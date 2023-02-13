@@ -15,7 +15,7 @@ const Circle = styled.div<{ confirmed?: boolean; disabled?: boolean }>`
   min-height: 20px;
   background-color: ${({ theme, confirmed, disabled }) =>
     disabled ? theme.bg4 : confirmed ? theme.green1 : theme.primary1};
-  border-radius: 50%;
+  border-radius: 5px;
   color: ${({ theme }) => theme.white};
   display: flex;
   align-items: center;
@@ -33,7 +33,7 @@ const CircleRow = styled.div`
 const Connector = styled.div<{ prevConfirmed?: boolean; disabled?: boolean }>`
   width: 100%;
   height: 2px;
-  background-color: ;
+
   background: linear-gradient(
     90deg,
     ${({ theme, prevConfirmed, disabled }) =>

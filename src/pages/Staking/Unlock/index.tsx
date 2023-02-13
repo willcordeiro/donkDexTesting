@@ -76,11 +76,7 @@ const StyledBottomCard = styled(DataCard)<{ dim: any }>`
 `*/
 
 const CustomCard = styled(DataCard)`
-  background: radial-gradient(
-    76.02% 75.41% at 1.84% 0%,
-    ${({ theme }) => theme.customCardGradientStart} 0%,
-    ${({ theme }) => theme.customCardGradientEnd} 100%
-  );
+  background: radial-gradient(76.02% 75.41% at 1.84% 0%, black 0%, black 100%);
   overflow: hidden;
 `
 

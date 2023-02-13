@@ -33,11 +33,7 @@ const PageWrapper = styled(AutoColumn)`
 `
 
 const VoteCard = styled(DataCard)`
-  background: radial-gradient(
-    76.02% 75.41% at 1.84% 0%,
-    ${({ theme }) => theme.customCardGradientStart} 0%,
-    ${({ theme }) => theme.customCardGradientEnd} 100%
-  );
+  background: radial-gradient(76.02% 75.41% at 1.84% 0%, black 0%, black 100%);
   overflow: hidden;
 `
 
@@ -76,7 +72,7 @@ const ResponsiveButtonSecondary = styled(ButtonSecondary)`
 const EmptyProposals = styled.div`
   border: 1px solid ${({ theme }) => theme.text4};
   padding: 16px 12px;
-  border-radius: 12px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;

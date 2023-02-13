@@ -27,25 +27,22 @@ const StyledMenuButton = styled.button`
   margin: 0;
   padding: 0;
   height: 38px;
-  background-color: ${({ theme }) => theme.bg3};
-  background: radial-gradient(
-    76.02% 75.41% at 1.84% 0%,
-    ${({ theme }) => theme.tokenButtonGradientStart} 0%,
-    ${({ theme }) => theme.tokenButtonGradientEnd} 100%
-  );
+  border: solid 1px ${({ theme }) => theme.text2};
 
   padding: 0.15rem 0.9rem 0.15rem 0.5rem;
   margin: 0 12px;
-  border-radius: 0.5rem;
+  border-radius: 5px;
   font-size: 1rem;
-  color: #fff;
+  color: ${({ theme }) => theme.text2};
   font-weight: 600;
 
   :hover,
   :focus {
     cursor: pointer;
     outline: none;
-    background-color: ${({ theme }) => theme.bg4};
+    background-color: #7dcfb6;
+    color: #000;
+    border: none;
   }
 
   svg {
@@ -67,7 +64,7 @@ const MenuFlyout = styled.span`
   background-color: ${({ theme }) => theme.bg3};
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
     0px 24px 32px rgba(0, 0, 0, 0.01);
-  border-radius: 12px;
+  border-radius: 5px;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -111,7 +108,7 @@ const StyledNavLink = styled(NavLink).attrs({
 })`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: left;
-  border-radius: 3rem;
+  border-radius: 5px;
   outline: none;
   cursor: pointer;
   text-decoration: none;
@@ -122,7 +119,7 @@ const StyledNavLink = styled(NavLink).attrs({
   font-weight: 500;
 
   &.${activeClassName} {
-    border-radius: 12px;
+    border-radius: 5px;
     font-weight: 600;
     color: ${({ theme }) => theme.text1};
   }
@@ -151,7 +148,7 @@ export default function StakingMenu() {
     <StyledMenu ref={node as any}>
       <StyledMenuButton onClick={toggle}>
         <span role="img" aria-label="wizard-icon" style={{ marginRight: '0.25rem' }}>
-          ⚡
+          🚀
         </span>
         Staking
       </StyledMenuButton>
@@ -164,29 +161,42 @@ export default function StakingMenu() {
           <StyledNavLink id={`stake-nav-link`} to={`/staking${pitSettings?.path}`}>
             {pitSettings?.name}
           </StyledNavLink>
+          {/*
           {chainId &&
             [ChainId.HARMONY_TESTNET, ChainId.HARMONY_MAINNET, ChainId.BSC_MAINNET, ChainId.BSC_TESTNET].includes(
               chainId
-            ) && (
-              <StyledNavLink id={`stake-nav-link`} to={'/staking/single'}>
+            ) &&
+            <StyledNavLink id={`stake-nav-link`} to={'/staking/single'}>
                 {nestSettings?.name}
               </StyledNavLink>
-            )}
-          {chainId && [ChainId.HARMONY_TESTNET, ChainId.HARMONY_MAINNET].includes(chainId) && (
+            
+           }
+            */}
+          {/*
+          {chainId &&
+            [ChainId.HARMONY_TESTNET, ChainId.HARMONY_MAINNET].includes(chainId) &&
+            
             <StyledNavLink id={`stake-nav-link`} to={'/staking/community'}>
               Community
             </StyledNavLink>
-          )}
+             }
+               */}
           {chainId && [ChainId.HARMONY_TESTNET, ChainId.HARMONY_MAINNET].includes(chainId) && (
             <StyledNavLink id={`stake-nav-link`} to={'/staking/bridge'}>
               Bridge
             </StyledNavLink>
           )}
-          {chainId && currentBlock && unlockingStarts && currentBlock >= unlockingStarts && (
+          {/*
+          {chainId &&
+            currentBlock &&
+            unlockingStarts &&
+            currentBlock >= unlockingStarts &&
+          
             <StyledNavLink id={`stake-nav-link`} to={'/staking/unlock'}>
               Unlock
             </StyledNavLink>
-          )}
+            }
+            */}
         </MenuFlyout>
       )}
     </StyledMenu>

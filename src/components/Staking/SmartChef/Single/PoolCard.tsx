@@ -48,13 +48,12 @@ const StatContainerResponsive = styled.div`
 `*/
 
 const Wrapper = styled(AutoColumn)<{ showBackground: boolean; bgColor: any }>`
-  border-radius: 12px;
+  border-radius: 5px;
   width: 100%;
   overflow: hidden;
   position: relative;
   opacity: ${({ showBackground }) => (showBackground ? '1' : '1')};
-  background: ${({ theme, bgColor, showBackground }) =>
-    `radial-gradient(91.85% 100% at 1.84% 0%, ${bgColor} 0%, ${showBackground ? theme.black : theme.bg5} 100%) `};
+  background: radial-gradient(76.02% 75.41% at 1.84% 0%, black 0%, black 100%);
   color: ${({ theme, showBackground }) => (showBackground ? theme.white : theme.text1)} !important;
 
   ${({ showBackground }) =>
@@ -78,7 +77,7 @@ const TopSection = styled.div`
 const BottomSection = styled.div<{ showBackground: boolean }>`
   padding: 12px 16px;
   opacity: ${({ showBackground }) => (showBackground ? '1' : '0.4')};
-  border-radius: 0 0 12px 12px;
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   align-items: baseline;

@@ -28,14 +28,13 @@ const ContentWrapper = styled(Column)`
   width: 100%;
   flex: 1 1;
   position: relative;
+  border-radius: 5px;
 `
 
 const Footer = styled.div`
   width: 100%;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 20px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
   background-color: ${({ theme }) => theme.bg1};
   border-top: 1px solid ${({ theme }) => theme.bg2};
 `

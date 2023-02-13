@@ -50,6 +50,14 @@ const AppWrapper = styled.div`
   flex-flow: column;
   align-items: flex-start;
   overflow-x: hidden;
+  font-family: 'Chakra Petch', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 0.1em;
 `
 
 const HeaderWrapper = styled.div`
@@ -119,12 +127,14 @@ export default function App() {
               <Route exact strict path="/pool" component={Pool} />
               <Route exact strict path="/staking/pools" component={Earn} />
               <Route exact strict path="/staking/pools/archived" component={EarnArchived} />
+              {/*  
               {[Blockchain.HARMONY, Blockchain.BINANCE_SMART_CHAIN].includes(blockchain) && (
                 <Route exact strict path="/staking/single" component={SmartChefSingleEarn} />
               )}
               {[Blockchain.HARMONY, Blockchain.BINANCE_SMART_CHAIN].includes(blockchain) && (
                 <Route exact strict path="/staking/single/archived" component={SmartChefSingleEarnArchived} />
               )}
+              */}
               {blockchain === Blockchain.HARMONY && (
                 <Route exact strict path="/staking/bridge" render={props => <SmartChefLPEarn category={'bridge'} />} />
               )}
@@ -136,7 +146,7 @@ export default function App() {
                   render={props => <SmartChefLPEarnArchived category={'bridge'} />}
                 />
               )}
-              {blockchain === Blockchain.HARMONY && (
+              {/*  {blockchain === Blockchain.HARMONY && (
                 <Route
                   exact
                   strict
@@ -144,6 +154,7 @@ export default function App() {
                   render={props => <SmartChefLPEarn category={'community'} />}
                 />
               )}
+              
               {blockchain === Blockchain.HARMONY && (
                 <Route
                   exact
@@ -152,8 +163,12 @@ export default function App() {
                   render={props => <SmartChefLPEarnArchived category={'community'} />}
                 />
               )}
+              */}
+
               <Route exact strict path={'/staking' + pitSettings?.path} component={Pit} />
+              {/*
               <Route exact strict path="/staking/unlock" component={Unlock} />
+               */}
               {blockchain === Blockchain.ETHEREUM && <Route exact strict path="/vote" component={Vote} />}
               <Route exact strict path="/create" component={RedirectToAddLiquidity} />
               <Route exact path="/add" component={AddLiquidity} />

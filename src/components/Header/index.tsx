@@ -40,6 +40,8 @@ import useGovernanceToken from '../../hooks/tokens/useGovernanceToken'
 import { useGovernanceTokenUserAggregatedBalance } from '../../hooks/tokens/useGovernanceTokenDetails'
 
 import { ANALYTICS_URLS } from '../../constants'
+import logoLight from '../../assets/images/logo/logo_-_discord_icon_1.png'
+import logoDarkOne from '../../assets/images/logo/logo_-_white_bg.png'
 
 const HeaderFrame = styled.div`
   display: grid;
@@ -51,7 +53,8 @@ const HeaderFrame = styled.div`
   width: 100%;
   top: 0;
   position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : 'rgba(0, 0, 0, 0.1)')};
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#111111' : 'white')};
   padding: 1rem;
   z-index: 2;
   ${({ theme }) => theme.mediaWidth.upToMedium`
@@ -85,7 +88,7 @@ const HeaderControls = styled.div`
     width: 100%;
     z-index: 99;
     height: 72px;
-    border-radius: 12px 12px 0 0;
+    border-radius: 5px
     background-color: ${({ theme }) => theme.bg1};
   `};
 `
@@ -129,7 +132,7 @@ const AccountElement = styled.div<{ active: boolean }>`
   flex-direction: row;
   align-items: center;
   background-color: ${({ theme, active }) => (!active ? theme.bg1 : theme.bg3)};
-  border-radius: 12px;
+  border-radius: 5px;
   white-space: nowrap;
   width: 100%;
   cursor: pointer;
@@ -173,7 +176,7 @@ const HideSmall = styled.span`
 `
 
 const NetworkCard = styled(BlueCard)`
-  border-radius: 12px;
+  border-radius: 5px;
   padding: 8px 12px;
   ${({ theme }) => theme.mediaWidth.upToSmall`
     margin: 0;
@@ -219,7 +222,7 @@ const StyledNavLink = styled(NavLink).attrs({
 })`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: left;
-  border-radius: 3rem;
+  border-radius: 5px;
   outline: none;
   cursor: pointer;
   text-decoration: none;
@@ -230,7 +233,7 @@ const StyledNavLink = styled(NavLink).attrs({
   font-weight: 500;
 
   &.${activeClassName} {
-    border-radius: 12px;
+    border-radius: 5px;
     font-weight: 600;
     color: ${({ theme }) => theme.text1};
   }
@@ -246,7 +249,7 @@ const StyledExternalLink = styled(ExternalLink).attrs({
 })<{ isActive?: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: left;
-  border-radius: 3rem;
+  border-radius: 5px;
   outline: none;
   cursor: pointer;
   text-decoration: none;
@@ -284,7 +287,7 @@ export const StyledMenuButton = styled.button`
   background-color: ${({ theme }) => theme.bg3};
   margin-left: 8px;
   padding: 0.15rem 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: 5px;
 
   :hover,
   :focus {
@@ -327,16 +330,16 @@ export default function Header() {
 
   switch (BLOCKCHAIN) {
     case Blockchain.BINANCE_SMART_CHAIN:
-      logoDark = CobraLogoDark
-      logo = CobraLogo
+      logoDark = logoDarkOne
+      logo = logoLight
       break
     case Blockchain.HARMONY:
-      logoDark = ViperLogoDark
-      logo = ViperLogo
+      logoDark = logoDarkOne
+      logo = logoLight
       break
     default:
-      logoDark = ViperLogoDark
-      logo = ViperLogo
+      logoDark = logoDarkOne
+      logo = logoLight
       break
   }
 

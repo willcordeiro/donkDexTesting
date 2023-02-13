@@ -81,11 +81,7 @@ const StyledBottomCard = styled(DataCard)<{ dim: any }>`
 `*/
 
 const CustomCard = styled(DataCard)`
-  background: radial-gradient(
-    76.02% 75.41% at 1.84% 0%,
-    ${({ theme }) => theme.customCardGradientStart} 0%,
-    ${({ theme }) => theme.customCardGradientEnd} 100%
-  );
+  background: radial-gradient(76.02% 75.41% at 1.84% 0%, black 0%, black 100%);
   overflow: hidden;
 `
 
@@ -242,7 +238,7 @@ export default function Pit({
 
         {account && (
           <DataRow style={{ marginBottom: '0rem' }}>
-            <ButtonPrimary padding="8px" borderRadius="8px" width="160px" onClick={handleDepositClick}>
+            <ButtonPrimary padding="8px" borderRadius="5px" width="160px" onClick={handleDepositClick}>
               Deposit
             </ButtonPrimary>
 

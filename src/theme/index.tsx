@@ -420,7 +420,11 @@ html {
 export const ThemedGlobalStyle = createGlobalStyle`
 html {
   color: ${({ theme }) => theme.text1};
-  background-color: ${({ theme }) => theme.bg2};
+  background: linear-gradient(180deg,rgba(6,6,15,.1) 67.19%,rgba(125,207,182,.1)),url(https://oneverse.one/static/media/grid.f7e22222.svg) no-repeat,url(https://oneverse.one/static/media/bg-home.c9d7df97.svg) no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 body {
