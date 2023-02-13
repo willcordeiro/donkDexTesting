@@ -7,9 +7,9 @@ import { ChainId } from '@venomswap/sdk'
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside'
 import { ApplicationModal } from '../../../state/application/actions'
 import { useModalOpen, useToggleModal } from '../../../state/application/hooks'
-import { PIT_SETTINGS, NEST_SETTINGS, UNLOCKING_STARTS } from '../../../constants'
+import { PIT_SETTINGS } from '../../../constants'
 import { useActiveWeb3React } from '../../../hooks'
-import { useBlockNumber } from '../../../state/application/hooks'
+//import { useBlockNumber } from '../../../state/application/hooks'
 
 //import { ExternalLink } from '../../theme'
 
@@ -133,10 +133,10 @@ const StyledNavLink = styled(NavLink).attrs({
 export default function StakingMenu() {
   const { chainId } = useActiveWeb3React()
   const pitSettings = chainId ? PIT_SETTINGS[chainId] : undefined
-  const nestSettings = chainId ? NEST_SETTINGS[chainId] : undefined
+  // const nestSettings = chainId ? NEST_SETTINGS[chainId] : undefined
 
-  const unlockingStarts = chainId ? UNLOCKING_STARTS[chainId] : undefined
-  const currentBlock = useBlockNumber()
+  // const unlockingStarts = chainId ? UNLOCKING_STARTS[chainId] : undefined
+  // const currentBlock = useBlockNumber()
 
   const node = useRef<HTMLDivElement>()
   const open = useModalOpen(ApplicationModal.STAKING_MENU)

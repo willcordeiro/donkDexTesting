@@ -9,10 +9,6 @@ import { isMobile, isAndroid, isIOS } from 'react-device-detect'
 
 import styled from 'styled-components'
 
-import ViperLogo from '../../assets/svg/viperswap/black.svg'
-import ViperLogoDark from '../../assets/svg/viperswap/white.svg'
-import CobraLogo from '../../assets/svg/cobraswap/black.svg'
-import CobraLogoDark from '../../assets/svg/cobraswap/white.svg'
 import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalance } from '../../state/wallet/hooks'
