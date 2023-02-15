@@ -19,12 +19,13 @@ export const PIT_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.MAINNET]: { name: '', path: '' },
   [ChainId.RINKEBY]: { name: '', path: '' },
   [ChainId.ROPSTEN]: { name: '', path: '' },
-  [ChainId.GÖRLI]: { name: '', path: '' },
+  [ChainId.GÖRLI]: { name: 'GravPit', path: '/gravPit' },
   [ChainId.KOVAN]: { name: '', path: '' },
   [ChainId.BSC_MAINNET]: { name: 'CobraPit', path: '/cobraPit' },
   [ChainId.BSC_TESTNET]: { name: 'CobraPit', path: '/cobraPit' },
   [ChainId.HARMONY_MAINNET]: { name: 'ViperPit', path: '/viperPit' },
-  [ChainId.HARMONY_TESTNET]: { name: 'ViperPit', path: '/viperPit' }
+  [ChainId.HARMONY_TESTNET]: { name: 'ViperPit', path: '/viperPit' },
+  [ChainId.FINDORA]: { name: 'GravPit', path: '/gravPit' }
 }
 
 export const NEST_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
@@ -36,7 +37,8 @@ export const NEST_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.BSC_MAINNET]: { name: 'CobraNest', path: '/single' },
   [ChainId.BSC_TESTNET]: { name: 'CobraNest', path: '/single' },
   [ChainId.HARMONY_MAINNET]: { name: 'ViperNest', path: '/single' },
-  [ChainId.HARMONY_TESTNET]: { name: 'ViperNest', path: '/single' }
+  [ChainId.HARMONY_TESTNET]: { name: 'ViperNest', path: '/single' },
+  [ChainId.FINDORA]: { name: '', path: '' }
 }
 
 export const EXCHANGE_SUBGRAPHS: { [chainId in ChainId]: string } = {
@@ -48,7 +50,8 @@ export const EXCHANGE_SUBGRAPHS: { [chainId in ChainId]: string } = {
   [ChainId.BSC_MAINNET]: '',
   [ChainId.BSC_TESTNET]: '',
   [ChainId.HARMONY_MAINNET]: '',
-  [ChainId.HARMONY_TESTNET]: ''
+  [ChainId.HARMONY_TESTNET]: '',
+  [ChainId.FINDORA]: ''
 }
 
 export const ANALYTICS_URLS: { [chainId in ChainId]: string } = {
@@ -60,7 +63,8 @@ export const ANALYTICS_URLS: { [chainId in ChainId]: string } = {
   [ChainId.BSC_MAINNET]: '',
   [ChainId.BSC_TESTNET]: '',
   [ChainId.HARMONY_MAINNET]: '',
-  [ChainId.HARMONY_TESTNET]: ''
+  [ChainId.HARMONY_TESTNET]: '',
+  [ChainId.FINDORA]: ''
 }
 
 export const BRIDGE_URLS: { [chainId in ChainId]: string } = {
@@ -72,7 +76,8 @@ export const BRIDGE_URLS: { [chainId in ChainId]: string } = {
   [ChainId.BSC_MAINNET]: '',
   [ChainId.BSC_TESTNET]: '',
   [ChainId.HARMONY_MAINNET]: 'https://bridge.harmony.one',
-  [ChainId.HARMONY_TESTNET]: ''
+  [ChainId.HARMONY_TESTNET]: '',
+  [ChainId.FINDORA]: ''
 }
 
 export const DOCS_URLS: { [chainId in ChainId]: string } = {
@@ -84,7 +89,8 @@ export const DOCS_URLS: { [chainId in ChainId]: string } = {
   [ChainId.BSC_MAINNET]: '',
   [ChainId.BSC_TESTNET]: '',
   [ChainId.HARMONY_MAINNET]: '',
-  [ChainId.HARMONY_TESTNET]: ''
+  [ChainId.HARMONY_TESTNET]: '',
+  [ChainId.FINDORA]: ''
 }
 
 export const WEB_INTERFACES: { [chainId in ChainId]: string[] } = {
@@ -96,7 +102,8 @@ export const WEB_INTERFACES: { [chainId in ChainId]: string[] } = {
   [ChainId.BSC_MAINNET]: [],
   [ChainId.BSC_TESTNET]: [],
   [ChainId.HARMONY_MAINNET]: [],
-  [ChainId.HARMONY_TESTNET]: []
+  [ChainId.HARMONY_TESTNET]: [],
+  [ChainId.FINDORA]: []
 }
 
 export const TOKEN_LOGO_EXCEPTIONS: { [chainId in ChainId]: string[] } = {
@@ -112,7 +119,8 @@ export const TOKEN_LOGO_EXCEPTIONS: { [chainId in ChainId]: string[] } = {
   ],
   [ChainId.BSC_TESTNET]: [],
   [ChainId.HARMONY_MAINNET]: [],
-  [ChainId.HARMONY_TESTNET]: []
+  [ChainId.HARMONY_TESTNET]: [],
+  [ChainId.FINDORA]: []
 }
 
 export const POOL_BACKGROUNDS: { [chainId in ChainId]: string } = {
@@ -124,7 +132,8 @@ export const POOL_BACKGROUNDS: { [chainId in ChainId]: string } = {
   [ChainId.BSC_MAINNET]: '#c99212',
   [ChainId.BSC_TESTNET]: '#c99212',
   [ChainId.HARMONY_MAINNET]: '#02a2c4',
-  [ChainId.HARMONY_TESTNET]: '#02a2c4'
+  [ChainId.HARMONY_TESTNET]: '#02a2c4',
+  [ChainId.FINDORA]: ''
 }
 
 export const UNLOCKING_STARTS: { [chainId in ChainId]: number | undefined } = {
@@ -136,7 +145,8 @@ export const UNLOCKING_STARTS: { [chainId in ChainId]: number | undefined } = {
   [ChainId.BSC_MAINNET]: 15135850,
   [ChainId.BSC_TESTNET]: 16612200,
   [ChainId.HARMONY_MAINNET]: 22770895,
-  [ChainId.HARMONY_TESTNET]: 21195000
+  [ChainId.HARMONY_TESTNET]: 21195000,
+  [ChainId.FINDORA]: undefined
 }
 
 export { PRELOADED_PROPOSALS } from './proposals'
@@ -181,7 +191,8 @@ const WETH_ONLY: ChainTokenList = {
   [ChainId.BSC_MAINNET]: [WETH[ChainId.BSC_MAINNET]],
   [ChainId.BSC_TESTNET]: [WETH[ChainId.BSC_TESTNET]],
   [ChainId.HARMONY_MAINNET]: [WETH[ChainId.HARMONY_MAINNET]],
-  [ChainId.HARMONY_TESTNET]: [WETH[ChainId.HARMONY_TESTNET]]
+  [ChainId.HARMONY_TESTNET]: [WETH[ChainId.HARMONY_TESTNET]],
+  [ChainId.FINDORA]: [WETH[ChainId.FINDORA]]
 }
 
 // used to construct intermediary pairs for trading
@@ -390,7 +401,6 @@ export const BLOCKED_ADDRESSES: string[] = [
   '0x901bb9583b24D97e995513C6778dc6888AB6870e',
   '0xA7e5d5A720f06526557c513402f2e6B5fA20b008',
   '0x8576aCC5C05D6Ce88f4e49bf65BdF0C62F91353C',
-  //https://home.treasury.gov/policy-issues/financial-sanctions/recent-actions/20220808
   '0x8589427373D6D84E98730D7795D8f6f8731FDA16',
   '0x722122dF12D4e14e13Ac3b6895a86e84145b6967',
   '0xDD4c48C0B24039969fC16D1cdF626eaB821d3384',

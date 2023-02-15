@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 import { Blockchain } from '@venomswap/sdk'
-import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
+//import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 import AddressClaimModal from '../components/claim/AddressClaimModal'
 import Header from '../components/Header'
 import Polling from '../components/Header/Polling'
@@ -38,7 +38,7 @@ import RemoveLiquidity from './RemoveLiquidity'
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
 import Swap from './Swap'
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
-import Vote from './Vote'
+//import Vote from './Vote'
 import VotePage from './Vote/VotePage'
 import { PIT_SETTINGS } from '../constants'
 import { useActiveWeb3React } from '../hooks'
@@ -107,7 +107,7 @@ export default function App() {
 
   return (
     <Suspense fallback={null}>
-      <Route component={GoogleAnalyticsReporter} />
+      <Route />
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
         <HeaderWrapper>
@@ -168,8 +168,8 @@ export default function App() {
               <Route exact strict path={'/staking' + pitSettings?.path} component={Pit} />
               {/*
               <Route exact strict path="/staking/unlock" component={Unlock} />
-               */}
-              {blockchain === Blockchain.ETHEREUM && <Route exact strict path="/vote" component={Vote} />}
+              
+              { /* blockchain === Blockchain.ETHEREUM && <Route exact strict path="/vote" component={Vote} />  */}
               <Route exact strict path="/create" component={RedirectToAddLiquidity} />
               <Route exact path="/add" component={AddLiquidity} />
               <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />

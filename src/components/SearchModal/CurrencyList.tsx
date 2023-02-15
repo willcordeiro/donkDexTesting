@@ -1,4 +1,4 @@
-import { ChainId, Currency, CurrencyAmount, currencyEquals, Token } from '@venomswap/sdk'
+import { ChainId, Currency, CurrencyAmount, currencyEquals } from '@venomswap/sdk'
 import { TOKENS } from '@venomswap/sdk-extra'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
@@ -27,10 +27,12 @@ import baseCurrencies from '../../utils/baseCurrencies'
 import { LinkStyledButton } from '../../theme'
 import { PlusHelper } from '../QuestionHelper'
 import useAddTokenToMetamask from 'hooks/useAddTokenToMetamask'
-
+import { Token } from '@venomswap/sdk'
+import { TokenMain } from 'hooks/tokens/useCreatGovToken'
 function currencyKey(currency: Currency): string {
+  console.log(BASE_CURRENCY, 'shadhas')
   const name: string = BASE_CURRENCY && BASE_CURRENCY.name ? BASE_CURRENCY.name.toUpperCase() : 'ETH'
-  return currency instanceof Token ? currency.address : currency === BASE_CURRENCY ? name : ''
+  return currency instanceof TokenMain ? currency.address : currency === BASE_CURRENCY ? name : ''
 }
 
 const StyledBalanceText = styled(Text)`

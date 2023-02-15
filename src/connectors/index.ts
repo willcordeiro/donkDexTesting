@@ -45,8 +45,14 @@ switch (BLOCKCHAIN) {
   case Blockchain.HARMONY:
     supportedChainIds = [1666600000, 1666700000]
     break
+  case Blockchain.GÖRLI:
+    supportedChainIds = [5]
+    break
+  case Blockchain.FINDORA:
+    supportedChainIds = [2152]
+    break
   default:
-    supportedChainIds = [1, 3, 4, 5, 42]
+    supportedChainIds = [1, 3, 4, 5, 42, 2152]
     break
 }
 
@@ -77,7 +83,7 @@ export const portis = new PortisConnector({
 // mainnet only
 export const walletlink = new WalletLinkConnector({
   url: NETWORK_URL,
-  appName: 'Viperswap',
+  appName: 'OneVerse Swap',
   appLogoUrl:
     'https://mpng.pngfly.com/20181202/bex/kisspng-emoji-domain-unicorn-pin-badges-sticker-unicorn-tumblr-emoji-unicorn-iphoneemoji-5c046729264a77.5671679315437924251569.jpg'
 })
