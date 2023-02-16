@@ -1,5 +1,6 @@
-import { Currency, ETHER, HARMONY, BINANCE_COIN, WETH } from '@venomswap/sdk'
+import { Currency, ETHER, WETH } from '@venomswap/sdk'
 import { NETWORK_CHAIN_ID } from '../connectors'
+
 import useCreateGovernanceToken from 'hooks/tokens/useCreatGovToken'
 
 enum ChainId {
@@ -44,19 +45,6 @@ export default function baseCurrencies(chainId: ChainId | undefined): Currency[]
 
   if (chainId) {
     switch (chainId) {
-      case ChainId.BSC_MAINNET:
-      case ChainId.BSC_TESTNET:
-        currencies.push(BINANCE_COIN)
-        currencies.push(WETH[chainId])
-        currencies.push(mainToken(chainId))
-        break
-      case ChainId.HARMONY_MAINNET:
-      case ChainId.HARMONY_TESTNET:
-        currencies.push(HARMONY)
-        currencies.push(WETH[chainId])
-        currencies.push(mainToken(chainId))
-        break
-
       case ChainId.GÖRLI:
       case ChainId.GÖRLI:
         currencies.push(goerliToken)

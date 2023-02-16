@@ -1,18 +1,4 @@
-export class TokenMain {
-  readonly chainId: number
-  readonly address: string
-  readonly decimals: number
-  readonly symbol: string | undefined
-  readonly name: string | undefined
-
-  constructor(chainId: number, address: string, decimals: number, symbol?: string, name?: string) {
-    this.chainId = chainId
-    this.address = address
-    this.decimals = decimals
-    this.symbol = symbol
-    this.name = name
-  }
-}
+import { TokenMain } from './govTokenClass'
 
 export default function useCreateGovernanceToken(chainId: number): any {
   const dataTokenGrav = {
@@ -20,7 +6,7 @@ export default function useCreateGovernanceToken(chainId: number): any {
     symbol: 'FRA',
     name: 'FINDORA',
     chainId: 2152,
-    address: '0xc5c31f6398339efa1599d4153e88c4613dd7ecb2'
+    address: '0x0000000000000000000000000000000000001000'
   }
 
   const dataTokenFRA = {
