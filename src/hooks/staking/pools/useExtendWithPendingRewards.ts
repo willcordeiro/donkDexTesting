@@ -1,4 +1,4 @@
-import { JSBI, TokenAmount } from '@venomswap/sdk'
+import { JSBI, TokenAmount } from '@oneverseswap/sdk'
 import { useMemo } from 'react'
 import { useActiveWeb3React } from '../..'
 import { useSingleContractMultipleData } from '../../../state/multicall/hooks'

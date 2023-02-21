@@ -1,7 +1,7 @@
 import { splitSignature } from '@ethersproject/bytes'
 import { Contract, CallOverrides } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Blockchain, Currency, currencyEquals, Percent, WETH, DEFAULT_CURRENCIES } from '@venomswap/sdk'
+import { Blockchain, Currency, currencyEquals, Percent, WETH, DEFAULT_CURRENCIES } from '@oneverseswap/sdk'
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { ArrowDown, Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -118,7 +118,7 @@ export default function RemoveLiquidity({
       return approveCallback()
     }
 
-    const signatureEnabled = [Blockchain.ETHEREUM, Blockchain.BINANCE_SMART_CHAIN].includes(blockchain)
+    const signatureEnabled = [Blockchain.ETHEREUM].includes(blockchain)
 
     if (signatureEnabled) {
       // try to gather a signature for permission

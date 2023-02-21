@@ -1,4 +1,4 @@
-import { JSBI, Token, CurrencyAmount, TokenAmount, Fraction, Price } from '@venomswap/sdk'
+import { JSBI, Token, CurrencyAmount, TokenAmount, Fraction, Price } from '@oneverseswap/sdk'
 import { SerializableFraction } from '../../state/serialize'
 
 const MAX_DURATION = 86400000 // 1 day in milliseconds

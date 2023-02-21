@@ -1,8 +1,9 @@
-import { ChainId, Pair } from '@venomswap/sdk'
-import getPairTokensWithDefaults from '../../../../utils/getPairTokensWithDefaults'
+//import { ChainId, Pair } from '@oneverseswap/sdk'
+//import getPairTokensWithDefaults from '../../../../utils/getPairTokensWithDefaults'
 import { DefaultStakingPoolInfo } from '../../types'
 
 export const HARMONY_TESTNET_POOLS: DefaultStakingPoolInfo[] = [
+  /*
   {
     pid: 0,
     order: 0,
@@ -51,4 +52,5 @@ export const HARMONY_TESTNET_POOLS: DefaultStakingPoolInfo[] = [
     allocPoints: 1000,
     active: true
   }
+  */
 ]

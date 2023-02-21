@@ -1,6 +1,6 @@
 import React from 'react'
-import { JSBI } from '@venomswap/sdk'
-import { BLOCKCHAIN_SETTINGS } from '@venomswap/sdk-extra'
+import { JSBI } from '@oneverseswap/sdk'
+import { BLOCKCHAIN_SETTINGS } from '@oneverseswap/sdk-extra'
 import { TYPE } from '../../../theme'
 import { useActiveWeb3React } from '../../../hooks'
 import useGovernanceToken from '../../../hooks/tokens/useGovernanceToken'

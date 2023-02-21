@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { TokenAmount, PIT_TOKENS } from '@venomswap/sdk'
+import { TokenAmount, PIT_TOKENS } from '@oneverseswap/sdk'
 import { AutoColumn } from '../../../components/Column'
 import styled from 'styled-components'
 

@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
 import { CallOverrides } from '@ethersproject/contracts'
-import { Currency, currencyEquals, TokenAmount, WETH, DEFAULT_CURRENCIES } from '@venomswap/sdk'
+import { Currency, currencyEquals, TokenAmount, WETH, DEFAULT_CURRENCIES } from '@oneverseswap/sdk'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'

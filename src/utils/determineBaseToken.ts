@@ -1,4 +1,4 @@
-import { Token, DEFAULT_CURRENCIES } from '@venomswap/sdk'
+import { Token, DEFAULT_CURRENCIES } from '@oneverseswap/sdk'
 import { unwrappedToken } from './wrappedCurrency'
 
 export default function determineBaseToken(tokenData: Record<string, any>, tokens: [Token, Token]): Token | undefined {

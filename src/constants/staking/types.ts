@@ -1,4 +1,4 @@
-import { Token } from '@venomswap/sdk'
+import { Token } from '@oneverseswap/sdk'
 
 export enum PoolType {
   Single,

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { AutoColumn } from '../../Column'
-import { JSBI } from '@venomswap/sdk'
+import { JSBI } from '@oneverseswap/sdk'
 import { TYPE } from '../../../theme'
 import { useBlockNumber } from '../../../state/application/hooks'
 import { SmartChefStakingPool } from '../../../state/stake/types'

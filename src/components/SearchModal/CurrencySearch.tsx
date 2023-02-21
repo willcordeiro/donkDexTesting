@@ -1,4 +1,4 @@
-import { Currency, ETHER, HARMONY, BINANCE_COIN, Token } from '@venomswap/sdk'
+import { Currency, ETHER, HARMONY, FINDORA, Token } from '@oneverseswap/sdk'
 import React, { KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import ReactGA from 'react-ga'
 import { useTranslation } from 'react-i18next'
@@ -139,7 +139,7 @@ export function CurrencySearch({
         } else if (s === 'one') {
           handleCurrencySelect(HARMONY)
         } else if (s === 'bnb') {
-          handleCurrencySelect(BINANCE_COIN)
+          handleCurrencySelect(FINDORA)
         } else if (filteredSortedTokens.length > 0) {
           if (
             filteredSortedTokens[0].symbol?.toLowerCase() === debouncedQuery.trim().toLowerCase() ||

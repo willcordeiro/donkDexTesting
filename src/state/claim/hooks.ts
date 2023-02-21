@@ -1,4 +1,4 @@
-import { TokenAmount, JSBI } from '@venomswap/sdk'
+import { TokenAmount, JSBI } from '@oneverseswap/sdk'
 import { TransactionResponse } from '@ethersproject/providers'
 import { CallOverrides } from '@ethersproject/contracts'
 import { useEffect, useState } from 'react'

@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI, Token, TokenAmount, Pair } from '@venomswap/sdk'
+import { CurrencyAmount, JSBI, Token, TokenAmount, Pair } from '@oneverseswap/sdk'
 import { useMemo } from 'react'
 import { useActiveWeb3React } from '../../hooks'
 import { tryParseAmount } from '../swap/hooks'

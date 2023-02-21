@@ -1,9 +1,7 @@
-import { Token } from '@venomswap/sdk'
+import { Token, GOVERNANCE_TOKENS } from '@oneverseswap/sdk'
 import { useActiveWeb3React } from '../index'
-import useCreateGovernanceToken from './useCreatGovToken'
 
 export default function useGovernanceToken(): Token | undefined {
   const { chainId } = useActiveWeb3React()
-  const useCreateToken: any = useCreateGovernanceToken
-  return useCreateToken(chainId)
+  return chainId ? GOVERNANCE_TOKENS[chainId] : undefined
 }

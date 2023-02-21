@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Token, ChainId } from '@venomswap/sdk'
+import { Token /*ChainId */ } from '@oneverseswap/sdk'
 import { useActiveWeb3React } from '..'
 import getToken from '../../utils/getToken'
 
@@ -9,9 +9,9 @@ import getToken from '../../utils/getToken'
  */
 export default function useToken(symbol = 'BUSD'): Token | undefined {
   const { chainId } = useActiveWeb3React()
-  if (symbol === 'BUSD' && chainId === ChainId.HARMONY_TESTNET) {
-    symbol = '1BUSD'
-  }
+  // if (symbol === 'BUSD' && chainId === ChainId.HARMONY_TESTNET) {
+  //  symbol = '1BUSD'
+  //  }
 
   return useMemo<Token | undefined>(() => {
     return getToken(chainId, symbol)

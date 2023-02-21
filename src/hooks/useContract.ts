@@ -8,8 +8,8 @@ import { abi as PIT_ABI } from '@venomswap/contracts/build/Pit.json'
 import { abi as PIT_BREEDER_ABI } from '@venomswap/contracts/build/PitBreeder.json'
 import { abi as SMART_CHEF_ABI } from '@venomswap/contracts/build/SmartChefInitializable.json'
 import { abi as MERKLE_DISTRIBUTOR_ABI } from '@uniswap/merkle-distributor/build/MerkleDistributor.json'
-import { ChainId, WETH, MASTER_BREEDER_ADDRESSES, PIT_BREEDER_ADDRESSES, PIT_TOKENS } from '@venomswap/sdk'
-import { abi as IUniswapV2PairABI } from '@venomswap/core/build/IUniswapV2Pair.json'
+import { ChainId, WETH, MASTER_BREEDER_ADDRESSES, PIT_BREEDER_ADDRESSES, PIT_TOKENS } from '@oneverseswap/sdk'
+import { abi as IUniswapV2PairABI } from '@oneverseswap/core/build/IUniswapV2Pair.json'
 import { useMemo } from 'react'
 import { GOVERNANCE_ADDRESS, MERKLE_DISTRIBUTOR_ADDRESS } from '../constants'
 import {
@@ -81,7 +81,7 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
   if (chainId) {
     switch (chainId) {
       case ChainId.MAINNET:
-      case ChainId.GÖRLI:
+      case ChainId.GOERLI:
       case ChainId.ROPSTEN:
       case ChainId.RINKEBY:
         address = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'

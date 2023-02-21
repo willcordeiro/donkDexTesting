@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { TokenAmount, Fraction, Price } from '@venomswap/sdk'
+import { TokenAmount, Fraction, Price } from '@oneverseswap/sdk'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useActiveWeb3React } from '../../hooks'
 import useBUSDPrice from '../useBUSDPrice'

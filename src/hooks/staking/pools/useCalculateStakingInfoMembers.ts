@@ -1,4 +1,4 @@
-import { ChainId } from '@venomswap/sdk'
+import { ChainId } from '@oneverseswap/sdk'
 import { useMemo } from 'react'
 import { DEFAULT_STAKING_POOL_INFOS } from '../../../constants/staking/pools'
 

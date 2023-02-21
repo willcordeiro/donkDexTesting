@@ -1,4 +1,4 @@
-import { ChainId, Pair } from '@venomswap/sdk'
+import { ChainId, Pair } from '@oneverseswap/sdk'
 import getPairTokensWithDefaults from '../../../../utils/getPairTokensWithDefaults'
 import { DefaultStakingPoolInfo } from '../../types'
 
@@ -376,14 +376,6 @@ export const HARMONY_MAINNET_POOLS: DefaultStakingPoolInfo[] = [
     order: 46,
     tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, 'ONEUSD/WONE'),
     pairAddress: Pair.getAddress(...getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, 'ONEUSD/WONE')),
-    allocPoints: 0,
-    active: false
-  },
-  {
-    pid: 47,
-    order: 47,
-    tokens: getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, 'ONEUSD/1USDC'),
-    pairAddress: Pair.getAddress(...getPairTokensWithDefaults(ChainId.HARMONY_MAINNET, 'ONEUSD/1USDC')),
     allocPoints: 0,
     active: false
   }

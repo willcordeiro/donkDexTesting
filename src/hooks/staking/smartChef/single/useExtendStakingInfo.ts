@@ -1,4 +1,4 @@
-import { JSBI, TokenAmount, Fraction } from '@venomswap/sdk'
+import { JSBI, TokenAmount, Fraction } from '@oneverseswap/sdk'
 import { SmartChefStakingPool } from '../../../../state/stake/types'
 import { Contract } from 'ethers'
 import { useActiveWeb3React } from '../../../../hooks'

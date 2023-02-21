@@ -1,62 +1,30 @@
-import { Currency, ETHER, WETH } from '@venomswap/sdk'
+import { ChainId, Currency, ETHER, FINDORA, GOERLI, ANVILTESTNET, WETH, GOVERNANCE_TOKENS } from '@oneverseswap/sdk'
 import { NETWORK_CHAIN_ID } from '../connectors'
-
-import useCreateGovernanceToken from 'hooks/tokens/useCreatGovToken'
-
-enum ChainId {
-  MAINNET = 1,
-  ROPSTEN = 3,
-  RINKEBY = 4,
-  GÖRLI = 5,
-  KOVAN = 42,
-  BSC_MAINNET = 56,
-  BSC_TESTNET = 97,
-  HARMONY_MAINNET = 1666600000,
-  HARMONY_TESTNET = 1666700000,
-  FINDORA = 2152
-}
 
 export default function baseCurrencies(chainId: ChainId | undefined): Currency[] {
   const currencies: Currency[] = []
 
-  const mainToken = useCreateGovernanceToken
-
-  const goerliCurrency = { decimals: 18, symbol: 'GoerliETH', name: 'GoerliETH' }
-
-  const findoraCurrency = { decimals: 18, symbol: 'FRA', name: 'Findora' }
-
-  class Currency {
-    readonly decimals: number
-    readonly symbol?: string
-    readonly name?: string
-
-    static readonly GÖRLI: Currency
-
-    static readonly FINDORA: Currency
-
-    constructor(decimals: number, symbol?: string, name?: string) {
-      this.decimals = decimals
-      this.symbol = symbol
-      this.name = name
-    }
-  }
-  const goerliToken = new Currency(goerliCurrency.decimals, goerliCurrency.symbol, goerliCurrency.name)
-  const findoraToken = new Currency(findoraCurrency.decimals, findoraCurrency.symbol, findoraCurrency.name)
-
   if (chainId) {
     switch (chainId) {
-      case ChainId.GÖRLI:
-      case ChainId.GÖRLI:
-        currencies.push(goerliToken)
+      case ChainId.GOERLI:
+      case ChainId.GOERLI:
+        currencies.push(FINDORA)
         currencies.push(WETH[chainId])
-        currencies.push(mainToken(chainId))
+        currencies.push(GOVERNANCE_TOKENS[chainId])
         break
 
       case ChainId.FINDORA:
       case ChainId.FINDORA:
-        currencies.push(findoraToken)
+        currencies.push(GOERLI)
         currencies.push(WETH[chainId])
-        currencies.push(mainToken(chainId))
+        currencies.push(GOVERNANCE_TOKENS[chainId])
+        break
+
+      case ChainId.ANVILTESTNET:
+      case ChainId.ANVILTESTNET:
+        currencies.push(ANVILTESTNET)
+        currencies.push(WETH[chainId])
+        currencies.push(GOVERNANCE_TOKENS[chainId])
         break
 
       default:

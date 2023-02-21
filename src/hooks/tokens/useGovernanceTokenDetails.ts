@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { ChainId, Token, TokenAmount, Price, Fraction } from '@venomswap/sdk'
+import { ChainId, Token, TokenAmount, Price, Fraction } from '@oneverseswap/sdk'
 import { useGovTokenSupply } from '../../data/TotalSupply'
 import { useActiveWeb3React } from '..'
 import { useTotalLockedGovTokensEarned, useTotalUnlockedGovTokensEarned } from '../../state/stake/hooks'

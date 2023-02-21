@@ -1,4 +1,4 @@
-import { Blockchain, Token, Price } from '@venomswap/sdk'
+import { Blockchain, Token, Price } from '@oneverseswap/sdk'
 import React, { useEffect, useState } from 'react'
 //import React, { useMemo } from 'react'
 import { X } from 'react-feather'
@@ -237,7 +237,7 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
           </AutoColumn>
         </CardSection>
 
-        {[Blockchain.HARMONY, Blockchain.BINANCE_SMART_CHAIN].includes(blockchain) && (
+        {[Blockchain.FINDORA, Blockchain.ANVILTESTNET].includes(blockchain) && (
           <>
             <Break />
             <CardSection gap="sm">

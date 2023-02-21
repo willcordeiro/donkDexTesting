@@ -1,5 +1,5 @@
-import { ChainId, Currency, CurrencyAmount, currencyEquals } from '@venomswap/sdk'
-import { TOKENS } from '@venomswap/sdk-extra'
+import { ChainId, Currency, CurrencyAmount, currencyEquals, Token } from '@oneverseswap/sdk'
+import { TOKENS } from '@oneverseswap/sdk-extra'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
@@ -27,7 +27,6 @@ import baseCurrencies from '../../utils/baseCurrencies'
 import { LinkStyledButton } from '../../theme'
 import { PlusHelper } from '../QuestionHelper'
 import useAddTokenToMetamask from 'hooks/useAddTokenToMetamask'
-import { Token } from '@venomswap/sdk'
 
 function currencyKey(currency: Currency): string {
   console.log(BASE_CURRENCY, 'shadhas')

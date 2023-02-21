@@ -1,4 +1,4 @@
-import { ChainId, Blockchain } from '@venomswap/sdk'
+import { ChainId } from '@oneverseswap/sdk'
 import React, { useState } from 'react'
 import { Text } from 'rebass'
 import { NavLink } from 'react-router-dom'
@@ -303,12 +303,11 @@ export const StyledMenuButton = styled.button`
 const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
   [ChainId.RINKEBY]: 'Rinkeby',
   [ChainId.ROPSTEN]: 'Ropsten',
-  [ChainId.GÖRLI]: 'Görli',
+  [ChainId.GOERLI]: 'GOERLI',
+  [ChainId.FINDORA]: 'FINDORA',
+  [ChainId.ANVILTESTNET]: 'ANVILTESTNET',
   [ChainId.KOVAN]: 'Kovan',
-  [ChainId.BSC_MAINNET]: 'BSC',
-  [ChainId.BSC_TESTNET]: 'BSC Testnet',
-  [ChainId.HARMONY_MAINNET]: 'Harmony',
-  [ChainId.HARMONY_TESTNET]: 'Harmony Testnet'
+  [ChainId.HARMONY_MAINNET]: 'Harmony'
 }
 
 export default function Header() {
@@ -325,14 +324,6 @@ export default function Header() {
   let logo: string
 
   switch (BLOCKCHAIN) {
-    case Blockchain.BINANCE_SMART_CHAIN:
-      logoDark = logoDarkOne
-      logo = logoLight
-      break
-    case Blockchain.HARMONY:
-      logoDark = logoDarkOne
-      logo = logoLight
-      break
     default:
       logoDark = logoDarkOne
       logo = logoLight

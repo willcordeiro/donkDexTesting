@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { TransactionResponse } from '@ethersproject/providers'
 import { CallOverrides } from '@ethersproject/contracts'
-import { TokenAmount } from '@venomswap/sdk'
+import { TokenAmount } from '@oneverseswap/sdk'
 import Modal from '../../Modal'
 import { AutoColumn } from '../../Column'
 import styled from 'styled-components'

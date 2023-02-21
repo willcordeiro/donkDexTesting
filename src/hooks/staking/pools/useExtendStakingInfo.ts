@@ -1,4 +1,4 @@
-import { JSBI, Pair, Token, TokenAmount, Fraction, ChainId } from '@venomswap/sdk'
+import { JSBI, Pair, Token, TokenAmount, Fraction, ChainId } from '@oneverseswap/sdk'
 import { useSingleCallResult, useSingleContractMultipleData } from '../../../state/multicall/hooks'
 import { useMasterBreederContract } from '../../useContract'
 import useGovernanceToken from '../../tokens/useGovernanceToken'

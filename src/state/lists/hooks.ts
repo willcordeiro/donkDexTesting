@@ -1,6 +1,6 @@
 import { UNSUPPORTED_LIST_URLS } from './../../constants/lists'
-import DEFAULT_TOKEN_LIST from '@venomswap/default-token-list'
-import { ChainId, Token } from '@venomswap/sdk'
+//import DEFAULT_TOKEN_LIST from '@oneverseswap/community-token-list'
+import { ChainId, Token } from '@oneverseswap/sdk'
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
@@ -40,13 +40,11 @@ const EMPTY_LIST: TokenAddressMap = {
   [ChainId.KOVAN]: {},
   [ChainId.RINKEBY]: {},
   [ChainId.ROPSTEN]: {},
-  [ChainId.GÖRLI]: {},
+  [ChainId.GOERLI]: {},
   [ChainId.MAINNET]: {},
-  [ChainId.BSC_MAINNET]: {},
-  [ChainId.BSC_TESTNET]: {},
   [ChainId.HARMONY_MAINNET]: {},
-  [ChainId.HARMONY_TESTNET]: {},
-  [ChainId.FINDORA]: {}
+  [ChainId.FINDORA]: {},
+  [ChainId.ANVILTESTNET]: {}
 }
 
 const listCache: WeakMap<TokenList, TokenAddressMap> | null =
@@ -102,11 +100,9 @@ function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddress
     4: { ...map1[4], ...map2[4] },
     5: { ...map1[5], ...map2[5] },
     42: { ...map1[42], ...map2[42] },
-    56: { ...map1[56], ...map2[56] },
-    97: { ...map1[97], ...map2[97] },
     1666600000: { ...map1[1666600000], ...map2[1666600000] },
-    1666700000: { ...map1[1666700000], ...map2[1666700000] },
-    2152: { ...map1[2152], ...map2[2152] }
+    2152: { ...map1[2152], ...map2[2152] },
+    2153: { ...map1[2153], ...map2[2153] }
   }
 }
 
@@ -154,7 +150,7 @@ export function useInactiveListUrls(): string[] {
 export function useCombinedActiveList(): TokenAddressMap {
   const activeListUrls = useActiveListUrls()
   const activeTokens = useCombinedTokenMapFromUrls(activeListUrls)
-  const defaultTokenMap = listToTokenMap(DEFAULT_TOKEN_LIST)
+  let defaultTokenMap: any /*= listToTokenMap(DEFAULT_TOKEN_LIST) */
   return combineMaps(activeTokens, defaultTokenMap)
 }
 
@@ -165,8 +161,8 @@ export function useCombinedInactiveList(): TokenAddressMap {
 }
 
 // used to hide warnings on import for default tokens
-export function useDefaultTokenList(): TokenAddressMap {
-  return listToTokenMap(DEFAULT_TOKEN_LIST)
+export function useDefaultTokenList(): any {
+  //return listToTokenMap(DEFAULT_TOKEN_LIST)
 }
 
 // list of tokens not supported on interface, used to show warnings and prevent swaps and adds

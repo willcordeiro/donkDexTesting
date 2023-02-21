@@ -1,4 +1,4 @@
-import { Token } from '@venomswap/sdk'
+import { Token } from '@oneverseswap/sdk'
 import { CallState } from '../state/multicall/hooks'
 
 export function validStakingInfo(tokens: [Token, Token], pendingReward: CallState): boolean {

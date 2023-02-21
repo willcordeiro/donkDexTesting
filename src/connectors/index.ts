@@ -7,7 +7,7 @@ import { PortisConnector } from '@web3-react/portis-connector'
 import { FortmaticConnector } from './Fortmatic'
 import { NetworkConnector } from './NetworkConnector'
 
-import { Blockchain, Currency } from '@venomswap/sdk'
+import { Blockchain, Currency } from '@oneverseswap/sdk'
 
 import baseCurrencies from '../utils/baseCurrencies'
 import { getBlockchain } from '../utils/blockchain'
@@ -39,20 +39,17 @@ export function getNetworkLibrary(): Web3Provider {
 
 let supportedChainIds: number[]
 switch (BLOCKCHAIN) {
-  case Blockchain.BINANCE_SMART_CHAIN:
-    supportedChainIds = [56, 97]
-    break
   case Blockchain.HARMONY:
     supportedChainIds = [1666600000, 1666700000]
-    break
-  case Blockchain.GÖRLI:
-    supportedChainIds = [5]
     break
   case Blockchain.FINDORA:
     supportedChainIds = [2152]
     break
+  case Blockchain.ANVILTESTNET:
+    supportedChainIds = [2153]
+    break
   default:
-    supportedChainIds = [1, 3, 4, 5, 42, 2152]
+    supportedChainIds = [1, 3, 4, 5, 42, 2152, 2153]
     break
 }
 

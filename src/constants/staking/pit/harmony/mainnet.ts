@@ -1,4 +1,4 @@
-import { ChainId } from '@venomswap/sdk'
+import { ChainId } from '@oneverseswap/sdk'
 import getPairTokensWithDefaults from '../../../../utils/getPairTokensWithDefaults'
 import { PitInfo } from '../../types'
 

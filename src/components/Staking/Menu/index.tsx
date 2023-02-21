@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { darken } from 'polished'
-import { ChainId } from '@venomswap/sdk'
+import { ChainId } from '@oneverseswap/sdk'
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside'
 import { ApplicationModal } from '../../../state/application/actions'
 import { useModalOpen, useToggleModal } from '../../../state/application/hooks'
@@ -181,7 +181,7 @@ export default function StakingMenu() {
             </StyledNavLink>
              }
                */}
-          {chainId && [ChainId.HARMONY_TESTNET, ChainId.HARMONY_MAINNET].includes(chainId) && (
+          {chainId && [ChainId.FINDORA, ChainId.GOERLI, ChainId.ANVILTESTNET].includes(chainId) && (
             <StyledNavLink id={`stake-nav-link`} to={'/staking/bridge'}>
               Bridge
             </StyledNavLink>

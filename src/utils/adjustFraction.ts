@@ -1,5 +1,5 @@
 import { utils } from 'ethers'
-import { Fraction } from '@venomswap/sdk'
+import { Fraction } from '@oneverseswap/sdk'
 
 export default function adjustFraction(fraction: Fraction, decimals = 18): Fraction {
   if (decimals === 18) return fraction

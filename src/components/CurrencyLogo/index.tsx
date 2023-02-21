@@ -1,5 +1,5 @@
 import { getAddress } from 'ethers/lib/utils'
-import { ChainId, Currency, Token, ETHER, HARMONY, BINANCE_COIN, DEFAULT_CURRENCIES, Blockchain } from '@venomswap/sdk'
+import { ChainId, Currency, Token, ETHER, HARMONY, DEFAULT_CURRENCIES, Blockchain, FINDORA } from '@oneverseswap/sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
@@ -10,21 +10,16 @@ import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
 import baseCurrencies from '../../utils/baseCurrencies'
 import useBlockchain from '../../hooks/useBlockchain'
-import { ASSET_HOST, TOKEN_LOGO_EXCEPTIONS } from '../../constants'
+import { ASSET_HOST } from '../../constants'
 
 export function getTokenLogoURL(token: Token): string {
   const address = getAddress(token.address)
-  const tokenExceptions = TOKEN_LOGO_EXCEPTIONS[token.chainId]
+  // const tokenExceptions = TOKEN_LOGO_EXCEPTIONS[token.chainId]
 
   switch (token.chainId) {
-    case ChainId.BSC_MAINNET:
-    case ChainId.BSC_TESTNET:
-      return tokenExceptions.includes(address)
-        ? `${ASSET_HOST}/tokens/${token.symbol}.png`
-        : `https://assets.trustwalletapp.com/blockchains/smartchain/assets/${address}/logo.png`
-
+    case ChainId.FINDORA:
+      return 'https://imgs.search.brave.com/ml-lANNpf--I9NyJ4b-ty6z2NxtDFoad9UYNQ0swPLc/rs:fit:558:558:1/g:ce/aHR0cHM6Ly9pbWcu/YXBpLmNyeXB0b3Jh/bmsuaW8vY29pbnMv/ZmluZG9yYTE2MDkx/NzIwNzUxOTMucG5n'
     case ChainId.HARMONY_MAINNET:
-    case ChainId.HARMONY_TESTNET:
       return `${ASSET_HOST}/tokens/${token.symbol}.png`
 
     default:
@@ -79,10 +74,7 @@ export default function CurrencyLogo({
     const wrappedCurrency = currency instanceof Token ? baseCurrencies(currency.chainId)[1] : undefined
     if (currency === HARMONY || currency === (wrappedCurrency && blockchain === Blockchain.HARMONY)) {
       return <StyledEthereumLogo src={HarmonyLogo} size={size} style={style} />
-    } else if (
-      currency === BINANCE_COIN ||
-      (currency === wrappedCurrency && blockchain === Blockchain.BINANCE_SMART_CHAIN)
-    ) {
+    } else if (currency === FINDORA || (currency === wrappedCurrency && blockchain === Blockchain.FINDORA)) {
       return <StyledEthereumLogo src={BinanceLogo} size={size} style={style} />
     }
   }

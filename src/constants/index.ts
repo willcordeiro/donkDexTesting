@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { ChainId, JSBI, Percent, Token, WETH, Fraction } from '@venomswap/sdk'
+import { ChainId, JSBI, Percent, Token, WETH, Fraction } from '@oneverseswap/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
@@ -17,136 +17,112 @@ export const DISPLAY_TVL = false
 
 export const PIT_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.MAINNET]: { name: '', path: '' },
-  [ChainId.RINKEBY]: { name: '', path: '' },
-  [ChainId.ROPSTEN]: { name: '', path: '' },
-  [ChainId.GÖRLI]: { name: 'GravPit', path: '/gravPit' },
-  [ChainId.KOVAN]: { name: '', path: '' },
-  [ChainId.BSC_MAINNET]: { name: 'CobraPit', path: '/cobraPit' },
-  [ChainId.BSC_TESTNET]: { name: 'CobraPit', path: '/cobraPit' },
-  [ChainId.HARMONY_MAINNET]: { name: 'ViperPit', path: '/viperPit' },
-  [ChainId.HARMONY_TESTNET]: { name: 'ViperPit', path: '/viperPit' },
-  [ChainId.FINDORA]: { name: 'GravPit', path: '/gravPit' }
+  [ChainId.FINDORA]: { name: 'GravPit', path: '/gravPit' },
+  [ChainId.GOERLI]: { name: 'GravPit', path: '/gravPit' },
+  [ChainId.ANVILTESTNET]: { name: 'GravPit', path: '/gravPit' },
+  [ChainId.RINKEBY]: { name: 'GravPit', path: '/gravPit' },
+  [ChainId.ROPSTEN]: { name: 'GravPit', path: '/gravPit' },
+  [ChainId.KOVAN]: { name: 'GravPit', path: '/gravPit' },
+  [ChainId.HARMONY_MAINNET]: { name: 'GravPit', path: '/gravPit' }
 }
 
 export const NEST_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.MAINNET]: { name: '', path: '' },
-  [ChainId.RINKEBY]: { name: '', path: '' },
-  [ChainId.ROPSTEN]: { name: '', path: '' },
-  [ChainId.GÖRLI]: { name: '', path: '' },
-  [ChainId.KOVAN]: { name: '', path: '' },
-  [ChainId.BSC_MAINNET]: { name: 'CobraNest', path: '/single' },
-  [ChainId.BSC_TESTNET]: { name: 'CobraNest', path: '/single' },
-  [ChainId.HARMONY_MAINNET]: { name: 'ViperNest', path: '/single' },
-  [ChainId.HARMONY_TESTNET]: { name: 'ViperNest', path: '/single' },
-  [ChainId.FINDORA]: { name: '', path: '' }
+  [ChainId.FINDORA]: { name: 'GravPit', path: '/single' },
+  [ChainId.GOERLI]: { name: 'GravPit', path: '/single' },
+  [ChainId.ANVILTESTNET]: { name: 'GravPit', path: '/single' },
+  [ChainId.RINKEBY]: { name: 'GravPit', path: '/gravPit' },
+  [ChainId.ROPSTEN]: { name: 'GravPit', path: '/gravPit' },
+  [ChainId.KOVAN]: { name: 'GravPit', path: '/gravPit' },
+  [ChainId.HARMONY_MAINNET]: { name: 'GravPit', path: '/gravPit' }
 }
 
 export const EXCHANGE_SUBGRAPHS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
+  [ChainId.FINDORA]: '',
+  [ChainId.GOERLI]: '',
+  [ChainId.ANVILTESTNET]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
-  [ChainId.GÖRLI]: '',
   [ChainId.KOVAN]: '',
-  [ChainId.BSC_MAINNET]: '',
-  [ChainId.BSC_TESTNET]: '',
-  [ChainId.HARMONY_MAINNET]: '',
-  [ChainId.HARMONY_TESTNET]: '',
-  [ChainId.FINDORA]: ''
+  [ChainId.HARMONY_MAINNET]: ''
 }
 
 export const ANALYTICS_URLS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
+  [ChainId.FINDORA]: '',
+  [ChainId.GOERLI]: '',
+  [ChainId.ANVILTESTNET]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
-  [ChainId.GÖRLI]: '',
   [ChainId.KOVAN]: '',
-  [ChainId.BSC_MAINNET]: '',
-  [ChainId.BSC_TESTNET]: '',
-  [ChainId.HARMONY_MAINNET]: '',
-  [ChainId.HARMONY_TESTNET]: '',
-  [ChainId.FINDORA]: ''
+  [ChainId.HARMONY_MAINNET]: ''
 }
 
 export const BRIDGE_URLS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
+  [ChainId.FINDORA]: '',
+  [ChainId.GOERLI]: '',
+  [ChainId.ANVILTESTNET]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
-  [ChainId.GÖRLI]: '',
   [ChainId.KOVAN]: '',
-  [ChainId.BSC_MAINNET]: '',
-  [ChainId.BSC_TESTNET]: '',
-  [ChainId.HARMONY_MAINNET]: 'https://bridge.harmony.one',
-  [ChainId.HARMONY_TESTNET]: '',
-  [ChainId.FINDORA]: ''
+  [ChainId.HARMONY_MAINNET]: ''
 }
 
 export const DOCS_URLS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
+  [ChainId.FINDORA]: '',
+  [ChainId.GOERLI]: '',
+  [ChainId.ANVILTESTNET]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
-  [ChainId.GÖRLI]: '',
   [ChainId.KOVAN]: '',
-  [ChainId.BSC_MAINNET]: '',
-  [ChainId.BSC_TESTNET]: '',
-  [ChainId.HARMONY_MAINNET]: '',
-  [ChainId.HARMONY_TESTNET]: '',
-  [ChainId.FINDORA]: ''
+  [ChainId.HARMONY_MAINNET]: ''
 }
 
 export const WEB_INTERFACES: { [chainId in ChainId]: string[] } = {
   [ChainId.MAINNET]: [''],
+  [ChainId.FINDORA]: [''],
+  [ChainId.GOERLI]: [''],
+  [ChainId.ANVILTESTNET]: [''],
   [ChainId.RINKEBY]: [''],
   [ChainId.ROPSTEN]: [''],
-  [ChainId.GÖRLI]: [''],
   [ChainId.KOVAN]: [''],
-  [ChainId.BSC_MAINNET]: [],
-  [ChainId.BSC_TESTNET]: [],
-  [ChainId.HARMONY_MAINNET]: [],
-  [ChainId.HARMONY_TESTNET]: [],
-  [ChainId.FINDORA]: []
+  [ChainId.HARMONY_MAINNET]: ['']
 }
 
 export const TOKEN_LOGO_EXCEPTIONS: { [chainId in ChainId]: string[] } = {
-  [ChainId.MAINNET]: [],
-  [ChainId.RINKEBY]: [],
-  [ChainId.ROPSTEN]: [],
-  [ChainId.GÖRLI]: [],
-  [ChainId.KOVAN]: [],
-  [ChainId.BSC_MAINNET]: [
-    '0x2C449bA613873e7B980FaF2b686207d7bd205541', // COBRA
-    '0x45f785581e0787D3C0C62676ABc6f17783e021f0', // xCOBRA
-    '0x7E080699D0F306dbAE458b13EA6fa8BfD0efe752' // 1VIPER
-  ],
-  [ChainId.BSC_TESTNET]: [],
-  [ChainId.HARMONY_MAINNET]: [],
-  [ChainId.HARMONY_TESTNET]: [],
-  [ChainId.FINDORA]: []
+  [ChainId.MAINNET]: [''],
+  [ChainId.FINDORA]: [''],
+  [ChainId.GOERLI]: [''],
+  [ChainId.ANVILTESTNET]: [''],
+  [ChainId.RINKEBY]: [''],
+  [ChainId.ROPSTEN]: [''],
+  [ChainId.KOVAN]: [''],
+  [ChainId.HARMONY_MAINNET]: ['']
 }
 
 export const POOL_BACKGROUNDS: { [chainId in ChainId]: string } = {
-  [ChainId.MAINNET]: '',
-  [ChainId.RINKEBY]: '',
-  [ChainId.ROPSTEN]: '',
-  [ChainId.GÖRLI]: '',
-  [ChainId.KOVAN]: '',
-  [ChainId.BSC_MAINNET]: '#c99212',
-  [ChainId.BSC_TESTNET]: '#c99212',
-  [ChainId.HARMONY_MAINNET]: '#02a2c4',
-  [ChainId.HARMONY_TESTNET]: '#02a2c4',
-  [ChainId.FINDORA]: ''
+  [ChainId.GOERLI]: '#02a2c4',
+  [ChainId.ANVILTESTNET]: '#02a2c4',
+  [ChainId.RINKEBY]: '#02a2c4',
+  [ChainId.FINDORA]: '#02a2c4',
+  [ChainId.MAINNET]: '#02a2c4',
+  [ChainId.ROPSTEN]: '#02a2c4',
+  [ChainId.KOVAN]: '#02a2c4',
+  [ChainId.HARMONY_MAINNET]: '#02a2c4'
 }
 
 export const UNLOCKING_STARTS: { [chainId in ChainId]: number | undefined } = {
-  [ChainId.MAINNET]: undefined,
+  [ChainId.GOERLI]: undefined,
+  [ChainId.ANVILTESTNET]: undefined,
   [ChainId.RINKEBY]: undefined,
+  [ChainId.FINDORA]: undefined,
+  [ChainId.MAINNET]: undefined,
   [ChainId.ROPSTEN]: undefined,
-  [ChainId.GÖRLI]: undefined,
   [ChainId.KOVAN]: undefined,
-  [ChainId.BSC_MAINNET]: 15135850,
-  [ChainId.BSC_TESTNET]: 16612200,
-  [ChainId.HARMONY_MAINNET]: 22770895,
-  [ChainId.HARMONY_TESTNET]: 21195000,
-  [ChainId.FINDORA]: undefined
+  [ChainId.HARMONY_MAINNET]: undefined
 }
 
 export { PRELOADED_PROPOSALS } from './proposals'
@@ -183,85 +159,49 @@ export const MERKLE_DISTRIBUTOR_ADDRESS: { [chainId in ChainId]?: string } = {
 }
 
 const WETH_ONLY: ChainTokenList = {
+  [ChainId.FINDORA]: [WETH[ChainId.FINDORA]],
+  [ChainId.GOERLI]: [WETH[ChainId.GOERLI]],
+  [ChainId.ANVILTESTNET]: [WETH[ChainId.ANVILTESTNET]],
+  [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
   [ChainId.ROPSTEN]: [WETH[ChainId.ROPSTEN]],
-  [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
-  [ChainId.GÖRLI]: [WETH[ChainId.GÖRLI]],
   [ChainId.KOVAN]: [WETH[ChainId.KOVAN]],
-  [ChainId.BSC_MAINNET]: [WETH[ChainId.BSC_MAINNET]],
-  [ChainId.BSC_TESTNET]: [WETH[ChainId.BSC_TESTNET]],
-  [ChainId.HARMONY_MAINNET]: [WETH[ChainId.HARMONY_MAINNET]],
-  [ChainId.HARMONY_TESTNET]: [WETH[ChainId.HARMONY_TESTNET]],
-  [ChainId.FINDORA]: [WETH[ChainId.FINDORA]]
+  [ChainId.HARMONY_MAINNET]: [WETH[ChainId.HARMONY_MAINNET]]
 }
 
-// used to construct intermediary pairs for trading
+//used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR, WBTC],
-  [ChainId.HARMONY_MAINNET]: [
-    ...WETH_ONLY[ChainId.HARMONY_MAINNET],
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'BUSD'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, '1DAI'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, '1USDC'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, '1ETH'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'VIPER'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'WAGMI')
-  ],
-  [ChainId.BSC_MAINNET]: [
-    ...WETH_ONLY[ChainId.BSC_MAINNET],
-    getTokenWithDefault(ChainId.BSC_MAINNET, 'BUSD'),
-    getTokenWithDefault(ChainId.BSC_MAINNET, 'USDT'),
-    getTokenWithDefault(ChainId.BSC_MAINNET, 'USDC'),
-    getTokenWithDefault(ChainId.BSC_MAINNET, 'COBRA')
-  ]
+  [ChainId.FINDORA]: [...WETH_ONLY[ChainId.FINDORA] /* DAI, USDC, USDT, COMP, MKR, WBTC */],
+  [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI] /* DAI, USDC, USDT, COMP, MKR, WBTC */],
+  [ChainId.ANVILTESTNET]: [...WETH_ONLY[ChainId.ANVILTESTNET] /* DAI, USDC, USDT, COMP, MKR, WBTC */]
 }
 
 /**
  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
  * tokens.
  */
+
 export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
   [ChainId.MAINNET]: {
-    [AMPL.address]: [DAI, WETH[ChainId.MAINNET]]
+    /*[AMPL.address]: [DAI, WETH[ChainId.MAINNET]] */
   }
 }
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
-  [ChainId.HARMONY_MAINNET]: [
-    ...WETH_ONLY[ChainId.HARMONY_MAINNET],
-    /*getTokenWithDefault(ChainId.HARMONY_MAINNET, '1DAI'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'BUSD'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, '1USDC'),*/
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'VIPER'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'WAGMI')
-  ],
-  [ChainId.BSC_MAINNET]: [
-    ...WETH_ONLY[ChainId.BSC_MAINNET],
-    getTokenWithDefault(ChainId.BSC_MAINNET, 'BUSD'),
-    getTokenWithDefault(ChainId.BSC_MAINNET, 'USDT'),
-    getTokenWithDefault(ChainId.BSC_MAINNET, 'USDC'),
-    getTokenWithDefault(ChainId.BSC_MAINNET, 'COBRA')
-  ]
+  [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI], getTokenWithDefault(ChainId.GOERLI, 'BUSD')]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, WBTC],
-  [ChainId.HARMONY_MAINNET]: [
-    ...WETH_ONLY[ChainId.HARMONY_MAINNET],
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'BUSD'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, '1DAI'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, '1USDC'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, '1ETH'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'VIPER'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'xVIPER'),
-    getTokenWithDefault(ChainId.HARMONY_MAINNET, 'WAGMI')
-  ],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET] /*DAI, USDC, USDT, WBTC */],
+  [ChainId.FINDORA]: [...WETH_ONLY[ChainId.FINDORA] /*DAI, USDC, USDT, WBTC */],
+  [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI] /*DAI, USDC, USDT, WBTC */],
+  [ChainId.ANVILTESTNET]: [...WETH_ONLY[ChainId.ANVILTESTNET] /*DAI, USDC, USDT, WBTC */]
+  /*
   [ChainId.BSC_MAINNET]: [
     ...WETH_ONLY[ChainId.BSC_MAINNET],
     getTokenWithDefault(ChainId.BSC_MAINNET, 'BUSD'),
@@ -270,6 +210,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
     getTokenWithDefault(ChainId.BSC_MAINNET, 'COBRA'),
     getTokenWithDefault(ChainId.BSC_MAINNET, 'xCOBRA')
   ]
+  */
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
@@ -277,9 +218,9 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [
       new Token(ChainId.MAINNET, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
       new Token(ChainId.MAINNET, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin')
-    ],
-    [USDC, USDT],
-    [DAI, USDT]
+    ]
+    // [USDC, USDT],
+    // [DAI, USDT]
   ]
 }
 

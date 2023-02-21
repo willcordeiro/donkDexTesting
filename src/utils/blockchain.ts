@@ -1,21 +1,13 @@
-import { Blockchain, ChainId, Currency, ETHER, BINANCE_COIN, HARMONY } from '@venomswap/sdk'
+import { Blockchain, ChainId, Currency, ETHER, FINDORA, ANVILTESTNET } from '@oneverseswap/sdk'
 
 export function getBlockchain(chainId: ChainId | undefined): Blockchain {
   switch (chainId) {
-    case ChainId.MAINNET:
-    case ChainId.ROPSTEN:
-    case ChainId.RINKEBY:
-    case ChainId.GÖRLI:
-    case ChainId.KOVAN:
-      return Blockchain.ETHEREUM
-    case ChainId.BSC_MAINNET:
-    case ChainId.BSC_TESTNET:
-      return Blockchain.BINANCE_SMART_CHAIN
-    case ChainId.HARMONY_MAINNET:
-    case ChainId.HARMONY_TESTNET:
-      return Blockchain.HARMONY
+    case ChainId.ANVILTESTNET:
+      return Blockchain.ANVILTESTNET
+    case ChainId.FINDORA:
+      return Blockchain.FINDORA
     default:
-      return Blockchain.ETHEREUM
+      return Blockchain.FINDORA
   }
 }
 
@@ -26,41 +18,39 @@ export function getBlockchainAdjustedCurrency(
   if (!currency) return currency
   if (currency !== ETHER) return currency
   switch (blockchain) {
-    case Blockchain.BINANCE_SMART_CHAIN:
-      return BINANCE_COIN
-    case Blockchain.HARMONY:
-      return HARMONY
+    case Blockchain.FINDORA:
+      return FINDORA
+
+    case Blockchain.ANVILTESTNET:
+      return ANVILTESTNET
     default:
       return ETHER
   }
 }
 
 // Returns the block time in seconds
-export function getBlockchainBlockTime(blockchain: Blockchain): number {
+export function getBlockchainBlockTime(blockchain: any): number {
   switch (blockchain) {
-    case Blockchain.BINANCE_SMART_CHAIN:
-      return 3
-    case Blockchain.HARMONY:
-      return 2
+    case blockchain.FINDORA:
+      return 16
+    case blockchain.ANVILTESTNET:
+      return 15
     default:
-      return 13
+      return 16
   }
 }
 
 export function getBlockchainName(chainId: ChainId | undefined): string {
   switch (chainId) {
     case ChainId.MAINNET:
-    case ChainId.ROPSTEN:
-    case ChainId.RINKEBY:
-    case ChainId.GÖRLI:
-    case ChainId.KOVAN:
       return 'Ethereum'
-    case ChainId.BSC_MAINNET:
-    case ChainId.BSC_TESTNET:
-      return 'Binance Smart Chain'
-    case ChainId.HARMONY_MAINNET:
-    case ChainId.HARMONY_TESTNET:
-      return 'Harmony'
+    case ChainId.GOERLI:
+      return 'Goerli'
+    case ChainId.FINDORA:
+      return 'Findora'
+    case ChainId.ANVILTESTNET:
+      return 'Anvil testnet'
+
     default:
       return 'Ethereum'
   }

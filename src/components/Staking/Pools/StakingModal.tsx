@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { TransactionResponse } from '@ethersproject/providers'
-import { TokenAmount, Pair } from '@venomswap/sdk'
+import { TokenAmount, Pair } from '@oneverseswap/sdk'
 import { CallOverrides } from '@ethersproject/contracts'
 import useTransactionDeadline from '../../../hooks/useTransactionDeadline'
 import Modal from '../../Modal'

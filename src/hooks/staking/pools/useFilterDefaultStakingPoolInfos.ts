@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ChainId, Pair } from '@venomswap/sdk'
+import { ChainId, Pair } from '@oneverseswap/sdk'
 import { DefaultStakingPoolInfo } from '../../../constants/staking/types'
 import { DEFAULT_STAKING_POOL_INFOS } from '../../../constants/staking/pools'
 

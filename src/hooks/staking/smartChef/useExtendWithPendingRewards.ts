@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Interface } from '@ethersproject/abi'
-import { TokenAmount } from '@venomswap/sdk'
+import { TokenAmount } from '@oneverseswap/sdk'
 import { abi as SMART_CHEF_ABI } from '@venomswap/contracts/build/SmartChefInitializable.json'
 import { useActiveWeb3React } from '../..'
 import useGovernanceToken from '../../tokens/useGovernanceToken'

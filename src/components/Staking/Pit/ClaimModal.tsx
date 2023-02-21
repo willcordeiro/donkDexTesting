@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { Interface } from '@ethersproject/abi'
 import { TransactionResponse } from '@ethersproject/providers'
-import { abi as IUniswapV2PairABI } from '@venomswap/core/build/IUniswapV2Pair.json'
+import { abi as IUniswapV2PairABI } from '@oneverseswap/core/build/IUniswapV2Pair.json'
 import { CallOverrides } from '@ethersproject/contracts'
 import Modal from '../../Modal'
 import { AutoColumn } from '../../Column'

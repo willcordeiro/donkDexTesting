@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
-import { Blockchain } from '@venomswap/sdk'
+import { Blockchain } from '@oneverseswap/sdk'
 //import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 import AddressClaimModal from '../components/claim/AddressClaimModal'
 import Header from '../components/Header'
@@ -183,7 +183,7 @@ export default function App() {
               <Route exact strict path="/migrate/v1" component={MigrateV1} />
               <Route exact strict path="/migrate/v1/:address" component={MigrateV1Exchange} />
               <Route exact strict path="/staking/pools/:currencyIdA/:currencyIdB" component={Manage} />
-              {[Blockchain.HARMONY, Blockchain.BINANCE_SMART_CHAIN].includes(blockchain) && (
+              {[Blockchain.HARMONY].includes(blockchain) && (
                 <Route exact strict path="/staking/single/:address" component={SmartChefSingleManage} />
               )}
               {blockchain === Blockchain.HARMONY && (

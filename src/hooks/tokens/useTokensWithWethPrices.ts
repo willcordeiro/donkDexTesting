@@ -1,4 +1,4 @@
-import { ChainId, WETH, Token, Blockchain } from '@venomswap/sdk'
+import { /*ChainId */ WETH, Token, Blockchain } from '@oneverseswap/sdk'
 import { useMemo } from 'react'
 import useGovernanceToken from './useGovernanceToken'
 import usePitToken from './usePitToken'
@@ -19,9 +19,9 @@ export default function useTokensWithWethPrices(): Record<string, any> {
   const pitToken = usePitToken()
   const pitTokenWETHPrice = useTokenWethPrice(pitToken)
 
-  const BUSDTicker = chainId !== ChainId.HARMONY_TESTNET ? 'BUSD' : '1BUSD'
-  const BUSD: Token | undefined = getToken(chainId, BUSDTicker)
-  const BUSDWETHPrice = useTokenWethPrice(BUSD)
+  //const BUSDTicker = chainId !== ChainId.HARMONY_TESTNET ? 'BUSD' : '1BUSD'
+  //const BUSD: Token | undefined = getToken(chainId, BUSDTicker)
+  //const BUSDWETHPrice = useTokenWethPrice(BUSD)
 
   const USDCTicker = blockchain === Blockchain.HARMONY ? '1USDC' : 'USDC'
   const USDC: Token | undefined = getToken(chainId, USDCTicker)
@@ -36,8 +36,8 @@ export default function useTokensWithWethPrices(): Record<string, any> {
 
   // Harmony specific tokens
   const bscBUSD: Token | undefined = blockchain === Blockchain.HARMONY ? getToken(chainId, 'bscBUSD') : undefined
-  let bscBUSDWETHPrice = useTokenWethPrice(bscBUSD)
-  bscBUSDWETHPrice = bscBUSDWETHPrice ? bscBUSDWETHPrice : BUSDWETHPrice
+  //let bscBUSDWETHPrice = useTokenWethPrice(bscBUSD)
+  // bscBUSDWETHPrice = bscBUSDWETHPrice ? bscBUSDWETHPrice : BUSDWETHPrice
 
   const bscUSDC: Token | undefined = blockchain === Blockchain.HARMONY ? getToken(chainId, 'bscUSDC') : undefined
   let bscUSDCWETHPrice = useTokenWethPrice(bscUSDC)
@@ -62,26 +62,26 @@ export default function useTokensWithWethPrices(): Record<string, any> {
   bridgedBscBTCWETHPrice = bridgedBscBTCWETHPrice ? bridgedBscBTCWETHPrice : bridgedBTCWETHPrice
 
   // BSC
-  const bridgedVIPER: Token | undefined = Blockchain.BINANCE_SMART_CHAIN ? getToken(chainId, '1VIPER') : undefined
-  const bridgedVIPERWETHPrice = useTokenWethPrice(bridgedVIPER)
+  //const bridgedVIPER: Token | undefined = Blockchain.BINANCE_SMART_CHAIN ? getToken(chainId, '1VIPER') : undefined
+  // const bridgedVIPERWETHPrice = useTokenWethPrice(bridgedVIPER)
 
   return useMemo(() => {
     return {
       WETH: { token: weth, price: undefined },
       govToken: { token: govToken, price: govTokenWETHPrice },
       pitToken: { token: pitToken, price: pitTokenWETHPrice },
-      BUSD: { token: BUSD, price: BUSDWETHPrice },
+      //  BUSD: { token: BUSD, price: BUSDWETHPrice },
       USDC: { token: USDC, price: USDCWETHPrice },
       DAI: { token: DAI, price: DAIWETHPrice },
       ONEUSD: { token: ONEUSD, price: ONEUSDWETHPrice },
-      bscBUSD: { token: bscBUSD, price: bscBUSDWETHPrice },
+      //bscBUSD: { token: bscBUSD, price: bscBUSDWETHPrice },
       bscUSDC: { token: bscUSDC, price: bscUSDCWETHPrice },
       bscDAI: { token: bscDAI, price: bscDAIWETHPrice },
       bridgedETH: { token: bridgedETH, price: bridgedETHWETHPrice },
       bridgedBscETH: { token: bridgedBscETH, price: bridgedBscETHWETHPrice },
       bridgedBTC: { token: bridgedBTC, price: bridgedBTCWETHPrice },
-      bridgedBscBTC: { token: bridgedBscBTC, price: bridgedBscBTCWETHPrice },
-      bridgedVIPER: { token: bridgedVIPER, price: bridgedVIPERWETHPrice }
+      bridgedBscBTC: { token: bridgedBscBTC, price: bridgedBscBTCWETHPrice }
+      //  bridgedVIPER: { token: bridgedVIPER, price: bridgedVIPERWETHPrice }
     }
   }, [
     chainId,
@@ -91,12 +91,12 @@ export default function useTokensWithWethPrices(): Record<string, any> {
     govTokenWETHPrice,
     pitToken,
     pitTokenWETHPrice,
-    BUSD,
-    BUSDWETHPrice,
+    //  BUSD,
+    // BUSDWETHPrice,
     USDC,
     USDCWETHPrice,
     bscBUSD,
-    bscBUSDWETHPrice,
+    // bscBUSDWETHPrice,
     bridgedETH,
     bridgedETHWETHPrice
   ])

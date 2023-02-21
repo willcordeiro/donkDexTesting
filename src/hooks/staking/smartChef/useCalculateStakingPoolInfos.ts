@@ -1,4 +1,4 @@
-import { ChainId } from '@venomswap/sdk'
+import { ChainId } from '@oneverseswap/sdk'
 import { useMemo } from 'react'
 import { SMART_CHEF_POOL_INFOS } from '../../../constants/staking/smartChef'
 

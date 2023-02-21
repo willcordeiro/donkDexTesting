@@ -1,10 +1,11 @@
-import { ChainId, Pair } from '@venomswap/sdk'
-import { PoolType } from '../../types'
-import getTokenWithDefault from '../../../../utils/getTokenWithDefault'
-import getPairTokensWithDefaults from '../../../../utils/getPairTokensWithDefaults'
+//import { ChainId, Pair } from '@oneverseswap/sdk'
+//import { PoolType } from '../../types'
+//import getTokenWithDefault from '../../../../utils/getTokenWithDefault'
+//import getPairTokensWithDefaults from '../../../../utils/getPairTokensWithDefaults'
 import { SmartChefPoolInfo } from '../../types'
 
 export const HARMONY_TESTNET_SMART_CHEF_POOLS: Record<string, SmartChefPoolInfo[]> = {
+  /*
   single: [
     {
       pid: 0,
@@ -41,4 +42,5 @@ export const HARMONY_TESTNET_SMART_CHEF_POOLS: Record<string, SmartChefPoolInfo[
       visible: true
     }
   ]
+  */
 }

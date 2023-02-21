@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Fraction, JSBI } from '@venomswap/sdk'
+import { Fraction, JSBI } from '@oneverseswap/sdk'
 import { DefaultStakingPool } from '../../state/stake/types'
 
 export default function useTotalTVL(stakingInfos: DefaultStakingPool[]): Fraction {

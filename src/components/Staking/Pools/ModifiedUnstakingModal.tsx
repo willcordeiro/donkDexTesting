@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { TransactionResponse } from '@ethersproject/providers'
-import { TokenAmount, Pair, Blockchain } from '@venomswap/sdk'
+import { TokenAmount, Pair } from '@oneverseswap/sdk'
 import { CallOverrides } from '@ethersproject/contracts'
 import Modal from '../../Modal'
 import { AutoColumn } from '../../Column'
@@ -100,15 +100,8 @@ export default function ModifiedStakingModal({ isOpen, onDismiss, stakingInfo }:
   let feeInfoUrl = ''
 
   switch (blockchain) {
-    case Blockchain.HARMONY:
-      feeInfoUrl = 'https://docs.venomdao.org/viper/fees'
-      break
-
-    case Blockchain.BINANCE_SMART_CHAIN:
-      feeInfoUrl = 'https://docs.venomdao.org/cobra/fees'
-      break
-
     default:
+      feeInfoUrl = 'Coming soon'
       break
   }
 
