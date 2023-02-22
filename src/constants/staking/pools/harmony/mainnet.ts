@@ -1,8 +1,9 @@
-import { ChainId, Pair } from '@oneverseswap/sdk'
-import getPairTokensWithDefaults from '../../../../utils/getPairTokensWithDefaults'
+//import { ChainId, Pair } from '@oneverseswap/sdk'
+//import getPairTokensWithDefaults from '../../../../utils/getPairTokensWithDefaults'
 import { DefaultStakingPoolInfo } from '../../types'
 
 export const HARMONY_MAINNET_POOLS: DefaultStakingPoolInfo[] = [
+  /*
   {
     pid: 0,
     order: 0,
@@ -379,4 +380,5 @@ export const HARMONY_MAINNET_POOLS: DefaultStakingPoolInfo[] = [
     allocPoints: 0,
     active: false
   }
+  */
 ]

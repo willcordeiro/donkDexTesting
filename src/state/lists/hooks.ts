@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import { AppState } from '../index'
 import sortByListPriority from 'utils/listSort'
 import UNSUPPORTED_TOKEN_LIST from '../../constants/tokenLists/uniswap-v2-unsupported.tokenlist.json'
-
+import { DEFAULT_LIST_OF_LISTS } from './../../constants/lists'
 type TagDetails = Tags[keyof Tags]
 export interface TagInfo extends TagDetails {
   id: string
@@ -93,7 +93,7 @@ export function useAllLists(): {
   return useSelector<AppState, AppState['lists']['byUrl']>(state => state.lists.byUrl)
 }
 
-function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddressMap {
+function combineMaps(map1: TokenAddressMap, map2: any): any {
   return {
     1: { ...map1[1], ...map2[1] },
     3: { ...map1[3], ...map2[3] },
@@ -123,6 +123,7 @@ function useCombinedTokenMapFromUrls(urls: string[] | undefined): TokenAddressMa
           if (!current) return allTokens
           try {
             const newTokens = Object.assign(listToTokenMap(current))
+
             return combineMaps(allTokens, newTokens)
           } catch (error) {
             console.error('Could not show token list due to error', error)
@@ -147,10 +148,12 @@ export function useInactiveListUrls(): string[] {
 }
 
 // get all the tokens from active lists, combine with local default tokens
+//TODO: CHANGE TO COMMUNITY TOKEN LIST
 export function useCombinedActiveList(): TokenAddressMap {
   const activeListUrls = useActiveListUrls()
   const activeTokens = useCombinedTokenMapFromUrls(activeListUrls)
-  let defaultTokenMap: any /*= listToTokenMap(DEFAULT_TOKEN_LIST) */
+  const defaultTokenMap = DEFAULT_LIST_OF_LISTS
+
   return combineMaps(activeTokens, defaultTokenMap)
 }
 
