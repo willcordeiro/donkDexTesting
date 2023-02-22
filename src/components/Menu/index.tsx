@@ -1,11 +1,11 @@
 import React, { useRef } from 'react'
 //import { Blockchain } from '@oneverseswap/sdk'
 //import { Send, Code, MessageSquare, BarChart2, Book, Twitter, Repeat } from 'react-feather'
-import { BarChart2 } from 'react-feather'
+
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import styled from 'styled-components'
 //import CoinGeckoLogo from '../../assets/images/CoinGecko-32x32.png'
-import { useActiveWeb3React } from '../../hooks'
+
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen, useToggleModal } from '../../state/application/hooks'
@@ -16,8 +16,9 @@ import { ExternalLink } from '../../theme'
 //import useGovernanceToken from '../../hooks/tokens/useGovernanceToken'
 //import useBlockchain from '../../hooks/useBlockchain'
 //import { ANALYTICS_URLS, DOCS_URLS, BRIDGE_URLS } from '../../constants'
-import { ANALYTICS_URLS } from '../../constants'
-
+import { RiDiscordLine, RiTwitterLine, RiFacebookBoxLine, RiTelegramLine } from 'react-icons/ri'
+import logo from '../../assets/images/logo/logo_-_discord_icon_1.png'
+import logobook from '../../assets/images/logo/logo_-_white_bg.png'
 const StyledMenuIcon = styled(MenuIcon)`
   path {
     stroke: ${({ theme }) => theme.text1};
@@ -35,7 +36,7 @@ const StyledMenuButton = styled.button`
   background-color: ${({ theme }) => theme.bg3};
 
   padding: 0.15rem 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: 5px;
 
   :hover,
   :focus {
@@ -64,7 +65,7 @@ const MenuFlyout = styled.span`
   background-color: ${({ theme }) => theme.bg3};
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
     0px 24px 32px rgba(0, 0, 0, 0.01);
-  border-radius: 12px;
+  border-radius: 5px;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -94,9 +95,6 @@ const MenuItem = styled(ExternalLink)`
 `
 
 export default function Menu() {
-  const { chainId } = useActiveWeb3React()
-  const analyticsUrl = chainId && ANALYTICS_URLS[chainId]
-
   const node = useRef<HTMLDivElement>()
   const open = useModalOpen(ApplicationModal.MENU)
   const toggle = useToggleModal(ApplicationModal.MENU)
@@ -111,12 +109,29 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          {analyticsUrl && analyticsUrl !== '' && (
-            <MenuItem id="link" href={analyticsUrl}>
-              <BarChart2 size={14} />
-              Charts
-            </MenuItem>
-          )}
+          <MenuItem id="link" href={'https://oneverse.one/'}>
+            <img src={`${logo}`} width={40} height={40} alt="logo" /> Website
+          </MenuItem>
+
+          <MenuItem id="link" href={'https://oneverse.gitbook.io/oneverse/oneverse/what-is-oneverse'}>
+            <img src={`${logobook}`} width={40} height={40} alt="logo" /> GitBook
+          </MenuItem>
+
+          <MenuItem id="link" href={'https://discord.com/invite/oneverse'}>
+            <RiDiscordLine color="white" size={35} /> Discord
+          </MenuItem>
+
+          <MenuItem id="link" href={'https://twitter.com/oneverseone'}>
+            <RiTwitterLine color="white" size={35} /> Twitter
+          </MenuItem>
+
+          <MenuItem id="link" href={'https://www.facebook.com/oneverse.one/'}>
+            <RiFacebookBoxLine color="white" size={35} /> Facebook
+          </MenuItem>
+
+          <MenuItem id="link" href={'https://t.me/ONEverseONEoff'}>
+            <RiTelegramLine color="white" size={35} /> Telegram
+          </MenuItem>
         </MenuFlyout>
       )}
     </StyledMenu>

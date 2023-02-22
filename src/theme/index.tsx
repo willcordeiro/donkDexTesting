@@ -417,6 +417,8 @@ html {
 
 export const ThemedGlobalStyle = createGlobalStyle`
 html {
+  
+
   color: ${({ theme }) => theme.text1};
   background: linear-gradient(180deg,rgba(6,6,15,.1) 67.19%,rgba(125,207,182,.1)),url(https://oneverse.one/static/media/grid.f7e22222.svg) no-repeat,url(https://oneverse.one/static/media/bg-home.c9d7df97.svg) no-repeat;
     background-size: cover;
@@ -429,10 +431,5 @@ body {
   min-height: 100vh;
   background-position: 0 -30vh;
   background-repeat: no-repeat;
-  background-image: ${({ theme }) =>
-    `radial-gradient(50% 50% at 50% 50%, ${transparentize(0.9, theme.primary1)} 0%, ${transparentize(
-      1,
-      theme.bg1
-    )} 100%)`};
 }
 `
