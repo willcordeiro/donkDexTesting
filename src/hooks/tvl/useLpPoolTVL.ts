@@ -41,7 +41,7 @@ export default function useLpPoolTVL(): Fraction {
     let mounted = true
 
     const fetchData = async () => {
-      if (subgraph && subgraph !== '' && chainId && [ChainId.HARMONY_MAINNET].includes(chainId)) {
+      if (subgraph && subgraph !== '' && chainId && [ChainId.FINDORA].includes(chainId)) {
         const subgraphClient = new Client(subgraph)
         const result = await subgraphClient.totalLiquidity()
         if (result) {

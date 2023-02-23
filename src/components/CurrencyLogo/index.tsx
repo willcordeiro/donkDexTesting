@@ -1,26 +1,37 @@
 import { getAddress } from 'ethers/lib/utils'
-import { ChainId, Currency, Token, ETHER, HARMONY, DEFAULT_CURRENCIES, Blockchain, FINDORA } from '@oneverseswap/sdk'
+import {
+  ChainId,
+  Currency,
+  Token,
+  ETHER,
+  DEFAULT_CURRENCIES,
+  Blockchain,
+  FINDORA,
+  GOERLI,
+  ANVILTESTNET
+} from '@oneverseswap/sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
-import HarmonyLogo from '../../assets/images/harmony-logo.png'
-import BinanceLogo from '../../assets/images/binance-logo.png'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
 import baseCurrencies from '../../utils/baseCurrencies'
 import useBlockchain from '../../hooks/useBlockchain'
-import { ASSET_HOST } from '../../constants'
-
+import FindoraLogo from '../../assets/images/FINDORA.png'
 export function getTokenLogoURL(token: Token): string {
   const address = getAddress(token.address)
   // const tokenExceptions = TOKEN_LOGO_EXCEPTIONS[token.chainId]
 
   switch (token.chainId) {
     case ChainId.FINDORA:
-      return 'https://imgs.search.brave.com/ml-lANNpf--I9NyJ4b-ty6z2NxtDFoad9UYNQ0swPLc/rs:fit:558:558:1/g:ce/aHR0cHM6Ly9pbWcu/YXBpLmNyeXB0b3Jh/bmsuaW8vY29pbnMv/ZmluZG9yYTE2MDkx/NzIwNzUxOTMucG5n'
-    case ChainId.HARMONY_MAINNET:
-      return `${ASSET_HOST}/tokens/${token.symbol}.png`
+      return FindoraLogo
+
+    case ChainId.ANVILTESTNET:
+      return FindoraLogo
+
+    case ChainId.GOERLI:
+      return EthereumLogo
 
     default:
       return `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
@@ -72,10 +83,12 @@ export default function CurrencyLogo({
     return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
   } else {
     const wrappedCurrency = currency instanceof Token ? baseCurrencies(currency.chainId)[1] : undefined
-    if (currency === HARMONY || currency === (wrappedCurrency && blockchain === Blockchain.HARMONY)) {
-      return <StyledEthereumLogo src={HarmonyLogo} size={size} style={style} />
+    if (currency === GOERLI) {
+      return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
     } else if (currency === FINDORA || (currency === wrappedCurrency && blockchain === Blockchain.FINDORA)) {
-      return <StyledEthereumLogo src={BinanceLogo} size={size} style={style} />
+      return <StyledEthereumLogo src={FindoraLogo} size={size} style={style} />
+    } else if (currency === ANVILTESTNET || (currency === wrappedCurrency && blockchain === Blockchain.ANVILTESTNET)) {
+      return <StyledEthereumLogo src={FindoraLogo} size={size} style={style} />
     }
   }
   return <StyledLogo size={size} srcs={srcs} alt={`${currency?.symbol ?? 'token'} logo`} style={style} />

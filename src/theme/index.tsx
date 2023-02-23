@@ -54,7 +54,7 @@ export function defaultColors(darkMode: boolean): Colors {
     bg2: darkMode ? '#2C2F36' : '#F7F8FA',
     bg3: darkMode ? '#40444F' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',
-    bg5: darkMode ? '#6C7284' : '#888D9B',
+    bg5: darkMode ? '#111111' : '#888D9B',
 
     //specialty colors
     modalBG: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
@@ -89,10 +89,10 @@ export function defaultColors(darkMode: boolean): Colors {
     // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
 
     // Added:
-    tokenButtonGradientStart: '#008c6b',
-    tokenButtonGradientEnd: '#005224',
-    customCardGradientStart: '#008c6b',
-    customCardGradientEnd: '#00c09c'
+    tokenButtonGradientStart: '#342a72',
+    tokenButtonGradientEnd: '#342a72',
+    customCardGradientStart: '#342a72',
+    customCardGradientEnd: '#342a72'
   }
 }
 
@@ -114,7 +114,7 @@ export function viperColors(darkMode: boolean): Colors {
     bg2: darkMode ? '#2C2F36' : '#F7F8FA',
     bg3: darkMode ? '#40444F' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',
-    bg5: darkMode ? '#6C7284' : '#888D9B',
+    bg5: darkMode ? '#111111' : '#888D9B',
 
     //specialty colors
     modalBG: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
@@ -174,7 +174,7 @@ export function bscColors(darkMode: boolean): Colors {
     bg2: darkMode ? '#2C2F36' : '#F7F8FA',
     bg3: darkMode ? '#40444F' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',
-    bg5: darkMode ? '#565A69' : '#888D9B',
+    bg5: darkMode ? '#111111' : '#888D9B',
 
     //specialty colors
     modalBG: darkMode ? 'rgba(0,0,0,42.5)' : 'rgba(0,0,0,0.3)',
@@ -234,14 +234,14 @@ export function harmonyColors(darkMode: boolean): Colors {
     bg2: darkMode ? '#2C2F36' : '#F7F8FA',
     bg3: darkMode ? '#40444F' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',
-    bg5: darkMode ? '#6C7284' : '#888D9B',
+    bg5: darkMode ? '#111111' : '#888D9B',
 
     //specialty colors
     modalBG: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
     advancedBG: darkMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.6)',
 
     //primary colors
-    primary1: darkMode ? '#2172E5' : '#00AEE9',
+    primary1: darkMode ? '#0563e7' : '#00AEE9',
     primary2: darkMode ? '#3680E7' : '#69FABD',
     primary3: darkMode ? '#4D8FEA' : '#00c5eb',
     primary4: darkMode ? '#376bad70' : '#bcecfd',
@@ -419,12 +419,19 @@ html {
   
 
   color: ${({ theme }) => theme.text1};
-  background: linear-gradient(180deg,rgba(6,6,15,.1) 67.19%,rgba(125,207,182,.1)),url(https://oneverse.one/static/media/grid.f7e22222.svg) no-repeat,url(https://oneverse.one/static/media/bg-home.c9d7df97.svg) no-repeat;
+  background:  ${({ theme }) =>
+    theme.text2 === '#C3C5CB'
+      ? 'linear-gradient(180deg,rgba(6,6,15,.1) 67.19%,rgba(16, 22, 20, 0.1)),url(https://oneverse.one/static/media/grid.f7e22222.svg) no-repeat,url(https://oneverse.one/static/media/bg-home.c9d7df97.svg) no-repeat;'
+      : '#edeef2'};
     background-size: cover;
-    min-height: 100vh;
-    max-width: 100vw;
+    min-height: 100%;
+    max-width: 100%;
     overflow-x: hidden;
+
+
+    
 }
+
 
 body {
   min-height: 100vh;

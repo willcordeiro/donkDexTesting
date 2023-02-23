@@ -5,6 +5,7 @@ import invariant from 'tiny-invariant'
 interface NetworkConnectorArguments {
   urls: { [chainId: number]: string }
   defaultChainId?: number
+  rpcAPIKey: string | undefined
 }
 
 // taken from ethers.js, compatible interface with web3 provider
@@ -35,29 +36,32 @@ class MiniRpcProvider implements AsyncSendable {
   public readonly host: string
   public readonly path: string
   public readonly batchWaitTimeMs: number
+  public readonly rpcAPIKey?: string
 
   private nextId = 1
   private batchTimeoutId: ReturnType<typeof setTimeout> | null = null
   private batch: BatchItem[] = []
 
-  constructor(chainId: number, url: string, batchWaitTimeMs?: number) {
+  constructor(chainId: number, url: string, rpcAPIKey?: string, batchWaitTimeMs?: number) {
     this.chainId = chainId
     this.url = url
     const parsed = new URL(url)
     this.host = parsed.host
     this.path = parsed.pathname
+    this.rpcAPIKey = rpcAPIKey
     // how long to wait to batch calls
     this.batchWaitTimeMs = batchWaitTimeMs ?? 50
   }
 
   public readonly clearBatch = async () => {
     console.debug('Clearing batch', this.batch)
+
     const batch = this.batch
     this.batch = []
     this.batchTimeoutId = null
     let response: Response
     try {
-      response = await fetch(this.url, {
+      response = await fetch(this.url + this.rpcAPIKey, {
         method: 'POST',
         headers: { 'content-type': 'application/json', accept: 'application/json' },
         body: JSON.stringify(batch.map(item => item.request))
@@ -141,13 +145,13 @@ export class NetworkConnector extends AbstractConnector {
   private readonly providers: { [chainId: number]: MiniRpcProvider }
   private currentChainId: number
 
-  constructor({ urls, defaultChainId }: NetworkConnectorArguments) {
+  constructor({ urls, defaultChainId, rpcAPIKey }: NetworkConnectorArguments) {
     invariant(defaultChainId || Object.keys(urls).length === 1, 'defaultChainId is a required argument with >1 url')
     super({ supportedChainIds: Object.keys(urls).map((k): number => Number(k)) })
 
     this.currentChainId = defaultChainId || Number(Object.keys(urls)[0])
     this.providers = Object.keys(urls).reduce<{ [chainId: number]: MiniRpcProvider }>((accumulator, chainId) => {
-      accumulator[Number(chainId)] = new MiniRpcProvider(Number(chainId), urls[Number(chainId)])
+      accumulator[Number(chainId)] = new MiniRpcProvider(Number(chainId), urls[Number(chainId)], rpcAPIKey)
       return accumulator
     }, {})
   }

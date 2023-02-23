@@ -14,6 +14,7 @@ import { getBlockchain } from '../utils/blockchain'
 
 export const NETWORK_URL = process.env.REACT_APP_NETWORK_URL
 export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
+export const RPC_API_KEY = 'b6f9e2638f6044d5840defb2c7058dd9'
 
 const FORMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY
 const PORTIS_ID = process.env.REACT_APP_PORTIS_ID
@@ -23,11 +24,13 @@ if (typeof NETWORK_URL === 'undefined') {
 }
 
 export const network = new NetworkConnector({
-  urls: { [NETWORK_CHAIN_ID]: NETWORK_URL }
+  urls: { [NETWORK_CHAIN_ID]: NETWORK_URL },
+  rpcAPIKey: RPC_API_KEY
 })
 
 const generatedBaseCurrencies = baseCurrencies(NETWORK_CHAIN_ID)
 export const BASE_CURRENCY: Currency = generatedBaseCurrencies[0]
+
 export const BASE_WRAPPED_CURRENCY: Currency = generatedBaseCurrencies[1]
 
 export const BLOCKCHAIN: Blockchain = getBlockchain(NETWORK_CHAIN_ID)
@@ -39,17 +42,17 @@ export function getNetworkLibrary(): Web3Provider {
 
 let supportedChainIds: number[]
 switch (BLOCKCHAIN) {
-  case Blockchain.HARMONY:
-    supportedChainIds = [1666600000, 1666700000]
-    break
   case Blockchain.FINDORA:
-    supportedChainIds = [2152]
+    supportedChainIds = [5, 2152, 2153]
     break
   case Blockchain.ANVILTESTNET:
-    supportedChainIds = [2153]
+    supportedChainIds = [5, 2152, 2153]
+    break
+  case Blockchain.GOERLI:
+    supportedChainIds = [5, 2152, 2153]
     break
   default:
-    supportedChainIds = [1, 3, 4, 5, 42, 2152, 2153]
+    supportedChainIds = [1, 5, 2152, 2153]
     break
 }
 

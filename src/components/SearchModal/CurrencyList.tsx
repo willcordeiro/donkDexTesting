@@ -29,7 +29,6 @@ import { PlusHelper } from '../QuestionHelper'
 import useAddTokenToMetamask from 'hooks/useAddTokenToMetamask'
 
 function currencyKey(currency: Currency): string {
-  console.log(BASE_CURRENCY, 'shadhas')
   const name: string = BASE_CURRENCY && BASE_CURRENCY.name ? BASE_CURRENCY.name.toUpperCase() : 'ETH'
   return currency instanceof Token ? currency.address : currency === BASE_CURRENCY ? name : ''
 }

@@ -8,6 +8,12 @@ export default function usePlatformName(): string {
       return 'OneverseSwap'
     case Blockchain.ETHEREUM:
       return 'OneverseSwap'
+    case Blockchain.FINDORA:
+      return 'OneverseSwap'
+    case Blockchain.GOERLI:
+      return 'OneverseSwap'
+    case Blockchain.ANVILTESTNET:
+      return 'OneverseSwap'
     default:
       return 'OneverseSwap'
   }

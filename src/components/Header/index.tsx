@@ -143,12 +143,7 @@ const UNIAmount = styled(AccountElement)`
   padding: 4px 8px;
   height: 36px;
   font-weight: 500;
-  background-color: ${({ theme }) => theme.bg3};
-  background: radial-gradient(
-    76.02% 75.41% at 1.84% 0%,
-    ${({ theme }) => theme.tokenButtonGradientStart} 0%,
-    ${({ theme }) => theme.tokenButtonGradientEnd} 100%
-  );
+  background-color: #614dc9;
 `
 
 const UNIWrapper = styled.span`
@@ -174,6 +169,7 @@ const HideSmall = styled.span`
 const NetworkCard = styled(BlueCard)`
   border-radius: 5px;
   padding: 8px 12px;
+
   ${({ theme }) => theme.mediaWidth.upToSmall`
     margin: 0;
     margin-right: 0.5rem;
@@ -280,23 +276,22 @@ export const StyledMenuButton = styled.button`
   margin: 0;
   padding: 0;
   height: 35px;
-  background-color: ${({ theme }) => theme.bg3};
+
+  background-color: #312764;
   margin-left: 8px;
   padding: 0.15rem 0.5rem;
   border-radius: 5px;
 
-  :hover,
-  :focus {
+  :hover {
     cursor: pointer;
     outline: none;
-    background-color: ${({ theme }) => theme.bg4};
   }
 
   svg {
     margin-top: 2px;
   }
   > * {
-    stroke: ${({ theme }) => theme.text1};
+    stroke: white;
   }
 `
 

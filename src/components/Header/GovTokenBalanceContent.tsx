@@ -25,11 +25,7 @@ const ContentWrapper = styled(AutoColumn)`
 
 const ModalUpper = styled(DataCard)`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  background: radial-gradient(
-    76.02% 75.41% at 1.84% 0%,
-    ${({ theme }) => theme.tokenButtonGradientStart} 0%,
-    #000 100%
-  );
+  background: radial-gradient(1.84% 0% at 1.84% 0%, ${({ theme }) => theme.tokenButtonGradientStart} 0%, #000 100%);
   padding: 0.5rem;
 `
 
@@ -237,7 +233,7 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
           </AutoColumn>
         </CardSection>
 
-        {[Blockchain.FINDORA, Blockchain.ANVILTESTNET].includes(blockchain) && (
+        {[Blockchain.FINDORA, Blockchain.ANVILTESTNET, Blockchain.GOERLI].includes(blockchain) && (
           <>
             <Break />
             <CardSection gap="sm">

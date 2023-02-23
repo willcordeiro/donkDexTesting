@@ -57,6 +57,7 @@ export default function Swap() {
     useCurrency(loadedUrlParams?.inputCurrencyId),
     useCurrency(loadedUrlParams?.outputCurrencyId)
   ]
+
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
     () => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c instanceof Token) ?? [],

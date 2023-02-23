@@ -8,14 +8,14 @@ export default function baseCurrencies(chainId: ChainId | undefined): Currency[]
     switch (chainId) {
       case ChainId.GOERLI:
       case ChainId.GOERLI:
-        currencies.push(FINDORA)
+        currencies.push(GOERLI)
         currencies.push(WETH[chainId])
         currencies.push(GOVERNANCE_TOKENS[chainId])
         break
 
       case ChainId.FINDORA:
       case ChainId.FINDORA:
-        currencies.push(GOERLI)
+        currencies.push(FINDORA)
         currencies.push(WETH[chainId])
         currencies.push(GOVERNANCE_TOKENS[chainId])
         break

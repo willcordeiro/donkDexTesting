@@ -7,5 +7,20 @@ export const STAKING_SETTINGS: {
     startBlock: 10183471,
     lockRewardsRatio: 95,
     unlockedRewardsRatio: 5
+  },
+  [ChainId.GOERLI]: {
+    startBlock: 10183471,
+    lockRewardsRatio: 95,
+    unlockedRewardsRatio: 5
+  },
+  [ChainId.FINDORA]: {
+    startBlock: 10183471,
+    lockRewardsRatio: 95,
+    unlockedRewardsRatio: 5
+  },
+  [ChainId.ANVILTESTNET]: {
+    startBlock: 10183471,
+    lockRewardsRatio: 95,
+    unlockedRewardsRatio: 5
   }
 }

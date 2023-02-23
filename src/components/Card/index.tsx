@@ -43,7 +43,7 @@ export const PinkCard = styled(Card)`
 `
 
 const BlueCardStyled = styled(Card)`
-  background-color: ${({ theme }) => theme.primary5};
+  background-color: #d9f4fd;
   color: ${({ theme }) => theme.primary1};
   border-radius: 5px;
   width: fit-content;
@@ -52,7 +52,7 @@ const BlueCardStyled = styled(Card)`
 export const BlueCard = ({ children, ...rest }: CardProps) => {
   return (
     <BlueCardStyled {...rest}>
-      <Text fontWeight={500} color="#2172E5">
+      <Text fontWeight={500} color="#624ecc">
         {children}
       </Text>
     </BlueCardStyled>
