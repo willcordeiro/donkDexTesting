@@ -2154,10 +2154,10 @@
   resolved "https://registry.yarnpkg.com/@oneverseswap/core/-/core-1.0.2.tgz#bf642a1280a27e4e3a0a274e1744b005e56aa284"
   integrity sha512-dlftgquAGrwW2KV74S3pQQgSHL16+wKkiTZRHq2O61dKGHOqKvcPjLxY+TS5hizrOC9wML7tZNF9ahLJg07HCA==
 
-"@oneverseswap/default-token-list@^2.3.8":
-  version "2.3.8"
-  resolved "https://registry.yarnpkg.com/@oneverseswap/default-token-list/-/default-token-list-2.3.8.tgz#97359be77ef147a3571ec1a4b852a957eaf7a2e0"
-  integrity sha512-Maj3Qwm44mwJ2FIaoo0T1gMuRqoSH5iKbUdEuxt8uJAS29ChaEBNJyhekorMWONPdRDou6cvcT83SjJoDFQUNw==
+"@oneverseswap/default-token-list@^2.3.9":
+  version "2.3.9"
+  resolved "https://registry.yarnpkg.com/@oneverseswap/default-token-list/-/default-token-list-2.3.9.tgz#c033f56980cbbb8aab3429dbbbaa40d98e167ef2"
+  integrity sha512-IEI3ngeHVLcKUAUtOOXvusseXJkN687COS8X83q1Tuxw7rTo/t65ggrgkCM7PIp138hKgKec0OGhx61egdyu+A==
   dependencies:
     ansi-colors "^4.1.1"
     ansi-regex "^5.0.1"
@@ -2262,17 +2262,17 @@
     "@oneverseswap/core" "1.0.2"
     "@oneverseswap/lib" "1.0.1"
 
-"@oneverseswap/sdk-extra@^1.3.13":
-  version "1.3.13"
-  resolved "https://registry.yarnpkg.com/@oneverseswap/sdk-extra/-/sdk-extra-1.3.13.tgz#05cc6ebc39a2fbccd34f937f43b60c1095d48fb7"
-  integrity sha512-njKZH9l7ze0tOH+kcRbX7DsVXfNn7dFhNSDvb2Rr9s1G+QfDR2PQzsbJFQ8g152B17aYIEirFsL8fPWYZ2+QfA==
+"@oneverseswap/sdk-extra@^1.3.14":
+  version "1.3.14"
+  resolved "https://registry.yarnpkg.com/@oneverseswap/sdk-extra/-/sdk-extra-1.3.14.tgz#53abae9b7830a6a98fe83e78b0e652efd44dc6d2"
+  integrity sha512-yF0rMfaMPKyBM2aaXNqaIakzQ3FqnCaIevSxmKBgIaVO55+gc6ZuG6zJXwplQgOXTL6vuRVwel8KjEExRWd2cg==
   dependencies:
     "@ethersproject/address" "^5.5.0"
     "@ethersproject/contracts" "^5.5.0"
     "@ethersproject/providers" "^5.5.2"
     "@ethersproject/solidity" "^5.5.0"
     "@oneverseswap/community-token-list" "^2.6.1"
-    "@oneverseswap/default-token-list" "^2.3.8"
+    "@oneverseswap/default-token-list" "^2.3.9"
     "@oneverseswap/sdk" "^2.3.8"
     lodash.random "^3.2.0"
 

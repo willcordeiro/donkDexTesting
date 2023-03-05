@@ -234,7 +234,7 @@ export function harmonyColors(darkMode: boolean): Colors {
     bg2: darkMode ? '#2C2F36' : '#F7F8FA',
     bg3: darkMode ? '#40444F' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',
-    bg5: darkMode ? '#111111' : '#888D9B',
+    bg5: darkMode ? '#111111' : '#CED0D9',
 
     //specialty colors
     modalBG: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
