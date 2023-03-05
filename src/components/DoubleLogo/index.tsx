@@ -6,6 +6,9 @@ import CurrencyLogo from '../CurrencyLogo'
 const Wrapper = styled.div<{ margin: boolean; sizeraw: number }>`
   position: relative;
   display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  justify-content: center;
   flex-direction: row;
   margin-right: ${({ sizeraw, margin }) => margin && (sizeraw / 3 + 8).toString() + 'px'};
 `

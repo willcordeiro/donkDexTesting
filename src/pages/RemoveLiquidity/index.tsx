@@ -132,7 +132,7 @@ export default function RemoveLiquidity({
       ]
 
       const domain = {
-        name: 'Venom LP Token',
+        name: 'Oneverse LP Token',
         version: '1',
         chainId: chainId,
         verifyingContract: pair.liquidityToken.address
@@ -214,6 +214,7 @@ export default function RemoveLiquidity({
       throw new Error('missing currency amounts')
     }
     const router = getRouterContract(chainId, library, account)
+    console.log(router, 'here')
 
     const amountsMin = {
       [Field.CURRENCY_A]: calculateSlippageAmount(currencyAmountA, allowedSlippage)[0],

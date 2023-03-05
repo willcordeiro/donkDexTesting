@@ -25,6 +25,7 @@ export function usePairs(currencies: [Currency | undefined, Currency | undefined
         wrappedCurrency(currencyA, chainId),
         wrappedCurrency(currencyB, chainId)
       ]),
+
     [chainId, currencies]
   )
 
@@ -33,6 +34,7 @@ export function usePairs(currencies: [Currency | undefined, Currency | undefined
       tokens.map(([tokenA, tokenB]) => {
         return tokenA && tokenB && !tokenA.equals(tokenB) ? Pair.getAddress(tokenA, tokenB) : undefined
       }),
+
     [tokens]
   )
 

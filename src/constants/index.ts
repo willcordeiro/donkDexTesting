@@ -4,37 +4,37 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 
-import getTokenWithDefault from '../utils/getTokenWithDefault'
+//import getTokenWithDefault from '../utils/getTokenWithDefault'
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 export const ZERO_ONE_ADDRESS = '0x0000000000000000000000000000000000000001'
 
-export const GOVERNANCE_ADDRESS = '0x5e4be8Bc9637f0EAA1A755019e06A68ce081D58F'
-
-export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
+export const GOVERNANCE_ADDRESS = '0x085fA7a07245603F89301e5Bc5D69284A357a7Fd'
+//anvil  0x085fA7a07245603F89301e5Bc5D69284A357a7Fd
+export const TIMELOCK_ADDRESS = '0x0000000000000000000000000000000000000001'
 
 export const DISPLAY_TVL = false
 
 export const PIT_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.MAINNET]: { name: '', path: '' },
-  [ChainId.FINDORA]: { name: 'GravPit', path: '/gravPit' },
-  [ChainId.GOERLI]: { name: 'GravPit', path: '/gravPit' },
-  [ChainId.ANVILTESTNET]: { name: 'GravPit', path: '/gravPit' },
-  [ChainId.RINKEBY]: { name: 'GravPit', path: '/gravPit' },
-  [ChainId.ROPSTEN]: { name: 'GravPit', path: '/gravPit' },
-  [ChainId.KOVAN]: { name: 'GravPit', path: '/gravPit' },
-  [ChainId.HARMONY_MAINNET]: { name: 'GravPit', path: '/gravPit' }
+  [ChainId.FINDORA]: { name: 'OVPit', path: '/OVPit' },
+  [ChainId.GOERLI]: { name: 'OVPit', path: '/OVPit' },
+  [ChainId.ANVILTESTNET]: { name: 'OVPit', path: '/OVPit' },
+  [ChainId.RINKEBY]: { name: 'OVPit', path: '/OVPit' },
+  [ChainId.ROPSTEN]: { name: 'OVPit', path: '/OVPit' },
+  [ChainId.KOVAN]: { name: 'OVPit', path: '/OVPit' },
+  [ChainId.HARMONY_MAINNET]: { name: 'OVPit', path: '/OVPit' }
 }
 
 export const NEST_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.MAINNET]: { name: '', path: '' },
-  [ChainId.FINDORA]: { name: 'GravPit', path: '/single' },
-  [ChainId.GOERLI]: { name: 'GravPit', path: '/single' },
-  [ChainId.ANVILTESTNET]: { name: 'GravPit', path: '/single' },
-  [ChainId.RINKEBY]: { name: 'GravPit', path: '/gravPit' },
-  [ChainId.ROPSTEN]: { name: 'GravPit', path: '/gravPit' },
-  [ChainId.KOVAN]: { name: 'GravPit', path: '/gravPit' },
-  [ChainId.HARMONY_MAINNET]: { name: 'GravPit', path: '/gravPit' }
+  [ChainId.FINDORA]: { name: 'OVPit', path: '/single' },
+  [ChainId.GOERLI]: { name: 'OVPit', path: '/single' },
+  [ChainId.ANVILTESTNET]: { name: 'OVPit', path: '/single' },
+  [ChainId.RINKEBY]: { name: 'OVPit', path: '/OVPit' },
+  [ChainId.ROPSTEN]: { name: 'OVPit', path: '/OVPit' },
+  [ChainId.KOVAN]: { name: 'OVPit', path: '/OVPit' },
+  [ChainId.HARMONY_MAINNET]: { name: 'OVPit', path: '/OVPit' }
 }
 
 export const EXCHANGE_SUBGRAPHS: { [chainId in ChainId]: string } = {
@@ -190,8 +190,10 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
-  ...WETH_ONLY,
-  [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI], getTokenWithDefault(ChainId.GOERLI, 'BUSD')]
+  ...WETH_ONLY
+  // [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI], getTokenWithDefault(ChainId.GOERLI, '')],
+  // [ChainId.ANVILTESTNET]: [...WETH_ONLY[ChainId.ANVILTESTNET], getTokenWithDefault(ChainId.ANVILTESTNET, '')],
+  // [ChainId.ANVILTESTNET]: [...WETH_ONLY[ChainId.FINDORA], getTokenWithDefault(ChainId.FINDORA, '')]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend

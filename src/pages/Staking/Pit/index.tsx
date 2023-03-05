@@ -242,11 +242,11 @@ export default function Pit({
               Deposit
             </ButtonPrimary>
 
-            <ButtonPrimary padding="8px" borderRadius="8px" width="160px" onClick={() => setShowClaimModal(true)}>
+            <ButtonPrimary padding="8px" borderRadius="5px" width="160px" onClick={() => setShowClaimModal(true)}>
               Claim
             </ButtonPrimary>
 
-            <ButtonPrimary padding="8px" borderRadius="8px" width="160px" onClick={() => setShowUnstakingModal(true)}>
+            <ButtonPrimary padding="8px" borderRadius="5px" width="160px" onClick={() => setShowUnstakingModal(true)}>
               Withdraw
             </ButtonPrimary>
           </DataRow>

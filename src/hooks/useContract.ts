@@ -81,7 +81,11 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
   if (chainId) {
     switch (chainId) {
       case ChainId.MAINNET:
+      case ChainId.FINDORA:
+      case ChainId.ANVILTESTNET:
       case ChainId.GOERLI:
+        address = '0x112234455C3a32FD11230C42E7Bccd4A84e02010'
+        break
       case ChainId.ROPSTEN:
       case ChainId.RINKEBY:
         address = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'

@@ -38,7 +38,8 @@ export default function CommonBases({
   selectedCurrency?: Currency | null
   onSelect: (currency: Currency) => void
 }) {
-  const baseCurrency = baseCurrencies(chainId)[0]
+  const baseCurrency: any = baseCurrencies(chainId)[0]
+  console.log(baseCurrency)
   return (
     <AutoColumn gap="md">
       <AutoRow>

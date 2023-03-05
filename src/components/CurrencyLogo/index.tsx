@@ -21,6 +21,7 @@ import useBlockchain from '../../hooks/useBlockchain'
 import FindoraLogo from '../../assets/images/FINDORA.png'
 export function getTokenLogoURL(token: Token): string {
   const address = getAddress(token.address)
+
   // const tokenExceptions = TOKEN_LOGO_EXCEPTIONS[token.chainId]
 
   switch (token.chainId) {

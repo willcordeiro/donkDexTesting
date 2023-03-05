@@ -11,6 +11,7 @@ export default function baseCurrencies(chainId: ChainId | undefined): Currency[]
         currencies.push(GOERLI)
         currencies.push(WETH[chainId])
         currencies.push(GOVERNANCE_TOKENS[chainId])
+
         break
 
       case ChainId.FINDORA:
@@ -25,6 +26,7 @@ export default function baseCurrencies(chainId: ChainId | undefined): Currency[]
         currencies.push(ANVILTESTNET)
         currencies.push(WETH[chainId])
         currencies.push(GOVERNANCE_TOKENS[chainId])
+
         break
 
       default:

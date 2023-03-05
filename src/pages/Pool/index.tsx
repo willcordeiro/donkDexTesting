@@ -85,8 +85,9 @@ export default function Pool() {
   const blockchain = useBlockchain()
 
   const baseCurrency = baseCurrencies(chainId)[0]
-  const addLiquidityUrl = `/add/${baseCurrency.symbol}`
-  const createPoolUrl = `/create/${baseCurrency.symbol}`
+
+  const addLiquidityUrl = `/add/${baseCurrency.address}`
+  const createPoolUrl = `/create/${baseCurrency.address}`
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()

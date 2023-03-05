@@ -91,6 +91,7 @@ export default function AddLiquidity({
 
   // txn values
   const deadline = useTransactionDeadline() // custom from users settings
+
   const [allowedSlippage] = useUserSlippageTolerance() // custom from users
   const [txHash, setTxHash] = useState<string>('')
 
@@ -147,6 +148,7 @@ export default function AddLiquidity({
       method: (...args: any) => Promise<TransactionResponse>,
       args: Array<string | string[] | number>,
       value: BigNumber | null
+
     if (
       (currencyA && DEFAULT_CURRENCIES.includes(currencyA)) ||
       (currencyB && DEFAULT_CURRENCIES.includes(currencyB))
@@ -154,6 +156,7 @@ export default function AddLiquidity({
       const tokenBIsETH = currencyB && DEFAULT_CURRENCIES.includes(currencyB)
       estimate = router.estimateGas.addLiquidityETH
       method = router.addLiquidityETH
+
       args = [
         wrappedCurrency(tokenBIsETH ? currencyA : currencyB, chainId)?.address ?? '', // token
         (tokenBIsETH ? parsedAmountA : parsedAmountB).raw.toString(), // token desired
@@ -180,6 +183,7 @@ export default function AddLiquidity({
     }
 
     setAttemptingTxn(true)
+
     await estimate(...args, value ? { value } : {})
       .then(estimatedGasLimit => {
         const callOptions: CallOverrides = {
@@ -226,7 +230,7 @@ export default function AddLiquidity({
       <AutoColumn gap="20px">
         <LightCard mt="20px" borderRadius="20px">
           <RowFlat>
-            <Text fontSize="48px" fontWeight={500} lineHeight="42px" marginRight={10}>
+            <Text fontSize="28px" fontWeight={500} lineHeight="42px" marginRight={10}>
               {currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol}
             </Text>
             <DoubleCurrencyLogo
@@ -240,7 +244,7 @@ export default function AddLiquidity({
     ) : (
       <AutoColumn gap="20px">
         <RowFlat style={{ marginTop: '20px' }}>
-          <Text fontSize="48px" fontWeight={500} lineHeight="42px" marginRight={10}>
+          <Text fontSize="28px" fontWeight={500} lineHeight="42px" marginRight={10}>
             {liquidityMinted?.toSignificant(6)}
           </Text>
           <DoubleCurrencyLogo
@@ -282,6 +286,8 @@ export default function AddLiquidity({
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
       const newCurrencyIdA = currencyId(currencyA)
+
+      console.log(newCurrencyIdA)
       if (newCurrencyIdA === currencyIdB) {
         history.push(`/add/${currencyIdB}/${currencyIdA}`)
       } else {
@@ -290,6 +296,7 @@ export default function AddLiquidity({
     },
     [currencyIdB, history, currencyIdA]
   )
+
   const handleCurrencyBSelect = useCallback(
     (currencyB: Currency) => {
       const newCurrencyIdB = currencyId(currencyB)
@@ -300,6 +307,7 @@ export default function AddLiquidity({
           history.push(`/add/${newCurrencyIdB}`)
         }
       } else {
+        console.log(currencyIdA ? currencyIdA : BASE_CURRENCY.symbol, newCurrencyIdB, 'two ballons')
         history.push(`/add/${currencyIdA ? currencyIdA : BASE_CURRENCY.symbol}/${newCurrencyIdB}`)
       }
     },

@@ -18,14 +18,14 @@ import {
   RedirectOldAddLiquidityPathStructure,
   RedirectToAddLiquidity
 } from './AddLiquidity/redirects'
-import Earn from './Staking/Pools'
-import EarnArchived from './Staking/Pools/Archived'
+//import Earn from './Staking/Pools'
+//import EarnArchived from './Staking/Pools/Archived'
 import Manage from './Staking/Pools/Manage'
 //import SmartChefSingleEarn from './Staking/SmartChef/Single'
 //import SmartChefSingleEarnArchived from './Staking/SmartChef/Single/Archived'
 import SmartChefSingleManage from './Staking/SmartChef/Single/Manage'
-import SmartChefLPEarn from './Staking/SmartChef/LiquidityPools'
-import SmartChefLPEarnArchived from './Staking/SmartChef/LiquidityPools/Archived'
+//import SmartChefLPEarn from './Staking/SmartChef/LiquidityPools'
+//import SmartChefLPEarnArchived from './Staking/SmartChef/LiquidityPools/Archived'
 import SmartChefLPManage from './Staking/SmartChef/LiquidityPools/Manage'
 import Pit from './Staking/Pit'
 //import Unlock from './Staking/Unlock'
@@ -125,8 +125,10 @@ export default function App() {
               <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
               <Route exact strict path="/find" component={PoolFinder} />
               <Route exact strict path="/pool" component={Pool} />
+              {/*  
               <Route exact strict path="/staking/pools" component={Earn} />
               <Route exact strict path="/staking/pools/archived" component={EarnArchived} />
+               */}
               {/*  
               {[Blockchain.HARMONY, Blockchain.BINANCE_SMART_CHAIN].includes(blockchain) && (
                 <Route exact strict path="/staking/single" component={SmartChefSingleEarn} />
@@ -135,17 +137,16 @@ export default function App() {
                 <Route exact strict path="/staking/single/archived" component={SmartChefSingleEarnArchived} />
               )}
               */}
-              {blockchain === Blockchain.HARMONY && (
-                <Route exact strict path="/staking/bridge" render={props => <SmartChefLPEarn category={'bridge'} />} />
-              )}
-              {blockchain === Blockchain.HARMONY && (
-                <Route
-                  exact
-                  strict
-                  path="/staking/bridge/archived"
-                  render={props => <SmartChefLPEarnArchived category={'bridge'} />}
-                />
-              )}
+              {/* 
+              <Route exact strict path="/staking/bridge" render={props => <SmartChefLPEarn category={'bridge'} />} />
+
+              <Route
+                exact
+                strict
+                path="/staking/bridge/archived"
+                render={props => <SmartChefLPEarnArchived category={'bridge'} />}
+              />
+      */}
               {/*  {blockchain === Blockchain.HARMONY && (
                 <Route
                   exact

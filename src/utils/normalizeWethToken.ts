@@ -3,6 +3,7 @@ import { ChainId, WETH, Token } from '@oneverseswap/sdk'
 export default function normalizeWethToken(chainId: ChainId, token: Token | undefined): Token | undefined {
   if (token === undefined) return undefined
   const weth = chainId && WETH[chainId]
+
   if (token == weth) {
     switch (chainId) {
       case ChainId.FINDORA:
@@ -14,6 +15,7 @@ export default function normalizeWethToken(chainId: ChainId, token: Token | unde
       case ChainId.ANVILTESTNET:
       case ChainId.ANVILTESTNET:
         return new Token(chainId, token.address, token.decimals, 'FRA', 'FINDORA')
+
       default:
         return token
     }

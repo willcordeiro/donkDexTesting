@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { darken } from 'polished'
-import { ChainId } from '@oneverseswap/sdk'
+//import { ChainId } from '@oneverseswap/sdk'
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside'
 import { ApplicationModal } from '../../../state/application/actions'
 import { useModalOpen, useToggleModal } from '../../../state/application/hooks'
@@ -155,9 +155,11 @@ export default function StakingMenu() {
 
       {open && (
         <MenuFlyout>
+          {/*
           <StyledNavLink id={`stake-nav-link`} to={'/staking/pools'}>
             Pools
           </StyledNavLink>
+          */}
           <StyledNavLink id={`stake-nav-link`} to={`/staking${pitSettings?.path}`}>
             {pitSettings?.name}
           </StyledNavLink>
@@ -181,11 +183,13 @@ export default function StakingMenu() {
             </StyledNavLink>
              }
                */}
+          {/* 
           {chainId && [ChainId.FINDORA, ChainId.GOERLI, ChainId.ANVILTESTNET].includes(chainId) && (
             <StyledNavLink id={`stake-nav-link`} to={'/staking/bridge'}>
               Bridge
             </StyledNavLink>
           )}
+          */}
           {/*
           {chainId &&
             currentBlock &&

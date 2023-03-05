@@ -6,6 +6,8 @@ export default function getExplorerName(blockchain: Blockchain): string {
       return 'FINDORA Explorer'
     case Blockchain.ANVILTESTNET:
       return 'ANVILTESTNET Explorer'
+    case Blockchain.GOERLI:
+      return 'GOERLI Explorer'
     default:
       return 'Etherscan'
   }

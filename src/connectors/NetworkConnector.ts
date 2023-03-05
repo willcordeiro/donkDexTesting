@@ -61,7 +61,7 @@ class MiniRpcProvider implements AsyncSendable {
     this.batchTimeoutId = null
     let response: Response
     try {
-      response = await fetch(this.url + this.rpcAPIKey, {
+      response = await fetch(this.url, {
         method: 'POST',
         headers: { 'content-type': 'application/json', accept: 'application/json' },
         body: JSON.stringify(batch.map(item => item.request))
