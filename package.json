@@ -4,7 +4,7 @@
   "homepage": ".",
   "private": true,
   "engines": {
-    "node": "18.x"
+    "node": "16.x"
   },
   "devDependencies": {
     "@ethersproject/experimental": "^5.1.2",
