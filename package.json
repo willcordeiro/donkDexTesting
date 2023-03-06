@@ -105,7 +105,7 @@
     "@walletconnect/web3-provider": "1.1.1-alpha.0"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "start:service-worker": "yarn build && yarn serve -s build",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test --env=jsdom",
