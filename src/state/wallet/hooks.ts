@@ -42,7 +42,7 @@ export function useETHBalances(
     () =>
       addresses.reduce<{ [address: string]: CurrencyAmount }>((memo, address, i) => {
         const value = results?.[i]?.result?.[0]
-        if (value) memo[address] = CurrencyAmount.ether(JSBI.BigInt(value.toString()))
+        if (value) memo[address] = CurrencyAmount.Anviltestnet(JSBI.BigInt(value.toString()))
         return memo
       }, {}),
     [addresses, results]
@@ -65,6 +65,7 @@ export function useETHBalance(): CurrencyAmount | undefined {
   useEffect(() => {
     if (storedBalance) {
       userEthBalance = retrieveETHAmount(userEthBalance, storedBalance.balance, storedBalance.timestamp)
+
       if (chainId && account && userEthBalance) {
         setBalance({ [account]: userEthBalance })
         balanceUpdater(chainId, account, userEthBalance.raw.toString())
@@ -144,10 +145,12 @@ export function useCurrencyBalances(
   ])
 
   const tokenBalances = useTokenBalances(account, tokens)
+
   const containsETH: boolean = useMemo(
     () => currencies?.some(currency => currency && DEFAULT_CURRENCIES.includes(currency)) ?? false,
     [currencies]
   )
+
   const ethBalance = useETHBalances(containsETH ? [account] : [])
 
   return useMemo(

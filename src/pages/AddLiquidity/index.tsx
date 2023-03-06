@@ -307,7 +307,6 @@ export default function AddLiquidity({
           history.push(`/add/${newCurrencyIdB}`)
         }
       } else {
-        console.log(currencyIdA ? currencyIdA : BASE_CURRENCY.symbol, newCurrencyIdB, 'two ballons')
         history.push(`/add/${currencyIdA ? currencyIdA : BASE_CURRENCY.symbol}/${newCurrencyIdB}`)
       }
     },

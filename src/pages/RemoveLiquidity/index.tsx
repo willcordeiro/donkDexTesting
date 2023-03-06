@@ -214,7 +214,6 @@ export default function RemoveLiquidity({
       throw new Error('missing currency amounts')
     }
     const router = getRouterContract(chainId, library, account)
-    console.log(router, 'here')
 
     const amountsMin = {
       [Field.CURRENCY_A]: calculateSlippageAmount(currencyAmountA, allowedSlippage)[0],

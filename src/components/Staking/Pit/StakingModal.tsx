@@ -73,9 +73,11 @@ export default function StakingModal({ isOpen, onDismiss, stakingToken, userLiqu
 
   async function onStake() {
     setAttempting(true)
+
     if (pit && parsedAmount && deadline) {
       if (approval === ApprovalState.APPROVED) {
         const formattedAmount = `0x${parsedAmount.raw.toString(16)}`
+
         const estimatedGas = await pit.estimateGas.enter(formattedAmount)
 
         const callOptions: CallOverrides = {

@@ -38,8 +38,8 @@ export default function CommonBases({
   selectedCurrency?: Currency | null
   onSelect: (currency: Currency) => void
 }) {
-  const baseCurrency: any = baseCurrencies(chainId)[0]
-  console.log(baseCurrency)
+  const baseCurrency = baseCurrencies(chainId)[0]
+
   return (
     <AutoColumn gap="md">
       <AutoRow>
@@ -55,7 +55,7 @@ export default function CommonBases({
               onSelect(baseCurrency)
             }
           }}
-          disable={selectedCurrency === baseCurrency}
+          disable={selectedCurrency instanceof Token && selectedCurrency.address === baseCurrency.address}
         >
           <CurrencyLogo currency={baseCurrency} style={{ marginRight: 8 }} />
           <Text fontWeight={500} fontSize={16}>

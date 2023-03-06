@@ -140,6 +140,7 @@ export function useDerivedSwapInfo(): {
 
   const inputCurrency = useCurrency(inputCurrencyId)
   const outputCurrency = useCurrency(outputCurrencyId)
+
   const recipientLookup = useENS(recipient ?? undefined)
   const to: string | null = (recipient === null ? account : recipientLookup.address) ?? null
 
@@ -232,13 +233,14 @@ export function useDerivedSwapInfo(): {
 function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
+    console.log(urlParam)
 
     if (valid) return valid
-    if (urlParam.toUpperCase() === BASE_CURRENCY.symbol) return BASE_CURRENCY.symbol as string
-    if (valid === false) return BASE_CURRENCY.symbol as string
+    if (urlParam.toUpperCase() === BASE_CURRENCY.symbol) return BASE_CURRENCY.address as string
+    if (valid === false) return BASE_CURRENCY.address as string
   }
 
-  return BASE_CURRENCY.symbol ?? ''
+  return BASE_CURRENCY.address ?? ''
 }
 
 function parseTokenAmountURLParameter(urlParam: any): string {
@@ -273,7 +275,6 @@ export function queryParametersToSwapState(parsedQs: ParsedQs): SwapState {
   }
 
   const recipient = validatedRecipient(parsedQs.recipient)
-
   return {
     [Field.INPUT]: {
       currencyId: inputCurrency
