@@ -3,6 +3,9 @@
   "description": "Oneverseswap Interface",
   "homepage": ".",
   "private": true,
+  "engines": {
+    "node": "16.x"
+  },
   "devDependencies": {
     "@ethersproject/experimental": "^5.1.2",
     "@oneverseswap/core": "^1.0.3",
