@@ -11,7 +11,7 @@
 ### Installation
 
 ```bash
-git clone https://github.com/VenomProtocol/frontend.git
+git clone https://github.com/willcordeiro/DEX-ui.git
 cd frontend
 yarn install
 ```
@@ -20,20 +20,20 @@ yarn install
 
 Create a new file called .env.local in the root of the project folder.
 
-#### Harmony / Viperswap
+#### Findora / OneverseSwap
 
 Add the following to the empty .env.local file:
+
 ```
-REACT_APP_CHAIN_ID="1666600000"
-REACT_APP_NETWORK_URL="https://api.harmony.one"
+REACT_APP_CHAIN_ID="5"
+REACT_APP_NETWORK_URL="https://prod-mainnet01-blockscout.prod.findora.org/"
 ```
 
-#### Binance Smart Chain (BSC) / Cobraswap
+#### Anvil / OneverseSwap
 
-Add the following to the empty .env.local file:
 ```
-REACT_APP_CHAIN_ID="56"
-REACT_APP_NETWORK_URL="https://bsc-dataseed.binance.org/"
+REACT_APP_CHAIN_ID=2153
+REACT_APP_NETWORK_URL=https://prod-testnet.prod.findora.org:8545
 ```
 
 ### Run
