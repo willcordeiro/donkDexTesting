@@ -2297,10 +2297,10 @@
     tiny-warning "^1.0.3"
     toformat "^2.0.0"
 
-"@oneverseswap/sdk@^2.3.20":
-  version "2.3.20"
-  resolved "https://registry.yarnpkg.com/@oneverseswap/sdk/-/sdk-2.3.20.tgz#b3861a300986446f88d520616c7951067e21a721"
-  integrity sha512-e/6xcjFubQ3NRurrn4B8Umpw4SqUvZlyaooJMWV2j6YSxDDIJ9sqT1GxOT79ElZXifi7idXdsNZkelu1lfGovg==
+"@oneverseswap/sdk@^2.3.23":
+  version "2.3.23"
+  resolved "https://registry.yarnpkg.com/@oneverseswap/sdk/-/sdk-2.3.23.tgz#4b6d9f2cd38d673230b253ac3835567fbac067ac"
+  integrity sha512-i5Wv3cJPR17xHetETtw7vCm+L9wnIbG4rr7NZEDKs4NdJh7RJ1G8mgcUY9tksMyo4P9XkKFnedfgLDY0PYuN3g==
   dependencies:
     "@oneverseswap/core" "^1.0.3"
     big.js "^5.2.2"

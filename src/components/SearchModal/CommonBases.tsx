@@ -1,18 +1,14 @@
 import React from 'react'
 import { Text } from 'rebass'
-import { ChainId, Currency, currencyEquals, Token } from '@oneverseswap/sdk'
+import { ChainId, Currency, Token } from '@oneverseswap/sdk'
 import styled from 'styled-components'
-
 import { SUGGESTED_BASES } from '../../constants'
 import { AutoColumn } from '../Column'
 import QuestionHelper from '../QuestionHelper'
 import { AutoRow } from '../Row'
 import CurrencyLogo from '../CurrencyLogo'
 
-import { BASE_CURRENCY } from '../../connectors'
-
-import baseCurrencies from '../../utils/baseCurrencies'
-
+console.log(SUGGESTED_BASES[2153])
 const BaseWrapper = styled.div<{ disable?: boolean }>`
   border: 1px solid ${({ theme, disable }) => (disable ? 'transparent' : theme.bg3)};
   border-radius: 10px;
@@ -38,8 +34,6 @@ export default function CommonBases({
   selectedCurrency?: Currency | null
   onSelect: (currency: Currency) => void
 }) {
-  const baseCurrency = baseCurrencies(chainId)[0]
-
   return (
     <AutoColumn gap="md">
       <AutoRow>
@@ -49,19 +43,6 @@ export default function CommonBases({
         <QuestionHelper text="These tokens are commonly paired with other tokens." />
       </AutoRow>
       <AutoRow gap="4px">
-        <BaseWrapper
-          onClick={() => {
-            if (!selectedCurrency || !currencyEquals(selectedCurrency, baseCurrency)) {
-              onSelect(baseCurrency)
-            }
-          }}
-          disable={selectedCurrency instanceof Token && selectedCurrency.address === baseCurrency.address}
-        >
-          <CurrencyLogo currency={baseCurrency} style={{ marginRight: 8 }} />
-          <Text fontWeight={500} fontSize={16}>
-            {BASE_CURRENCY.symbol}
-          </Text>
-        </BaseWrapper>
         {(chainId ? SUGGESTED_BASES[chainId] : []).map((token: Token) => {
           const selected = selectedCurrency instanceof Token && selectedCurrency.address === token.address
           return (

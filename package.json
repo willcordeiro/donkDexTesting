@@ -11,7 +11,7 @@
     "@oneverseswap/contracts": "^1.0.10",
     "@oneverseswap/core": "^1.0.3",
     "@oneverseswap/peripheryy": "^1.0.3",
-    "@oneverseswap/sdk": "^2.3.20",
+    "@oneverseswap/sdk": "^2.3.23",
     "@oneverseswap/sdk-extra": "^1.3.23",
     "@popperjs/core": "^2.4.4",
     "@reach/dialog": "^0.10.3",
