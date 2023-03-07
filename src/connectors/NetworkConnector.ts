@@ -46,6 +46,7 @@ class MiniRpcProvider implements AsyncSendable {
     this.chainId = chainId
     this.url = url
     const parsed = new URL(url)
+
     this.host = parsed.host
     this.path = parsed.pathname
     this.rpcAPIKey = rpcAPIKey
