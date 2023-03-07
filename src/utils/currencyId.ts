@@ -3,7 +3,6 @@ import { BASE_CURRENCY } from '../connectors'
 
 export function currencyId(currency: Currency): any {
   if (currency && DEFAULT_CURRENCIES.includes(currency)) {
-    console.log(currency)
     return BASE_CURRENCY && BASE_CURRENCY.symbol ? BASE_CURRENCY.address : 'ETH'
   }
   if (currency instanceof Token) return currency.address
