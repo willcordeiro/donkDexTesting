@@ -189,7 +189,7 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 }
 
 // used for display in the default list when adding liquidity
-console.log(WETH_ONLY)
+
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY
   // [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI], getTokenWithDefault(ChainId.GOERLI, '')],

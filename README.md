@@ -25,7 +25,7 @@ Create a new file called .env.local in the root of the project folder.
 Add the following to the empty .env.local file:
 
 ```
-REACT_APP_CHAIN_ID="5"
+REACT_APP_CHAIN_ID="2152"
 REACT_APP_NETWORK_URL="https://prod-mainnet01-blockscout.prod.findora.org/"
 ```
 
