@@ -392,6 +392,6 @@ export const BLOCKED_ADDRESSES: string[] = [
   '0x4736dCf1b7A3d580672CcE6E7c65cd5cc9cFBa9D'
 ]
 
-export const ASSET_HOST = 'https://raw.githubusercontent.com/VenomProtocol/assets/main'
+export const ASSET_HOST = ''
 
 export const BLOCKED_TOKENS: string[] = ['0xd6c08040db9d34932ba34c2ce10ed37b4667a96a'] // HRC20 Fortnite Token
