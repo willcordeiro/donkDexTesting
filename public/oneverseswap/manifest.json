@@ -17,8 +17,13 @@
     }
   ],
   "orientation": "portrait",
+<<<<<<< HEAD
   "name": "oneverseSwap",
   "short_name": "oneverseSwap",
+=======
+  "name": "CobraSwap",
+  "short_name": "CobraSwap",
+>>>>>>> 7246a7481e08cfb6fecd3e50c4c3d3ba00407547
   "start_url": ".",
   "theme_color": "#ffad00"
 }
