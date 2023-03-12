@@ -18,7 +18,7 @@ import { useActiveWeb3React } from '../../../hooks'
     stroke: ${({ theme }) => theme.text1};
   }
 `*/
-
+/*
 const StyledMenuButton = styled.button`
   width: 100%;
   height: 100%;
@@ -49,6 +49,7 @@ const StyledMenuButton = styled.button`
     margin-top: 2px;
   }
 `
+*/
 
 const StyledMenu = styled.div`
   display: flex;
@@ -146,13 +147,14 @@ export default function StakingMenu() {
   return (
     // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30451
     <StyledMenu ref={node as any}>
+      {/*
       <StyledMenuButton onClick={toggle}>
         <span role="img" aria-label="wizard-icon" style={{ marginRight: '0.25rem' }}>
           🚀
         </span>
         Staking
       </StyledMenuButton>
-
+    */}
       {open && (
         <MenuFlyout>
           {/*

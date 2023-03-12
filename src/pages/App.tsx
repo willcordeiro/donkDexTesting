@@ -27,7 +27,7 @@ import SmartChefSingleManage from './Staking/SmartChef/Single/Manage'
 //import SmartChefLPEarn from './Staking/SmartChef/LiquidityPools'
 //import SmartChefLPEarnArchived from './Staking/SmartChef/LiquidityPools/Archived'
 import SmartChefLPManage from './Staking/SmartChef/LiquidityPools/Manage'
-import Pit from './Staking/Pit'
+//import Pit from './Staking/Pit'
 //import Unlock from './Staking/Unlock'
 import MigrateV1 from './MigrateV1'
 import MigrateV1Exchange from './MigrateV1/MigrateV1Exchange'
@@ -40,8 +40,8 @@ import Swap from './Swap'
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 //import Vote from './Vote'
 import VotePage from './Vote/VotePage'
-import { PIT_SETTINGS } from '../constants'
-import { useActiveWeb3React } from '../hooks'
+//import { PIT_SETTINGS } from '../constants'
+//import { useActiveWeb3React } from '../hooks'
 //import usePlatformName from '../hooks/usePlatformName'
 import useBlockchain from '../hooks/useBlockchain'
 
@@ -96,9 +96,9 @@ function TopLevelModals() {
 }
 
 export default function App() {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
   const blockchain = useBlockchain()
-  const pitSettings = chainId ? PIT_SETTINGS[chainId] : undefined
+  // const pitSettings = chainId ? PIT_SETTINGS[chainId] : undefined
   /*const platformName = usePlatformName()
 
   useEffect(() => {
@@ -165,8 +165,9 @@ export default function App() {
                 />
               )}
               */}
-
+              {/*
               <Route exact strict path={'/staking' + pitSettings?.path} component={Pit} />
+              */}
               {/*
               <Route exact strict path="/staking/unlock" component={Unlock} />
               
@@ -184,6 +185,7 @@ export default function App() {
               <Route exact strict path="/migrate/v1" component={MigrateV1} />
               <Route exact strict path="/migrate/v1/:address" component={MigrateV1Exchange} />
               <Route exact strict path="/staking/pools/:currencyIdA/:currencyIdB" component={Manage} />
+
               {[Blockchain.HARMONY].includes(blockchain) && (
                 <Route exact strict path="/staking/single/:address" component={SmartChefSingleManage} />
               )}
@@ -191,6 +193,7 @@ export default function App() {
                 <Route exact strict path="/staking/:category/:address" component={SmartChefLPManage} />
               )}
               {blockchain === Blockchain.ETHEREUM && <Route exact strict path="/vote/:id" component={VotePage} />}
+
               <Route component={RedirectPathToSwapOnly} />
             </Switch>
           </Web3ReactManager>

@@ -13,7 +13,7 @@ import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalance } from '../../state/wallet/hooks'
 import { CardNoise } from '../Staking/Pools/styled'
-import { CountUp } from 'use-count-up'
+//import { CountUp } from 'use-count-up'
 import { TYPE, ExternalLink } from '../../theme'
 
 import { BlueCard } from '../Card'
@@ -236,6 +236,31 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 `
 
+const Link = styled.a`
+  ${({ theme }) => theme.flexRowNoWrap}
+  align-items: left;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: ${({ theme }) => theme.text2};
+  font-size: 1rem;
+  width: fit-content;
+  margin: 0 12px;
+  font-weight: 500;
+
+  &.${activeClassName} {
+    border-radius: 5px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.text1};
+  }
+
+  :hover,
+  :focus {
+    color: ${({ theme }) => darken(0.1, theme.text1)};
+  }
+`
+
 const StyledExternalLink = styled(ExternalLink).attrs({
   activeClassName
 })<{ isActive?: boolean }>`
@@ -373,6 +398,11 @@ export default function Header() {
           >
             {t('pool')}
           </StyledNavLink>
+
+          <Link href="https://www.rialtobridge.io/" target="_blank" rel="noreferrer">
+            Bridge
+          </Link>
+
           <StakingMenu />
           {!mobile && analyticsUrl && analyticsUrl !== '' && (
             <StyledExternalLink id={`analytics-nav-link`} href={analyticsUrl}>
@@ -405,24 +435,6 @@ export default function Header() {
           {!availableClaim && (countUpValue || countUpValuePrevious) && (
             <UNIWrapper onClick={() => setShowUniBalanceModal(true)}>
               <UNIAmount active={!!account && !availableClaim} style={{ pointerEvents: 'auto' }}>
-                {account && (
-                  <HideSmall>
-                    <TYPE.white
-                      style={{
-                        paddingRight: '.4rem'
-                      }}
-                    >
-                      <CountUp
-                        key={countUpValue}
-                        isCounting
-                        start={parseFloat(countUpValuePrevious)}
-                        end={parseFloat(countUpValue)}
-                        thousandsSeparator={','}
-                        duration={1}
-                      />
-                    </TYPE.white>
-                  </HideSmall>
-                )}
                 {govToken?.symbol}
               </UNIAmount>
               <CardNoise />

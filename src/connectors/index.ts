@@ -43,7 +43,7 @@ export function getNetworkLibrary(): Web3Provider {
 let supportedChainIds: number[]
 switch (BLOCKCHAIN) {
   case Blockchain.FINDORA:
-    supportedChainIds = [5, 2152, 2153]
+    supportedChainIds = [2152]
     break
   case Blockchain.ANVILTESTNET:
     supportedChainIds = [5, 2152, 2153]
