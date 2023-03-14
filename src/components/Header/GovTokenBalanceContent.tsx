@@ -95,8 +95,7 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
   }, [dataPrice])
 
   async function fetchFindoraValue(value: string) {
-    const apiUrl =
-      'https://api.coingecko.com/api/v3/simple/price?ids=findora&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false'
+    const apiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=findora&vs_currencies=usd'
 
     axios
       .get(apiUrl)
