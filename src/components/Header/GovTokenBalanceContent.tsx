@@ -1,24 +1,27 @@
-import { Blockchain, Token, Price } from '@oneverseswap/sdk'
+import { Blockchain, Token } from '@oneverseswap/sdk'
 import React, { useEffect, useState } from 'react'
 //import React, { useMemo } from 'react'
 import { X } from 'react-feather'
 import styled from 'styled-components'
 import getTokenLogo from '../../utils/getTokenLogo'
 import { useActiveWeb3React } from '../../hooks'
-//import { useMerkleDistributorContract } from '../../hooks/useContract'
+//import { useMerkleDistributorContract} from '../../hooks/useContract'
 //import useCurrentBlockTimestamp from '../../hooks/useCurrentBlockTimestamp'
-import { StyledInternalLink, TYPE, UniTokenAnimated } from '../../theme'
+import { /* StyledInternalLink, */ TYPE, UniTokenAnimated } from '../../theme'
 //import { computeUniCirculation } from '../../utils/computeUniCirculation'
 import { AutoColumn } from '../Column'
 import { RowBetween } from '../Row'
 import { Break, CardBGImage, CardNoise, CardSection, DataCard } from '../Staking/Pools/styled'
-import { MouseoverTooltip } from '../Tooltip'
+//import { MouseoverTooltip } from '../Tooltip'
 import useBlockchain from '../../hooks/useBlockchain'
-import generateTooltips from '../../utils/generateTooltips'
+//import generateTooltips from '../../utils/generateTooltips'
 import { useBlockNumber } from '../../state/application/hooks'
-import { useGovernanceTokenDetailsData, GovernanceTokenUserDetails } from '../../hooks/tokens/useGovernanceTokenDetails'
+import { useGovernanceTokenDetailsData } from '../../hooks/tokens/useGovernanceTokenDetails'
 import Loader from '../Loader'
-
+import { dataPrice } from '../../hooks/useBUSDPrice'
+import Big from 'big.js'
+import axios from 'axios'
+import { userBalance } from '../../hooks/tokens/useGovernanceTokenDetails'
 const ContentWrapper = styled(AutoColumn)`
   width: 100%;
 `
@@ -46,19 +49,21 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
   const { chainId, account } = useActiveWeb3React()
   const latestBlockNumber = useBlockNumber()
   const blockchain = useBlockchain()
-  const tooltips = generateTooltips(blockchain)
+  // const tooltips = generateTooltips(blockchain)
 
   const govTokenDetails = useGovernanceTokenDetailsData()
   const [govToken, setGovToken] = useState<Token | undefined>(undefined)
-  const [govTokenPrice, setGovTokenPrice] = useState<Price | undefined>(undefined)
-  const [govTokenUserDetails, setGovTokenUserDetails] = useState<GovernanceTokenUserDetails | undefined>(undefined)
+  const [govTokenUserDetails, setGovTokenUserDetails] = useState<any>(undefined)
+  const [tokenPricing, setTokenPricing] = useState<string>('...')
+  const [marketCap, setMarketCap] = useState<string>('...')
+  const [usdValue, setUsdValue] = useState<string>('...')
+  const [userBalanceUsd, setUserBalanceUsd] = useState<string>('...')
 
   useEffect(() => {
     let mounted = true
 
     if (mounted) {
       setGovToken(govTokenDetails?.token)
-      setGovTokenPrice(govTokenDetails?.usdPrice)
       setGovTokenUserDetails(account ? govTokenDetails?.users?.[account] : undefined)
     }
 
@@ -66,6 +71,52 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
       mounted = false
     }
   }, [chainId, latestBlockNumber])
+
+  const zero: any = 0
+  useEffect(() => {
+    if (dataPrice[0][0] !== zero && tokenPricing === '...') {
+      //setting by the pair contract
+      const currency0 = Big(dataPrice[0][0])
+
+      const currency1 = Big(dataPrice[0][1])
+
+      const pricing = Big(currency0.div(currency1).toString())
+
+      const rounded = pricing.toFixed(3)
+
+      const marketCalc = Big('25000000')
+        .times(rounded)
+        .toString()
+
+      setMarketCap(marketCalc)
+      setTokenPricing(rounded)
+      fetchFindoraValue(rounded)
+    }
+  }, [dataPrice])
+
+  async function fetchFindoraValue(value: string) {
+    const apiUrl =
+      'https://api.coingecko.com/api/v3/simple/price?ids=findora&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false'
+
+    axios
+      .get(apiUrl)
+      .then(response => {
+        const amount = new Big(value)
+        const usdValue = new Big(response.data.findora.usd)
+        const convertedAmount = new Big(amount.times(usdValue))
+        const formattedAmount = convertedAmount.toFixed(3)
+
+        const userBalancee: any = new Big(userBalance)
+
+        const formattedUserAmount: any = new Big(userBalancee.times(formattedAmount)).toFixed(2)
+
+        setUsdValue(formattedAmount.toString())
+        setUserBalanceUsd(formattedUserAmount.toString())
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
   return (
     <ContentWrapper gap="lg">
@@ -84,29 +135,16 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
             <CardSection gap="sm">
               <AutoColumn gap="md" justify="center">
                 <UniTokenAnimated width="48px" src={getTokenLogo()} />{' '}
-                <TYPE.white fontSize={48} fontWeight={600} color="white">
-                  {govTokenUserDetails?.aggregatedBalance?.toFixed(2, { groupSeparator: ',' })}
-                </TYPE.white>
               </AutoColumn>
               <AutoColumn gap="md">
                 <RowBetween>
                   <TYPE.white color="white">Balance:</TYPE.white>
                   <TYPE.white color="white">
-                    <MouseoverTooltip
-                      text={
-                        govTokenPrice &&
-                        govTokenUserDetails?.unlockedBalance &&
-                        govTokenUserDetails?.unlockedBalance.greaterThan('0')
-                          ? `USD: $${govTokenUserDetails?.unlockedBalance
-                              .multiply(govTokenPrice?.raw)
-                              .toSignificant(6, { groupSeparator: ',' })}`
-                          : ''
-                      }
-                    >
-                      {govTokenUserDetails?.unlockedBalance?.toFixed(2, { groupSeparator: ',' })}
-                    </MouseoverTooltip>
+                    {govTokenUserDetails?.unlockedBalance?.toFixed(2, { groupSeparator: ',' })} OV / {userBalanceUsd}{' '}
+                    USD
                   </TYPE.white>
                 </RowBetween>
+                {/* 
                 <RowBetween>
                   <TYPE.white color="white">
                     <MouseoverTooltip text={tooltips.unlockedRewards}>
@@ -152,9 +190,11 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
                     <Loader style={{ marginTop: '0.25rem' }} />
                   )}
                 </RowBetween>
+                  */}
               </AutoColumn>
             </CardSection>
             <Break />
+            {/* 
             <CardSection gap="sm">
               <AutoColumn gap="md">
                 <RowBetween>
@@ -204,6 +244,7 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
                 </RowBetween>
               </AutoColumn>
             </CardSection>
+            */}
             <Break />
           </>
         )}
@@ -240,8 +281,10 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
               <AutoColumn gap="md">
                 <RowBetween>
                   <TYPE.white color="white">{govToken?.symbol} price:</TYPE.white>
-                  {govTokenPrice ? (
-                    <TYPE.white color="white">${govTokenPrice?.toFixed(4) ?? '-'}</TYPE.white>
+                  {tokenPricing ? (
+                    <TYPE.white color="white">
+                      {usdValue} USD / {tokenPricing} FRA
+                    </TYPE.white>
                   ) : (
                     <Loader style={{ marginTop: '0.25rem' }} />
                   )}
@@ -249,21 +292,8 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
 
                 <RowBetween>
                   <TYPE.white color="white">{govToken?.symbol} circ. market cap:</TYPE.white>
-                  {govTokenDetails?.totalCirculatingMarketCap ? (
-                    <TYPE.white color="white">
-                      ${govTokenDetails?.totalCirculatingMarketCap?.toFixed(0, { groupSeparator: ',' })}
-                    </TYPE.white>
-                  ) : (
-                    <Loader style={{ marginTop: '0.25rem' }} />
-                  )}
-                </RowBetween>
-
-                <RowBetween>
-                  <TYPE.white color="white">{govToken?.symbol} total market cap:</TYPE.white>
-                  {govTokenDetails?.totalMarketCap ? (
-                    <TYPE.white color="white">
-                      ${govTokenDetails?.totalMarketCap?.toFixed(0, { groupSeparator: ',' })}
-                    </TYPE.white>
+                  {marketCap ? (
+                    <TYPE.white color="white">{marketCap} FRA</TYPE.white>
                   ) : (
                     <Loader style={{ marginTop: '0.25rem' }} />
                   )}

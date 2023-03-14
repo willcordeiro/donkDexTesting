@@ -113,6 +113,7 @@ function persistTokenUserDetails(
   }
 }
 
+export let userBalance: any
 export function useGovernanceTokenUserDetailsData(govToken: Token | undefined): GovernanceTokenUserDetails | undefined {
   const { chainId, account } = useActiveWeb3React()
   const latestBlockNumber = useBlockNumber()
@@ -171,6 +172,8 @@ export function useGovernanceTokenUserDetailsData(govToken: Token | undefined): 
     claimableLocked: userLockedTokensToClaim,
     claimableUnlocked: userUnlockedTokensToClaim
   }
+
+  userBalance = details?.unlockedBalance?.toFixed(2)
 
   useEffect(() => {
     persistTokenUserDetails(
@@ -247,6 +250,7 @@ export function useGovernanceTokenDetailsData(): GovernanceTokenDetails | undefi
 
   const quoteStableCoinToken = useToken('BUSD')
   const latestGovTokenPrice = useBUSDPrice(govToken)
+
   const govTokenPrice = retrievePrice(
     govToken,
     quoteStableCoinToken,

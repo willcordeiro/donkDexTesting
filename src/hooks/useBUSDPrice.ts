@@ -1,6 +1,6 @@
 import { Currency, currencyEquals, JSBI, Price, WETH } from '@oneverseswap/sdk'
 import { useMemo } from 'react'
-import { PairState, usePairs } from '../data/Reserves'
+import { PairState, usePairs, usePairsToGetPrice } from '../data/Reserves'
 import { useActiveWeb3React } from '.'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
 import useToken from './tokens/useToken'
@@ -9,6 +9,9 @@ import useToken from './tokens/useToken'
  * Returns the price in BUSD of the input currency
  * @param currency currency to compute the BUSD price of
  */
+
+export let dataPrice = []
+
 export default function useBUSDPrice(currency?: Currency): Price | undefined {
   const { chainId } = useActiveWeb3React()
   const wrapped = wrappedCurrency(currency, chainId)
@@ -27,6 +30,10 @@ export default function useBUSDPrice(currency?: Currency): Price | undefined {
   )
 
   const [[ethPairState, ethPair], [busdPairState, busdPair], [busdEthPairState, busdEthPair]] = usePairs(tokenPairs)
+
+  const data: any = usePairsToGetPrice(tokenPairs)
+
+  dataPrice = data
 
   return useMemo(() => {
     if (!currency || !wrapped || !chainId) {
@@ -48,6 +55,7 @@ export default function useBUSDPrice(currency?: Currency): Price | undefined {
     }
 
     const ethPairETHAmount = ethPair?.reserveOf(WETH[chainId])
+
     const ethPairETHBUSDValue: JSBI =
       ethPairETHAmount && busdEthPair ? busdEthPair.priceOf(WETH[chainId]).quote(ethPairETHAmount).raw : JSBI.BigInt(0)
 

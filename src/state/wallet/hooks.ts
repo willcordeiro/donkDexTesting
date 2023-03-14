@@ -132,7 +132,9 @@ export function useTokenBalance(
   tokenInterface = ERC20_INTERFACE
 ): TokenAmount | undefined {
   const tokenBalances = useTokenBalances(account, [token], method, tokenInterface)
+
   if (!token) return undefined
+
   return tokenBalances[token.address]
 }
 
