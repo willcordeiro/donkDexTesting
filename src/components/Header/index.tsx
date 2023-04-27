@@ -49,10 +49,10 @@ const HeaderFrame = styled.div`
   width: 100%;
   top: 0;
   position: relative;
-  border-bottom: 1px solid ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : 'rgba(0, 0, 0, 0.1)')};
-  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#111111' : 'white')};
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : 'white')};
   padding: 1rem;
   z-index: 2;
+
   ${({ theme }) => theme.mediaWidth.upToMedium`
     grid-template-columns: 1fr;
     padding: 0 1rem;
@@ -127,8 +127,8 @@ const AccountElement = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: ${({ theme, active }) => (!active ? theme.bg1 : theme.bg3)};
-  border-radius: 5px;
+  background-color: ${({ theme, active }) => (!active ? theme.bg1 : theme.bg5)};
+  border-radius: 1.5rem;
   white-space: nowrap;
   width: 100%;
   cursor: pointer;
@@ -218,45 +218,29 @@ const StyledNavLink = styled(NavLink).attrs({
   outline: none;
   cursor: pointer;
   text-decoration: none;
-  color: ${({ theme }) => theme.text2};
-  font-size: 1rem;
+  color: ${({ theme }) => theme.text1};
+  font-size: 16px;
   width: fit-content;
   margin: 0 12px;
   font-weight: 500;
-
+  color: inherit;
+  text-decoration: inherit;
+  flex-basis: 100%;
+  border-radius: 0.375rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 7px;
+  padding-bottom: 7px;
   &.${activeClassName} {
     border-radius: 5px;
-    font-weight: 600;
+    font-weight: 500;
+
     color: ${({ theme }) => theme.text1};
   }
 
   :hover,
   :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
-`
-
-const Link = styled.a`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: left;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${({ theme }) => theme.text2};
-  font-size: 1rem;
-  width: fit-content;
-  margin: 0 12px;
-  font-weight: 500;
-
-  &.${activeClassName} {
-    border-radius: 5px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.text1};
-  }
-
-  :hover,
-  :focus {
+    background-color: rgba(205, 205, 205, 0.416);
     color: ${({ theme }) => darken(0.1, theme.text1)};
   }
 `
@@ -270,15 +254,15 @@ const StyledExternalLink = styled(ExternalLink).attrs({
   outline: none;
   cursor: pointer;
   text-decoration: none;
-  color: ${({ theme }) => theme.text2};
-  font-size: 1rem;
+  color: ${({ theme }) => theme.text1};
+  font-size: 16px;
   width: fit-content;
   margin: 0 12px;
   font-weight: 500;
 
   &.${activeClassName} {
     border-radius: 12px;
-    font-weight: 600;
+    font-weight: 500;
     color: ${({ theme }) => theme.text1};
   }
 
@@ -302,10 +286,10 @@ export const StyledMenuButton = styled.button`
   padding: 0;
   height: 35px;
 
-  background-color: #312764;
+  background-color: white;
   margin-left: 8px;
   padding: 0.15rem 0.5rem;
-  border-radius: 5px;
+  border-radius: 9999px;
 
   :hover {
     cursor: pointer;
@@ -316,7 +300,7 @@ export const StyledMenuButton = styled.button`
     margin-top: 2px;
   }
   > * {
-    stroke: white;
+    stroke: black;
   }
 `
 
@@ -378,13 +362,14 @@ export default function Header() {
       <HeaderRow>
         <Title href=".">
           <UniIcon>
-            <img width={'48px'} src={darkMode ? logoDark : logo} alt="logo" />
+            <img width={'62x'} src={darkMode ? logoDark : logo} alt="logo" />
           </UniIcon>
         </Title>
         <HeaderLinks>
           <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
-            {t('swap')}
+            {t('Trade')}
           </StyledNavLink>
+
           <StyledNavLink
             id={`pool-nav-link`}
             to={'/pool'}
@@ -398,10 +383,13 @@ export default function Header() {
           >
             {t('pool')}
           </StyledNavLink>
+          <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
+            {t('Stake')}
+          </StyledNavLink>
 
-          <Link href="https://www.rialtobridge.io/" target="_blank" rel="noreferrer">
-            Bridge
-          </Link>
+          <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
+            {t('Farm')}
+          </StyledNavLink>
 
           <StakingMenu />
           {!mobile && analyticsUrl && analyticsUrl !== '' && (
@@ -432,14 +420,7 @@ export default function Header() {
               <CardNoise />
             </UNIWrapper>
           )}
-          {!availableClaim && (countUpValue || countUpValuePrevious) && (
-            <UNIWrapper onClick={() => setShowUniBalanceModal(true)}>
-              <UNIAmount active={!!account && !availableClaim} style={{ pointerEvents: 'auto' }}>
-                {govToken?.symbol}
-              </UNIAmount>
-              <CardNoise />
-            </UNIWrapper>
-          )}
+
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>

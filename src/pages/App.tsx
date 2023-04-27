@@ -50,14 +50,11 @@ const AppWrapper = styled.div`
   flex-flow: column;
   align-items: flex-start;
   overflow-x: hidden;
-  font-family: 'Chakra Petch', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 20px;
   text-align: center;
-  letter-spacing: 0.1em;
 `
 
 const HeaderWrapper = styled.div`

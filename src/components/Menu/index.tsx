@@ -34,13 +34,12 @@ const StyledMenuButton = styled.button`
   background-color: ${({ theme }) => theme.bg2};
 
   padding: 0.15rem 0.5rem;
-  border-radius: 5px;
+  border-radius: 9999px;
 
   :hover,
   :focus {
     cursor: pointer;
     outline: none;
-    background-color: ${({ theme }) => theme.bg4};
   }
 
   svg {
@@ -84,7 +83,6 @@ const MenuItem = styled(ExternalLink)`
   color: ${({ theme }) => theme.text2};
   text-decoration: none;
   :hover {
-    color: ${({ theme }) => theme.text1};
     cursor: pointer;
     text-decoration: none;
   }
