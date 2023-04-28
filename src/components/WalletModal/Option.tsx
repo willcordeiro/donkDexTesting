@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { ExternalLink } from '../../theme'
 
 const InfoCard = styled.button<{ active?: boolean }>`
-  background-color: ${({ theme, active }) => (active ? theme.bg3 : theme.bg2)};
+  background: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#edeef2')};
   padding: 1rem;
   outline: none;
-  border: 1px solid;
+  border: none;
   border-radius: 12px;
   width: 100% !important;
   &:focus {

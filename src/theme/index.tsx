@@ -416,8 +416,6 @@ html {
 
 export const ThemedGlobalStyle = createGlobalStyle`
 html {
-  
-
   color: ${({ theme }) => theme.text1};
   background:  ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#edeef2')};
     background-size: cover;

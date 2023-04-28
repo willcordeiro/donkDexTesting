@@ -85,7 +85,6 @@ const HeaderControls = styled.div`
     z-index: 99;
     height: 72px;
     border-radius: 5px
-    background-color: ${({ theme }) => theme.bg1};
   `};
 `
 
@@ -127,14 +126,15 @@ const AccountElement = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: ${({ theme, active }) => (!active ? theme.bg1 : theme.bg5)};
+  background-color: white;
   border-radius: 1.5rem;
   white-space: nowrap;
   width: 100%;
   cursor: pointer;
 
-  :focus {
-    border: 1px solid blue;
+  :hover {
+    opacity: 0.8;
+    color: ${({ theme }) => darken(0.1, theme.text1)};
   }
 `
 
@@ -285,7 +285,6 @@ export const StyledMenuButton = styled.button`
   margin: 0;
   padding: 0;
   height: 35px;
-
   background-color: white;
   margin-left: 8px;
   padding: 0.15rem 0.5rem;
@@ -300,7 +299,7 @@ export const StyledMenuButton = styled.button`
     margin-top: 2px;
   }
   > * {
-    stroke: black;
+    stroke: ${({ theme }) => theme.text1};
   }
 `
 
