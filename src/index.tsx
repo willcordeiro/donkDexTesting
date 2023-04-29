@@ -1,4 +1,5 @@
 import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core'
+import './index.css'
 import 'inter-ui'
 import React, { StrictMode } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -71,7 +72,7 @@ ReactDOM.render(
             </ThemeProvider>
           </Provider>
         </Blocklist>
-      </Web3ProviderNetwork>
+      </Web3ProviderNetwork>{' '}
     </Web3ReactProvider>
   </StrictMode>,
   document.getElementById('root')
