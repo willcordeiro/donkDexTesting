@@ -42,8 +42,8 @@ const Option = styled(FancyButton)<{ active: boolean }>`
   :hover {
     cursor: pointer;
   }
-  background-color: ${({ active, theme }) => active && theme.primary1};
-  color: ${({ active, theme }) => (active ? theme.white : theme.text1)};
+  background-color: ${({ active, theme }) => active && '#ff8e4c'};
+  color: 'white';
 `
 
 const Input = styled.input`

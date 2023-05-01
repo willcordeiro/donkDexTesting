@@ -51,12 +51,11 @@ export function defaultColors(darkMode: boolean): Colors {
     text5: darkMode ? 'white' : '#EDEEF2',
 
     // backgrounds / greys
-    bg1: darkMode ? '#212429' : '#736666',
+    bg1: darkMode ? '#33271e' : '#736666',
     bg2: darkMode ? 'white' : '#F7F8FA',
     bg3: darkMode ? '#40444F' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',
     bg5: darkMode ? '#f1ece9' : '#888D9B',
-
     //specialty colors
     modalBG: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
     advancedBG: darkMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.6)',
@@ -111,7 +110,7 @@ export function viperColors(darkMode: boolean): Colors {
     text5: darkMode ? 'white' : '#EDEEF2',
 
     // backgrounds / greys
-    bg1: darkMode ? '#212429' : '#736666',
+    bg1: darkMode ? '#33271e' : '#736666',
     bg2: darkMode ? 'white' : '#F7F8FA',
     bg3: darkMode ? '#40444F' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',
@@ -171,7 +170,7 @@ export function bscColors(darkMode: boolean): Colors {
     text5: darkMode ? 'white' : '#EDEEF2',
 
     // backgrounds / greys
-    bg1: darkMode ? '#212429' : '#736666',
+    bg1: darkMode ? '#33271e' : '#736666',
     bg2: darkMode ? 'white' : '#F7F8FA',
     bg3: darkMode ? '#40444F' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',
@@ -231,7 +230,7 @@ export function harmonyColors(darkMode: boolean): Colors {
     text5: darkMode ? 'white' : '#EDEEF2',
 
     // backgrounds / greys
-    bg1: darkMode ? '#212429' : '#736666',
+    bg1: darkMode ? '#33271e' : '#736666',
     bg2: darkMode ? 'white' : '#F7F8FA',
     bg3: darkMode ? '#40444F' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',

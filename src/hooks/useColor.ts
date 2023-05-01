@@ -74,7 +74,7 @@ export function useColor(token?: Token) {
 }
 
 export function useListColor(listImageUri?: string) {
-  const [color, setColor] = useState('#02a2c4')
+  const [color, setColor] = useState('#ff8e4c')
 
   useLayoutEffect(() => {
     let stale = false
@@ -89,7 +89,7 @@ export function useListColor(listImageUri?: string) {
 
     return () => {
       stale = true
-      setColor('#02a2c4')
+      setColor('#ff8e4c')
     }
   }, [listImageUri])
 

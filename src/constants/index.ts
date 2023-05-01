@@ -107,7 +107,7 @@ export const POOL_BACKGROUNDS: { [chainId in ChainId]: string } = {
   [ChainId.GOERLI]: '#02a2c4',
   [ChainId.ANVILTESTNET]: '#02a2c4',
   [ChainId.RINKEBY]: '#02a2c4',
-  [ChainId.FINDORA]: '#02a2c4',
+  [ChainId.FINDORA]: '#ff8e4c',
   [ChainId.MAINNET]: '#02a2c4',
   [ChainId.ROPSTEN]: '#02a2c4',
   [ChainId.KOVAN]: '#02a2c4',
