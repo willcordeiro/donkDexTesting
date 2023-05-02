@@ -106,28 +106,20 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href={'https://oneverse.one/'}>
-            Website
-          </MenuItem>
-
-          <MenuItem id="link" href={'https://oneverse.gitbook.io/oneverse/oneverse/what-is-oneverse'}>
-            GitBook
-          </MenuItem>
-
-          <MenuItem id="link" href={'https://discord.com/invite/oneverse'}>
+          <MenuItem id="link" href={'https://discord.com/invite/c5SnGZWUF8'}>
             Discord
           </MenuItem>
 
-          <MenuItem id="link" href={'https://twitter.com/oneverseone'}>
+          <MenuItem id="link" href={'https://twitter.com/donksol?s=21&t=H840g90JZa4v2LPWSf689Q'}>
             Twitter
           </MenuItem>
 
-          <MenuItem id="link" href={'https://www.facebook.com/oneverse.one/'}>
-            Facebook
+          <MenuItem id="link" href={''}>
+            Github
           </MenuItem>
 
-          <MenuItem id="link" href={'https://t.me/ONEverseONEoff'}>
-            Telegram
+          <MenuItem id="link" href={''}>
+            Website
           </MenuItem>
         </MenuFlyout>
       )}
