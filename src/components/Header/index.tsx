@@ -18,7 +18,6 @@ import { TYPE, ExternalLink } from '../../theme'
 
 import { BlueCard } from '../Card'
 import { Moon, Sun } from 'react-feather'
-import Menu from '../Menu'
 import StakingMenu from '../Staking/Menu'
 
 import Row, { RowFixed } from '../Row'
@@ -433,7 +432,6 @@ export default function Header() {
           <StyledMenuButton onClick={() => toggleDarkMode()}>
             {darkMode ? <Moon size={20} /> : <Sun size={20} />}
           </StyledMenuButton>
-          <Menu />
         </HeaderElementWrap>
       </HeaderControls>
     </HeaderFrame>

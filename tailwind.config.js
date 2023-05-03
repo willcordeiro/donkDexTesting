@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-
 module.exports = {
-  darkMode: 'class',
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
     extend: {
       fontFamily: {
@@ -25,6 +23,9 @@ module.exports = {
         black500: 'hsl(228, 9%, 11%)'
       }
     }
+  },
+  variants: {
+    extend: {}
   },
   plugins: []
 }

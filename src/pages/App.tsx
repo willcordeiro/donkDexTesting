@@ -45,6 +45,7 @@ import VotePage from './Vote/VotePage'
 //import usePlatformName from '../hooks/usePlatformName'
 import useBlockchain from '../hooks/useBlockchain'
 import Home from './home/Home'
+import Footer from 'components/Footer/Footer'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -68,8 +69,6 @@ const BodyWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-top: 100px;
-  align-items: center;
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
@@ -196,9 +195,9 @@ export default function App() {
               <Route component={RedirectPathToSwapOnly} />
             </Switch>
           </Web3ReactManager>
-          <Marginer />
         </BodyWrapper>
       </AppWrapper>
+      <Footer />
     </Suspense>
   )
 }
