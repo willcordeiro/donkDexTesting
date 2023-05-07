@@ -41,15 +41,14 @@ const Base = styled(RebassButton)<{
 export const ButtonPrimary = styled(Base)`
   background-color: ${({ theme }) => theme.primary1};
   color: white;
+  border-radius: 9999px;
   &:focus {
-    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.primary1)};
     background-color: ${({ theme }) => darken(0.05, theme.primary1)};
   }
   &:hover {
     background-color: ${({ theme }) => darken(0.05, theme.primary1)};
   }
   &:active {
-    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.1, theme.primary1)};
     background-color: ${({ theme }) => darken(0.1, theme.primary1)};
   }
   &:disabled {
@@ -66,20 +65,19 @@ export const ButtonPrimary = styled(Base)`
 `
 
 export const ButtonLight = styled(Base)`
-  background-color: rgb(235, 123, 18);
+  background-color: #ff8e4c;
   color: 'white';
   font-size: 16px;
   font-weight: 500;
+  border-radius: 9999px;
+  height: 45px;
   &:focus {
-    box-shadow: 0 0 0 1pt ${({ theme, disabled }) => !disabled && darken(0.03, theme.primary5)};
     background-color: 'rgb(255, 142, 76)';
   }
   &:hover {
-    background-color: '#ff8e4c';
     opacity: 0.5s;
   }
   &:active {
-    box-shadow: 0 0 0 1pt ${({ theme, disabled }) => !disabled && darken(0.05, theme.primary5)};
     background-color: '#ff8e4c';
   }
   :disabled {
@@ -119,14 +117,12 @@ export const ButtonSecondary = styled(Base)`
   padding: ${({ padding }) => (padding ? padding : '10px')};
 
   &:focus {
-    box-shadow: 0 0 0 1pt ${({ theme }) => theme.primary4};
     border: 1px solid ${({ theme }) => theme.primary3};
   }
   &:hover {
     border: 1px solid ${({ theme }) => theme.primary3};
   }
   &:active {
-    box-shadow: 0 0 0 1pt ${({ theme }) => theme.primary4};
     border: 1px solid ${({ theme }) => theme.primary3};
   }
   &:disabled {
@@ -143,14 +139,12 @@ export const ButtonPink = styled(Base)`
   color: white;
 
   &:focus {
-    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.primary1)};
     background-color: ${({ theme }) => darken(0.05, theme.primary1)};
   }
   &:hover {
     background-color: ${({ theme }) => darken(0.05, theme.primary1)};
   }
   &:active {
-    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.1, theme.primary1)};
     background-color: ${({ theme }) => darken(0.1, theme.primary1)};
   }
   &:disabled {
@@ -185,15 +179,6 @@ export const ButtonOutlined = styled(Base)`
   background-color: transparent;
   color: ${({ theme }) => theme.text1};
 
-  &:focus {
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.bg4};
-  }
-  &:hover {
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.bg4};
-  }
-  &:active {
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.bg4};
-  }
   &:disabled {
     opacity: 50%;
     cursor: auto;
@@ -227,16 +212,6 @@ export const ButtonWhite = styled(Base)`
   background-color: ${({ theme }) => theme.bg1};
   color: black;
 
-  &:focus {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    box-shadow: 0 0 0 1pt ${darken(0.05, '#edeef2')};
-  }
-  &:hover {
-    box-shadow: 0 0 0 1pt ${darken(0.1, '#edeef2')};
-  }
-  &:active {
-    box-shadow: 0 0 0 1pt ${darken(0.1, '#edeef2')};
-  }
   &:disabled {
     opacity: 50%;
     cursor: auto;
@@ -259,14 +234,11 @@ const ButtonErrorStyle = styled(Base)`
   border: 1px solid ${({ theme }) => theme.red1};
 
   &:focus {
-    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.red1)};
     background-color: ${({ theme }) => darken(0.05, theme.red1)};
   }
   &:hover {
-    background-color: ${({ theme }) => darken(0.05, theme.red1)};
   }
   &:active {
-    box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.1, theme.red1)};
     background-color: ${({ theme }) => darken(0.1, theme.red1)};
   }
   &:disabled {
@@ -283,16 +255,6 @@ export const CustomButtonWhite = styled(Base)`
   background-color: #fff;
   color: black;
 
-  &:focus {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    box-shadow: 0 0 0 1pt ${darken(0.05, '#edeef2')};
-  }
-  &:hover {
-    box-shadow: 0 0 0 1pt ${darken(0.1, '#edeef2')};
-  }
-  &:active {
-    box-shadow: 0 0 0 1pt ${darken(0.1, '#edeef2')};
-  }
   &:disabled {
     opacity: 50%;
     cursor: auto;

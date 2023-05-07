@@ -19,6 +19,7 @@ import QuestionHelper from '../QuestionHelper'
 import { RowBetween, RowFixed } from '../Row'
 import Toggle from '../Toggle'
 import TransactionSettings from '../TransactionSettings'
+import SettingsImage from '../../assets/settings.svg'
 
 const StyledMenuIcon = styled(Settings)`
   height: 20px;
@@ -47,16 +48,19 @@ const StyledCloseIcon = styled(X)`
 
 const StyledMenuButton = styled.button`
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 140px;
   border: none;
-  background-color: transparent;
+  background-color: #ff8e4c;
+  color: white;
   margin: 0;
-  padding: 0;
-  height: 35px;
-
-  padding: 0.15rem 0.5rem;
-  border-radius: 5px;
+  padding: 20px;
+  font-weight: 500;
+  height: 45px;
+  gap: 0.5rem;
+  font-size: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 9999px;
 
   :hover,
   :focus {
@@ -179,7 +183,8 @@ export default function SettingsTab() {
         </ModalContentWrapper>
       </Modal>
       <StyledMenuButton onClick={toggle} id="open-settings-dialog-button">
-        <StyledMenuIcon />
+        <img src={SettingsImage} alt="setting-icon" />
+        Settings
         {expertMode ? (
           <EmojiWrapper>
             <span role="img" aria-label="wizard-icon">

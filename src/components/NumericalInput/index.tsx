@@ -3,14 +3,13 @@ import styled from 'styled-components'
 import { escapeRegExp } from '../../utils'
 
 const StyledInput = styled.input<{ error?: boolean; fontSize?: string; align?: string }>`
-  color: ${({ error, theme }) => (error ? theme.red1 : theme.bg5)};
+  color: ${({ error, theme }) => (error ? theme.red1 : theme.bg1)};
   width: 0;
   position: relative;
   font-weight: 500;
   outline: none;
   border: none;
   flex: 1 1 auto;
-  background-color: ${({ theme }) => theme.bg1};
   font-size: ${({ fontSize }) => fontSize ?? '24px'};
   text-align: ${({ align }) => align && align};
   white-space: nowrap;
@@ -33,7 +32,7 @@ const StyledInput = styled.input<{ error?: boolean; fontSize?: string; align?: s
   }
 
   ::placeholder {
-    color: ${({ theme }) => theme.text4};
+    color: #9ca3b7;
   }
 `
 

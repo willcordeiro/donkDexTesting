@@ -4,7 +4,7 @@ import { discord, github, m, twitter } from '../../assets'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#1f202e')};
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#1f202e')};
 `
 
 const Span = styled.span`
@@ -43,22 +43,22 @@ export default function Footer() {
               <ul className="flex items-center gap-3 justify-between w-full">
                 <li className="w-10 h-10 rounded-full bg-orange500 p-2">
                   <a target="_blank" href="https://discord.gg/c5SnGZWUF8" rel="noreferrer">
-                    <img src={discord} alt="discord" />
+                    <img src={discord} alt="discord" width="24px" />
                   </a>
                 </li>
                 <li className="w-10 h-10 rounded-full bg-orange500 p-2">
                   <a target="_blank" href="https://twitter.com/donksol?s=21&t=H840g90JZa4v2LPWSf689Q" rel="noreferrer">
-                    <img src={twitter} alt="twitter" />
+                    <img src={twitter} alt="twitter" width="24px" />
                   </a>
                 </li>
                 <li className="w-10 h-10 rounded-full bg-orange500">
                   <a href="/">
-                    <img src={m} alt="m" />
+                    <img src={m} alt="m" width="42px" />
                   </a>
                 </li>
                 <li className="w-10 h-10 rounded-full bg-orange500 p-1">
                   <a href="/">
-                    <img src={github} alt="github" />
+                    <img src={github} alt="github" width="32px" />
                   </a>
                 </li>
               </ul>
