@@ -1,20 +1,18 @@
 import React, { useState } from 'react'
 import RechartGraph from './RechartGraph'
 
-export default function SwipResult() {
+export default function SwipResult({ FieldOne, FieldTwo }: any) {
   const swip: any = {
     selected: {
-      icon:
-        'https://firebasestorage.googleapis.com/v0/b/donk-coin-e36c7.appspot.com/o/images%2Fgmx.jpg?alt=media&token=13f28e95-c0af-4dca-bc65-daa5955830b8',
-      name: 'a'
+      icon: FieldTwo?.tokenInfo.logoURI,
+      name: FieldTwo?.symbol
     }
   }
 
   const to: any = {
     selected: {
-      icon:
-        'https://firebasestorage.googleapis.com/v0/b/donk-coin-e36c7.appspot.com/o/images%2Fgmx.jpg?alt=media&token=13f28e95-c0af-4dca-bc65-daa5955830b8',
-      name: 'b'
+      icon: FieldOne?.tokenInfo.logoURI,
+      name: FieldOne?.symbol
     }
   }
 
@@ -24,19 +22,19 @@ export default function SwipResult() {
 
   return (
     <div className="basis-full">
-      {swip.selected && to.selected ? (
+      {FieldOne && FieldTwo ? (
         <>
           <header className="grid grid-cols-2 gap-3 mb-14 ">
             <div
               className={`flex items-center gap-3 max-xl:col-span-2 ${flipBtn ? 'flex-row-reverse justify-end' : ''}`}
             >
               <div className="flex items-center gap-2">
-                <img src={`${swip.selected.icon}`} alt="terra" className="w-[40px] rounded-full" />
+                <img src={`${swip.selected.icon}`} alt="no image" className="w-[40px] rounded-full" />
                 <span className="font-semibold dark:text-white uppercase">{swip.selected.name}</span>
               </div>
               <span className="dark:text-white">/</span>
               <div className="flex items-center gap-2">
-                <img src={`${to.selected.icon}`} alt="terra" className="w-[40px] rounded-full" />
+                <img src={`${to.selected.icon}`} alt="no image" className="w-[40px] rounded-full" />
                 <span className="font-semibold dark:text-white uppercase">{to.selected.name}</span>
               </div>
             </div>
