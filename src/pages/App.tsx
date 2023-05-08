@@ -46,6 +46,7 @@ import VotePage from './Vote/VotePage'
 import useBlockchain from '../hooks/useBlockchain'
 import Home from './home/Home'
 import Footer from 'components/Footer/Footer'
+import DonkStaking from '../pages/DonkStaking/index'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -123,6 +124,7 @@ export default function App() {
               <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
               <Route exact strict path="/find" component={PoolFinder} />
               <Route exact strict path="/pool" component={Pool} />
+              <Route exact strict path="/stake" component={DonkStaking} />
               {/*  
               <Route exact strict path="/staking/pools" component={Earn} />
               <Route exact strict path="/staking/pools/archived" component={EarnArchived} />
