@@ -241,7 +241,7 @@ export function harmonyColors(darkMode: boolean): Colors {
     advancedBG: darkMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.6)',
 
     //primary colors
-    primary1: darkMode ? '#5c49c6' : '#00AEE9',
+    primary1: darkMode ? '#ff8e4c' : '#ff8e4c',
     primary2: darkMode ? '#3680E7' : '#69FABD',
     primary3: darkMode ? '#4D8FEA' : '#00c5eb',
     primary4: darkMode ? '#376bad70' : '#bcecfd',
