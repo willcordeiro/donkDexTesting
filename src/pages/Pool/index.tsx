@@ -32,6 +32,7 @@ import { useSearch } from 'react-use-search'
 import { bitcoin, etherium, litecoin, solona, terra } from '../../assets'
 import PoolTableRow from './PoolTableRow'
 import { BiSearch } from 'react-icons/bi'
+import { Console } from 'console'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -134,14 +135,12 @@ export default function Pool() {
 
   // fetch the reserves for all V2 pools in which the user has a balance
   const liquidityTokensWithBalances = useMemo(
-    () =>
-      tokenPairsWithLiquidityTokens.filter(({ liquidityToken }) =>
-        v2PairsBalances[liquidityToken.address]?.greaterThan('0')
-      ),
+    () => tokenPairsWithLiquidityTokens.filter(({ liquidityToken }) => liquidityToken.address),
     [tokenPairsWithLiquidityTokens, v2PairsBalances]
   )
 
   const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
+
   const v2IsLoading =
     fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some(V2Pair => !V2Pair)
 
@@ -166,96 +165,29 @@ export default function Pool() {
     )
   })
 
-  console.log(trackedTokenPairs, 'all pairs founded')
-
   const analyticsUrl = chainId && ANALYTICS_URLS[chainId]
 
-  const predicate = (user: { name: string }, query: string) => user.name.toLowerCase().includes(query.toLowerCase())
+  const pairInfo: any = []
 
-  const tradInfo = [
+  pairInfo.push(v2PairsWithoutStakedAmount)
+
+  for (let i = 0; i < v2PairsWithoutStakedAmount.length; i++) {
     {
-      no: 1,
-      icon: terra,
-      name: 'Terra',
-      liquidity: '$345,564,839',
-      volume: '$67',
-      FEES: '24.45%',
-      APR: '7.90%'
-    },
-    {
-      no: 2,
-      icon: bitcoin,
-      name: 'Bitcoin',
-      liquidity: '$345,564,839',
-      volume: '$23,050',
-      FEES: '24.45%',
-      APR: '7.90%'
-    },
-    {
-      no: 3,
-      icon: litecoin,
-      name: 'Litecoin',
-      liquidity: '$345,564,839',
-      volume: '$67',
-      FEES: '24.45%',
-      APR: '7.90%'
-    },
-    {
-      no: 4,
-      icon: solona,
-      name: 'Solana',
-      liquidity: '$345,564,839',
-      volume: '$67',
-      FEES: '24.45%',
-      APR: '7.90%'
-    },
-    {
-      no: 5,
-      icon: etherium,
-      name: 'Etherium',
-      liquidity: '$345,564,839',
-      volume: '$67',
-      FEES: '24.45%',
-      APR: '7.90%'
-    },
-    {
-      no: 6,
-      icon: litecoin,
-      name: 'Litecoin',
-      liquidity: '$345,564,839',
-      volume: '$67',
-      FEES: '24.45%',
-      APR: '7.90%'
-    },
-    {
-      no: 7,
-      icon: terra,
-      name: 'Terra',
-      liquidity: '$345,564,839',
-      volume: '$67',
-      FEES: '24.45%',
-      APR: '7.90%'
-    },
-    {
-      no: 8,
-      icon: terra,
-      name: 'Terra',
-      liquidity: '$345,564,839',
-      volume: '$67',
-      FEES: '24.45%',
-      APR: '7.90%'
-    },
-    {
-      no: 9,
-      icon: terra,
-      name: 'Terra',
-      liquidity: '$345,564,839',
-      volume: '$67',
-      FEES: '24.45%',
-      APR: '7.90%'
+      if (pairInfo[0].length != 0) {
+        const obj = []
+        obj.push({
+          pairName: pairInfo[0][i].tokenAmounts[0].token.symbol + ' ' + pairInfo[0][i].tokenAmounts[1].token.symbol
+        })
+        pairInfo[0][i].pairName = obj
+      }
     }
-  ]
-  const [filteredUsers, query, handleChange] = useSearch(tradInfo, predicate, {
+  }
+
+  const predicate: any = (v2Pair: any, query: any) => {
+    return v2Pair.pairName[0].pairName.toLowerCase().includes(query.toLowerCase())
+  }
+
+  const [filteredUsers, query, handleChange] = useSearch(pairInfo[0], predicate, {
     filter: true,
     debounce: 200
   })
@@ -293,7 +225,7 @@ export default function Pool() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="table-auto min-w-[800px] w-full">
+            <div className="table-auto min-w-[800px] w-full">
               <thead>
                 <tr>
                   <th className="text-start px-5 pb-[10px] font-medium text-[rgb(150,150,150)]">POOL NAME</th>
@@ -303,16 +235,13 @@ export default function Pool() {
                   <th className="text-center px-5 pb-[10px] font-medium text-[rgb(150,150,150)]">APR (24H)</th>
                 </tr>
               </thead>
+
               {filteredUsers.length !== 0 ? (
-                filteredUsers.map((data: any, index: React.Key | null | undefined) => (
-                  <tbody key={index}>
-                    <PoolTableRow data={data} />
-                  </tbody>
-                ))
+                filteredUsers.map((v2Pair: any, index) => <FullPositionCard key={index} pair={v2Pair} />)
               ) : (
                 <div className="text-sm text-center pt-8">No matching pool found</div>
               )}
-            </table>
+            </div>
           </div>
           <PageWrapper>
             <SwapPoolTabs active={'pool'} />
@@ -374,9 +303,11 @@ export default function Pool() {
                         </RowBetween>
                       </ButtonSecondary>
                     )}
+                    {/* 
                     {v2PairsWithoutStakedAmount.map(v2Pair => (
                       <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} />
                     ))}
+                    */}
                     {stakingPairs.map(
                       (stakingPair, i) =>
                         stakingPair[1] && ( // skip pairs that arent loaded

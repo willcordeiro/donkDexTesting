@@ -159,7 +159,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
   )
 }
 
-export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
+export default function FullPositionCard({ pair, border, stakedBalance }: any) {
   const { account } = useActiveWeb3React()
 
   const currency0 = unwrappedToken(pair.token0)
