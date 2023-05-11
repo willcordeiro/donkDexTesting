@@ -36,12 +36,15 @@ export const HoverCard = styled(Card)`
     border: 1px solid ${({ theme }) => darken(0.06, theme.bg2)};
   }
 `
-const StyledPositionCard = styled(LightCard)<{ bgColor: any }>`
+const StyledPositionCard = styled(LightCard)`
   border: none;
-  background: ${({ theme, bgColor }) =>
-    `radial-gradient(91.85% 100% at 1.84% 0%, ${transparentize(0.8, bgColor)} 0%, ${theme.bg3} 100%) `};
+  background: #f1ece9;
   position: relative;
   overflow: hidden;
+  min-width: 800px;
+  :hover {
+    background-color: rgb(232 226 222);
+  }
 `
 
 interface PositionCardProps {
@@ -190,43 +193,56 @@ export default function FullPositionCard({ pair, border, stakedBalance }: any) {
         ]
       : [undefined, undefined]
 
-  const backgroundColor = useColor(pair?.token0)
+  // const backgroundColor = useColor(pair?.token0)
 
   return (
-    <StyledPositionCard border={border} bgColor={backgroundColor}>
-      <CardNoise />
-      <AutoColumn gap="12px">
-        <FixedHeightRow>
-          <AutoRow gap="8px">
-            <DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={20} />
-            <Text fontWeight={500} fontSize={20}>
-              {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
-            </Text>
-          </AutoRow>
-          <RowFixed gap="8px">
-            <ButtonEmpty
-              padding="6px 8px"
-              borderRadius="12px"
-              width="fit-content"
-              onClick={() => setShowMore(!showMore)}
-            >
-              {showMore ? (
-                <>
-                  Manage
-                  <ChevronUp size="20" style={{ marginLeft: '10px' }} />
-                </>
-              ) : (
-                <>
-                  Manage
-                  <ChevronDown size="20" style={{ marginLeft: '10px' }} />
-                </>
-              )}
-            </ButtonEmpty>
-          </RowFixed>
-        </FixedHeightRow>
+    <StyledPositionCard border={border}>
+      <table className="w-full cursor-pointer" style={{ tableLayout: 'auto' }} onClick={() => setShowMore(!showMore)}>
+        <thead>
+          <tr>
+            <th className="text-left font-medium text-[rgb(150,150,150)]">POOL NAME</th>
+            <th className="text-center font-medium text-[rgb(150,150,150)]">LIQUIDITY</th>
+            <th className="text-center font-medium text-[rgb(150,150,150)]">VOLUME (24H)</th>
+            <th className="text-center font-medium text-[rgb(150,150,150)]">FEES (24H)</th>
+            <th className="text-right font-medium text-[rgb(150,150,150)]">APR (24H)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="text-left flex items-center gap-2">
+              <DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={27} />
+              <Text fontWeight={600} fontSize={14} color={'black'}>
+                {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
+              </Text>
+              <span className="px-2 py-[6px] text-xs bg-[#dbdbdb91]">2.08%</span>
+            </td>
+            <td className="text-center">
+              <Text fontWeight={600} fontSize={14} color={'black'}>
+                {!currency0 || !currency1 ? <Dots>Loading</Dots> : `$345,564,839`}
+              </Text>
+            </td>
+            <td className="text-center">
+              <Text fontWeight={600} fontSize={14} color={'black'}>
+                {!currency0 || !currency1 ? <Dots>Loading</Dots> : `$67`}
+              </Text>
+            </td>
+            <td className="text-center">
+              <Text fontWeight={600} fontSize={14} color={'black'}>
+                {!currency0 || !currency1 ? <Dots>Loading</Dots> : `24.45%`}
+              </Text>
+            </td>
+            <td className="text-center">
+              <Text fontWeight={600} fontSize={14} color={'black'}>
+                {!currency0 || !currency1 ? <Dots>Loading</Dots> : `7.90%`}
+              </Text>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
+      <AutoColumn>
         {showMore && (
-          <AutoColumn gap="8px">
+          <AutoRow gap="8px">
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
                 Your total pool tokens:
@@ -325,7 +341,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: any) {
                 Manage Liquidity in Rewards Pool
               </ButtonPrimary>
             )}
-          </AutoColumn>
+          </AutoRow>
         )}
       </AutoColumn>
     </StyledPositionCard>

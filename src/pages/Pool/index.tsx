@@ -225,24 +225,13 @@ export default function Pool() {
           </div>
 
           <div className="overflow-x-auto">
-            <div className="table-auto min-w-[800px] w-full">
-              <thead>
-                <tr>
-                  <th className="text-start px-5 pb-[10px] font-medium text-[rgb(150,150,150)]">POOL NAME</th>
-                  <th className="text-center px-5 pb-[10px] font-medium text-[rgb(150,150,150)]">↓ LIQUIDITY</th>
-                  <th className="text-center px-5 pb-[10px] font-medium text-[rgb(150,150,150)]">VOLUME (24H)</th>
-                  <th className="text-center px-5 pb-[10px] font-medium text-[rgb(150,150,150)]">FEES (24H)</th>
-                  <th className="text-center px-5 pb-[10px] font-medium text-[rgb(150,150,150)]">APR (24H)</th>
-                </tr>
-              </thead>
-
-              {filteredUsers.length !== 0 ? (
-                filteredUsers.map((v2Pair: any, index) => <FullPositionCard key={index} pair={v2Pair} />)
-              ) : (
-                <div className="text-sm text-center pt-8">No matching pool found</div>
-              )}
-            </div>
+            {filteredUsers.length !== 0 ? (
+              filteredUsers.map((v2Pair: any, index) => <FullPositionCard key={index} pair={v2Pair} />)
+            ) : (
+              <div className="text-sm text-center pt-8">No matching pool found</div>
+            )}
           </div>
+
           <PageWrapper>
             <SwapPoolTabs active={'pool'} />
             <VoteCard>
