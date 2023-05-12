@@ -12,11 +12,7 @@ import { useTokenBalance } from '../../state/wallet/hooks'
 import { TYPE } from '../../theme'
 import { currencyId } from '../../utils/currencyId'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
-import { ButtonPrimary, ButtonEmpty } from '../Button'
-import { transparentize } from 'polished'
-import { CardNoise } from '../Staking/Pools/styled'
-
-import { useColor } from '../../hooks/useColor'
+import { ButtonPrimary } from '../Button'
 
 import Card, { GreyCard, LightCard } from '../Card'
 import { AutoColumn } from '../Column'
@@ -107,44 +103,43 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
                 </Text>
               </RowFixed>
             </FixedHeightRow>
-            <AutoColumn gap="4px">
-              <FixedHeightRow>
-                <Text fontSize={16} fontWeight={500}>
-                  Your pool share:
-                </Text>
-                <Text fontSize={16} fontWeight={500}>
-                  {poolTokenPercentage ? poolTokenPercentage.toFixed(6) + '%' : '-'}
-                </Text>
-              </FixedHeightRow>
-              <FixedHeightRow>
-                <Text fontSize={16} fontWeight={500}>
-                  {currency0.symbol}:
-                </Text>
-                {token0Deposited ? (
-                  <RowFixed>
-                    <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
-                      {token0Deposited?.toSignificant(6)}
-                    </Text>
-                  </RowFixed>
-                ) : (
-                  '-'
-                )}
-              </FixedHeightRow>
-              <FixedHeightRow>
-                <Text fontSize={16} fontWeight={500}>
-                  {currency1.symbol}:
-                </Text>
-                {token1Deposited ? (
-                  <RowFixed>
-                    <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
-                      {token1Deposited?.toSignificant(6)}
-                    </Text>
-                  </RowFixed>
-                ) : (
-                  '-'
-                )}
-              </FixedHeightRow>
-            </AutoColumn>
+
+            <FixedHeightRow>
+              <Text fontSize={16} fontWeight={500}>
+                Your pool share:
+              </Text>
+              <Text fontSize={16} fontWeight={500}>
+                {poolTokenPercentage ? poolTokenPercentage.toFixed(6) + '%' : '-'}
+              </Text>
+            </FixedHeightRow>
+            <FixedHeightRow>
+              <Text fontSize={16} fontWeight={500}>
+                {currency0.symbol}:
+              </Text>
+              {token0Deposited ? (
+                <RowFixed>
+                  <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
+                    {token0Deposited?.toSignificant(6)}
+                  </Text>
+                </RowFixed>
+              ) : (
+                '-'
+              )}
+            </FixedHeightRow>
+            <FixedHeightRow>
+              <Text fontSize={16} fontWeight={500}>
+                {currency1.symbol}:
+              </Text>
+              {token1Deposited ? (
+                <RowFixed>
+                  <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
+                    {token1Deposited?.toSignificant(6)}
+                  </Text>
+                </RowFixed>
+              ) : (
+                '-'
+              )}
+            </FixedHeightRow>
           </AutoColumn>
         </GreyCard>
       ) : (

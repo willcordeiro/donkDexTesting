@@ -29,10 +29,8 @@ import useExtendWithStakedAmount from '../../hooks/staking/pools/useExtendWithSt
 import GraphSection from './GraphSection'
 
 import { useSearch } from 'react-use-search'
-import { bitcoin, etherium, litecoin, solona, terra } from '../../assets'
-import PoolTableRow from './PoolTableRow'
+
 import { BiSearch } from 'react-icons/bi'
-import { Console } from 'console'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -42,15 +40,6 @@ const PageWrapper = styled(AutoColumn)`
 const VoteCard = styled(DataCard)`
   background: radial-gradient(76.02% 75.41% at 1.84% 0%, black 0%, black 100%);
   overflow: hidden;
-`
-
-const TitleRow = styled(RowBetween)`
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    flex-wrap: wrap;
-    gap: 12px;
-    width: 100%;
-    flex-direction: column-reverse;
-  `};
 `
 
 const ButtonRow = styled(RowFixed)`

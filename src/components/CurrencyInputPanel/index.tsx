@@ -26,7 +26,7 @@ const CurrencySelect = styled.button<{ selected: boolean }>`
   height: 2.6rem;
   font-size: 20px;
   font-weight: 500;
-  background-color: #33271e;
+  background-color: #ff8e4c;
   color: ${({ selected, theme }) => (selected ? 'white' : 'white')};
   border-radius: 9999px;
   outline: none;
