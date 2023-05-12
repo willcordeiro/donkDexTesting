@@ -6,6 +6,7 @@ const StyledRangeInput = styled.input<{ size: number }>`
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
   cursor: pointer;
+  color: #ff8e4c;
 
   &:focus {
     outline: none;
@@ -19,55 +20,37 @@ const StyledRangeInput = styled.input<{ size: number }>`
     -webkit-appearance: none;
     height: ${({ size }) => size}px;
     width: ${({ size }) => size}px;
-    background-color: #565a69;
+    background-color: #ff8e4c;
     border-radius: 100%;
     border: none;
     transform: translateY(-50%);
-    color: ${({ theme }) => theme.bg1};
-
-    &:hover,
-    &:focus {
-      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 16px 24px rgba(0, 0, 0, 0.06),
-        0px 24px 32px rgba(0, 0, 0, 0.04);
-    }
+    color: #ff8e4c;
   }
 
   &::-moz-range-thumb {
     height: ${({ size }) => size}px;
     width: ${({ size }) => size}px;
-    background-color: #565a69;
+    background-color: #ff8e4c;
     border-radius: 100%;
     border: none;
-    color: ${({ theme }) => theme.bg1};
-
-    &:hover,
-    &:focus {
-      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 16px 24px rgba(0, 0, 0, 0.06),
-        0px 24px 32px rgba(0, 0, 0, 0.04);
-    }
+    color: #ff8e4c;
   }
 
   &::-ms-thumb {
     height: ${({ size }) => size}px;
     width: ${({ size }) => size}px;
-    background-color: #565a69;
+    background-color: #ff8e4c;
     border-radius: 100%;
-    color: ${({ theme }) => theme.bg1};
-
-    &:hover,
-    &:focus {
-      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 16px 24px rgba(0, 0, 0, 0.06),
-        0px 24px 32px rgba(0, 0, 0, 0.04);
-    }
+    color: #ff8e4c;
   }
 
   &::-webkit-slider-runnable-track {
-    background: linear-gradient(90deg, ${({ theme }) => theme.bg5}, ${({ theme }) => theme.bg3});
+    background: #ff8e4c;
     height: 2px;
   }
 
   &::-moz-range-track {
-    background: linear-gradient(90deg, ${({ theme }) => theme.bg5}, ${({ theme }) => theme.bg3});
+    background: #ff8e4c;
     height: 2px;
   }
 

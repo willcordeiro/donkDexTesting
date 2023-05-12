@@ -45,9 +45,7 @@ import { useRouterContractAddress } from '../../utils'
 import Overview from './Overview'
 import styled from 'styled-components'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
-
 import { Link } from 'react-router-dom'
-import { minWidth } from '@mui/system'
 
 const ButtonList = styled.ul`
   display: flex;

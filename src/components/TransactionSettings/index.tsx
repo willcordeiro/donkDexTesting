@@ -42,12 +42,12 @@ const Option = styled(FancyButton)<{ active: boolean }>`
   :hover {
     cursor: pointer;
   }
-  background-color: ${({ active, theme }) => active && '#ff8e4c'};
+  background-color: white;
   color: 'white';
 `
 
 const Input = styled.input`
-  background: ${({ theme }) => theme.bg1};
+  background: white;
   font-size: 16px;
   width: auto;
   outline: none;
@@ -63,6 +63,7 @@ const OptionCustom = styled(FancyButton)<{ active?: boolean; warning?: boolean }
   height: 2rem;
   position: relative;
   padding: 0 0.75rem;
+  background-color: white;
   flex: 1;
   border: ${({ theme, active, warning }) => active && `1px solid ${warning ? theme.red1 : theme.primary1}`};
   :hover {
@@ -223,30 +224,28 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
         )}
       </AutoColumn>
 
-      <AutoColumn gap="sm">
-        <RowFixed>
-          <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
-            Transaction deadline
-          </TYPE.black>
-          <QuestionHelper text="Your transaction will revert if it is pending for more than this long." />
-        </RowFixed>
-        <RowFixed>
-          <OptionCustom style={{ width: '80px' }} tabIndex={-1}>
-            <Input
-              color={!!deadlineError ? 'red' : undefined}
-              onBlur={() => {
-                parseCustomDeadline((deadline / 60).toString())
-              }}
-              placeholder={(deadline / 60).toString()}
-              value={deadlineInput}
-              onChange={e => parseCustomDeadline(e.target.value)}
-            />
-          </OptionCustom>
-          <TYPE.body style={{ paddingLeft: '8px' }} fontSize={14}>
-            minutes
-          </TYPE.body>
-        </RowFixed>
-      </AutoColumn>
+      <RowFixed>
+        <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
+          Transaction deadline
+        </TYPE.black>
+        <QuestionHelper text="Your transaction will revert if it is pending for more than this long." />
+      </RowFixed>
+      <RowFixed>
+        <OptionCustom style={{ width: '80px' }} tabIndex={-1}>
+          <Input
+            color={!!deadlineError ? 'red' : undefined}
+            onBlur={() => {
+              parseCustomDeadline((deadline / 60).toString())
+            }}
+            placeholder={(deadline / 60).toString()}
+            value={deadlineInput}
+            onChange={e => parseCustomDeadline(e.target.value)}
+          />
+        </OptionCustom>
+        <TYPE.body style={{ paddingLeft: '8px' }} fontSize={14}>
+          minutes
+        </TYPE.body>
+      </RowFixed>
     </AutoColumn>
   )
 }
