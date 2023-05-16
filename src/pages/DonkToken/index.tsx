@@ -4,29 +4,59 @@ import Overview from './Overview'
 import StakeUnStake from './StakeUnStake'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Header = styled.div`
+  text-align: left;
+`
+
+const Button = styled.button`
+  font-size: 15px;
+  background: none;
+  outline: none;
+  border: none;
+`
+
+const Text = styled.span`
+  font-size: 50px;
+`
+const TextLink = styled.span`
+  color: black;
+`
+
 export default function DonkToken() {
   return (
-    <div className="pt-3 pb-14">
-      <section className="max-w-6xl  mx-auto">
-        <header className="pb-14">
+    <section className="max-w-6xl  mx-auto">
+      <Header>
+        <header>
           <Link to="/stake">
-            <button type="button" className="gap-1 font-semibold px-2 py-2 mb-4 text-black">
-              <AiOutlineArrowLeft fontSize="14px" />
-              Back
-            </button>
+            <Button type="button" className="gap-1 font-semibold px-2 py-2 text-black">
+              <AiOutlineArrowLeft fontSize="14px" color={'black'} />
+            </Button>
+            <TextLink>Back</TextLink>
           </Link>
-          <div className="gap-2 h-16 w-16 min-w-[4rem]">
-            <img src={logo} alt="bitcoin" width={70} />
-            <p className="font-semibold text-5xl text-black">Donk</p>
+          <div className="flex min-w-[4rem]">
+            <table>
+              <tr>
+                <td>
+                  {' '}
+                  <img src={logo} alt="logo" height={70} />
+                </td>
+                <td>
+                  <p className="font-semibold text-black">
+                    <Text>Donk</Text>
+                  </p>
+                </td>
+              </tr>
+            </table>
           </div>
-          <p className="text-sm mt-2 ml-1 text-black">Rewards distributed very few days</p>
+          <p className="text-sm ">Rewards distributed very few days</p>
         </header>
-
-        <main className="grid lg:grid-cols-2 grid-cols-1 gap-10">
-          <Overview />
-          <StakeUnStake />
-        </main>
-      </section>
-    </div>
+      </Header>
+      <main className="grid lg:grid-cols-2 grid-cols-1 gap-10">
+        <Overview />
+        <StakeUnStake />
+      </main>
+    </section>
   )
 }

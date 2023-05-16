@@ -9,8 +9,12 @@
   transition: all 0.1s ease-in-out;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   text-decoration: none;
-  list-style: none;
 }
+
+.borderBottom {
+  border-bottom: solid 1px black;
+}
+
 ::-webkit-scrollbar {
   width: 20px;
 }
