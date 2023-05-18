@@ -303,28 +303,27 @@ export default function FullPositionCard({ pair, border, stakedBalance }: any) {
               </Text>
             </FixedHeightRow>
 
-            {userDefaultPoolBalance && JSBI.greaterThan(userDefaultPoolBalance.raw, BIG_INT_ZERO) && (
-              <RowBetween marginTop="10px">
-                <ButtonPrimary
-                  padding="8px"
-                  borderRadius="8px"
-                  as={Link}
-                  to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}
-                  width="48%"
-                >
-                  Add
-                </ButtonPrimary>
-                <ButtonPrimary
-                  padding="8px"
-                  borderRadius="8px"
-                  as={Link}
-                  width="48%"
-                  to={`/remove/${currencyId(currency0)}/${currencyId(currency1)}`}
-                >
-                  Remove
-                </ButtonPrimary>
-              </RowBetween>
-            )}
+            <RowBetween marginTop="10px">
+              <ButtonPrimary
+                padding="8px"
+                borderRadius="8px"
+                as={Link}
+                to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}
+                width="48%"
+              >
+                Add
+              </ButtonPrimary>
+              <ButtonPrimary
+                padding="8px"
+                borderRadius="8px"
+                as={Link}
+                width="48%"
+                to={`/remove/${currencyId(currency0)}/${currencyId(currency1)}`}
+              >
+                Remove
+              </ButtonPrimary>
+            </RowBetween>
+
             {stakedBalance && JSBI.greaterThan(stakedBalance.raw, BIG_INT_ZERO) && (
               <ButtonPrimary
                 padding="8px"
