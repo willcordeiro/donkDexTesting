@@ -7,16 +7,16 @@ export default function GraphSection() {
   return (
     <section>
       <header
-        className="flex items-center justify-between gap-2 flex-wrap
+        className="flex items-center justify-between  flex-wrap
     "
       >
         <div>
-          <p className="font-semibold text-sm text-pink900 mb-1  ">TVL (Total Value Locked)</p>
-          <p className="text-2xl font-semibold  text-black">$86,029,43</p>
+          <p className="font-semibold text-sm text-pink900 ">TVL (Total Value Locked)</p>
+          <p className="text-2xl font-semibold  text-black text-left">$86,029,43</p>
         </div>
-        <ul className="flex items-center gap-1 font-medium px-1 py-1 rounded-md border border-pink900 text-pink900 w-fit dark:text-dark900 dark:border-dark900">
+        <ul className="flex items-center font-medium px-1 py-1 rounded-md border border-pink900 text-pink900 w-fit dark:text-dark900 dark:border-dark900">
           {['5m', '15m', '1H', '4H'].map(duration => (
-            <li key={duration}>
+            <div key={duration}>
               <button
                 type="button"
                 className={`py-1 px-2 hover:bg-pink900 dark:hover:bg-darkHover hover:text-white rounded-md ${
@@ -26,7 +26,7 @@ export default function GraphSection() {
               >
                 {duration}
               </button>
-            </li>
+            </div>
           ))}
         </ul>
       </header>

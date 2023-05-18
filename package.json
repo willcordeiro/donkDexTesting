@@ -1,7 +1,6 @@
 {
   "name": "oneverseswap",
   "description": "Oneverseswap Interface",
-  "homepage": ".",
   "private": true,
   "engines": {
     "node": "16.x"
@@ -116,8 +115,8 @@
   "scripts": {
     "build:css": "postcss src/tailwind.css -o src/index.css",
     "watch:css": "postcss src/tailwind.css -o src/index.css",
-    "start": "npm run watch:css & react-scripts start",
-    "build": "npm run build:css react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start:service-worker": "yarn build && yarn serve -s build",

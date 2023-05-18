@@ -48,7 +48,8 @@ import Home from './home/Home'
 import Footer from 'components/Footer/Footer'
 import DonkStaking from '../pages/DonkStaking/index'
 import DonkToken from './DonkToken'
-
+import Farm from './Farm'
+import ManageFarm from './manageFarm'
 const AppWrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -128,6 +129,8 @@ export default function App() {
               <Route exact strict path="/pool" component={Pool} />
               <Route exact strict path="/stake" component={DonkStaking} />
               <Route exact strict path="/stake/token" component={DonkToken} />
+              <Route exact strict path="/Farm" component={Farm} />
+              <Route path="/farm/manage/:id" component={ManageFarm} />
               {/*  
               <Route exact strict path="/staking/pools" component={Earn} />
               <Route exact strict path="/staking/pools/archived" component={EarnArchived} />

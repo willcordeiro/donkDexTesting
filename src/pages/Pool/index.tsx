@@ -183,11 +183,11 @@ export default function Pool() {
 
   return (
     <>
-      <div className="pt-2 pb-24 min-h-[80vh]">
+      <div className="min-h-[80vh]">
         <section className="max-w-6xl w-[90%] mx-auto">
-          <header className="flex items-center justify-between mb-5 gap-1">
+          <header className="flex items-center justify-between  gap-1">
             <div>
-              <h2 className="font-semibold sm:text-4xl text-3xl mb-1 text-left">Pool</h2>
+              <h2 className="font-semibold sm:text-4xl text-3xl text-left text-black">Pool</h2>
               <p className="text-sm font-medium text-left	">Provide liquidity and earn fees</p>
             </div>
           </header>
