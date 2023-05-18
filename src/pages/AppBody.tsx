@@ -8,6 +8,7 @@ export const BodyWrapper = styled.div`
   width: 100%;
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#1f202e')};
   border-radius: 1rem;
+  z-index: 1;
 `
 
 /**

@@ -340,16 +340,15 @@ export default function Swap() {
                   />
                   <AutoColumn justify="space-between">
                     <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
-                      <div className="w-full relative h-[1px] bg-black my-2" style={{ cursor: 'pointer' }}>
-                        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-full">
-                          <img
-                            src={updownarrow}
-                            alt="arrow"
-                            onClick={() => {
-                              setApprovalSubmitted(false)
-                              onSwitchTokens()
-                            }}
-                          />
+                      <div
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                          setApprovalSubmitted(false)
+                          onSwitchTokens()
+                        }}
+                      >
+                        <span className="absolute bg-white rounded-full">
+                          <img src={updownarrow} alt="arrow" />
                         </span>
                       </div>
                       {recipient === null && !showWrap && isExpertMode ? (
