@@ -12,6 +12,7 @@ const Button = styled.button`
   font-size: 17px;
   border: none;
   outline: none;
+  cursor: pointer;
 `
 
 export default function Rewards() {

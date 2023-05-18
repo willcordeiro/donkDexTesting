@@ -20,6 +20,7 @@ const Button = styled.button`
   background: none;
   border: none;
   margin-top: 17px;
+  cursor: pointer;
 `
 
 export default function ManageFarm() {
