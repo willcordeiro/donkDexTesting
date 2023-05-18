@@ -2,6 +2,12 @@ import React from 'react'
 import Rewards from './Rewards'
 import { useParams } from 'react-router-dom'
 import { etherium, solona, bitcoin, terra, logo } from '../../assets'
+import styled from 'styled-components'
+
+const ContainerHarvest = styled.div`
+  padding-right: 10px;
+  padding-left: 10px;
+`
 export default function Harvest() {
   const { id }: any = useParams()
 
@@ -61,43 +67,43 @@ export default function Harvest() {
   const { icon, icon2, name, totalStaked, yourStake, APR, share, donkAPR } = mappedData[0] || {}
 
   return (
-    <section className="rounded-2xl bg-white basis-3/5 py-8 sm:px-10 px-5">
+    <section className="rounded-2xl bg-white basis-3/5 py-4 sm:px-10 px-5">
       <header>
-        <div className="fic flex-wrap gap-[6px] font-semibold text-xl mb-5 ">
+        <ContainerHarvest className="fic flex-wrap gap-[6px] font-semibold text-xl mb-5 ">
           <img src={icon} alt="bitcoin" width={40} />
-          <p className="uppercase">LP Token</p>
+          <p className="uppercase text-black">LP Token</p>
           <span>/</span>
           <img src={icon2} alt="litecoin" width={40} />
-          <p className="uppercase">{name}</p>
-        </div>
-        <div className="mb-4 flex justify-between py-4 gap-3 flex-wrap">
+          <p className="uppercase text-black">{name}</p>
+        </ContainerHarvest>
+        <ContainerHarvest className="mb-4 flex justify-between py-4 gap-3 flex-wrap text-left">
           <div>
             <p className="font-medium text-pink900 mb-[1px] text-[15px] ">Liquidity</p>
-            <div className=" font-medium text-[15px]">${totalStaked}</div>
+            <div className=" font-medium text-[15px] text-black">${totalStaked}</div>
           </div>
           <div>
             <p className="font-medium text-pink900 mb-[1px] text-[15px] ">Pool APR</p>
-            <div className=" font-medium text-[15px]">{APR}%</div>
+            <div className=" font-medium text-[15px] text-black">{APR}%</div>
           </div>
           <div>
             <p className="font-medium text-pink900 mb-[1px] text-[15px] ">DONK APR</p>
-            <div className=" font-medium text-[15px]">{donkAPR}%</div>
+            <div className=" font-medium text-[15px] text-black">{donkAPR}%</div>
           </div>
-        </div>
+        </ContainerHarvest>
       </header>
 
       <section className="flex md:items-center gap-3 max-md:flex-col">
-        <div className="flex-1">
+        <ContainerHarvest className="flex-1 text-left">
           <div className="mb-3 ">
-            <p className="text-pink900 font-medium mb-1 ">Staked</p>
-            <p className="font-medium mb-1 text-2xl">${yourStake}</p>
+            <p className="text-pink900 font-medium ">Staked</p>
+            <p className="font-medium text-2xl text-black">${yourStake}</p>
             <p className="mb-1"></p>
           </div>
           <div>
-            <p className="text-pink900 font-medium mb-1 ">Your share</p>
-            <p className="font-medium mb-1 text-2xl ">{share}%</p>
+            <p className="text-pink900 font-medium ">Your share</p>
+            <p className="font-medium text-2xl text-black">{share}%</p>
           </div>
-        </div>
+        </ContainerHarvest>
         <Rewards />
       </section>
     </section>
