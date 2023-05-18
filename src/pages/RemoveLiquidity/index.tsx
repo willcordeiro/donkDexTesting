@@ -50,7 +50,7 @@ import useBlockchain from '../../hooks/useBlockchain'
 import { Link } from 'react-router-dom'
 import Overview from './Overview'
 
-const ButtonList = styled.ul`
+const ButtonList = styled.div`
   display: flex;
   font-weight: 500;
   align-items: center;
@@ -59,6 +59,7 @@ const ButtonList = styled.ul`
   gap: 0.25rem;
   border: solid 1px grey;
   padding: 0.3rem;
+  margin-bottom: 20px;
 `
 
 const Button = styled.button`
@@ -582,16 +583,16 @@ export default function RemoveLiquidity({
               {twoCurrencies[0] && twoCurrencies[1] ? (
                 <>
                   <ButtonList>
-                    <li className="w-full">
+                    <div className="w-full">
                       <Link to={`/add/${twoCurrencies[0].address}/${twoCurrencies[1].address}`}>
                         <ButtonLink type="button">Add Liquidity</ButtonLink>
                       </Link>
-                    </li>
-                    <li className="w-full">
+                    </div>
+                    <div className="w-full">
                       <Button type="button" style={{ backgroundColor: '#fba676', padding: '12px', color: '#f1ece9' }}>
                         Remove Liquidity
                       </Button>
-                    </li>
+                    </div>
                   </ButtonList>
                 </>
               ) : (
