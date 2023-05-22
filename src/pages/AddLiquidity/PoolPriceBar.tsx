@@ -1,4 +1,4 @@
-import { Currency, Percent, Price } from '@oneverseswap/sdk'
+import { Currency, Percent, Price } from '@donkswap/sdk'
 import React, { useContext } from 'react'
 import { Text } from 'rebass'
 import { ThemeContext } from 'styled-components'

@@ -1,15 +1,15 @@
 import { Contract } from '@ethersproject/contracts'
 import { abi as GOVERNANCE_ABI } from '@uniswap/governance/build/GovernorAlpha.json'
 import { abi as UNI_ABI } from '@uniswap/governance/build/Uni.json'
-import { abi as GOVERNANCE_TOKEN_ABI } from '@oneverseswap/contracts/build/GovernanceToken.json'
+import { abi as GOVERNANCE_TOKEN_ABI } from '@donkswap/contracts/build/GovernanceToken.json'
 import { abi as STAKING_REWARDS_ABI } from '@uniswap/liquidity-staker/build/StakingRewards.json'
-import { abi as MASTER_BREEDER_ABI } from '@oneverseswap/contracts/build/MasterBreeder.json'
-import { abi as PIT_ABI } from '@oneverseswap/contracts/build/Pit.json'
-import { abi as PIT_BREEDER_ABI } from '@oneverseswap/contracts/build/PitBreeder.json'
-import { abi as SMART_CHEF_ABI } from '@oneverseswap/contracts/build/SmartChefInitializable.json'
+import { abi as MASTER_BREEDER_ABI } from '@donkswap/contracts/build/MasterBreeder.json'
+import { abi as PIT_ABI } from '@donkswap/contracts/build/Pit.json'
+import { abi as PIT_BREEDER_ABI } from '@donkswap/contracts/build/PitBreeder.json'
+import { abi as SMART_CHEF_ABI } from '@donkswap/contracts/build/SmartChefInitializable.json'
 import { abi as MERKLE_DISTRIBUTOR_ABI } from '@uniswap/merkle-distributor/build/MerkleDistributor.json'
-import { ChainId, WETH, MASTER_BREEDER_ADDRESSES, PIT_BREEDER_ADDRESSES, PIT_TOKENS } from '@oneverseswap/sdk'
-import { abi as IUniswapV2PairABI } from '@oneverseswap/core/build/IUniswapV2Pair.json'
+import { ChainId, WETH, MASTER_BREEDER_ADDRESSES, PIT_BREEDER_ADDRESSES, PIT_TOKENS } from '@donkswap/sdk'
+import { abi as IUniswapV2PairABI } from '@donkswap/core/build/IUniswapV2Pair.json'
 import { useMemo } from 'react'
 import { GOVERNANCE_ADDRESS, MERKLE_DISTRIBUTOR_ADDRESS } from '../constants'
 import {
@@ -81,8 +81,7 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
   if (chainId) {
     switch (chainId) {
       case ChainId.MAINNET:
-      case ChainId.FINDORA:
-      case ChainId.ANVILTESTNET:
+      case ChainId.ARBITRUM:
       case ChainId.GOERLI:
         address = '0x112234455C3a32FD11230C42E7Bccd4A84e02010'
         break

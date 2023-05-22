@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TokenAmount } from '@oneverseswap/sdk'
+import { TokenAmount } from '@donkswap/sdk'
 import { AutoColumn } from '../../../components/Column'
 import styled from 'styled-components'
 

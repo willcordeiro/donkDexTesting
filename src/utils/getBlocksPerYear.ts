@@ -1,5 +1,5 @@
-import { ChainId, JSBI } from '@oneverseswap/sdk'
-import { BLOCKCHAIN_SETTINGS } from '@oneverseswap/sdk-extra'
+import { ChainId, JSBI } from '@donkswap/sdk'
+import { BLOCKCHAIN_SETTINGS } from '@donkswap/sdk-extra'
 
 export default function getBlocksPerYear(chainId: ChainId | undefined): JSBI {
   const blockchainSettings = chainId ? BLOCKCHAIN_SETTINGS[chainId] : undefined

@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, JSBI, Price, WETH } from '@oneverseswap/sdk'
+import { Currency, currencyEquals, JSBI, Price, WETH } from '@donkswap/sdk'
 import { useMemo } from 'react'
 import { PairState, usePairs, usePairsToGetPrice } from '../data/Reserves'
 import { useActiveWeb3React } from '.'

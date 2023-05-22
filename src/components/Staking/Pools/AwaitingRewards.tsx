@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { AutoColumn } from '../../Column'
-import { JSBI } from '@oneverseswap/sdk'
+import { JSBI } from '@donkswap/sdk'
 import { TYPE } from '../../../theme'
 import { useBlockNumber } from '../../../state/application/hooks'
 import { useSingleCallResult } from '../../../state/multicall/hooks'

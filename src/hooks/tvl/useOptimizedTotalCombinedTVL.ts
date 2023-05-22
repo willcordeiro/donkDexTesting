@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ChainId } from '@oneverseswap/sdk'
+import { ChainId } from '@donkswap/sdk'
 import useLpPoolTVL from './useLpPoolTVL'
 import usePitTVL from './usePitTVL'
 import useSingleStakingTVL from './useSingleStakingTVL'

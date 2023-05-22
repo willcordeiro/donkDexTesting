@@ -1,4 +1,4 @@
-import { JSBI, Token, CurrencyAmount, TokenAmount, Fraction, Price } from '@oneverseswap/sdk'
+import { JSBI, Token, CurrencyAmount, TokenAmount, Fraction, Price } from '@donkswap/sdk'
 import { SerializableFraction } from '../../state/serialize'
 
 const MAX_DURATION = 86400000 // 1 day in milliseconds
@@ -20,7 +20,7 @@ export function retrieveETHAmount(
   if (currentValue !== undefined) return currentValue
 
   return storedValue && recentlyStored(timestamp, maxDuration)
-    ? CurrencyAmount.Anviltestnet(JSBI.BigInt(storedValue))
+    ? CurrencyAmount.ether(JSBI.BigInt(storedValue))
     : undefined
 }
 

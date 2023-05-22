@@ -1,7 +1,7 @@
 import { splitSignature } from '@ethersproject/bytes'
 import { Contract, CallOverrides } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Blockchain, Currency, currencyEquals, Percent, WETH, DEFAULT_CURRENCIES } from '@oneverseswap/sdk'
+import { Blockchain, Currency, currencyEquals, Percent, WETH, DEFAULT_CURRENCIES } from '@donkswap/sdk'
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { ArrowDown, Plus } from 'react-feather'
 import ReactGA from 'react-ga'

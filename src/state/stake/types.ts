@@ -1,4 +1,4 @@
-import { JSBI, Token, TokenAmount, Fraction } from '@oneverseswap/sdk'
+import { JSBI, Token, TokenAmount, Fraction } from '@donkswap/sdk'
 import { PoolType } from '../../constants/staking/types'
 
 export interface DefaultStakingPool {

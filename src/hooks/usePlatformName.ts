@@ -1,20 +1,18 @@
-import { Blockchain } from '@oneverseswap/sdk'
+import { Blockchain } from '@donkswap/sdk'
 import useBlockchain from './useBlockchain'
 
 export default function usePlatformName(): string {
   const blockchain = useBlockchain()
   switch (blockchain) {
     case Blockchain.HARMONY:
-      return 'OneverseSwap'
+      return 'DonkSwap'
     case Blockchain.ETHEREUM:
-      return 'OneverseSwap'
-    case Blockchain.FINDORA:
-      return 'OneverseSwap'
+      return 'DonkSwap'
+    case Blockchain.ARBITRUM:
+      return 'DonkSwap'
     case Blockchain.GOERLI:
-      return 'OneverseSwap'
-    case Blockchain.ANVILTESTNET:
-      return 'OneverseSwap'
+      return 'DonkSwap'
     default:
-      return 'OneverseSwap'
+      return 'DonkSwap'
   }
 }

@@ -1,4 +1,4 @@
-import { ChainId } from '@oneverseswap/sdk'
+import { ChainId } from '@donkswap/sdk'
 import React, { useState } from 'react'
 import { Text } from 'rebass'
 import { NavLink } from 'react-router-dom'
@@ -306,8 +306,7 @@ const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
   [ChainId.RINKEBY]: 'Rinkeby',
   [ChainId.ROPSTEN]: 'Ropsten',
   [ChainId.GOERLI]: 'GOERLI',
-  [ChainId.FINDORA]: 'FINDORA',
-  [ChainId.ANVILTESTNET]: 'ANVILTESTNET',
+  [ChainId.ARBITRUM]: 'ARBITRUM',
   [ChainId.KOVAN]: 'Kovan',
   [ChainId.HARMONY_MAINNET]: 'Harmony'
 }

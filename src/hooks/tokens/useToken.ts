@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ChainId, Token /*ChainId */ } from '@oneverseswap/sdk'
+import { ChainId, Token /*ChainId */ } from '@donkswap/sdk'
 import { useActiveWeb3React } from '..'
 import getToken from '../../utils/getToken'
 
@@ -9,7 +9,7 @@ import getToken from '../../utils/getToken'
  */
 export default function useToken(symbol = 'BUSD'): Token | undefined {
   const { chainId } = useActiveWeb3React()
-  if (symbol === 'BUSD' && chainId === ChainId.FINDORA) {
+  if (symbol === 'BUSD' && chainId === ChainId.ARBITRUM) {
     symbol = 'BUSD.b'
   }
 

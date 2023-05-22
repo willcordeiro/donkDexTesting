@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Pair, TokenAmount, Fraction } from '@oneverseswap/sdk'
+import { ChainId, JSBI, Pair, TokenAmount, Fraction } from '@donkswap/sdk'
 import { SmartChefStakingPool } from '../../../../state/stake/types'
 import { Contract } from 'ethers'
 import { useActiveWeb3React } from '../../..'

@@ -1,4 +1,4 @@
-//import { ChainId } from '@oneverseswap/sdk'
+//import { ChainId } from '@donkswap/sdk'
 //import getPairTokensWithDefaults from '../../../../utils/getPairTokensWithDefaults'
 import { PitInfo } from '../../types'
 

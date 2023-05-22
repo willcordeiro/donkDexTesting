@@ -1,4 +1,4 @@
-import { Currency, ETHER, HARMONY, FINDORA, Token } from '@oneverseswap/sdk'
+import { Currency, ETHER, HARMONY, ARBITRUM, Token } from '@donkswap/sdk'
 import React, { KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import ReactGA from 'react-ga'
 import { useTranslation } from 'react-i18next'
@@ -140,7 +140,7 @@ export function CurrencySearch({
         } else if (s === 'one') {
           handleCurrencySelect(HARMONY)
         } else if (s === 'bnb') {
-          handleCurrencySelect(FINDORA)
+          handleCurrencySelect(ARBITRUM)
         } else if (filteredSortedTokens.length > 0) {
           if (
             filteredSortedTokens[0].symbol?.toLowerCase() === debouncedQuery.trim().toLowerCase() ||

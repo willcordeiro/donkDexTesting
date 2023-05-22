@@ -1,4 +1,4 @@
-import { ChainId } from '@oneverseswap/sdk'
+import { ChainId } from '@donkswap/sdk'
 import { DefaultStakingPoolInfo } from '../types'
 import { HARMONY_MAINNET_POOLS } from './harmony/mainnet'
 //import { HARMONY_TESTNET_POOLS } from './harmony/testnet'
@@ -10,8 +10,7 @@ export const DEFAULT_STAKING_POOL_INFOS: {
 } = {
   [ChainId.HARMONY_MAINNET]: HARMONY_MAINNET_POOLS,
   [ChainId.GOERLI]: HARMONY_MAINNET_POOLS,
-  [ChainId.FINDORA]: HARMONY_MAINNET_POOLS,
-  [ChainId.ANVILTESTNET]: HARMONY_MAINNET_POOLS
+  [ChainId.ARBITRUM]: HARMONY_MAINNET_POOLS
   //  [ChainId.HARMONY_TESTNET]: HARMONY_TESTNET_POOLS,
   // [ChainId.BSC_MAINNET]: BSC_MAINNET_POOLS,
   // [ChainId.BSC_TESTNET]: BSC_TESTNET_POOLS

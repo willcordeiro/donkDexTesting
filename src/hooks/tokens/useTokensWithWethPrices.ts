@@ -1,4 +1,4 @@
-import { /*ChainId */ WETH, Token, Blockchain } from '@oneverseswap/sdk'
+import { /*ChainId */ WETH, Token, Blockchain } from '@donkswap/sdk'
 import { useMemo } from 'react'
 import useGovernanceToken from './useGovernanceToken'
 import usePitToken from './usePitToken'

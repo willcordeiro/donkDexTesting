@@ -1,4 +1,4 @@
-import { Blockchain, Token } from '@oneverseswap/sdk'
+import { Blockchain, Token } from '@donkswap/sdk'
 import React, { useEffect, useState } from 'react'
 //import React, { useMemo } from 'react'
 import { X } from 'react-feather'
@@ -273,7 +273,7 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
           </AutoColumn>
         </CardSection>
 
-        {[Blockchain.FINDORA, Blockchain.ANVILTESTNET, Blockchain.GOERLI].includes(blockchain) && (
+        {[Blockchain.ARBITRUM, Blockchain.GOERLI].includes(blockchain) && (
           <>
             <Break />
             <CardSection gap="sm">

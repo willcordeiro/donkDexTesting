@@ -1,4 +1,4 @@
-//import { ChainId } from '@oneverseswap/sdk'
+//import { ChainId } from '@donkswap/sdk'
 //import { PoolType } from '../../types'
 //import getTokenWithDefault from '../../../../utils/getTokenWithDefault'
 import { SmartChefPoolInfo } from '../../types'

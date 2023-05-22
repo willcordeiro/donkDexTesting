@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text } from 'rebass'
-import { ChainId, Currency, Token } from '@oneverseswap/sdk'
+import { ChainId, Currency, Token } from '@donkswap/sdk'
 import styled from 'styled-components'
 import { SUGGESTED_BASES } from '../../constants'
 import { AutoColumn } from '../Column'

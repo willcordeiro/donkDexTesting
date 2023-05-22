@@ -1,17 +1,17 @@
 {
-  "name": "oneverseswap",
-  "description": "Oneverseswap Interface",
+  "name": "donkswap",
+  "description": "donkswap Interface",
   "private": true,
   "engines": {
     "node": "16.x"
   },
   "devDependencies": {
     "@ethersproject/experimental": "^5.1.2",
-    "@oneverseswap/contracts": "^1.0.10",
-    "@oneverseswap/core": "^1.0.3",
-    "@oneverseswap/peripheryy": "^1.0.5",
-    "@oneverseswap/sdk": "^2.3.27",
-    "@oneverseswap/sdk-extra": "^1.3.28",
+    "@donkswap/contracts": "^1.0.1",
+    "@donkswap/core": "^1.0.0",
+    "@donkswap/periphery": "^1.0.1",
+    "@donkswap/sdk": "^1.0.2",
+    "@donkswap/sdk-extra": "^1.3.29",
     "@popperjs/core": "^2.4.4",
     "@reach/dialog": "^0.10.3",
     "@reach/portal": "^0.10.3",
@@ -144,7 +144,7 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@oneverseswap/community-token-list": "^2.6.1",
+    "@donkswap/community-token-list": "^2.6.3",
     "@types/big.js": "^6.1.6",
     "axios": "^1.3.4",
     "big.js": "^6.2.1",

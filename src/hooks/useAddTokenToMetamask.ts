@@ -1,6 +1,6 @@
 import { getTokenLogoURL } from './../components/CurrencyLogo/index'
 import { wrappedCurrency } from 'utils/wrappedCurrency'
-import { Currency, Token } from '@oneverseswap/sdk'
+import { Currency, Token } from '@donkswap/sdk'
 import { useCallback, useState } from 'react'
 import { useActiveWeb3React } from 'hooks'
 

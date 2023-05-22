@@ -1,4 +1,4 @@
-import { currencyEquals, Trade } from '@oneverseswap/sdk'
+import { currencyEquals, Trade } from '@donkswap/sdk'
 import React, { useCallback, useMemo } from 'react'
 import TransactionConfirmationModal, {
   ConfirmationModalContent,

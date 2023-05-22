@@ -1,4 +1,4 @@
-//import { ChainId, Pair } from '@oneverseswap/sdk'
+//import { ChainId, Pair } from '@donkswap/sdk'
 //import getPairTokensWithDefaults from '../../../../utils/getPairTokensWithDefaults'
 import { DefaultStakingPoolInfo } from '../../types'
 

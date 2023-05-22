@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from 'ethers'
-import { WETH, Fraction, JSBI, TokenAmount, ChainId } from '@oneverseswap/sdk'
+import { WETH, Fraction, JSBI, TokenAmount, ChainId } from '@donkswap/sdk'
 import useGovernanceToken from '../tokens/useGovernanceToken'
 import usePitToken from '../tokens/usePitToken'
 import { useActiveWeb3React } from '../../hooks'

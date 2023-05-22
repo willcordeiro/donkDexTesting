@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { TransactionResponse } from '@ethersproject/providers'
-import { TokenAmount, Pair } from '@oneverseswap/sdk'
+import { TokenAmount, Pair } from '@donkswap/sdk'
 import { CallOverrides } from '@ethersproject/contracts'
 import Modal from '../../Modal'
 import { AutoColumn } from '../../Column'

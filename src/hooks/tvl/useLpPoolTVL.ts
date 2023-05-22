@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ChainId, JSBI, Fraction } from '@oneverseswap/sdk'
+import { ChainId, JSBI, Fraction } from '@donkswap/sdk'
 import { useActiveWeb3React } from '..'
 import { EXCHANGE_SUBGRAPHS, ZERO_FRACTION } from '../../constants'
 import Client from '../../services/graphql/client'
@@ -41,7 +41,7 @@ export default function useLpPoolTVL(): Fraction {
     let mounted = true
 
     const fetchData = async () => {
-      if (subgraph && subgraph !== '' && chainId && [ChainId.FINDORA].includes(chainId)) {
+      if (subgraph && subgraph !== '' && chainId && [ChainId.ARBITRUM].includes(chainId)) {
         const subgraphClient = new Client(subgraph)
         const result = await subgraphClient.totalLiquidity()
         if (result) {

@@ -1,4 +1,4 @@
-import { ChainId } from '@oneverseswap/sdk'
+import { ChainId } from '@donkswap/sdk'
 
 export const STAKING_SETTINGS: {
   [chainId in ChainId]?: Record<string, any>
@@ -13,12 +13,7 @@ export const STAKING_SETTINGS: {
     lockRewardsRatio: 95,
     unlockedRewardsRatio: 5
   },
-  [ChainId.FINDORA]: {
-    startBlock: 10183471,
-    lockRewardsRatio: 95,
-    unlockedRewardsRatio: 5
-  },
-  [ChainId.ANVILTESTNET]: {
+  [ChainId.ARBITRUM]: {
     startBlock: 10183471,
     lockRewardsRatio: 95,
     unlockedRewardsRatio: 5

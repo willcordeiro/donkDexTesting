@@ -1,13 +1,13 @@
-import { Blockchain, ChainId, Currency, ETHER, FINDORA, ANVILTESTNET } from '@oneverseswap/sdk'
+import { Blockchain, ChainId, Currency, ETHER, ARBITRUM, GOERLI } from '@donkswap/sdk'
 
 export function getBlockchain(chainId: ChainId | undefined): Blockchain {
   switch (chainId) {
-    case ChainId.ANVILTESTNET:
-      return Blockchain.ANVILTESTNET
-    case ChainId.FINDORA:
-      return Blockchain.FINDORA
+    case ChainId.ARBITRUM:
+      return Blockchain.ARBITRUM
+    case ChainId.GOERLI:
+      return Blockchain.GOERLI
     default:
-      return Blockchain.FINDORA
+      return Blockchain.ARBITRUM
   }
 }
 
@@ -18,11 +18,11 @@ export function getBlockchainAdjustedCurrency(
   if (!currency) return currency
   if (currency !== ETHER) return currency
   switch (blockchain) {
-    case Blockchain.FINDORA:
-      return FINDORA
+    case Blockchain.ARBITRUM:
+      return ARBITRUM
 
-    case Blockchain.ANVILTESTNET:
-      return ANVILTESTNET
+    case Blockchain.GOERLI:
+      return GOERLI
     default:
       return ETHER
   }
@@ -31,12 +31,14 @@ export function getBlockchainAdjustedCurrency(
 // Returns the block time in seconds
 export function getBlockchainBlockTime(blockchain: any): number {
   switch (blockchain) {
-    case blockchain.FINDORA:
-      return 16
-    case blockchain.ANVILTESTNET:
+    case blockchain.ARBITRUM:
       return 15
+
+    case blockchain.GOERLI:
+      return 5
+
     default:
-      return 16
+      return 15
   }
 }
 
@@ -46,10 +48,8 @@ export function getBlockchainName(chainId: ChainId | undefined): string {
       return 'Ethereum'
     case ChainId.GOERLI:
       return 'Goerli'
-    case ChainId.FINDORA:
-      return 'Findora'
-    case ChainId.ANVILTESTNET:
-      return 'Anvil testnet'
+    case ChainId.ARBITRUM:
+      return 'ARBITRUM'
 
     default:
       return 'Ethereum'

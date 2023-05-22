@@ -1,7 +1,7 @@
 import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
 import { CallOverrides } from '@ethersproject/contracts'
-import { Trade, TokenAmount, CurrencyAmount, DEFAULT_CURRENCIES } from '@oneverseswap/sdk'
+import { Trade, TokenAmount, CurrencyAmount, DEFAULT_CURRENCIES } from '@donkswap/sdk'
 import { useCallback, useMemo } from 'react'
 import { useTokenAllowance } from '../data/Allowances'
 import { getTradeVersion, useV1TradeExchangeAddress } from '../data/V1'

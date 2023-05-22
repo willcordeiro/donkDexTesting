@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@oneverseswap/sdk'
+import { ChainId, Token } from '@donkswap/sdk'
 import getTokenWithDefault from './getTokenWithDefault'
 import { ZERO_ONE_ADDRESS } from '../constants/index'
 

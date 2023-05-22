@@ -1,7 +1,7 @@
 import { Contract } from 'ethers'
 import { CallOverrides } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Blockchain, CurrencyAmount } from '@oneverseswap/sdk'
+import { Blockchain, CurrencyAmount } from '@donkswap/sdk'
 import { calculateGasMargin } from '../..'
 import { SmartChefStakingPool } from '../../../state/stake/types'
 

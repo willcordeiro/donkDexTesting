@@ -1,15 +1,5 @@
 import { getAddress } from 'ethers/lib/utils'
-import {
-  ChainId,
-  Currency,
-  Token,
-  ETHER,
-  DEFAULT_CURRENCIES,
-  Blockchain,
-  FINDORA,
-  GOERLI,
-  ANVILTESTNET
-} from '@oneverseswap/sdk'
+import { ChainId, Currency, Token, ETHER, DEFAULT_CURRENCIES, Blockchain, ARBITRUM, GOERLI } from '@donkswap/sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
@@ -18,18 +8,15 @@ import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
 import baseCurrencies from '../../utils/baseCurrencies'
 import useBlockchain from '../../hooks/useBlockchain'
-import FindoraLogo from '../../assets/images/FINDORA.png'
+
 export function getTokenLogoURL(token: Token): string {
   const address = getAddress(token.address)
 
   // const tokenExceptions = TOKEN_LOGO_EXCEPTIONS[token.chainId]
 
   switch (token.chainId) {
-    case ChainId.FINDORA:
-      return FindoraLogo
-
-    case ChainId.ANVILTESTNET:
-      return FindoraLogo
+    case ChainId.ARBITRUM:
+      return EthereumLogo
 
     case ChainId.GOERLI:
       return EthereumLogo
@@ -86,10 +73,8 @@ export default function CurrencyLogo({
     const wrappedCurrency = currency instanceof Token ? baseCurrencies(currency.chainId)[1] : undefined
     if (currency === GOERLI) {
       return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
-    } else if (currency === FINDORA || (currency === wrappedCurrency && blockchain === Blockchain.FINDORA)) {
-      return <StyledEthereumLogo src={FindoraLogo} size={size} style={style} />
-    } else if (currency === ANVILTESTNET || (currency === wrappedCurrency && blockchain === Blockchain.ANVILTESTNET)) {
-      return <StyledEthereumLogo src={FindoraLogo} size={size} style={style} />
+    } else if (currency === ARBITRUM || (currency === wrappedCurrency && blockchain === Blockchain.ARBITRUM)) {
+      return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
     }
   }
   return <StyledLogo size={size} srcs={srcs} alt={`${currency?.symbol ?? 'token'} logo`} style={style} />

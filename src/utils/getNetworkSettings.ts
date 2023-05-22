@@ -1,5 +1,5 @@
-import { ChainId } from '@oneverseswap/sdk'
-import { BLOCKCHAIN_SETTINGS } from '@oneverseswap/sdk-extra'
+import { ChainId } from '@donkswap/sdk'
+import { BLOCKCHAIN_SETTINGS } from '@donkswap/sdk-extra'
 
 export default function getNetworkSettings(chainId: ChainId, rpcUrls?: string[]): Record<string, any> {
   const settings = BLOCKCHAIN_SETTINGS[chainId]

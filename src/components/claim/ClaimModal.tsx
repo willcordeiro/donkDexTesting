@@ -1,4 +1,4 @@
-import { JSBI, TokenAmount } from '@oneverseswap/sdk'
+import { JSBI, TokenAmount } from '@donkswap/sdk'
 import { isAddress } from 'ethers/lib/utils'
 import React, { useEffect, useState } from 'react'
 import { Text } from 'rebass'

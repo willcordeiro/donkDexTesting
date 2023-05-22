@@ -1,5 +1,5 @@
 import { Interface } from '@ethersproject/abi'
-import { abi as PIT_ABI } from '@oneverseswap/contracts/build/Pit.json'
+import { abi as PIT_ABI } from '@donkswap/contracts/build/Pit.json'
 
 const PIT_INTERFACE = new Interface(PIT_ABI)
 

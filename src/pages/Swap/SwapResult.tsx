@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import RechartGraph from './RechartGraph'
 
 export default function SwipResult({ FieldOne, FieldTwo }: any) {
+  console.log(FieldOne, FieldTwo)
   const swip: any = {
     selected: {
       icon: FieldTwo?.tokenInfo.logoURI,

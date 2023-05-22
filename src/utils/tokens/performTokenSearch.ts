@@ -1,4 +1,4 @@
-import { ChainId } from '@oneverseswap/sdk'
+import { ChainId } from '@donkswap/sdk'
 import normalizeWethToken from '../normalizeWethToken'
 
 const REGEX_PATTERN = /(?<token0>[\da-z]{2,10})[\-\/](?<token1>[\da-z]{2,10})/gi

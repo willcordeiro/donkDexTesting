@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { ChainId } from '@oneverseswap/sdk'
+import { ChainId } from '@donkswap/sdk'
 import { SerializableGovernanceTokenUserDetails } from '..'
 
 export const updateGovernanceTokenUserDetails = createAction<{

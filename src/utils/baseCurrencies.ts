@@ -1,4 +1,4 @@
-import { ChainId, Currency, ETHER, FINDORA, GOERLI, ANVILTESTNET, WETH, GOVERNANCE_TOKENS } from '@oneverseswap/sdk'
+import { ChainId, Currency, ETHER, ARBITRUM, GOERLI, WETH, GOVERNANCE_TOKENS } from '@donkswap/sdk'
 import { NETWORK_CHAIN_ID } from '../connectors'
 
 export default function baseCurrencies(chainId: ChainId | undefined): Currency[] {
@@ -14,19 +14,11 @@ export default function baseCurrencies(chainId: ChainId | undefined): Currency[]
 
         break
 
-      case ChainId.FINDORA:
-      case ChainId.FINDORA:
-        currencies.push(FINDORA)
+      case ChainId.ARBITRUM:
+      case ChainId.ARBITRUM:
+        currencies.push(ARBITRUM)
         currencies.push(WETH[chainId])
         currencies.push(GOVERNANCE_TOKENS[chainId])
-        break
-
-      case ChainId.ANVILTESTNET:
-      case ChainId.ANVILTESTNET:
-        currencies.push(ANVILTESTNET)
-        currencies.push(WETH[chainId])
-        currencies.push(GOVERNANCE_TOKENS[chainId])
-
         break
 
       default:

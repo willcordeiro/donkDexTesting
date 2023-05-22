@@ -1,4 +1,4 @@
-import { Token, TokenAmount, Pair } from '@oneverseswap/sdk'
+import { Token, TokenAmount, Pair } from '@donkswap/sdk'
 import { BigNumber } from 'ethers'
 
 export default function getPair(

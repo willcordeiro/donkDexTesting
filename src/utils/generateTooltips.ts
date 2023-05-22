@@ -1,4 +1,4 @@
-import { Blockchain } from '@oneverseswap/sdk'
+import { Blockchain } from '@donkswap/sdk'
 
 export default function generateTooltips(blockchain: Blockchain): Record<string, string> {
   const defaultToolTips: Record<string, string> = {
@@ -11,7 +11,7 @@ export default function generateTooltips(blockchain: Blockchain): Record<string,
   }
 
   switch (blockchain) {
-    case Blockchain.FINDORA:
+    case Blockchain.ARBITRUM:
       return defaultToolTips
 
     default:

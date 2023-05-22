@@ -1,13 +1,4 @@
-import {
-  Currency,
-  CurrencyAmount,
-  JSBI,
-  Pair,
-  Percent,
-  Price,
-  TokenAmount,
-  DEFAULT_CURRENCIES
-} from '@oneverseswap/sdk'
+import { Currency, CurrencyAmount, JSBI, Pair, Percent, Price, TokenAmount, DEFAULT_CURRENCIES } from '@donkswap/sdk'
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { PairState, usePair } from '../../data/Reserves'

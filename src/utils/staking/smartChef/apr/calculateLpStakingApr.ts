@@ -1,4 +1,4 @@
-import { Price, Fraction, TokenAmount, JSBI } from '@oneverseswap/sdk'
+import { Price, Fraction, TokenAmount, JSBI } from '@donkswap/sdk'
 import { utils } from 'ethers'
 
 export default function calculateLpStakingApr(

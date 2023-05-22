@@ -3,7 +3,7 @@ import { getAddress } from '@ethersproject/address'
 import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
-import { abi as IUniswapV2Router02ABI } from '@oneverseswap/peripheryy/build/IUniswapV2Router02.json'
+import { abi as IUniswapV2Router02ABI } from '@donkswap/periphery/build/IUniswapV2Router02.json'
 import {
   ChainId,
   JSBI,
@@ -13,7 +13,7 @@ import {
   Currency,
   DEFAULT_CURRENCIES,
   ROUTER_ADDRESSES
-} from '@oneverseswap/sdk'
+} from '@donkswap/sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
 import { useActiveWeb3React } from '../hooks/index'
 
@@ -33,8 +33,7 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   5: 'goerli.etherscan.io/',
   42: 'kovan.',
   1666600000: 'explorer.harmony.one',
-  2152: 'evm.findorascan.io/',
-  2153: 'testnet-anvil.evm.findorascan.io/'
+  42161: 'https://arb1.arbitrum.io/rpc'
 }
 
 export function getEtherscanLink(
@@ -43,7 +42,7 @@ export function getEtherscanLink(
   type: 'transaction' | 'token' | 'address' | 'block'
 ): string {
   let prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}`
-  prefix = [ChainId.GOERLI, ChainId.ANVILTESTNET, ChainId.FINDORA].includes(chainId) ? prefix : `${prefix}etherscan.io`
+  prefix = [ChainId.GOERLI, ChainId.ARBITRUM].includes(chainId) ? prefix : `${prefix}etherscan.io`
 
   switch (type) {
     case 'transaction': {

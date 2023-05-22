@@ -1,4 +1,4 @@
-import { Token, PIT_TOKENS } from '@oneverseswap/sdk'
+import { Token, PIT_TOKENS } from '@donkswap/sdk'
 import { useActiveWeb3React } from '../index'
 
 export default function usePitToken(): Token | undefined {

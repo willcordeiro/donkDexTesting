@@ -1,5 +1,5 @@
-import { ChainId, Token, WETH, GOVERNANCE_TOKENS } from '@oneverseswap/sdk'
-import { TOKENS } from '@oneverseswap/sdk-extra'
+import { ChainId, Token, WETH, GOVERNANCE_TOKENS } from '@donkswap/sdk'
+import { TOKENS } from '@donkswap/sdk-extra'
 import { ZERO_ONE_ADDRESS } from '../constants/index'
 
 export default function getTokenWithDefault(chainId: ChainId, symbol: string): Token {
@@ -18,10 +18,7 @@ export default function getTokenWithDefault(chainId: ChainId, symbol: string): T
       break
   }
 
-  if (
-    (!token || token.address === ZERO_ONE_ADDRESS) &&
-    [ChainId.ANVILTESTNET, ChainId.GOERLI, ChainId.FINDORA].includes(chainId)
-  ) {
+  if ((!token || token.address === ZERO_ONE_ADDRESS) && [ChainId.GOERLI, ChainId.ARBITRUM].includes(chainId)) {
     const govToken = GOVERNANCE_TOKENS[chainId]
     if (symbol.toUpperCase() === govToken.symbol?.toUpperCase()) {
       token = govToken

@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI, DEFAULT_CURRENCIES } from '@oneverseswap/sdk'
+import { CurrencyAmount, JSBI, DEFAULT_CURRENCIES } from '@donkswap/sdk'
 import { MIN_ETH } from '../constants'
 
 /**

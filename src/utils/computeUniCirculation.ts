@@ -1,4 +1,4 @@
-import { JSBI, Token, TokenAmount } from '@oneverseswap/sdk'
+import { JSBI, Token, TokenAmount } from '@donkswap/sdk'
 import { BigNumber } from 'ethers'
 import { STAKING_GENESIS } from '../state/stake/hooks'
 

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-//import { Blockchain } from '@oneverseswap/sdk'
+//import { Blockchain } from '@donkswap/sdk'
 //import { Send, Code, MessageSquare, BarChart2, Book, Twitter, Repeat } from 'react-feather'
 
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'

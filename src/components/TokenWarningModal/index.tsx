@@ -1,4 +1,4 @@
-import { Token } from '@oneverseswap/sdk'
+import { Token } from '@donkswap/sdk'
 import React, { useCallback } from 'react'
 import Modal from '../Modal'
 import { ImportToken } from 'components/SearchModal/ImportToken'

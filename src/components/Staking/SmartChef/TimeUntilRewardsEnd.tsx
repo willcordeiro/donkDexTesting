@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { JSBI } from '@oneverseswap/sdk'
+import { JSBI } from '@donkswap/sdk'
 import { useBlockNumber } from '../../../state/application/hooks'
 import { SmartChefStakingPool } from '../../../state/stake/types'
 import useBlockchain from '../../../hooks/useBlockchain'

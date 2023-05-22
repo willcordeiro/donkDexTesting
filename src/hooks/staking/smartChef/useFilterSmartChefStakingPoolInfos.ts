@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ChainId } from '@oneverseswap/sdk'
+import { ChainId } from '@donkswap/sdk'
 import { SmartChefPoolInfo } from '../../../constants/staking/types'
 import { SMART_CHEF_POOL_INFOS } from '../../../constants/staking/smartChef'
 

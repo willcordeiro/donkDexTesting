@@ -18,7 +18,7 @@ const CMC_STABLECOIN = 'stablecoin.cmc.eth'
 const KLEROS_LIST = 't2crtokens.eth'
 const GEMINI_LIST = 'https://www.gemini.com/uniswap/manifest.json'*/
 const DEFAULT_LIST =
-  'https://raw.githubusercontent.com/ONEverseONE/oneverseswap-default-token-list/main/build/oneverseswap-default.tokenlist.json'
+  'https://raw.githubusercontent.com/DonkSolana/donk-default-token-list/main/build/donkswap-default.tokenlist.json'
 
 /*
 const VENOMSWAP_COMMUNITY_LIST =

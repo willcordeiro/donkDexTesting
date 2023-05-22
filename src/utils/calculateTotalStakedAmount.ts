@@ -1,4 +1,4 @@
-import { Token, TokenAmount, Pair, JSBI } from '@oneverseswap/sdk'
+import { Token, TokenAmount, Pair, JSBI } from '@donkswap/sdk'
 
 export default function calculateTotalStakedAmount(
   baseToken: Token,

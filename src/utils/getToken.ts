@@ -1,5 +1,5 @@
-import { ChainId, Token, WETH } from '@oneverseswap/sdk'
-import { TOKENS } from '@oneverseswap/sdk-extra'
+import { ChainId, Token, WETH } from '@donkswap/sdk'
+import { TOKENS } from '@donkswap/sdk-extra'
 
 export default function getTokenWithDefault(chainId: ChainId | undefined, symbol: string): Token | undefined {
   if (chainId === undefined) return undefined

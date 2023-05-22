@@ -1,4 +1,4 @@
-import { Blockchain } from '@oneverseswap/sdk'
+import { Blockchain } from '@donkswap/sdk'
 import { getBlockchain } from '../utils/blockchain'
 import { NETWORK_CHAIN_ID } from '../connectors'
 

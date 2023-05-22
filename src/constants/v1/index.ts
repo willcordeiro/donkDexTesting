@@ -1,5 +1,5 @@
 import { Interface } from '@ethersproject/abi'
-import { ChainId } from '@oneverseswap/sdk'
+import { ChainId } from '@donkswap/sdk'
 import V1_EXCHANGE_ABI from './v1_exchange.json'
 import V1_FACTORY_ABI from './v1_factory.json'
 
@@ -10,8 +10,7 @@ const V1_FACTORY_ADDRESSES: { [chainId in ChainId]: string } = {
   [ChainId.GOERLI]: '0x0000000000000000000000000000000000000001',
   [ChainId.KOVAN]: '0xD3E51Ef092B2845f10401a0159B2B96e8B6c3D30',
   [ChainId.HARMONY_MAINNET]: '0x0000000000000000000000000000000000000001',
-  [ChainId.FINDORA]: '0x0000000000000000000000000000000000000001',
-  [ChainId.ANVILTESTNET]: '0x0000000000000000000000000000000000000001'
+  [ChainId.ARBITRUM]: '0x0000000000000000000000000000000000000001'
 }
 
 const V1_FACTORY_INTERFACE = new Interface(V1_FACTORY_ABI)

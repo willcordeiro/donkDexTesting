@@ -1,4 +1,4 @@
-import { Token, TokenAmount, Fraction, ChainId } from '@oneverseswap/sdk'
+import { Token, TokenAmount, Fraction, ChainId } from '@donkswap/sdk'
 import { wrappedCurrency } from './wrappedCurrency'
 import calculateTotalStakedAmount from './calculateTotalStakedAmount'
 import getPair from './getPair'

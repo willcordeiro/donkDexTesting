@@ -2,7 +2,7 @@ import React, { useCallback, useState, useMemo } from 'react'
 import { AutoColumn } from '../../../../components/Column'
 import styled from 'styled-components'
 
-import { JSBI } from '@oneverseswap/sdk'
+import { JSBI } from '@donkswap/sdk'
 import { RouteComponentProps } from 'react-router-dom'
 import DoubleCurrencyLogo from '../../../../components/DoubleLogo'
 import { useWalletModalToggle, useBlockNumber } from '../../../../state/application/hooks'

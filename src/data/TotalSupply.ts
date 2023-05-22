@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { Token, TokenAmount } from '@oneverseswap/sdk'
+import { Token, TokenAmount } from '@donkswap/sdk'
 import { useTokenContract, useGovTokenContract } from '../hooks/useContract'
 import { useSingleCallResult } from '../state/multicall/hooks'
 import useGovernanceToken from '../hooks/tokens/useGovernanceToken'

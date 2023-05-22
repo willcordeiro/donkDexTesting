@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Fraction } from '@oneverseswap/sdk'
+import { Fraction } from '@donkswap/sdk'
 
 import { utils } from 'ethers'
 import usePitToken from '../../tokens/usePitToken'

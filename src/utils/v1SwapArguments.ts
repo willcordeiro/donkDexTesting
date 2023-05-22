@@ -7,7 +7,7 @@ import {
   TradeOptionsDeadline,
   TradeType,
   DEFAULT_CURRENCIES
-} from '@oneverseswap/sdk'
+} from '@donkswap/sdk'
 import { getTradeVersion } from '../data/V1'
 import { Version } from '../hooks/useToggledVersion'
 

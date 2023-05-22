@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Fraction, Percent } from '@oneverseswap/sdk'
+import { Currency, CurrencyAmount, Fraction, Percent } from '@donkswap/sdk'
 import React from 'react'
 import { Text } from 'rebass'
 import { ButtonPrimary } from '../../components/Button'

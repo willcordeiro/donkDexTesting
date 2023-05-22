@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { ChainId, JSBI, Percent, Token, WETH, Fraction } from '@oneverseswap/sdk'
+import { ChainId, JSBI, Percent, Token, WETH, Fraction } from '@donkswap/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
@@ -17,31 +17,28 @@ export const DISPLAY_TVL = false
 
 export const PIT_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.MAINNET]: { name: '', path: '' },
-  [ChainId.FINDORA]: { name: 'OVPit', path: '/OVPit' },
-  [ChainId.GOERLI]: { name: 'OVPit', path: '/OVPit' },
-  [ChainId.ANVILTESTNET]: { name: 'OVPit', path: '/OVPit' },
-  [ChainId.RINKEBY]: { name: 'OVPit', path: '/OVPit' },
-  [ChainId.ROPSTEN]: { name: 'OVPit', path: '/OVPit' },
-  [ChainId.KOVAN]: { name: 'OVPit', path: '/OVPit' },
-  [ChainId.HARMONY_MAINNET]: { name: 'OVPit', path: '/OVPit' }
+  [ChainId.ARBITRUM]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.GOERLI]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.RINKEBY]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.ROPSTEN]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.KOVAN]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.HARMONY_MAINNET]: { name: 'DonkPit', path: '/DonkPit' }
 }
 
 export const NEST_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.MAINNET]: { name: '', path: '' },
-  [ChainId.FINDORA]: { name: 'OVPit', path: '/single' },
-  [ChainId.GOERLI]: { name: 'OVPit', path: '/single' },
-  [ChainId.ANVILTESTNET]: { name: 'OVPit', path: '/single' },
-  [ChainId.RINKEBY]: { name: 'OVPit', path: '/OVPit' },
-  [ChainId.ROPSTEN]: { name: 'OVPit', path: '/OVPit' },
-  [ChainId.KOVAN]: { name: 'OVPit', path: '/OVPit' },
-  [ChainId.HARMONY_MAINNET]: { name: 'OVPit', path: '/OVPit' }
+  [ChainId.ARBITRUM]: { name: 'DonkPit', path: '/single' },
+  [ChainId.GOERLI]: { name: 'DonkPit', path: '/single' },
+  [ChainId.RINKEBY]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.ROPSTEN]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.KOVAN]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.HARMONY_MAINNET]: { name: 'DonkPit', path: '/DonkPit' }
 }
 
 export const EXCHANGE_SUBGRAPHS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
-  [ChainId.FINDORA]: '',
+  [ChainId.ARBITRUM]: '',
   [ChainId.GOERLI]: '',
-  [ChainId.ANVILTESTNET]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
@@ -50,9 +47,8 @@ export const EXCHANGE_SUBGRAPHS: { [chainId in ChainId]: string } = {
 
 export const ANALYTICS_URLS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
-  [ChainId.FINDORA]: '',
+  [ChainId.ARBITRUM]: '',
   [ChainId.GOERLI]: '',
-  [ChainId.ANVILTESTNET]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
@@ -61,9 +57,8 @@ export const ANALYTICS_URLS: { [chainId in ChainId]: string } = {
 
 export const BRIDGE_URLS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
-  [ChainId.FINDORA]: '',
+  [ChainId.ARBITRUM]: '',
   [ChainId.GOERLI]: '',
-  [ChainId.ANVILTESTNET]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
@@ -72,9 +67,8 @@ export const BRIDGE_URLS: { [chainId in ChainId]: string } = {
 
 export const DOCS_URLS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
-  [ChainId.FINDORA]: '',
+  [ChainId.ARBITRUM]: '',
   [ChainId.GOERLI]: '',
-  [ChainId.ANVILTESTNET]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
@@ -83,9 +77,8 @@ export const DOCS_URLS: { [chainId in ChainId]: string } = {
 
 export const WEB_INTERFACES: { [chainId in ChainId]: string[] } = {
   [ChainId.MAINNET]: [''],
-  [ChainId.FINDORA]: [''],
+  [ChainId.ARBITRUM]: [''],
   [ChainId.GOERLI]: [''],
-  [ChainId.ANVILTESTNET]: [''],
   [ChainId.RINKEBY]: [''],
   [ChainId.ROPSTEN]: [''],
   [ChainId.KOVAN]: [''],
@@ -94,9 +87,8 @@ export const WEB_INTERFACES: { [chainId in ChainId]: string[] } = {
 
 export const TOKEN_LOGO_EXCEPTIONS: { [chainId in ChainId]: string[] } = {
   [ChainId.MAINNET]: [''],
-  [ChainId.FINDORA]: [''],
+  [ChainId.ARBITRUM]: [''],
   [ChainId.GOERLI]: [''],
-  [ChainId.ANVILTESTNET]: [''],
   [ChainId.RINKEBY]: [''],
   [ChainId.ROPSTEN]: [''],
   [ChainId.KOVAN]: [''],
@@ -105,9 +97,8 @@ export const TOKEN_LOGO_EXCEPTIONS: { [chainId in ChainId]: string[] } = {
 
 export const POOL_BACKGROUNDS: { [chainId in ChainId]: string } = {
   [ChainId.GOERLI]: '#02a2c4',
-  [ChainId.ANVILTESTNET]: '#02a2c4',
   [ChainId.RINKEBY]: '#02a2c4',
-  [ChainId.FINDORA]: '#ff8e4c',
+  [ChainId.ARBITRUM]: '#ff8e4c',
   [ChainId.MAINNET]: '#02a2c4',
   [ChainId.ROPSTEN]: '#02a2c4',
   [ChainId.KOVAN]: '#02a2c4',
@@ -116,9 +107,8 @@ export const POOL_BACKGROUNDS: { [chainId in ChainId]: string } = {
 
 export const UNLOCKING_STARTS: { [chainId in ChainId]: number | undefined } = {
   [ChainId.GOERLI]: undefined,
-  [ChainId.ANVILTESTNET]: undefined,
   [ChainId.RINKEBY]: undefined,
-  [ChainId.FINDORA]: undefined,
+  [ChainId.ARBITRUM]: undefined,
   [ChainId.MAINNET]: undefined,
   [ChainId.ROPSTEN]: undefined,
   [ChainId.KOVAN]: undefined,
@@ -159,9 +149,8 @@ export const MERKLE_DISTRIBUTOR_ADDRESS: { [chainId in ChainId]?: string } = {
 }
 
 const WETH_ONLY: ChainTokenList = {
-  [ChainId.FINDORA]: [WETH[ChainId.FINDORA]],
+  [ChainId.ARBITRUM]: [WETH[ChainId.ARBITRUM]],
   [ChainId.GOERLI]: [WETH[ChainId.GOERLI]],
-  [ChainId.ANVILTESTNET]: [WETH[ChainId.ANVILTESTNET]],
   [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
   [ChainId.ROPSTEN]: [WETH[ChainId.ROPSTEN]],
@@ -172,9 +161,8 @@ const WETH_ONLY: ChainTokenList = {
 //used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.FINDORA]: [...WETH_ONLY[ChainId.FINDORA] /* DAI, USDC, USDT, COMP, MKR, WBTC */],
-  [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI] /* DAI, USDC, USDT, COMP, MKR, WBTC */],
-  [ChainId.ANVILTESTNET]: [...WETH_ONLY[ChainId.ANVILTESTNET] /* DAI, USDC, USDT, COMP, MKR, WBTC */]
+  [ChainId.ARBITRUM]: [...WETH_ONLY[ChainId.ARBITRUM] /* DAI, USDC, USDT, COMP, MKR, WBTC */],
+  [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI] /* DAI, USDC, USDT, COMP, MKR, WBTC */]
 }
 
 /**
@@ -193,17 +181,14 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY
   // [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI], getTokenWithDefault(ChainId.GOERLI, '')],
-  // [ChainId.ANVILTESTNET]: [...WETH_ONLY[ChainId.ANVILTESTNET], getTokenWithDefault(ChainId.ANVILTESTNET, '')],
-  // [ChainId.ANVILTESTNET]: [...WETH_ONLY[ChainId.FINDORA], getTokenWithDefault(ChainId.FINDORA, '')]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET] /*DAI, USDC, USDT, WBTC */],
-  [ChainId.FINDORA]: [...WETH_ONLY[ChainId.FINDORA] /*DAI, USDC, USDT, WBTC */],
-  [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI] /*DAI, USDC, USDT, WBTC */],
-  [ChainId.ANVILTESTNET]: [...WETH_ONLY[ChainId.ANVILTESTNET] /*DAI, USDC, USDT, WBTC */]
+  [ChainId.ARBITRUM]: [...WETH_ONLY[ChainId.ARBITRUM] /*DAI, USDC, USDT, WBTC */],
+  [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI] /*DAI, USDC, USDT, WBTC */]
   /*
   [ChainId.BSC_MAINNET]: [
     ...WETH_ONLY[ChainId.BSC_MAINNET],
