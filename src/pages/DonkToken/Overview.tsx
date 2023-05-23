@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import RechartGraph from '../DonkStaking/RechartGraph'
 import RemittancesTable from './RemittancesTable'
 import styled from 'styled-components'
+import { useDonkStakingContract } from 'hooks/useContract'
+import { ethers } from 'ethers'
 
 const Container = styled.section`
   text-align: left;
@@ -16,6 +18,15 @@ const List = styled.li`
 `
 
 export default function Overview() {
+  const stakingContract: any = useDonkStakingContract()
+  const [totalContractBalance, setTotalContractBalance] = useState('0')
+
+  const checkContractBalance = async () => {
+    const stakingBalance = await stakingContract.checkBalance(stakingContract.address)
+    const amount = ethers.utils.formatUnits(stakingBalance, 0)
+    setTotalContractBalance(amount)
+  }
+  //checkContractBalance()
   return (
     <Container>
       <header className="mb-8">
@@ -23,7 +34,7 @@ export default function Overview() {
         <div className="mb-5 flex gap-2 flex-wrap">
           <div className="py-5 px-6 bg-white rounded-2xl flex-1">
             <p className="font-semibold mb-[1px] text-[13px] ">Total Staked</p>
-            <div className="text-black font-semibold text-xl text-black">0</div>
+            <div className="text-black font-semibold text-xl text-black">{totalContractBalance}</div>
           </div>
         </div>
         <div>

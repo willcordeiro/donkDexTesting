@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { logo } from '../../assets'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { ButtonLight } from '../../components/Button'
 import { useDonkStakingContract } from 'hooks/useContract'
+import { useDonkTokenContract } from 'hooks/useContract'
 import { useWeb3React } from '@web3-react/core'
 import { useWalletModalToggle } from 'state/application/hooks'
+import { ethers } from 'ethers'
+
 const ControlButtons = styled.div`
   display: flex;
   border-bottom: solid 1px rgb(209 213 219);
@@ -57,30 +60,50 @@ const ButtonContainer = styled.div`
 export default function StakeUnStake() {
   const { account } = useWeb3React()
   const toggleWalletModal = useWalletModalToggle()
-  const stakingContract = useDonkStakingContract()
+  const stakingContract: any = useDonkStakingContract()
+  const tokenContract: any = useDonkTokenContract()
   const [stakeUnStake, setStakeUnStake] = useState('Stake')
   const [stakeAmount, setStakeAmount] = useState('')
-  const [stakeReward, setStakeReward] = useState('')
+  const [stakeReward, setStakeReward] = useState('0')
+  const [totalUserStaked, setTotalUserStaked] = useState('0')
 
-  useEffect(() => {
-    console.log(stakeAmount)
-  }, [stakeAmount])
-
-  const stakeToken = () => {
+  const stakeToken = async () => {
     if (stakeAmount === '') return
+    if (!account) return
 
-    console.log('staking...')
+    //converting amount
+    const amount = ethers.utils.parseUnits(stakeAmount, 0)
+
+    // Aproving Token
+    const approveTx = await tokenContract.connect(account).approve(stakingContract.address, amount)
+    await approveTx.wait()
+
+    // Staking token
+    await stakingContract.connect(account).stake(amount)
+
+    console.log('Staking...')
+
+    getStakedBalance()
   }
 
-  const unstakeToken = () => {
+  const unstakeToken = async () => {
+    if (!account) return
+    // Unstake tokens
+    await stakingContract.connect(account).unstake()
+
     console.log('unstaking...')
   }
 
-  const harvestToken = () => {
+  const harvestToken = async () => {
+    if (!account) return
+
+    //harvesting rewards
+    await stakingContract.connect(account).harvest()
     console.log('harvesting...')
   }
 
-  const getCurrentStakeTab = () => {
+  const getCurrentStakeTab = async () => {
+    //verifing the tab
     if (stakeUnStake === 'Stake') {
       stakeToken()
     } else {
@@ -88,20 +111,30 @@ export default function StakeUnStake() {
     }
   }
 
-  /*
+  const getStakedBalance = async () => {
+    if (!account) return
+    // Check staking balance
+    const userBalance = await stakingContract.checkBalance(account)
 
-
-  
-
-  const getStakedBalance = () => {}
-
-  const getCurrentRewardAmount = () => {      
+    const amount = ethers.utils.formatUnits(userBalance, 0)
+    setTotalUserStaked(amount)
   }
+  //getStakedBalance()
 
-  setInterval( getCurrentRewardAmount(), 60000);
+  const getCurrentRewardAmount = async () => {
+    if (!account) return
 
+    const reward = await stakingContract.connect(account).getRewards()
 
-*/
+    const amount = ethers.utils.formatUnits(reward, 0)
+    setStakeReward(amount)
+  }
+  //getCurrentRewardAmount()
+  setInterval(() => {
+    getCurrentRewardAmount()
+    console.log('um minuto se passou...')
+  }, 60000)
+
   return (
     <section>
       <ControlButtons className="font-semibold border-gray-300 text-black">
@@ -148,14 +181,14 @@ export default function StakeUnStake() {
           <p className="mb-1">Staked Balance</p>
           <div className="gap-2 flex">
             <img src={logo} alt="bitcoin" width={60} />
-            <p>0 Donk</p>
+            <p>{totalUserStaked} Donk</p>
           </div>
         </div>
         <div className="font-semibold col-span-2 ">
           <p className="mb-1">Pending Rewards</p>
           <div className="gap-2 flex">
             <img src={logo} alt="litecoin" width={60} />
-            <p>0 Donk</p>
+            <p>{stakeReward} Donk</p>
           </div>
         </div>
       </div>

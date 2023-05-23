@@ -29,7 +29,7 @@ import { getContract } from '../utils'
 import { useActiveWeb3React } from './index'
 import useGovernanceToken from './tokens/useGovernanceToken'
 import DONK_STAKING_ABI from '../constants/donkStaking/donkStakingABI.json'
-
+import DONK_TOKEN_ABI from '../constants/donkToken/donkTokenABI.json'
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
   const { library, account } = useActiveWeb3React()
@@ -48,6 +48,11 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
 export function useDonkStakingContract(): Contract | null {
   const donkStakingContract = ''
   return useContract(donkStakingContract, DONK_STAKING_ABI)
+}
+
+export function useDonkTokenContract(): Contract | null {
+  const donkTokenContract = ''
+  return useContract(donkTokenContract, DONK_TOKEN_ABI)
 }
 
 export function useV1FactoryContract(): Contract | null {
