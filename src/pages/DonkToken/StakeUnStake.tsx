@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { logo } from '../../assets'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
@@ -57,29 +57,50 @@ const ButtonContainer = styled.div`
 export default function StakeUnStake() {
   const { account } = useWeb3React()
   const toggleWalletModal = useWalletModalToggle()
+  const stakingContract = useDonkStakingContract()
   const [stakeUnStake, setStakeUnStake] = useState('Stake')
-  const [stakeAmount, setStakeAmount] = useState('0')
-  const [stakeReward, setStakeReward] = useState('0')
+  const [stakeAmount, setStakeAmount] = useState('')
+  const [stakeReward, setStakeReward] = useState('')
+
+  useEffect(() => {
+    console.log(stakeAmount)
+  }, [stakeAmount])
+
+  const stakeToken = () => {
+    if (stakeAmount === '') return
+
+    console.log('staking...')
+  }
+
+  const unstakeToken = () => {
+    console.log('unstaking...')
+  }
+
+  const harvestToken = () => {
+    console.log('harvesting...')
+  }
+
+  const getCurrentStakeTab = () => {
+    if (stakeUnStake === 'Stake') {
+      stakeToken()
+    } else {
+      unstakeToken()
+    }
+  }
+
   /*
-  const stakeToken = () => {}
 
-  const unstakeToken = () => {}
 
-  const harvestToken = () => {}
+  
+
+  const getStakedBalance = () => {}
 
   const getCurrentRewardAmount = () => {      
   }
 
   setInterval( getCurrentRewardAmount(), 60000);
 
-  const getCurrentStakeTab = () =>{
 
-    if(stakeUnStake = "Stake"){
-      stakeToken()
-    }else{
-      unstakeToken()
-    }
-  }
 */
   return (
     <section>
@@ -101,20 +122,23 @@ export default function StakeUnStake() {
           Unstake
         </Button>
       </ControlButtons>
+      {stakeUnStake === 'Stake' ? (
+        <ContainerInput>
+          <Label>
+            <Input type="number" placeholder="Enter Amount" onChange={(e: any) => setStakeAmount(e.target.value)} />
 
-      <ContainerInput>
-        <Label>
-          <Input type="number" placeholder="Enter Amount" />
-
-          <div className="fic gap-2 bg-white py-2 px-3 rounded-lg ml-1">
-            <img src={logo} alt="logo" width={40} />
-            <p className="font-semibold text-sm">Donk</p>
-          </div>
-        </Label>
-      </ContainerInput>
+            <div className="fic gap-2 bg-white py-2 px-3 rounded-lg ml-1">
+              <img src={logo} alt="logo" width={40} />
+              <p className="font-semibold text-sm">Donk</p>
+            </div>
+          </Label>
+        </ContainerInput>
+      ) : (
+        ''
+      )}
       <ButtonContainer>
         {account ? (
-          <ButtonLight>{stakeUnStake}</ButtonLight>
+          <ButtonLight onClick={() => getCurrentStakeTab()}>{stakeUnStake}</ButtonLight>
         ) : (
           <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
         )}
@@ -139,7 +163,13 @@ export default function StakeUnStake() {
         <div className="col-span-2 text-center">
           {' '}
           {account ? (
-            <ButtonLight>Harvest</ButtonLight>
+            <ButtonLight
+              onClick={() => {
+                harvestToken()
+              }}
+            >
+              Harvest
+            </ButtonLight>
           ) : (
             <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
           )}
