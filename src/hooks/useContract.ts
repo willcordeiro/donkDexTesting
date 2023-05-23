@@ -28,6 +28,7 @@ import { V1_EXCHANGE_ABI, V1_FACTORY_ABI, V1_FACTORY_ADDRESSES } from '../consta
 import { getContract } from '../utils'
 import { useActiveWeb3React } from './index'
 import useGovernanceToken from './tokens/useGovernanceToken'
+import DONK_STAKING_ABI from '../constants/donkStaking/donkStakingABI.json'
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -42,6 +43,11 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
       return null
     }
   }, [address, ABI, library, withSignerIfPossible, account])
+}
+
+export function useDonkStakingContract(): Contract | null {
+  const donkStakingContract = ''
+  return useContract(donkStakingContract, DONK_STAKING_ABI)
 }
 
 export function useV1FactoryContract(): Contract | null {

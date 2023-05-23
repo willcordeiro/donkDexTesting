@@ -3,58 +3,84 @@ import { logo } from '../../assets'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { ButtonLight } from '../../components/Button'
+import { useDonkStakingContract } from 'hooks/useContract'
+import { useWeb3React } from '@web3-react/core'
+import { useWalletModalToggle } from 'state/application/hooks'
+const ControlButtons = styled.div`
+  display: flex;
+  border-bottom: solid 1px rgb(209 213 219);
+  margin-bottom: 20px;
+`
+
+const Button = styled.button<any>`
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: ${({ borderBottom }) => borderBottom};
+  cursor: pointer;
+`
+Button.propTypes = {
+  borderBottom: PropTypes.string
+}
+
+const ContainerInput = styled.div`
+  border: solid 1px rgb(209 213 219);
+  border-radius: 0.75rem;
+  padding: 0.25rem;
+  padding-left: 1rem;
+`
+
+const Label = styled.label`
+  display: flex;
+  justify-content: space-between;
+`
+
+const Input = styled.input`
+  border: none;
+  background: none;
+  width: 100%;
+  font-size: 17px;
+  outline: none;
+  ::placeholder {
+    color: #9ca3b4;
+    font-size: 17px;
+  }
+`
+
+const ButtonContainer = styled.div`
+  text-align: center;
+  margin-top: 20px;
+`
 
 export default function StakeUnStake() {
+  const { account } = useWeb3React()
+  const toggleWalletModal = useWalletModalToggle()
   const [stakeUnStake, setStakeUnStake] = useState('Stake')
+  const [stakeAmount, setStakeAmount] = useState('0')
+  const [stakeReward, setStakeReward] = useState('0')
+  /*
+  const stakeToken = () => {}
 
-  const ControlButtons = styled.div`
-    display: flex;
-    border-bottom: solid 1px rgb(209 213 219);
-    margin-bottom: 20px;
-  `
+  const unstakeToken = () => {}
 
-  const Button = styled.button<any>`
-    background: none;
-    outline: none;
-    border: none;
-    font-size: 18px;
-    font-weight: 600;
-    border-bottom: ${({ borderBottom }) => borderBottom};
-    cursor: pointer;
-  `
-  Button.propTypes = {
-    borderBottom: PropTypes.string
+  const harvestToken = () => {}
+
+  const getCurrentRewardAmount = () => {      
   }
 
-  const ContainerInput = styled.div`
-    border: solid 1px rgb(209 213 219);
-    border-radius: 0.75rem;
-    padding: 0.25rem;
-    padding-left: 1rem;
-  `
+  setInterval( getCurrentRewardAmount(), 60000);
 
-  const Label = styled.label`
-    display: flex;
-    justify-content: space-between;
-  `
+  const getCurrentStakeTab = () =>{
 
-  const Input = styled.input`
-    border: none;
-    background: none;
-    width: 100%;
-    font-size: 17px;
-    outline: none;
-    ::placeholder {
-      color: #9ca3b4;
-      font-size: 17px;
+    if(stakeUnStake = "Stake"){
+      stakeToken()
+    }else{
+      unstakeToken()
     }
-  `
-
-  const ButtonContainer = styled.div`
-    text-align: center;
-    margin-top: 20px;
-  `
-
+  }
+*/
   return (
     <section>
       <ControlButtons className="font-semibold border-gray-300 text-black">
@@ -87,7 +113,11 @@ export default function StakeUnStake() {
         </Label>
       </ContainerInput>
       <ButtonContainer>
-        <ButtonLight>Connect Wallet</ButtonLight>
+        {account ? (
+          <ButtonLight>{stakeUnStake}</ButtonLight>
+        ) : (
+          <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
+        )}
       </ButtonContainer>
       <div className="grid grid-cols-2 mt-12 py-10 bg-white text-black rounded-2xl text-left p-5">
         <div className="font-semibold col-span-2 ">
@@ -108,7 +138,11 @@ export default function StakeUnStake() {
       <ButtonContainer>
         <div className="col-span-2 text-center">
           {' '}
-          <ButtonLight>Connect Wallet</ButtonLight>
+          {account ? (
+            <ButtonLight>Harvest</ButtonLight>
+          ) : (
+            <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
+          )}
         </div>
       </ButtonContainer>
     </section>
