@@ -178,7 +178,7 @@ export default function RemoveLiquidity({
       ]
 
       const domain = {
-        name: 'Oneverse LP Token',
+        name: 'donkswap LP Token',
         version: '1',
         chainId: chainId,
         verifyingContract: pair.liquidityToken.address

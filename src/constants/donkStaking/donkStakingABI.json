@@ -1,67 +1,228 @@
 [
   {
-    "name": "NewExchange",
     "inputs": [
-      { "type": "address", "name": "token", "indexed": true },
-      { "type": "address", "name": "exchange", "indexed": true }
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
     ],
-    "anonymous": false,
-    "type": "event"
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
-    "name": "initializeFactory",
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "totalStakedPercentage",
+        "type": "uint256"
+      }
+    ],
+    "name": "calculateAPR",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "checkBalance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAPR",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getPositions",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "createdDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountStaked",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "rewardStaked",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct Staking.Position",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getRewards",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "harvest",
     "outputs": [],
-    "inputs": [{ "type": "address", "name": "template" }],
-    "constant": false,
-    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "name": "createExchange",
-    "outputs": [{ "type": "address", "name": "out" }],
-    "inputs": [{ "type": "address", "name": "token" }],
-    "constant": false,
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "name": "getExchange",
-    "outputs": [{ "type": "address", "name": "out" }],
-    "inputs": [{ "type": "address", "name": "token" }],
-    "constant": true,
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "name": "getToken",
-    "outputs": [{ "type": "address", "name": "out" }],
-    "inputs": [{ "type": "address", "name": "exchange" }],
-    "constant": true,
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "name": "getTokenWithId",
-    "outputs": [{ "type": "address", "name": "out" }],
-    "inputs": [{ "type": "uint256", "name": "token_id" }],
-    "constant": true,
-    "payable": false,
-    "type": "function"
-  },
-  {
-    "name": "exchangeTemplate",
-    "outputs": [{ "type": "address", "name": "out" }],
     "inputs": [],
-    "constant": true,
-    "payable": false,
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
-    "name": "tokenCount",
-    "outputs": [{ "type": "uint256", "name": "out" }],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "positions",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "walletAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "createdDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountStaked",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "rewardStaked",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "apr",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountStaked",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "startDate",
+        "type": "uint256"
+      }
+    ],
+    "name": "reward",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "stake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
-    "constant": true,
-    "payable": false,
+    "name": "stakingToken",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "unstake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

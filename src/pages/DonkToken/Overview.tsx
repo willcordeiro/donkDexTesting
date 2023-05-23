@@ -4,6 +4,7 @@ import RemittancesTable from './RemittancesTable'
 import styled from 'styled-components'
 import { useDonkStakingContract } from 'hooks/useContract'
 import { ethers } from 'ethers'
+import { useWeb3React } from '@web3-react/core'
 
 const Container = styled.section`
   text-align: left;
@@ -20,13 +21,16 @@ const List = styled.li`
 export default function Overview() {
   const stakingContract: any = useDonkStakingContract()
   const [totalContractBalance, setTotalContractBalance] = useState('0')
+  const { account, library } = useWeb3React()
 
   const checkContractBalance = async () => {
+    if (!account) return
     const stakingBalance = await stakingContract.checkBalance(stakingContract.address)
+
     const amount = ethers.utils.formatUnits(stakingBalance, 0)
     setTotalContractBalance(amount)
   }
-  //checkContractBalance()
+  checkContractBalance()
   return (
     <Container>
       <header className="mb-8">

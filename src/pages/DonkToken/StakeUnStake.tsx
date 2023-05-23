@@ -58,7 +58,7 @@ const ButtonContainer = styled.div`
 `
 
 export default function StakeUnStake() {
-  const { account } = useWeb3React()
+  const { account, library } = useWeb3React()
   const toggleWalletModal = useWalletModalToggle()
   const stakingContract: any = useDonkStakingContract()
   const tokenContract: any = useDonkTokenContract()
@@ -66,39 +66,63 @@ export default function StakeUnStake() {
   const [stakeAmount, setStakeAmount] = useState('')
   const [stakeReward, setStakeReward] = useState('0')
   const [totalUserStaked, setTotalUserStaked] = useState('0')
+  const [totalContractBalance, setTotalContractBalance] = useState('0')
 
   const stakeToken = async () => {
-    if (stakeAmount === '') return
     if (!account) return
+    if (stakeAmount === '') return
 
+    if (totalContractBalance < stakeReward) return
     //converting amount
     const amount = ethers.utils.parseUnits(stakeAmount, 0)
 
     // Aproving Token
-    const approveTx = await tokenContract.connect(account).approve(stakingContract.address, amount)
-    await approveTx.wait()
+    await tokenContract.allowance(account, stakingContract.address)
 
-    // Staking token
-    await stakingContract.connect(account).stake(amount)
+    await tokenContract.approve(stakingContract.address, amount)
+
+    // Staking tokens
+
+    const signer = library.getSigner(account)
+
+    const stakingContractWithSigner = stakingContract.connect(signer)
+
+    await stakingContractWithSigner.stake(amount).then(() => {
+      getStakedBalance(), checkContractBalance()
+    })
 
     console.log('Staking...')
-
-    getStakedBalance()
   }
 
   const unstakeToken = async () => {
     if (!account) return
-    // Unstake tokens
-    await stakingContract.connect(account).unstake()
+    if (totalContractBalance < stakeReward) return
+    if (stakeAmount === '') return
+    //unstaking tokens
+    const signer = library.getSigner(account)
+
+    const stakingContractWithSigner = stakingContract.connect(signer)
+
+    await stakingContractWithSigner.unstake().then(() => {
+      getStakedBalance(), checkContractBalance()
+    })
 
     console.log('unstaking...')
   }
 
   const harvestToken = async () => {
     if (!account) return
-
+    if (totalContractBalance < stakeReward) return
+    if (stakeAmount === '') return
     //harvesting rewards
-    await stakingContract.connect(account).harvest()
+    const signer = library.getSigner(account)
+
+    const stakingContractWithSigner = stakingContract.connect(signer)
+
+    await stakingContractWithSigner.harvest().then(() => {
+      getCurrentRewardAmount(), checkContractBalance()
+    })
+
     console.log('harvesting...')
   }
 
@@ -114,12 +138,20 @@ export default function StakeUnStake() {
   const getStakedBalance = async () => {
     if (!account) return
     // Check staking balance
-    const userBalance = await stakingContract.checkBalance(account)
+    const userBalance = await stakingContract.connect(account).getPositions()
 
-    const amount = ethers.utils.formatUnits(userBalance, 0)
+    const amount = ethers.utils.formatUnits(userBalance.amountStaked, 0)
     setTotalUserStaked(amount)
   }
-  //getStakedBalance()
+  getStakedBalance()
+
+  const checkContractBalance = async () => {
+    if (!account) return
+    const stakingBalance = await stakingContract.checkBalance(stakingContract.address)
+    const amount = ethers.utils.formatUnits(stakingBalance, 0)
+    setTotalContractBalance(amount)
+  }
+  checkContractBalance()
 
   const getCurrentRewardAmount = async () => {
     if (!account) return
@@ -127,13 +159,14 @@ export default function StakeUnStake() {
     const reward = await stakingContract.connect(account).getRewards()
 
     const amount = ethers.utils.formatUnits(reward, 0)
+
     setStakeReward(amount)
   }
-  //getCurrentRewardAmount()
+  getCurrentRewardAmount()
+
   setInterval(() => {
     getCurrentRewardAmount()
-    console.log('um minuto se passou...')
-  }, 60000)
+  }, 30000)
 
   return (
     <section>
