@@ -217,7 +217,11 @@ export default function Pool() {
             {filteredUsers.length !== 0 ? (
               filteredUsers.map((v2Pair: any, index) => <FullPositionCard key={index} pair={v2Pair} />)
             ) : (
-              <div className="text-sm text-center pt-8">No matching pool found</div>
+              <EmptyProposals>
+                <TYPE.body color={theme.text3} textAlign="center">
+                  No liquidity found.
+                </TYPE.body>
+              </EmptyProposals>
             )}
           </div>
 
@@ -298,11 +302,7 @@ export default function Pool() {
                     )}
                   </>
                 ) : (
-                  <EmptyProposals>
-                    <TYPE.body color={theme.text3} textAlign="center">
-                      No liquidity found.
-                    </TYPE.body>
-                  </EmptyProposals>
+                  ''
                 )}
 
                 <AutoColumn justify={'center'} gap="md">

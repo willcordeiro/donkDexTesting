@@ -6,6 +6,7 @@ import styled from 'styled-components'
 
 const ContainerHeader = styled.div`
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#191924')};
+  height: 100%;
 `
 
 const ContainerExplore = styled.div`
@@ -21,7 +22,6 @@ export default function Home() {
       <ContainerExplore>
         <Explore />
       </ContainerExplore>
-      <TradTable />
     </>
   )
 }
