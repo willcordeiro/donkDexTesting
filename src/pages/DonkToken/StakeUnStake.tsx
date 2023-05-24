@@ -69,10 +69,6 @@ export default function StakeUnStake() {
   const [totalContractBalance, setTotalContractBalance] = useState('0')
 
   const stakeToken = async () => {
-    if (!account) return
-    if (stakeAmount === '') return
-
-    if (totalContractBalance < stakeReward) return
     //converting amount
     const amount = ethers.utils.parseUnits(stakeAmount, 0)
 
@@ -95,9 +91,6 @@ export default function StakeUnStake() {
   }
 
   const unstakeToken = async () => {
-    if (!account) return
-    if (totalContractBalance < stakeReward) return
-    if (stakeAmount === '') return
     //unstaking tokens
     const signer = library.getSigner(account)
 
@@ -111,9 +104,6 @@ export default function StakeUnStake() {
   }
 
   const harvestToken = async () => {
-    if (!account) return
-    if (totalContractBalance < stakeReward) return
-    if (stakeAmount === '') return
     //harvesting rewards
     const signer = library.getSigner(account)
 

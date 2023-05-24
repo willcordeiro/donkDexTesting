@@ -46,6 +46,7 @@ import Overview from './Overview'
 import styled from 'styled-components'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import ETHlogo from '../../assets/images/ethereum-logo.png'
 
 const ButtonList = styled.div`
   display: flex;
@@ -334,7 +335,6 @@ export default function AddLiquidity({
     (currencyA: Currency) => {
       const newCurrencyIdA = currencyId(currencyA)
 
-      console.log(newCurrencyIdA)
       if (newCurrencyIdA === currencyIdB) {
         history.push(`/add/${currencyIdB}/${currencyIdA}`)
       } else {
@@ -395,11 +395,11 @@ export default function AddLiquidity({
                 </ButtonLink>
               </Link>
               <div className="flex items-center gap-1">
-                <img src={twoCurrencies[0].tokenInfo.logoURI} alt="noImage" className="w-8 sm:w-10" />
-                <span className="font-semibold text-2xl text-black">{twoCurrencies[0].tokenInfo.name}</span>
+                <img src={`${twoCurrencies[0]?.tokenInfo?.logoURI ?? ETHlogo}`} alt="noImage" className="w-8 sm:w-10" />
+                <span className="font-semibold text-2xl text-black">{twoCurrencies[0]?.symbol}</span>
                 <span>/</span>
-                <img src={twoCurrencies[1].tokenInfo.logoURI} alt="noImage" className="w-8 sm:w-10" />
-                <span className="font-semibold text-2xl text-black">{twoCurrencies[1].tokenInfo.name}</span>
+                <img src={`${twoCurrencies[1]?.tokenInfo?.logoURI ?? ETHlogo}`} alt="noImage" className="w-8 sm:w-10" />
+                <span className="font-semibold text-2xl text-black">{twoCurrencies[1]?.symbol}</span>
               </div>
             </header>
           ) : (

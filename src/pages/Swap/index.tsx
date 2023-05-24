@@ -300,7 +300,8 @@ export default function Swap() {
     <>
       <div className="py-8 min-h-[80vh] mt-12">
         <section className="max-w-6xl mx-auto flex gap-20 max-lg:flex-col">
-          <SwipResult FieldOne={currencies[Field.INPUT]} FieldTwo={currencies[Field.OUTPUT]} />
+          <SwipResult FieldOne={currencies?.INPUT} FieldTwo={currencies?.OUTPUT} />
+
           <div className="basis-full mt-8 lg:mt-0">
             <TokenWarningModal
               isOpen={importTokensNotInDefault.length > 0 && !dismissTokenWarning}

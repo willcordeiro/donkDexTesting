@@ -51,6 +51,7 @@ export default function Card() {
     const apr = await stakingContract.connect(account).getAPR()
 
     const amount = ethers.utils.formatUnits(apr, 0)
+    console.log(apr, 'apr')
     setApr(amount)
   }
   getAPR()

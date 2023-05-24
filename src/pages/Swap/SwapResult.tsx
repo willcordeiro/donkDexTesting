@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 import RechartGraph from './RechartGraph'
+import ETHlogo from '../../assets/images/ethereum-logo.png'
 
 export default function SwipResult({ FieldOne, FieldTwo }: any) {
-  console.log(FieldOne, FieldTwo)
   const swip: any = {
     selected: {
-      icon: FieldTwo?.tokenInfo.logoURI,
-      name: FieldTwo?.symbol
+      icon: FieldOne?.tokenInfo?.logoURI ?? ETHlogo,
+      name: FieldOne?.symbol
     }
   }
 
   const to: any = {
     selected: {
-      icon: FieldOne?.tokenInfo.logoURI,
-      name: FieldOne?.symbol
+      icon: FieldTwo?.tokenInfo?.logoURI ?? ETHlogo,
+      name: FieldTwo?.symbol
     }
   }
 

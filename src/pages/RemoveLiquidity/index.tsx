@@ -49,6 +49,7 @@ import { useRouterContractAddress } from '../../utils'
 import useBlockchain from '../../hooks/useBlockchain'
 import { Link } from 'react-router-dom'
 import Overview from './Overview'
+import ETHlogo from '../../assets/images/ethereum-logo.png'
 
 const ButtonList = styled.div`
   display: flex;
@@ -540,8 +541,6 @@ export default function RemoveLiquidity({
   twoCurrencies.push(currencyA)
   twoCurrencies.push(currencyB)
 
-  console.log(twoCurrencies)
-
   const styles = {
     maxWidth: twoCurrencies[0] && twoCurrencies[1] ? '72rem' : '32rem'
   }
@@ -559,11 +558,11 @@ export default function RemoveLiquidity({
                 </ButtonLink>
               </Link>
               <div className="flex items-center gap-1">
-                <img src={twoCurrencies[0].tokenInfo.logoURI} alt="noImage" className="w-8 sm:w-10" />
-                <span className="font-semibold text-2xl text-black">{twoCurrencies[0].tokenInfo.name}</span>
+                <img src={`${twoCurrencies[0]?.tokenInfo?.logoURI ?? ETHlogo}`} alt="noImage" className="w-8 sm:w-10" />
+                <span className="font-semibold text-2xl text-black">{twoCurrencies[0]?.symbol}</span>
                 <span>/</span>
-                <img src={twoCurrencies[1].tokenInfo.logoURI} alt="noImage" className="w-8 sm:w-10" />
-                <span className="font-semibold text-2xl text-black">{twoCurrencies[1].tokenInfo.name}</span>
+                <img src={`${twoCurrencies[1]?.tokenInfo?.logoURI ?? ETHlogo}`} alt="noImage" className="w-8 sm:w-10" />
+                <span className="font-semibold text-2xl text-black">{twoCurrencies[1]?.symbol}</span>
               </div>
             </header>
           ) : (
@@ -717,11 +716,11 @@ export default function RemoveLiquidity({
                                   <StyledInternalLink
                                     to={`/remove/${
                                       currencyA && currencyEquals(currencyA, WETH[chainId])
-                                        ? '0x0000000000000000000000000000000000001000'
+                                        ? '0xdd69db25f6d620a7bad3023c5d32761d353d3de9'
                                         : currencyIdA
                                     }/${
                                       currencyB && currencyEquals(currencyB, WETH[chainId])
-                                        ? '0x0000000000000000000000000000000000001000'
+                                        ? '0xdd69db25f6d620a7bad3023c5d32761d353d3de9'
                                         : currencyIdB
                                     }`}
                                   >
