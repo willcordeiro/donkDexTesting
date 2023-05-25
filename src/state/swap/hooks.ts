@@ -236,11 +236,11 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
     console.log(urlParam)
 
     if (valid) return valid
-    if (urlParam.toUpperCase() === BASE_CURRENCY.symbol) return BASE_CURRENCY.address as string
-    if (valid === false) return BASE_CURRENCY.address as string
+    if (urlParam.toUpperCase() === BASE_CURRENCY.symbol) return BASE_CURRENCY.symbol as string
+    if (valid === false) return BASE_CURRENCY.symbol as string
   }
 
-  return BASE_CURRENCY.address ?? ''
+  return BASE_CURRENCY.symbol ?? ''
 }
 
 function parseTokenAmountURLParameter(urlParam: any): string {
