@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import { Blockchain } from '@donkswap/sdk'
 //import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
@@ -50,6 +50,8 @@ import DonkStaking from '../pages/DonkStaking/index'
 import DonkToken from './DonkToken'
 import Farm from './Farm'
 import ManageFarm from './manageFarm'
+import PropTypes from 'prop-types'
+
 const AppWrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -68,7 +70,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
 `
 
-const BodyWrapper = styled.div`
+const BodyWrapper = styled.div<any>`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -82,14 +84,21 @@ const BodyWrapper = styled.div`
     padding: 16px;
     padding-top: 2rem;
   `};
-
+  align-items: ${({ alignItems }) => alignItems};
   z-index: 1;
 `
+
+BodyWrapper.propTypes = {
+  alignItems: PropTypes.string
+}
 
 const Marginer = styled.div`
   margin-top: 5rem;
 `
 
+const FindContainer = styled.div`
+  align-items: center;
+`
 function TopLevelModals() {
   const open = useModalOpen(ApplicationModal.ADDRESS_CLAIM)
   const toggle = useToggleModal(ApplicationModal.ADDRESS_CLAIM)
@@ -106,6 +115,8 @@ export default function App() {
     document.title = platformName
   }, [platformName])*/
 
+  const location = useLocation()
+
   return (
     <Suspense fallback={null}>
       <Route />
@@ -114,7 +125,7 @@ export default function App() {
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>
-        <BodyWrapper>
+        <BodyWrapper alignItems={`${location.pathname == '/find' ? 'center' : ''}`}>
           <Popups />
           <Polling />
           <TopLevelModals />
@@ -125,7 +136,9 @@ export default function App() {
               <Route exact strict path="/claim" component={OpenClaimAddressModalAndRedirectToSwap} />
               <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
               <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
+
               <Route exact strict path="/find" component={PoolFinder} />
+
               <Route exact strict path="/pool" component={Pool} />
               <Route exact strict path="/stake" component={DonkStaking} />
               <Route exact strict path="/stake/token" component={DonkToken} />

@@ -105,11 +105,12 @@ export default function Pool() {
 
   const baseCurrency = baseCurrencies(chainId)[0]
 
-  const addLiquidityUrl = `/add/${baseCurrency.address}`
-  const createPoolUrl = `/create/${baseCurrency.address}`
+  const addLiquidityUrl = `/add/${baseCurrency.symbol}`
+  const createPoolUrl = `/create/${baseCurrency.symbol}`
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
+
   const tokenPairsWithLiquidityTokens = useMemo(
     () => trackedTokenPairs.map(tokens => ({ liquidityToken: toV2LiquidityToken(tokens), tokens })),
     [trackedTokenPairs]

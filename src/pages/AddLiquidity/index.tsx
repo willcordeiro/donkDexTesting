@@ -382,8 +382,6 @@ export default function AddLiquidity({
     maxWidth: twoCurrencies[0] && twoCurrencies[1] ? '72rem' : '32rem'
   }
 
-  console.log(BASE_CURRENCY, 'basecurrency')
-
   return (
     <>
       <div className="pt-4 pb-4">

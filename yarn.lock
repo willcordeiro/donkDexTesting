@@ -1254,10 +1254,10 @@
     yargs-unparser "^2.0.0"
     yocto-queue "^0.1.0"
 
-"@donkswap/contracts@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@donkswap/contracts/-/contracts-1.0.1.tgz#a9d73174568866c9eb25e499181f5c8d9fe82138"
-  integrity "sha1-qdcxdFaIZsnrJeSZGB9cjZ/oITg= sha512-iqrr4AVgCMIwZdmcx3AepMHCBEboJZY8dZf242PpmKGDuGO90al/odwG/E1QZ9ZhmA8EcmsVIcYysDFVGrzPww=="
+"@donkswap/contracts@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@donkswap/contracts/-/contracts-1.0.3.tgz#09f941f0052f2eb427ef1e773e4d10d4795a4b92"
+  integrity sha512-f0b1EFMF61HV4Lx3Lkz2srRBeOmZHWZ2Jd7mr6+UlPbkOUTS1t47oGLCL5VWDdQp6L1uZEDFWzVwyYHeAgVHXg==
   dependencies:
     "@remix-project/remixd" "^0.6.12"
 
@@ -1366,10 +1366,10 @@
   resolved "https://registry.npmjs.org/@donkswap/lib/-/lib-1.0.1.tgz"
   integrity "sha1-rhU4uQ4Y6LkyZa7a7AvINDpyf0A= sha512-kySMNsQx6JNHQOmcmlTO8CspAxZ1ZzmAZAOw0sxyYIc4h3SM46wrzJGqBhOlGLG4VDFNCR+dDnhRfoFLpBHJBQ=="
 
-"@donkswap/periphery@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@donkswap/periphery/-/periphery-1.0.1.tgz#246fc536ebcc681d09697a3d2355129f73929f34"
-  integrity "sha1-JG/FNuvMaB0JaXo9I1USn3OSnzQ= sha512-8xQPiKfCpcvpXlY0wScIHue451vRpIXRYEVwJPl5J52iqbeiIHlqUWuYD8p8wYJ9ZJZSbkciyA4GnIReMUmGMw=="
+"@donkswap/periphery@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@donkswap/periphery/-/periphery-1.0.5.tgz#d5cb8e2cfc5b7f89a065fc268facfe9f7e8bd4ed"
+  integrity sha512-U9u7Rkt3GS6jQfhtfu+ENDgpCczPLE2bZ1B7vgXfwjnSpMLSm9ruAWDIsU1+djRWRiz+3IooszDftOx2rdkE0w==
   dependencies:
     "@donkswap/core" "1.0.0"
     "@donkswap/lib" "1.0.1"
@@ -1392,6 +1392,20 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.2.tgz#5a04a52ace6f39f4bece95d39000ec2f2e13ab65"
   integrity "sha1-WgSlKs5vOfS+zpXTkADsLy4Tq2U= sha512-KxfSWKX5UG5+2OzCMBAh/DdvAIykwMTOa7dYfalKw3kprehnCqm9OtCmJ5O2NIP+qeSTTkz6I06H2dYsofCfgA=="
+  dependencies:
+    "@donkswap/core" "^1.0.0"
+    big.js "^5.2.2"
+    decimal.js-light "^2.5.0"
+    jsbi "^3.1.1"
+    lodash.random "^3.2.0"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.3"
+    toformat "^2.0.0"
+
+"@donkswap/sdk@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.5.tgz#419352946f7a9ca84da763da27d5dddb7f2d652f"
+  integrity sha512-doxrvag9AAeAuSLiu7iIpLG+ZXJEh6Pql/Q4rad/1F8cLOUGQGe2ghmjQ0e7t87PVPYdxkaAWLP+py/JCjE2UQ==
   dependencies:
     "@donkswap/core" "^1.0.0"
     big.js "^5.2.2"
