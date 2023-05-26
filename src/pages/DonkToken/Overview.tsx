@@ -25,12 +25,15 @@ export default function Overview() {
 
   const checkContractBalance = async () => {
     if (!account) return
-    const stakingBalance = await stakingContract.checkBalance(stakingContract.address)
+    const stakingBalance = await stakingContract.getTotalStakedAmount()
 
-    const amount = ethers.utils.formatUnits(stakingBalance, 0)
-    setTotalContractBalance(amount)
+    const amount = ethers.utils.formatUnits(stakingBalance)
+    setTotalContractBalance(parseFloat(amount).toFixed(0))
   }
-  checkContractBalance()
+  setInterval(() => {
+    checkContractBalance()
+  }, 1000)
+
   return (
     <Container>
       <header className="mb-8">

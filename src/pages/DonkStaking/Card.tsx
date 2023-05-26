@@ -29,21 +29,19 @@ export default function Card() {
   const checkContractBalance = async () => {
     //checking contract balance
     if (!account) return
-    const stakingBalance = await stakingContract.checkBalance(stakingContract.address)
-    const amount = ethers.utils.formatUnits(stakingBalance, 0)
-    setTotalContractBalance(amount)
+    const stakingBalance = await stakingContract.getTotalStakedAmount()
+    const amount = ethers.utils.formatUnits(stakingBalance)
+    setTotalContractBalance(parseFloat(amount).toFixed(0))
   }
-  checkContractBalance()
 
   const getStakedBalance = async () => {
     if (!account) return
     // Check staking balance
     const userBalance = await stakingContract.connect(account).getPositions()
 
-    const amount = ethers.utils.formatUnits(userBalance.amountStaked, 0)
-    setTotalUserStaked(amount)
+    const amount = ethers.utils.formatUnits(userBalance.amountStaked)
+    setTotalUserStaked(parseFloat(amount).toFixed(0))
   }
-  getStakedBalance()
 
   const getAPR = async () => {
     if (!account) return
@@ -51,10 +49,12 @@ export default function Card() {
     const apr = await stakingContract.connect(account).getAPR()
 
     const amount = ethers.utils.formatUnits(apr, 0)
-    console.log(apr, 'apr')
+
     setApr(amount)
   }
-  getAPR()
+  setInterval(() => {
+    getAPR(), getStakedBalance(), checkContractBalance()
+  }, 1000)
 
   return (
     <div className="grid md:grid-cols-2 grid-cols-1 gap-3 mt-3 mb-10 border border-gray-300 ">

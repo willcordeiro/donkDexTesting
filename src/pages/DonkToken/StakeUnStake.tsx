@@ -66,11 +66,10 @@ export default function StakeUnStake() {
   const [stakeAmount, setStakeAmount] = useState('')
   const [stakeReward, setStakeReward] = useState('0')
   const [totalUserStaked, setTotalUserStaked] = useState('0')
-  const [totalContractBalance, setTotalContractBalance] = useState('0')
 
   const stakeToken = async () => {
     //converting amount
-    const amount = ethers.utils.parseUnits(stakeAmount, 0)
+    const amount = ethers.utils.parseUnits(stakeAmount, 18)
 
     // Aproving Token
     await tokenContract.allowance(account, stakingContract.address)
@@ -83,9 +82,11 @@ export default function StakeUnStake() {
 
     const stakingContractWithSigner = stakingContract.connect(signer)
 
-    await stakingContractWithSigner.stake(amount).then(() => {
-      getStakedBalance(), checkContractBalance()
-    })
+    const staking = await stakingContractWithSigner.stake(amount)
+
+    await staking.wait()
+
+    getStakedBalance()
 
     console.log('Staking...')
   }
@@ -97,7 +98,7 @@ export default function StakeUnStake() {
     const stakingContractWithSigner = stakingContract.connect(signer)
 
     await stakingContractWithSigner.unstake().then(() => {
-      getStakedBalance(), checkContractBalance()
+      getStakedBalance()
     })
 
     console.log('unstaking...')
@@ -110,7 +111,7 @@ export default function StakeUnStake() {
     const stakingContractWithSigner = stakingContract.connect(signer)
 
     await stakingContractWithSigner.harvest().then(() => {
-      getCurrentRewardAmount(), checkContractBalance()
+      getCurrentRewardAmount()
     })
 
     console.log('harvesting...')
@@ -130,33 +131,29 @@ export default function StakeUnStake() {
     // Check staking balance
     const userBalance = await stakingContract.connect(account).getPositions()
 
-    const amount = ethers.utils.formatUnits(userBalance.amountStaked, 0)
-    setTotalUserStaked(amount)
+    const amount = ethers.utils.formatUnits(userBalance.amountStaked)
+
+    setTotalUserStaked(parseFloat(amount).toFixed(0))
   }
   getStakedBalance()
 
-  const checkContractBalance = async () => {
-    if (!account) return
-    const stakingBalance = await stakingContract.checkBalance(stakingContract.address)
-    const amount = ethers.utils.formatUnits(stakingBalance, 0)
-    setTotalContractBalance(amount)
-  }
-  checkContractBalance()
-
   const getCurrentRewardAmount = async () => {
-    if (!account) return
+    if (!account || !library) return
 
-    const reward = await stakingContract.connect(account).getRewards()
+    const wallet = library.getSigner(account)
+    const stakingContractWithSigner = stakingContract.connect(wallet)
 
-    const amount = ethers.utils.formatUnits(reward, 0)
+    const reward = await stakingContractWithSigner.getRewards()
 
-    setStakeReward(amount)
+    const amount = ethers.utils.formatUnits(reward)
+
+    setStakeReward(parseFloat(amount).toFixed(0))
   }
   getCurrentRewardAmount()
 
   setInterval(() => {
     getCurrentRewardAmount()
-  }, 30000)
+  }, 1000)
 
   return (
     <section>
