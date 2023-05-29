@@ -66,15 +66,19 @@ export default function StakeUnStake() {
   const [stakeAmount, setStakeAmount] = useState('')
   const [stakeReward, setStakeReward] = useState('0')
   const [totalUserStaked, setTotalUserStaked] = useState('0')
+  const [amountRestake, setAmountRestake] = useState('0')
 
   const stakeToken = async () => {
     //converting amount
     const amount = ethers.utils.parseUnits(stakeAmount, 18)
 
     // Aproving Token
-    await tokenContract.allowance(account, stakingContract.address)
 
-    await tokenContract.approve(stakingContract.address, amount)
+    const currentAllowance = await tokenContract.allowance(account, stakingContract.address)
+
+    if (currentAllowance < amount) {
+      await tokenContract.approve(stakingContract.address, amount)
+    }
 
     // Staking tokens
 
@@ -153,7 +157,29 @@ export default function StakeUnStake() {
 
   setInterval(() => {
     getCurrentRewardAmount()
-  }, 1000)
+  }, 10000)
+
+  const restake = async () => {
+    const signer = library.getSigner(account)
+    const stakingContractWithSigner = stakingContract.connect(signer)
+    //converting amount
+    await getCurrentRewardAmount()
+    setAmountRestake(stakeReward)
+
+    const amount = ethers.utils.parseUnits(stakeReward, 18)
+
+    await stakingContractWithSigner.harvest().then(() => {
+      getCurrentRewardAmount()
+    })
+
+    // Staking tokens
+
+    const staking = await stakingContractWithSigner.stake(amount)
+
+    await staking.wait()
+
+    getStakedBalance()
+  }
 
   return (
     <section>
@@ -196,6 +222,7 @@ export default function StakeUnStake() {
           <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
         )}
       </ButtonContainer>
+
       <div className="grid grid-cols-2 mt-12 py-10 bg-white text-black rounded-2xl text-left p-5">
         <div className="font-semibold col-span-2 ">
           <p className="mb-1">Staked Balance</p>
@@ -227,6 +254,15 @@ export default function StakeUnStake() {
             <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
           )}
         </div>
+      </ButtonContainer>
+      <ButtonContainer>
+        {account ? (
+          <ButtonLight onClick={() => restake()} disabled={stakeReward == '0' ? true : false}>
+            Restake
+          </ButtonLight>
+        ) : (
+          <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
+        )}
       </ButtonContainer>
     </section>
   )

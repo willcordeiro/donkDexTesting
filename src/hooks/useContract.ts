@@ -46,7 +46,7 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
 }
 
 export function useDonkStakingContract(): Contract | null {
-  const donkStakingContract = '0x4809a84bE6e54929611236A664337AA48D366bae'
+  const donkStakingContract = '0x6b7618C70921234B76731662f263F3C3Db4A4F94'
   return useContract(donkStakingContract, DONK_STAKING_ABI)
 }
 

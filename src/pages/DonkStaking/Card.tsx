@@ -25,7 +25,7 @@ export default function Card() {
   const [totalContractBalance, setTotalContractBalance] = useState('0')
   const [totalUserStaked, setTotalUserStaked] = useState('0')
   const [apr, setApr] = useState('0')
-
+  const [fee, setFee] = useState('0')
   const checkContractBalance = async () => {
     //checking contract balance
     if (!account) return
@@ -52,9 +52,20 @@ export default function Card() {
 
     setApr(amount)
   }
+
+  const getFee = async () => {
+    if (!account) return
+    // Check apr
+    const fee = await stakingContract.connect(account).getStakingFee()
+
+    const amount = `${fee / 10000}`
+
+    setFee(amount)
+  }
+
   setInterval(() => {
-    getAPR(), getStakedBalance(), checkContractBalance()
-  }, 1000)
+    getAPR(), getStakedBalance(), checkContractBalance(), getFee()
+  }, 10000)
 
   return (
     <div className="grid md:grid-cols-2 grid-cols-1 gap-3 mt-3 mb-10 border border-gray-300 ">
@@ -83,8 +94,8 @@ export default function Card() {
               <p className="font-semibold text-black">{apr}%</p>
             </div>
             <div>
-              <p className="text-xs text-pink900 mb-[2px] ">Deposit Fee</p>
-              <p className="font-semibold text-black">0.1%</p>
+              <p className="text-xs text-pink900 mb-[2px] ">Unstake Fee</p>
+              <p className="font-semibold text-black">{fee}%</p>
             </div>
           </div>
         </Link>
