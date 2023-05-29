@@ -63,9 +63,7 @@ export default function Card() {
     setFee(amount)
   }
 
-  setInterval(() => {
-    getAPR(), getStakedBalance(), checkContractBalance(), getFee()
-  }, 10000)
+  getAPR(), getStakedBalance(), checkContractBalance(), getFee()
 
   return (
     <div className="grid md:grid-cols-2 grid-cols-1 gap-3 mt-3 mb-10 border border-gray-300 ">
