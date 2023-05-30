@@ -10,12 +10,19 @@ const Container = styled.section`
   text-align: left;
 `
 
+const Card = styled.div`
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
+`
+
 const List = styled.li`
   list-style-type: disc;
   list-style-position: inside;
-  color: black;
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
   font-weight: normal;
   margin-bottom: 5px;
+`
+const Text = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
 `
 
 export default function Overview() {
@@ -37,15 +44,23 @@ export default function Overview() {
   return (
     <Container>
       <header className="mb-8">
-        <p className="font-semibold mb-2 text-black text-xl">Overview</p>
+        <p className="font-semibold mb-2 text-black text-xl">
+          <Text>Overview</Text>
+        </p>
         <div className="mb-5 flex gap-2 flex-wrap">
-          <div className="py-5 px-6 bg-white rounded-2xl flex-1">
-            <p className="font-semibold mb-[1px] text-[13px] ">Total Staked</p>
-            <div className="text-black font-semibold text-xl text-black">{totalContractBalance}</div>
-          </div>
+          <Card className="py-5 px-6 bg-white rounded-2xl flex-1">
+            <p className="font-semibold mb-[1px] text-[13px] ">
+              <Text>Total Staked</Text>
+            </p>
+            <div className="text-black font-semibold text-xl text-black">
+              <Text>{totalContractBalance}</Text>
+            </div>
+          </Card>
         </div>
         <div>
-          <p className="font-semibold mb-2 text-black text-xl">Stake Information</p>
+          <p className="font-semibold mb-2 text-black text-xl">
+            <Text>Stake Information</Text>
+          </p>
 
           <List>Claim your share of protocol revenue generated.</List>
           <List>
@@ -59,7 +74,9 @@ export default function Overview() {
         </div>
       </header>
       <div>
-        <p className="font-semibold text-black text-xl">Total Staked</p>
+        <p className="font-semibold text-black text-xl">
+          <Text>Total Staked</Text>
+        </p>
         <div className="my-5 sm:h-[280px] h-[200px]">
           <RechartGraph />
         </div>

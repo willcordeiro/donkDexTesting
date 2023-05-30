@@ -7,17 +7,19 @@ const Container = styled.div`
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#1f202e')};
 `
 
-const Span = styled.span`
-  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
-`
+const Span = styled.span``
 
 const List = styled.li`
   list-style: none;
-  color: black;
 
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : '#9b9bb0')};
   a {
-    color: black;
+    color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : '#9b9bb0')};
   }
+`
+
+const Disclink = styled.span`
+  color: #ff8e3f;
 `
 
 export default function Footer() {
@@ -44,7 +46,7 @@ export default function Footer() {
                 className="text-orange500 hover:underListne"
                 rel="noreferrer"
               >
-                our official Discord
+                <Disclink> our official Discord</Disclink>
               </a>{' '}
               for dedicated support
             </List>

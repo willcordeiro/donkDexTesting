@@ -96,16 +96,6 @@ export default function Filter() {
             className="w-full text-sm "
           />
         </Label>
-        <div className="text-sm flex items-center max-lg:mr-auto ">
-          <span>Sort by:</span>
-          <Btn className={`${sort === 'Liquidity' ? 'font-semibold' : ''}`} onClick={() => setSort('Liquidity')}>
-            Liquidity
-          </Btn>
-          <span> | </span>
-          <Btn className={`${sort === 'APR' ? 'font-semibold' : ''}`} onClick={() => setSort('APR')}>
-            APR
-          </Btn>
-        </div>
       </div>
       <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
         {filteredUsers.length !== 0 ? (

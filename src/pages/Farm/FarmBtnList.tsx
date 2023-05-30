@@ -9,7 +9,9 @@ const Btn = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
   margin-bottom: 20px;
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '' : '#2f3146')};
 `
 
 export default function FarmBtnList() {

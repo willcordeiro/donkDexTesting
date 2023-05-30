@@ -34,13 +34,17 @@ export const HoverCard = styled(Card)`
 `
 const StyledPositionCard = styled(LightCard)`
   border: none;
-  background: #f1ece9;
+  background: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#191924')};
   position: relative;
   overflow: hidden;
   min-width: 800px;
   :hover {
-    background-color: rgb(232 226 222);
+    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'rgb(232 226 222)' : '#474a66')};
   }
+`
+
+const Text2 = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
 `
 
 interface PositionCardProps {
@@ -86,7 +90,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
             <FixedHeightRow>
               <RowFixed>
                 <Text fontWeight={500} fontSize={16}>
-                  Your position
+                  <Text2> Your position</Text2>
                 </Text>
               </RowFixed>
             </FixedHeightRow>
@@ -94,32 +98,34 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
               <RowFixed>
                 <DoubleCurrencyLogo currency0={currency0} currency1={currency1} margin={true} size={20} />
                 <Text fontWeight={500} fontSize={20}>
-                  {currency0.symbol}/{currency1.symbol}
+                  <Text2>
+                    {currency0.symbol}/{currency1.symbol}
+                  </Text2>
                 </Text>
               </RowFixed>
               <RowFixed>
                 <Text fontWeight={500} fontSize={20}>
-                  {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
+                  <Text2> {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}</Text2>
                 </Text>
               </RowFixed>
             </FixedHeightRow>
 
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-                Your pool share:
+                <Text2> Your pool share:</Text2>
               </Text>
               <Text fontSize={16} fontWeight={500}>
-                {poolTokenPercentage ? poolTokenPercentage.toFixed(6) + '%' : '-'}
+                <Text2>{poolTokenPercentage ? poolTokenPercentage.toFixed(6) + '%' : '-'}</Text2>
               </Text>
             </FixedHeightRow>
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-                {currency0.symbol}:
+                <Text2>{currency0.symbol}:</Text2>
               </Text>
               {token0Deposited ? (
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
-                    {token0Deposited?.toSignificant(6)}
+                    <Text2> {token0Deposited?.toSignificant(6)}</Text2>
                   </Text>
                 </RowFixed>
               ) : (
@@ -128,12 +134,12 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
             </FixedHeightRow>
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-                {currency1.symbol}:
+                <Text2> {currency1.symbol}:</Text2>
               </Text>
               {token1Deposited ? (
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
-                    {token1Deposited?.toSignificant(6)}
+                    <Text2> {token1Deposited?.toSignificant(6)}</Text2>
                   </Text>
                 </RowFixed>
               ) : (
@@ -207,28 +213,31 @@ export default function FullPositionCard({ pair, border, stakedBalance }: any) {
             <td className="text-left flex items-center gap-2">
               <DoubleCurrencyLogo currency0={currency0} currency1={currency1} size={27} />
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
+                <Text2>
+                  {' '}
+                  {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
+                </Text2>
               </Text>
               <span className="px-2 py-[6px] text-xs bg-[#dbdbdb91]">2.08%</span>
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                {!currency0 || !currency1 ? <Dots>Loading</Dots> : `$345,564,839`}
+                <Text2>{!currency0 || !currency1 ? <Dots>Loading</Dots> : `$345,564,839`}</Text2>
               </Text>
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                {!currency0 || !currency1 ? <Dots>Loading</Dots> : `$67`}
+                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `$67`}</Text2>
               </Text>
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                {!currency0 || !currency1 ? <Dots>Loading</Dots> : `24.45%`}
+                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `24.45%`}</Text2>
               </Text>
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                {!currency0 || !currency1 ? <Dots>Loading</Dots> : `7.90%`}
+                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `7.90%`}</Text2>
               </Text>
             </td>
           </tr>
@@ -240,32 +249,32 @@ export default function FullPositionCard({ pair, border, stakedBalance }: any) {
           <AutoRow gap="8px">
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-                Your total pool tokens:
+                <Text2> Your total pool tokens:</Text2>
               </Text>
               <Text fontSize={16} fontWeight={500}>
-                {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
+                <Text2> {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}</Text2>
               </Text>
             </FixedHeightRow>
             {stakedBalance && (
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
-                  Pool tokens in rewards pool:
+                  <Text2> Pool tokens in rewards pool:</Text2>
                 </Text>
                 <Text fontSize={16} fontWeight={500}>
-                  {stakedBalance.toSignificant(4)}
+                  <Text2> {stakedBalance.toSignificant(4)}</Text2>
                 </Text>
               </FixedHeightRow>
             )}
             <FixedHeightRow>
               <RowFixed>
                 <Text fontSize={16} fontWeight={500}>
-                  Pooled {currency0.symbol}:
+                  <Text2> Pooled {currency0.symbol}:</Text2>
                 </Text>
               </RowFixed>
               {token0Deposited ? (
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
-                    {token0Deposited?.toSignificant(6)}
+                    <Text2> {token0Deposited?.toSignificant(6)}</Text2>
                   </Text>
                   <CurrencyLogo size="20px" style={{ marginLeft: '8px' }} currency={currency0} />
                 </RowFixed>
@@ -277,13 +286,13 @@ export default function FullPositionCard({ pair, border, stakedBalance }: any) {
             <FixedHeightRow>
               <RowFixed>
                 <Text fontSize={16} fontWeight={500}>
-                  Pooled {currency1.symbol}:
+                  <Text2> Pooled {currency1.symbol}:</Text2>
                 </Text>
               </RowFixed>
               {token1Deposited ? (
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
-                    {token1Deposited?.toSignificant(6)}
+                    <Text2> {token1Deposited?.toSignificant(6)}</Text2>
                   </Text>
                   <CurrencyLogo size="20px" style={{ marginLeft: '8px' }} currency={currency1} />
                 </RowFixed>
@@ -294,12 +303,15 @@ export default function FullPositionCard({ pair, border, stakedBalance }: any) {
 
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-                Your pool share:
+                <Text2> Your pool share:</Text2>
               </Text>
               <Text fontSize={16} fontWeight={500}>
-                {poolTokenPercentage
-                  ? (poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)) + '%'
-                  : '-'}
+                <Text2>
+                  {' '}
+                  {poolTokenPercentage
+                    ? (poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)) + '%'
+                    : '-'}
+                </Text2>
               </Text>
             </FixedHeightRow>
 

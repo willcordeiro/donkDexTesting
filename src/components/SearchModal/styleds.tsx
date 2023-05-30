@@ -57,7 +57,7 @@ export const Checkbox = styled.input`
 `
 
 export const PaddedColumn = styled(AutoColumn)`
-  padding: 20px;
+  padding: 10px;
 `
 
 export const MenuItem = styled(RowBetween)`
@@ -85,7 +85,7 @@ export const SearchInput = styled.input`
   border: none;
   outline: none;
   border-radius: 5px;
-  color: ${({ theme }) => theme.text1};
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
   border-style: solid;
   border: 1px solid ${({ theme }) => theme.bg3};
   -webkit-appearance: none;

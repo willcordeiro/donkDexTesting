@@ -40,6 +40,10 @@ const Label = styled.label`
   justify-content: space-between;
 `
 
+const Text = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
+`
+
 const Input = styled.input`
   border: none;
   background: none;
@@ -55,6 +59,10 @@ const Input = styled.input`
 const ButtonContainer = styled.div`
   text-align: center;
   margin-top: 20px;
+`
+
+const Card = styled.div`
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
 `
 
 export default function StakeUnStake() {
@@ -190,7 +198,7 @@ export default function StakeUnStake() {
           borderBottom={stakeUnStake == 'Stake' ? 'solid 2px black' : ''}
           onClick={() => setStakeUnStake('Stake')}
         >
-          Stake
+          <Text>Stake</Text>
         </Button>
         <Button
           type="button"
@@ -198,7 +206,7 @@ export default function StakeUnStake() {
           borderBottom={stakeUnStake === 'Unstake' ? 'solid 2px black' : ''}
           onClick={() => setStakeUnStake('Unstake')}
         >
-          Unstake
+          <Text>Unstake</Text>
         </Button>
       </ControlButtons>
       {stakeUnStake === 'Stake' ? (
@@ -223,22 +231,30 @@ export default function StakeUnStake() {
         )}
       </ButtonContainer>
 
-      <div className="grid grid-cols-2 mt-12 py-10 bg-white text-black rounded-2xl text-left p-5">
+      <Card className="grid grid-cols-2 mt-12 py-10 bg-white text-black rounded-2xl text-left p-5">
         <div className="font-semibold col-span-2 ">
-          <p className="mb-1">Staked Balance</p>
+          <p className="mb-1">
+            <Text>Staked Balance</Text>
+          </p>
           <div className="gap-2 flex">
             <img src={logo} alt="bitcoin" width={60} />
-            <p>{totalUserStaked} Donk</p>
+            <p>
+              <Text>{totalUserStaked} Donk</Text>
+            </p>
           </div>
         </div>
         <div className="font-semibold col-span-2 ">
-          <p className="mb-1">Pending Rewards</p>
+          <p className="mb-1">
+            <Text>Pending Rewards</Text>
+          </p>
           <div className="gap-2 flex">
             <img src={logo} alt="litecoin" width={60} />
-            <p>{stakeReward} Donk</p>
+            <p>
+              <Text>{stakeReward} Donk</Text>
+            </p>
           </div>
         </div>
-      </div>
+      </Card>
       <ButtonContainer>
         <div className="col-span-2 text-center">
           {' '}

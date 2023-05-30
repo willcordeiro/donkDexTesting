@@ -23,9 +23,13 @@ const Button = styled.button`
   cursor: pointer;
 `
 
+const Container = styled.div`
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#191924')};
+`
+
 export default function ManageFarm() {
   return (
-    <div className="bg-pink100 pt-3 pb-14">
+    <Container className="bg-pink100 pt-3 pb-14">
       <section className="max-w-5xl w-[90%] mx-auto">
         <div className="justify-between w-full">
           <ContainerHeader className="fic gap-1 relative rounded-3xl justify-between w-full">
@@ -46,6 +50,6 @@ export default function ManageFarm() {
           <ManageStakeUnstake />
         </main>
       </section>
-    </div>
+    </Container>
   )
 }

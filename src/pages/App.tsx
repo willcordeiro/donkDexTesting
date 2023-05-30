@@ -62,6 +62,7 @@ const AppWrapper = styled.div`
   font-weight: 500;
   line-height: 20px;
   text-align: center;
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#191924')};
 `
 
 const HeaderWrapper = styled.div`

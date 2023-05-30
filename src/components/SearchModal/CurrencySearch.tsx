@@ -29,6 +29,7 @@ const ContentWrapper = styled(Column)`
   flex: 1 1;
   position: relative;
   border-radius: 5px;
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#2f3146')};
 `
 
 const Footer = styled.div`
@@ -38,6 +39,10 @@ const Footer = styled.div`
   background-color: #ff8e4c;
   color: white;
   border-top: 1px solid ${({ theme }) => theme.bg2};
+`
+
+const Text2 = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
 `
 
 interface CurrencySearchProps {
@@ -168,7 +173,7 @@ export function CurrencySearch({
       <PaddedColumn gap="16px">
         <RowBetween>
           <Text fontWeight={500} fontSize={16}>
-            Select a token
+            <Text2> Select a token</Text2>
           </Text>
           <CloseIcon onClick={onDismiss} />
         </RowBetween>
@@ -226,7 +231,7 @@ export function CurrencySearch({
           <ButtonText onClick={showManageView} color={'white'} className="list-token-manage-button">
             <RowFixed>
               <IconWrapper size="16px" marginRight="6px">
-                <Edit />
+                <Edit color={'white'} />
               </IconWrapper>
               <TYPE.main color={'white'}>Manage</TYPE.main>
             </RowFixed>

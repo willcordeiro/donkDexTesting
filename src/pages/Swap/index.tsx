@@ -348,7 +348,7 @@ export default function Swap() {
                           onSwitchTokens()
                         }}
                       >
-                        <span className="absolute bg-white rounded-full">
+                        <span className="absolute rounded-full">
                           <img src={updownarrow} alt="arrow" />
                         </span>
                       </div>

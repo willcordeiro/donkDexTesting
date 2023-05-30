@@ -83,6 +83,9 @@ const ButtonLink = styled.button`
   outline: inherit;
   text-decoration: none;
 `
+const Text2 = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
+`
 
 const ContainerApp = styled.section`
   margin: auto;
@@ -390,16 +393,18 @@ export default function AddLiquidity({
             <header className="pb-14">
               <Link to="/pool">
                 <ButtonLink type="button" className="fic gap-1 font-semibold px-2 py-2 mb-4">
-                  <AiOutlineArrowLeft fontSize="14px" />
-                  Back to pool list
+                  <Text2>
+                    <AiOutlineArrowLeft fontSize="14px" />
+                  </Text2>
+                  <Text2> Back to pool list</Text2>
                 </ButtonLink>
               </Link>
               <div className="flex items-center gap-1">
                 <img src={`${twoCurrencies[0]?.tokenInfo?.logoURI ?? ETHlogo}`} alt="noImage" className="w-8 sm:w-10" />
-                <span className="font-semibold text-2xl text-black">{twoCurrencies[0]?.symbol}</span>
-                <span>/</span>
+                <Text2 className="font-semibold text-2xl text-black">{twoCurrencies[0]?.symbol}</Text2>
+                <Text2>/</Text2>
                 <img src={`${twoCurrencies[1]?.tokenInfo?.logoURI ?? ETHlogo}`} alt="noImage" className="w-8 sm:w-10" />
-                <span className="font-semibold text-2xl text-black">{twoCurrencies[1]?.symbol}</span>
+                <Text2 className="font-semibold text-2xl text-black">{twoCurrencies[1]?.symbol}</Text2>
               </div>
             </header>
           ) : (
@@ -421,12 +426,15 @@ export default function AddLiquidity({
                   <ButtonList>
                     <div className="w-full">
                       <Button type="button" style={{ backgroundColor: '#fba676', padding: '12px', color: '#f1ece9' }}>
-                        Add Liquidity
+                        <Text2>Add Liquidity</Text2>
                       </Button>
                     </div>
                     <div className="w-full">
                       <Link to={`/remove/${twoCurrencies[0].address}/${twoCurrencies[1].address}`}>
-                        <ButtonLink type="button">Remove Liquidity</ButtonLink>
+                        <ButtonLink type="button">
+                          {' '}
+                          <Text2>Remove Liquidity</Text2>
+                        </ButtonLink>
                       </Link>
                     </div>
                   </ButtonList>
@@ -487,7 +495,7 @@ export default function AddLiquidity({
                         <LightCard padding="0px" borderRadius={'20px'}>
                           <RowBetween padding="1rem">
                             <TYPE.subHeader fontWeight={500} fontSize={14}>
-                              {noLiquidity ? 'Initial prices' : 'Prices'} and pool share
+                              <Text2> {noLiquidity ? 'Initial prices' : 'Prices'} and pool share</Text2>
                             </TYPE.subHeader>
                           </RowBetween>{' '}
                           <LightCard padding="1rem" borderRadius={'20px'}>

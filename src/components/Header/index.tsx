@@ -48,7 +48,7 @@ const HeaderFrame = styled.div`
   width: 100%;
   top: 0;
   position: relative;
-  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : 'white')};
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#191924')};
   padding: 1rem;
   z-index: 2;
 
@@ -217,12 +217,12 @@ const StyledNavLink = styled(NavLink).attrs({
   outline: none;
   cursor: pointer;
   text-decoration: none;
-  color: ${({ theme }) => theme.text1};
   font-size: 16px;
   width: fit-content;
   margin: 0 12px;
   font-weight: 500;
-  color: inherit;
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#736666' : '#9b9bb0')};
+  text-decoration: none;
   text-decoration: inherit;
   flex-basis: 100%;
   border-radius: 0.375rem;
@@ -233,14 +233,13 @@ const StyledNavLink = styled(NavLink).attrs({
   &.${activeClassName} {
     border-radius: 5px;
     font-weight: 500;
-
-    color: ${({ theme }) => theme.text1};
+    color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'theme.text1' : '#9b9bb0')};
   }
 
   :hover,
   :focus {
     background-color: rgba(205, 205, 205, 0.416);
-    color: ${({ theme }) => darken(0.1, theme.text1)};
+    color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'theme.text1' : '#9b9bb0')};
   }
 `
 
@@ -253,7 +252,7 @@ const StyledExternalLink = styled(ExternalLink).attrs({
   outline: none;
   cursor: pointer;
   text-decoration: none;
-  color: ${({ theme }) => theme.text1};
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'theme.text1' : '#9b9bb0')};
   font-size: 16px;
   width: fit-content;
   margin: 0 12px;
@@ -262,12 +261,12 @@ const StyledExternalLink = styled(ExternalLink).attrs({
   &.${activeClassName} {
     border-radius: 12px;
     font-weight: 500;
-    color: ${({ theme }) => theme.text1};
+    color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'theme.text1' : '#9b9bb0')};
   }
 
   :hover,
   :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
+    color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'theme.text1' : '#9b9bb0')};
   }
 
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`

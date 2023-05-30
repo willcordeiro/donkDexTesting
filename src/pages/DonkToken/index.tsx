@@ -23,7 +23,9 @@ const Text = styled.span`
 const TextLink = styled.span`
   color: black;
 `
-
+const Text2 = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
+`
 export default function DonkToken() {
   return (
     <section className="max-w-6xl  mx-auto">
@@ -33,7 +35,9 @@ export default function DonkToken() {
             <Button type="button" className="gap-1 font-semibold px-2 py-2 text-black">
               <AiOutlineArrowLeft fontSize="14px" color={'black'} />
             </Button>
-            <TextLink>Back</TextLink>
+            <TextLink>
+              <Text2>Back</Text2>
+            </TextLink>
           </Link>
           <div className="flex min-w-[4rem]">
             <table>
@@ -44,13 +48,17 @@ export default function DonkToken() {
                 </td>
                 <td>
                   <p className="font-semibold text-black">
-                    <Text>Donk</Text>
+                    <Text>
+                      <Text2>Donk</Text2>
+                    </Text>
                   </p>
                 </td>
               </tr>
             </table>
           </div>
-          <p className="text-sm ">Rewards distributed very few days</p>
+          <p className="text-sm ">
+            <Text2>Rewards distributed very few days</Text2>
+          </p>
         </header>
       </Header>
       <main className="grid lg:grid-cols-2 grid-cols-1 gap-10">

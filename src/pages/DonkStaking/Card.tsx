@@ -19,6 +19,10 @@ const Header = styled.div`
   padding: 20px;
 `
 
+const Text = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
+`
+
 export default function Card() {
   const stakingContract: any = useDonkStakingContract()
   const { account, library } = useWeb3React()
@@ -73,27 +77,47 @@ export default function Card() {
             <header className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <img src={logo} alt="logo" width="60" />
-                <span className="font-semibold text-black">Donk</span>
+                <span className="font-semibold text-black">
+                  <Text>Donk</Text>
+                </span>
               </div>
-              <div className="text-xs px-2 py-1 bg-[#cdcdcd6a] font-medium text-black rounded-md">Earn Donk</div>
+              <div className="text-xs px-2 py-1 bg-[#cdcdcd6a] font-medium text-black rounded-md">
+                <Text>Earn Donk</Text>
+              </div>
             </header>
           </Header>
           <div className="grid grid-cols-2 p-5">
             <div>
-              <p className="text-xs text-pink900 mb-[2px]">Total Stacked </p>
-              <p className="font-semibold text-black">{totalContractBalance}</p>
+              <p className="text-xs text-pink900 mb-[2px]">
+                <Text>Total Stacked </Text>
+              </p>
+              <p className="font-semibold text-black">
+                <Text>{totalContractBalance}</Text>
+              </p>
             </div>
             <div>
-              <p className="text-xs text-pink900 mb-[2px] ">Your Stake </p>
-              <p className="font-semibold text-black">{totalUserStaked}</p>
+              <p className="text-xs text-pink900 mb-[2px] ">
+                <Text>Your Stake </Text>
+              </p>
+              <p className="font-semibold text-black">
+                <Text>{totalUserStaked}</Text>
+              </p>
             </div>
             <div>
-              <p className="text-xs text-pink900 mb-[2px] ">APR (1YR)</p>
-              <p className="font-semibold text-black">{apr}%</p>
+              <p className="text-xs text-pink900 mb-[2px] ">
+                <Text>APR (1YR)</Text>
+              </p>
+              <p className="font-semibold text-black">
+                <Text>{apr}%</Text>
+              </p>
             </div>
             <div>
-              <p className="text-xs text-pink900 mb-[2px] ">Unstake Fee</p>
-              <p className="font-semibold text-black">{fee}%</p>
+              <p className="text-xs text-pink900 mb-[2px] ">
+                <Text>Unstake Fee</Text>
+              </p>
+              <p className="font-semibold text-black">
+                <Text>{fee}%</Text>
+              </p>
             </div>
           </div>
         </Link>

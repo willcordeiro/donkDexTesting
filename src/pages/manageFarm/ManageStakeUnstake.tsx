@@ -46,11 +46,18 @@ const Input = styled.input`
   }
 `
 
+const ContainerSection = styled.section`
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
+`
+const Text = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
+`
+
 export default function ManageStakeUnstake() {
   const [stakeUnStake, setStakeUnStake] = useState('Stake')
 
   return (
-    <section className="rounded-2xl bg-white  flex-1">
+    <ContainerSection className="rounded-2xl bg-white  flex-1">
       <Container className="fic font-semibold border-gray-300 ">
         <Button
           type="button"
@@ -58,7 +65,7 @@ export default function ManageStakeUnstake() {
           onClick={() => setStakeUnStake('Stake')}
           borderBottom={stakeUnStake == 'Stake' ? 'solid 2px black' : ''}
         >
-          Stake
+          <Text>Stake</Text>
         </Button>
         <Button
           type="button"
@@ -66,7 +73,7 @@ export default function ManageStakeUnstake() {
           onClick={() => setStakeUnStake('Unstake')}
           borderBottom={stakeUnStake == 'Unstake' ? 'solid 2px black' : ''}
         >
-          Unstake
+          <Text> Unstake</Text>
         </Button>
       </Container>
       <div className="px-6 py-4 flex justify-between flex-col h-[87%]">
@@ -86,12 +93,16 @@ export default function ManageStakeUnstake() {
             />
           </label>
           <div className="fic justify-between gap-3 px-1 my-1">
-            <p className="text-sm font-medium text-black">LP Token Balance</p>
-            <p className="text-black">0</p>
+            <p className="text-sm font-medium text-black">
+              <Text>LP Token Balance</Text>
+            </p>
+            <p className="text-black">
+              <Text>0</Text>
+            </p>
           </div>
           <div className="fic justify-between px-1 mt-5 relative ">
             <Link to="/pool/lp-token" className="font-medium  hover:underline text-black">
-              Get LP Token
+              <Text> Get LP Token</Text>
             </Link>
             {/*<Settings />*/}
           </div>
@@ -99,10 +110,10 @@ export default function ManageStakeUnstake() {
         <div>
           {' '}
           <ButtonSubmit className="bg-orange500 text-white w-full py-[14px] rounded-2xl custom-shadow font-semibold mt-8 hover:bg-[#ff8138]">
-            Connect Wallet
+            <Text>Connect Wallet</Text>
           </ButtonSubmit>
         </div>
       </div>
-    </section>
+    </ContainerSection>
   )
 }

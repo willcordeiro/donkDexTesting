@@ -94,6 +94,10 @@ const ContainerSection = styled.section`
   flex: 1 1 0%;
 `
 
+const Text2 = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
+`
+
 export default function RemoveLiquidity({
   history,
   match: {
@@ -553,16 +557,18 @@ export default function RemoveLiquidity({
             <header className="pb-14">
               <Link to="/pool">
                 <ButtonLink type="button" className="fic gap-1 font-semibold px-2 py-2 mb-4">
-                  <AiOutlineArrowLeft fontSize="14px" />
-                  Back to pool list
+                  <Text2>
+                    <AiOutlineArrowLeft fontSize="14px" />
+                  </Text2>
+                  <Text2>Back to pool list</Text2>
                 </ButtonLink>
               </Link>
               <div className="flex items-center gap-1">
                 <img src={`${twoCurrencies[0]?.tokenInfo?.logoURI ?? ETHlogo}`} alt="noImage" className="w-8 sm:w-10" />
-                <span className="font-semibold text-2xl text-black">{twoCurrencies[0]?.symbol}</span>
-                <span>/</span>
+                <Text2 className="font-semibold text-2xl text-black">{twoCurrencies[0]?.symbol}</Text2>
+                <Text2>/</Text2>
                 <img src={`${twoCurrencies[1]?.tokenInfo?.logoURI ?? ETHlogo}`} alt="noImage" className="w-8 sm:w-10" />
-                <span className="font-semibold text-2xl text-black">{twoCurrencies[1]?.symbol}</span>
+                <Text2 className="font-semibold text-2xl text-black">{twoCurrencies[1]?.symbol}</Text2>
               </div>
             </header>
           ) : (
@@ -584,12 +590,14 @@ export default function RemoveLiquidity({
                   <ButtonList>
                     <div className="w-full">
                       <Link to={`/add/${twoCurrencies[0].address}/${twoCurrencies[1].address}`}>
-                        <ButtonLink type="button">Add Liquidity</ButtonLink>
+                        <ButtonLink type="button">
+                          <Text2> Add Liquidity</Text2>
+                        </ButtonLink>
                       </Link>
                     </div>
                     <div className="w-full">
                       <Button type="button" style={{ backgroundColor: '#fba676', padding: '12px', color: '#f1ece9' }}>
-                        Remove Liquidity
+                        <Text2> Remove Liquidity</Text2>
                       </Button>
                     </div>
                   </ButtonList>
@@ -631,7 +639,9 @@ export default function RemoveLiquidity({
                     <LightCard>
                       <AutoColumn gap="20px">
                         <RowBetween>
-                          <Text fontWeight={500}>Amount</Text>
+                          <Text fontWeight={500}>
+                            <Text2>Amount</Text2>
+                          </Text>
                           <ClickableText
                             fontWeight={500}
                             onClick={() => {
@@ -643,7 +653,7 @@ export default function RemoveLiquidity({
                         </RowBetween>
                         <Row style={{ alignItems: 'flex-end' }}>
                           <Text fontSize={72} fontWeight={500}>
-                            {formattedAmounts[Field.LIQUIDITY_PERCENT]}%
+                            <Text2> {formattedAmounts[Field.LIQUIDITY_PERCENT]}%</Text2>
                           </Text>
                         </Row>
                         {!showDetailed && (
@@ -676,23 +686,23 @@ export default function RemoveLiquidity({
                           <AutoColumn gap="10px">
                             <RowBetween>
                               <Text fontSize={24} fontWeight={500}>
-                                {formattedAmounts[Field.CURRENCY_A] || '-'}
+                                <Text2> {formattedAmounts[Field.CURRENCY_A] || '-'}</Text2>
                               </Text>
                               <RowFixed>
                                 <CurrencyLogo currency={currencyA} style={{ marginRight: '12px' }} />
                                 <Text fontSize={24} fontWeight={500} id="remove-liquidity-tokena-symbol">
-                                  {currencyA?.symbol}
+                                  <Text2>{currencyA?.symbol}</Text2>
                                 </Text>
                               </RowFixed>
                             </RowBetween>
                             <RowBetween>
                               <Text fontSize={24} fontWeight={500}>
-                                {formattedAmounts[Field.CURRENCY_B] || '-'}
+                                <Text2>{formattedAmounts[Field.CURRENCY_B] || '-'}</Text2>
                               </Text>
                               <RowFixed>
                                 <CurrencyLogo currency={currencyB} style={{ marginRight: '12px' }} />
                                 <Text fontSize={24} fontWeight={500} id="remove-liquidity-tokenb-symbol">
-                                  {currencyB?.symbol}
+                                  <Text2>{currencyB?.symbol}</Text2>
                                 </Text>
                               </RowFixed>
                             </RowBetween>
@@ -715,13 +725,9 @@ export default function RemoveLiquidity({
                                 ) : oneCurrencyIsWETH ? (
                                   <StyledInternalLink
                                     to={`/remove/${
-                                      currencyA && currencyEquals(currencyA, WETH[chainId])
-                                        ? '0xdd69db25f6d620a7bad3023c5d32761d353d3de9'
-                                        : currencyIdA
+                                      currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'GoerliETH' : currencyIdA
                                     }/${
-                                      currencyB && currencyEquals(currencyB, WETH[chainId])
-                                        ? '0xdd69db25f6d620a7bad3023c5d32761d353d3de9'
-                                        : currencyIdB
+                                      currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'GoerliETH' : currencyIdB
                                     }`}
                                   >
                                     Receive {BASE_CURRENCY.symbol}
@@ -781,17 +787,23 @@ export default function RemoveLiquidity({
                     {pair && (
                       <div style={{ padding: '10px 20px' }}>
                         <RowBetween>
-                          Price:
+                          <Text2>Price:</Text2>
                           <div>
-                            1 {currencyA?.symbol} = {tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'}{' '}
-                            {currencyB?.symbol}
+                            <Text2>
+                              {' '}
+                              1 {currencyA?.symbol} = {tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'}{' '}
+                              {currencyB?.symbol}
+                            </Text2>
                           </div>
                         </RowBetween>
                         <RowBetween>
                           <div />
                           <div>
-                            1 {currencyB?.symbol} = {tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'}{' '}
-                            {currencyA?.symbol}
+                            <Text2>
+                              {' '}
+                              1 {currencyB?.symbol} = {tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'}{' '}
+                              {currencyA?.symbol}
+                            </Text2>
                           </div>
                         </RowBetween>
                       </div>

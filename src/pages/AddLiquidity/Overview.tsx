@@ -1,40 +1,58 @@
 import React from 'react'
 import GraphSection from '../Pool/GraphSection'
+import styled from 'styled-components'
+
+const Text = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
+`
+
+const CardContainer = styled.div`
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
+  text-align: left;
+`
 
 export default function Overview() {
   return (
     <section className="basis-3/5">
-      <header className="mb-8">
-        <p className="font-semibold mb-2 text-xl">Overview</p>
+      <header className="mb-8 text-left">
+        <Text className="font-semibold mb-2 text-xl ">Overview</Text>
         <div className="mb-5 grid grid-cols-1 md:grid-cols-2 gap-2">
-          <div className="py-4 px-5 bg-white drounded-xl">
-            <p className="text-pink900 mb-[1px] text-[13px] ">Liquidity</p>
+          <CardContainer className="py-4 px-5 bg-white rounded-xl">
+            <p className="text-pink900 mb-[1px] text-[13px] ">
+              <Text>Liquidity</Text>
+            </p>
             <div className=" font-semibold text-[22px]">
-              <span>120,863,779</span>
+              <Text>120,863,779</Text>
               <span className="font-normal text-green-500 text-sm ml-2">5.38%</span>
             </div>
-          </div>
-          <div className="py-4 px-5 bg-white  rounded-xl">
-            <p className="text-pink900 mb-[1px] text-[13px] ">Volume (24h)</p>
+          </CardContainer>
+          <CardContainer className="py-4 px-5 bg-white  rounded-xl">
+            <p className="text-pink900 mb-[1px] text-[13px] ">
+              <Text>Volume (24h)</Text>
+            </p>
             <div className=" font-semibold text-[22px]">
-              <span>120,863,779</span>
+              <Text>120,863,779</Text>
               <span className="font-normal text-green-500 text-sm ml-2">5.38%</span>
             </div>
-          </div>
-          <div className="py-4 px-5 bg-white rounded-xl">
-            <p className="text-pink900 mb-[1px] text-[13px]">Fees (24h)</p>
+          </CardContainer>
+          <CardContainer className="py-4 px-5 bg-white rounded-xl">
+            <p className="text-pink900 mb-[1px] text-[13px]">
+              <Text>Fees (24h)</Text>
+            </p>
             <div className=" font-semibold text-[22px]">
-              <span>120,863,779</span>
+              <Text>120,863,779</Text>
               <span className="font-normal text-red-500 text-sm ml-2">5.38%</span>
             </div>
-          </div>
-          <div className="py-4 px-5 bg-white rounded-xl">
-            <p className="text-pink900 mb-[1px] text-[13px] ">APR</p>
+          </CardContainer>
+          <CardContainer className="py-4 px-5 bg-white rounded-xl">
+            <p className="text-pink900 mb-[1px] text-[13px] ">
+              <Text>APR</Text>
+            </p>
             <div className="font-semibold text-[22px]">
-              <span>120,863,779</span>
+              <Text>120,863,779</Text>
               <span className="font-normal text-green-500 text-sm ml-2">5.38%</span>
             </div>
-          </div>
+          </CardContainer>
         </div>
       </header>
 

@@ -15,12 +15,14 @@ const Wrapper = styled.div`
   width: 100%;
   position: relative;
   padding-bottom: 80px;
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
 `
 
 const ToggleWrapper = styled(RowBetween)`
-  background-color: ${({ theme }) => theme.bg3};
   border-radius: 12px;
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
   padding: 6px;
+  border: solid 1px gray;
 `
 
 const ToggleOption = styled.div<{ active?: boolean }>`
@@ -39,6 +41,10 @@ const ToggleOption = styled.div<{ active?: boolean }>`
     cursor: pointer;
     opacity: 0.7;
   }
+`
+
+const Text2 = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
 `
 
 export default function Manage({
@@ -63,7 +69,7 @@ export default function Manage({
         <RowBetween>
           <ArrowLeft style={{ cursor: 'pointer' }} onClick={() => setModalView(CurrencyModalView.search)} />
           <Text fontWeight={500} fontSize={20}>
-            Manage
+            <Text2> Manage </Text2>
           </Text>
           <CloseIcon onClick={onDismiss} />
         </RowBetween>

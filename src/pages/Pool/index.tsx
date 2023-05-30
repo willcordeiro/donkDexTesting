@@ -98,6 +98,10 @@ const Input = styled.input`
   border: none;
 `
 
+const Text2 = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
+`
+
 export default function Pool() {
   const theme = useContext(ThemeContext)
   const { account, chainId } = useActiveWeb3React()
@@ -188,8 +192,12 @@ export default function Pool() {
         <section className="max-w-6xl w-[90%] mx-auto">
           <header className="flex items-center justify-between  gap-1">
             <div>
-              <h2 className="font-semibold sm:text-4xl text-3xl text-left text-black">Pool</h2>
-              <p className="text-sm font-medium text-left	">Provide liquidity and earn fees</p>
+              <h2 className="font-semibold sm:text-4xl text-3xl text-left text-black">
+                <Text2>Pool</Text2>
+              </h2>
+              <p className="text-sm font-medium text-left	">
+                <Text2>Provide liquidity and earn fees</Text2>
+              </p>
             </div>
           </header>
           <div className="flex gap-10 max-md:flex-wrap">

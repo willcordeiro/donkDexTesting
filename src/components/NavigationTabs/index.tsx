@@ -51,6 +51,9 @@ const ActiveText = styled.div`
   font-weight: 500;
   font-size: 20px;
 `
+const Text2 = styled.span`
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
+`
 
 const StyledArrowLeft = styled(ArrowLeft)`
   color: ${({ theme }) => theme.text1};
@@ -99,7 +102,9 @@ export function AddRemoveTabs({ adding, creating }: { adding: boolean; creating:
         >
           <StyledArrowLeft />
         </HistoryLink>
-        <ActiveText>{creating ? 'Create a pair' : adding ? 'Add Liquidity' : 'Remove Liquidity'}</ActiveText>
+        <ActiveText>
+          <Text2>{creating ? 'Create a pair' : adding ? 'Add Liquidity' : 'Remove Liquidity'}</Text2>
+        </ActiveText>
         <Settings />
       </RowBetween>
     </Tabs>

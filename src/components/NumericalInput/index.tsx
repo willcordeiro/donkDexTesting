@@ -17,7 +17,7 @@ const StyledInput = styled.input<{ error?: boolean; fontSize?: string; align?: s
   text-overflow: ellipsis;
   padding: 0px;
   -webkit-appearance: textfield;
-
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#1f202e')};
   ::-webkit-search-decoration {
     -webkit-appearance: none;
   }
