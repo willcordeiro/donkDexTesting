@@ -58,7 +58,7 @@ export default function Card() {
     // Check apr
     const fee = await stakingContract.connect(account).getStakingFee()
 
-    const amount = `${fee / 10000}`
+    const amount = `${fee / 100}`
 
     setFee(amount)
   }
