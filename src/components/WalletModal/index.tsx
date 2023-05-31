@@ -221,25 +221,25 @@ export default function WalletModal({
         if (option.connector === portis) {
           return null
         }
-
-        if (!window.web3 && !window.ethereum && option.mobile) {
-          return (
-            <Option
-              onClick={() => {
-                option.connector !== connector && !option.href && tryActivation(option.connector)
-              }}
-              id={`connect-${key}`}
-              key={key}
-              active={option.connector && option.connector === connector}
-              color={option.color}
-              link={option.href}
-              header={option.name}
-              subheader={null}
-              icon={require('../../assets/images/' + option.iconName).default}
-            />
-          )
+        if (option.name === 'Injected') {
+          return null
         }
-        return null
+
+        return (
+          <Option
+            onClick={() => {
+              option.connector !== connector && !option.href && tryActivation(option.connector)
+            }}
+            id={`connect-${key}`}
+            key={key}
+            active={option.connector && option.connector === connector}
+            color={option.color}
+            link={option.href}
+            header={option.name}
+            subheader={null}
+            icon={require('../../assets/images/' + option.iconName).default}
+          />
+        )
       }
 
       // overwrite injected when needed
