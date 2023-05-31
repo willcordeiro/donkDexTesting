@@ -8,6 +8,8 @@ import { useDonkTokenContract } from 'hooks/useContract'
 import { useWeb3React } from '@web3-react/core'
 import { useWalletModalToggle } from 'state/application/hooks'
 import { ethers } from 'ethers'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const ControlButtons = styled.div`
   display: flex;
@@ -50,6 +52,7 @@ const Input = styled.input`
   width: 100%;
   font-size: 17px;
   outline: none;
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
   ::placeholder {
     color: #9ca3b4;
     font-size: 17px;
@@ -74,9 +77,11 @@ export default function StakeUnStake() {
   const [stakeAmount, setStakeAmount] = useState('')
   const [stakeReward, setStakeReward] = useState('0')
   const [totalUserStaked, setTotalUserStaked] = useState('0')
-  const [amountRestake, setAmountRestake] = useState('0')
 
   const stakeToken = async () => {
+    if (stakeAmount == '') return toast.warning('You should have an amount to stake!')
+
+    toast.info(`Starting the staking with ${stakeAmount} amount of tokens.`)
     //converting amount
     const amount = ethers.utils.parseUnits(stakeAmount, 18)
 
@@ -94,39 +99,58 @@ export default function StakeUnStake() {
 
     const stakingContractWithSigner = stakingContract.connect(signer)
 
-    const staking = await stakingContractWithSigner.stake(amount)
+    try {
+      const staking = await stakingContractWithSigner.stake(amount)
+      await staking.wait()
 
-    await staking.wait()
-
-    getStakedBalance()
-
-    console.log('Staking...')
+      toast.success(`Sucessfully staked ${stakeAmount} amount of tokens.`)
+      return getStakedBalance()
+    } catch (error) {
+      console.log(error)
+      return toast.error('Something went wrong.')
+    }
   }
 
   const unstakeToken = async () => {
+    if (totalUserStaked == '0') return toast.warning('You should have an amount to unstake!')
+
+    toast.info(`Starting the unstake for ${totalUserStaked} amount of tokens and harvesting ${stakeReward} tokens.`)
     //unstaking tokens
     const signer = library.getSigner(account)
 
     const stakingContractWithSigner = stakingContract.connect(signer)
 
-    await stakingContractWithSigner.unstake().then(() => {
-      getStakedBalance()
-    })
+    try {
+      const staking = await stakingContractWithSigner.unstake()
+      await staking.wait()
 
-    console.log('unstaking...')
+      toast.success(`Successfully unstaked ${totalUserStaked} amount of tokens and harvested ${stakeReward} tokens.`)
+      return getStakedBalance()
+    } catch (error) {
+      console.log(error)
+      return toast.error('Something went wrong.')
+    }
   }
 
   const harvestToken = async () => {
+    if (stakeReward == '0') return toast.warning('You should have an reward amount to harvest!')
+
+    toast.info(`Starting the harvesting for ${stakeReward} amount of tokens.`)
     //harvesting rewards
     const signer = library.getSigner(account)
 
     const stakingContractWithSigner = stakingContract.connect(signer)
 
-    await stakingContractWithSigner.harvest().then(() => {
-      getCurrentRewardAmount()
-    })
+    try {
+      const staking = await stakingContractWithSigner.harvest()
+      await staking.wait()
 
-    console.log('harvesting...')
+      toast.success(`Successfully harvested ${stakeReward} amount of tokens`)
+      return getCurrentRewardAmount()
+    } catch (error) {
+      console.log(error)
+      return toast.error('Something went wrong.')
+    }
   }
 
   const getCurrentStakeTab = async () => {
@@ -170,21 +194,36 @@ export default function StakeUnStake() {
   const restake = async () => {
     const signer = library.getSigner(account)
     const stakingContractWithSigner = stakingContract.connect(signer)
+
     //converting amount
+
     await getCurrentRewardAmount()
-    setAmountRestake(stakeReward)
 
     const amount = ethers.utils.parseUnits(stakeReward, 18)
 
-    await stakingContractWithSigner.harvest().then(() => {
+    const amountConverted = stakeReward
+    toast.info(`Starting the restaking with ${stakeReward} amount of tokens.`)
+
+    try {
+      const harvest = await stakingContractWithSigner.harvest()
+      await harvest.wait()
       getCurrentRewardAmount()
-    })
 
-    // Staking tokens
+      toast.success(`Successfully harvested ${stakeReward} amount of tokens.`)
+      await getCurrentRewardAmount()
 
-    const staking = await stakingContractWithSigner.stake(amount)
+      // Staking tokens
+      const staking = await stakingContractWithSigner.stake(amount)
 
-    await staking.wait()
+      await staking.wait()
+      //TODO: WHEN IT'S HIGHER AMOUNT IT CRASH
+      toast.success(`Successfully Staked ${amountConverted} amount of tokens.`)
+
+      getCurrentRewardAmount()
+    } catch (error) {
+      console.log(error)
+      toast.error('Something went wrong.')
+    }
 
     getStakedBalance()
   }

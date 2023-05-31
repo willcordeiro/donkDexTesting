@@ -51,6 +51,7 @@ import DonkToken from './DonkToken'
 import Farm from './Farm'
 import ManageFarm from './manageFarm'
 import PropTypes from 'prop-types'
+import { ToastContainer } from 'react-toastify'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -120,6 +121,7 @@ export default function App() {
 
   return (
     <Suspense fallback={null}>
+      <ToastContainer />
       <Route />
       <Route component={DarkModeQueryParamReader} />
       <AppWrapper>
