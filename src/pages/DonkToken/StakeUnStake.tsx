@@ -199,7 +199,7 @@ export default function StakeUnStake() {
 
     await getCurrentRewardAmount()
 
-    const amount = ethers.utils.parseUnits(stakeReward, 18)
+    const amount = await stakingContractWithSigner.getRewards()
 
     const amountConverted = stakeReward
     toast.info(`Starting the restaking with ${stakeReward} amount of tokens.`)
@@ -216,7 +216,7 @@ export default function StakeUnStake() {
       const staking = await stakingContractWithSigner.stake(amount)
 
       await staking.wait()
-      //TODO: WHEN IT'S HIGHER AMOUNT IT CRASH
+
       toast.success(`Successfully Staked ${amountConverted} amount of tokens.`)
 
       getCurrentRewardAmount()

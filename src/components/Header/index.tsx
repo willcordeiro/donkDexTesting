@@ -204,6 +204,10 @@ const UniIcon = styled.div`
   :hover {
     transform: rotate(-5deg);
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 const activeClassName = 'ACTIVE'
