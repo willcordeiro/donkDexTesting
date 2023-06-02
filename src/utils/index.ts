@@ -30,10 +30,10 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   1: '',
   3: 'ropsten.',
   4: 'rinkeby.',
-  5: 'goerli.etherscan.io/',
+  11155111: 'sepolia.etherscan.io',
   42: 'kovan.',
   1666600000: 'explorer.harmony.one',
-  42161: 'https://arb1.arbitrum.io/rpc'
+  42161: 'arb1.arbitrum.io/rpc'
 }
 
 export function getEtherscanLink(
@@ -42,7 +42,7 @@ export function getEtherscanLink(
   type: 'transaction' | 'token' | 'address' | 'block'
 ): string {
   let prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}`
-  prefix = [ChainId.GOERLI, ChainId.ARBITRUM].includes(chainId) ? prefix : `${prefix}etherscan.io`
+  prefix = [ChainId.SEPOLIA, ChainId.ARBITRUM].includes(chainId) ? prefix : `${prefix}etherscan.io`
 
   switch (type) {
     case 'transaction': {

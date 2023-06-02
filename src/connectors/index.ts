@@ -45,8 +45,8 @@ switch (BLOCKCHAIN) {
   case Blockchain.ARBITRUM:
     supportedChainIds = [42161]
     break
-  case Blockchain.GOERLI:
-    supportedChainIds = [5]
+  case Blockchain.SEPOLIA:
+    supportedChainIds = [11155111]
     break
   default:
     supportedChainIds = [1, 5, 42161]

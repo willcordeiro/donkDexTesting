@@ -273,7 +273,7 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
           </AutoColumn>
         </CardSection>
 
-        {[Blockchain.ARBITRUM, Blockchain.GOERLI].includes(blockchain) && (
+        {[Blockchain.ARBITRUM, Blockchain.SEPOLIA].includes(blockchain) && (
           <>
             <Break />
             <CardSection gap="sm">

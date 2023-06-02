@@ -10,7 +10,7 @@ export default function usePlatformName(): string {
       return 'DonkSwap'
     case Blockchain.ARBITRUM:
       return 'DonkSwap'
-    case Blockchain.GOERLI:
+    case Blockchain.SEPOLIA:
       return 'DonkSwap'
     default:
       return 'DonkSwap'

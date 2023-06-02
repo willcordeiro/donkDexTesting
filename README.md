@@ -28,11 +28,11 @@ REACT_APP_CHAIN_ID="42161"
 REACT_APP_NETWORK_URL="https://arb1.arbitrum.io/rpc"
 ```
 
-#### Goerli/ DonkSwap
+#### Sepolia/ DonkSwap
 
 ```
-REACT_APP_CHAIN_ID=5
-REACT_APP_NETWORK_URL=https://mainnet.infura.io/v3/
+REACT_APP_CHAIN_ID=11155111
+REACT_APP_NETWORK_URL=https://sepolia.infura.io/v3/
 ```
 
 ### Run

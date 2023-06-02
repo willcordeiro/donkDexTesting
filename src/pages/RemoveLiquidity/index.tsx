@@ -725,9 +725,9 @@ export default function RemoveLiquidity({
                                 ) : oneCurrencyIsWETH ? (
                                   <StyledInternalLink
                                     to={`/remove/${
-                                      currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'GoerliETH' : currencyIdA
+                                      currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'SepoliaETH' : currencyIdA
                                     }/${
-                                      currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'GoerliETH' : currencyIdB
+                                      currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'SepoliaETH' : currencyIdB
                                     }`}
                                   >
                                     Receive {BASE_CURRENCY.symbol}

@@ -1,11 +1,11 @@
-import { Blockchain, ChainId, Currency, ETHER, ARBITRUM, GOERLI } from '@donkswap/sdk'
+import { Blockchain, ChainId, Currency, ETHER, ARBITRUM, SepoliaETH } from '@donkswap/sdk'
 
 export function getBlockchain(chainId: ChainId | undefined): Blockchain {
   switch (chainId) {
     case ChainId.ARBITRUM:
       return Blockchain.ARBITRUM
-    case ChainId.GOERLI:
-      return Blockchain.GOERLI
+    case ChainId.SEPOLIA:
+      return Blockchain.SEPOLIA
     default:
       return Blockchain.ARBITRUM
   }
@@ -21,8 +21,8 @@ export function getBlockchainAdjustedCurrency(
     case Blockchain.ARBITRUM:
       return ARBITRUM
 
-    case Blockchain.GOERLI:
-      return GOERLI
+    case Blockchain.SEPOLIA:
+      return SepoliaETH
     default:
       return ETHER
   }
@@ -34,8 +34,8 @@ export function getBlockchainBlockTime(blockchain: any): number {
     case blockchain.ARBITRUM:
       return 15
 
-    case blockchain.GOERLI:
-      return 5
+    case blockchain.SEPOLIA:
+      return 36
 
     default:
       return 15
@@ -46,8 +46,8 @@ export function getBlockchainName(chainId: ChainId | undefined): string {
   switch (chainId) {
     case ChainId.MAINNET:
       return 'Ethereum'
-    case ChainId.GOERLI:
-      return 'Goerli'
+    case ChainId.SEPOLIA:
+      return 'SEPOLIA'
     case ChainId.ARBITRUM:
       return 'ARBITRUM'
 

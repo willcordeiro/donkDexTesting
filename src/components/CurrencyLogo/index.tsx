@@ -1,5 +1,5 @@
 import { getAddress } from 'ethers/lib/utils'
-import { ChainId, Currency, Token, ETHER, DEFAULT_CURRENCIES, Blockchain, ARBITRUM, GOERLI } from '@donkswap/sdk'
+import { ChainId, Currency, Token, ETHER, DEFAULT_CURRENCIES, Blockchain, ARBITRUM, SepoliaETH } from '@donkswap/sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
@@ -18,7 +18,7 @@ export function getTokenLogoURL(token: Token): string {
     case ChainId.ARBITRUM:
       return EthereumLogo
 
-    case ChainId.GOERLI:
+    case ChainId.SEPOLIA:
       return EthereumLogo
 
     default:
@@ -71,7 +71,7 @@ export default function CurrencyLogo({
     return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
   } else {
     const wrappedCurrency = currency instanceof Token ? baseCurrencies(currency.chainId)[1] : undefined
-    if (currency === GOERLI) {
+    if (currency === SepoliaETH) {
       return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
     } else if (currency === ARBITRUM || (currency === wrappedCurrency && blockchain === Blockchain.ARBITRUM)) {
       return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />

@@ -8,7 +8,7 @@ export const STAKING_SETTINGS: {
     lockRewardsRatio: 95,
     unlockedRewardsRatio: 5
   },
-  [ChainId.GOERLI]: {
+  [ChainId.SEPOLIA]: {
     startBlock: 10183471,
     lockRewardsRatio: 95,
     unlockedRewardsRatio: 5

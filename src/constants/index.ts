@@ -18,7 +18,7 @@ export const DISPLAY_TVL = false
 export const PIT_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.MAINNET]: { name: '', path: '' },
   [ChainId.ARBITRUM]: { name: 'DonkPit', path: '/DonkPit' },
-  [ChainId.GOERLI]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.SEPOLIA]: { name: 'DonkPit', path: '/DonkPit' },
   [ChainId.RINKEBY]: { name: 'DonkPit', path: '/DonkPit' },
   [ChainId.ROPSTEN]: { name: 'DonkPit', path: '/DonkPit' },
   [ChainId.KOVAN]: { name: 'DonkPit', path: '/DonkPit' },
@@ -28,7 +28,7 @@ export const PIT_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
 export const NEST_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.MAINNET]: { name: '', path: '' },
   [ChainId.ARBITRUM]: { name: 'DonkPit', path: '/single' },
-  [ChainId.GOERLI]: { name: 'DonkPit', path: '/single' },
+  [ChainId.SEPOLIA]: { name: 'DonkPit', path: '/single' },
   [ChainId.RINKEBY]: { name: 'DonkPit', path: '/DonkPit' },
   [ChainId.ROPSTEN]: { name: 'DonkPit', path: '/DonkPit' },
   [ChainId.KOVAN]: { name: 'DonkPit', path: '/DonkPit' },
@@ -38,7 +38,7 @@ export const NEST_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
 export const EXCHANGE_SUBGRAPHS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.ARBITRUM]: '',
-  [ChainId.GOERLI]: '',
+  [ChainId.SEPOLIA]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
@@ -48,7 +48,7 @@ export const EXCHANGE_SUBGRAPHS: { [chainId in ChainId]: string } = {
 export const ANALYTICS_URLS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.ARBITRUM]: '',
-  [ChainId.GOERLI]: '',
+  [ChainId.SEPOLIA]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
@@ -58,7 +58,7 @@ export const ANALYTICS_URLS: { [chainId in ChainId]: string } = {
 export const BRIDGE_URLS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.ARBITRUM]: '',
-  [ChainId.GOERLI]: '',
+  [ChainId.SEPOLIA]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
@@ -68,7 +68,7 @@ export const BRIDGE_URLS: { [chainId in ChainId]: string } = {
 export const DOCS_URLS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '',
   [ChainId.ARBITRUM]: '',
-  [ChainId.GOERLI]: '',
+  [ChainId.SEPOLIA]: '',
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
@@ -78,7 +78,7 @@ export const DOCS_URLS: { [chainId in ChainId]: string } = {
 export const WEB_INTERFACES: { [chainId in ChainId]: string[] } = {
   [ChainId.MAINNET]: [''],
   [ChainId.ARBITRUM]: [''],
-  [ChainId.GOERLI]: [''],
+  [ChainId.SEPOLIA]: [''],
   [ChainId.RINKEBY]: [''],
   [ChainId.ROPSTEN]: [''],
   [ChainId.KOVAN]: [''],
@@ -88,7 +88,7 @@ export const WEB_INTERFACES: { [chainId in ChainId]: string[] } = {
 export const TOKEN_LOGO_EXCEPTIONS: { [chainId in ChainId]: string[] } = {
   [ChainId.MAINNET]: [''],
   [ChainId.ARBITRUM]: [''],
-  [ChainId.GOERLI]: [''],
+  [ChainId.SEPOLIA]: [''],
   [ChainId.RINKEBY]: [''],
   [ChainId.ROPSTEN]: [''],
   [ChainId.KOVAN]: [''],
@@ -96,7 +96,7 @@ export const TOKEN_LOGO_EXCEPTIONS: { [chainId in ChainId]: string[] } = {
 }
 
 export const POOL_BACKGROUNDS: { [chainId in ChainId]: string } = {
-  [ChainId.GOERLI]: '#02a2c4',
+  [ChainId.SEPOLIA]: '#02a2c4',
   [ChainId.RINKEBY]: '#02a2c4',
   [ChainId.ARBITRUM]: '#ff8e4c',
   [ChainId.MAINNET]: '#02a2c4',
@@ -106,7 +106,7 @@ export const POOL_BACKGROUNDS: { [chainId in ChainId]: string } = {
 }
 
 export const UNLOCKING_STARTS: { [chainId in ChainId]: number | undefined } = {
-  [ChainId.GOERLI]: undefined,
+  [ChainId.SEPOLIA]: undefined,
   [ChainId.RINKEBY]: undefined,
   [ChainId.ARBITRUM]: undefined,
   [ChainId.MAINNET]: undefined,
@@ -150,7 +150,7 @@ export const MERKLE_DISTRIBUTOR_ADDRESS: { [chainId in ChainId]?: string } = {
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.ARBITRUM]: [WETH[ChainId.ARBITRUM]],
-  [ChainId.GOERLI]: [WETH[ChainId.GOERLI]],
+  [ChainId.SEPOLIA]: [WETH[ChainId.SEPOLIA]],
   [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
   [ChainId.ROPSTEN]: [WETH[ChainId.ROPSTEN]],
@@ -162,7 +162,7 @@ const WETH_ONLY: ChainTokenList = {
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.ARBITRUM]: [...WETH_ONLY[ChainId.ARBITRUM] /* DAI, USDC, USDT, COMP, MKR, WBTC */],
-  [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI] /* DAI, USDC, USDT, COMP, MKR, WBTC */]
+  [ChainId.SEPOLIA]: [...WETH_ONLY[ChainId.SEPOLIA] /* DAI, USDC, USDT, COMP, MKR, WBTC */]
 }
 
 /**
@@ -180,7 +180,7 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY
-  // [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI], getTokenWithDefault(ChainId.GOERLI, '')],
+  // [ChainId.SEPOLIA]: [...WETH_ONLY[ChainId.SEPOLIA], getTokenWithDefault(ChainId.SEPOLIA, '')],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -188,7 +188,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET] /*DAI, USDC, USDT, WBTC */],
   [ChainId.ARBITRUM]: [...WETH_ONLY[ChainId.ARBITRUM] /*DAI, USDC, USDT, WBTC */],
-  [ChainId.GOERLI]: [...WETH_ONLY[ChainId.GOERLI] /*DAI, USDC, USDT, WBTC */]
+  [ChainId.SEPOLIA]: [...WETH_ONLY[ChainId.SEPOLIA] /*DAI, USDC, USDT, WBTC */]
   /*
   [ChainId.BSC_MAINNET]: [
     ...WETH_ONLY[ChainId.BSC_MAINNET],

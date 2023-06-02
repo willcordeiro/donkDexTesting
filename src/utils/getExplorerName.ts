@@ -4,8 +4,8 @@ export default function getExplorerName(blockchain: Blockchain): string {
   switch (blockchain) {
     case Blockchain.ARBITRUM:
       return 'ARBITRUM Explorer'
-    case Blockchain.GOERLI:
-      return 'GOERLI Explorer'
+    case Blockchain.SEPOLIA:
+      return 'SEPOLIA Explorer'
     default:
       return 'Etherscan'
   }

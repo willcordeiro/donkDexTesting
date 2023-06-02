@@ -9,9 +9,9 @@ export default function normalizeWethToken(chainId: ChainId, token: Token | unde
       case ChainId.ARBITRUM:
       case ChainId.ARBITRUM:
         return new Token(chainId, token.address, token.decimals, 'ETH', 'ETHERIUM')
-      case ChainId.GOERLI:
-      case ChainId.GOERLI:
-        return new Token(chainId, token.address, token.decimals, 'GoerliETH', 'GoerliETH')
+      case ChainId.SEPOLIA:
+      case ChainId.SEPOLIA:
+        return new Token(chainId, token.address, token.decimals, 'SepoliaETH', 'SepoliaETH')
 
       default:
         return token
