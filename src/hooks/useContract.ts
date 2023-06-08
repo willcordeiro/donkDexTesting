@@ -46,12 +46,12 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
 }
 
 export function useDonkStakingContract(): Contract | null {
-  const donkStakingContract = '0x6b7618C70921234B76731662f263F3C3Db4A4F94'
+  const donkStakingContract = '0xE513c6BDA225945e265Aad7257a14FfA4ee190bB'
   return useContract(donkStakingContract, DONK_STAKING_ABI)
 }
 
 export function useDonkTokenContract(): Contract | null {
-  const donkTokenContract = '0x4Fd7D81461cE438f5A3C2E0fc3F049d3307b6Dea'
+  const donkTokenContract = '0x42Fb5CE5fe683c301eD6Ed24ED1BE4B81804aD30'
   return useContract(donkTokenContract, DONK_TOKEN_ABI)
 }
 
