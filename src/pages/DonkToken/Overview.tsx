@@ -8,6 +8,10 @@ import { useWeb3React } from '@web3-react/core'
 
 const Container = styled.section`
   text-align: left;
+
+  @media (min-width: 768px) {
+    min-width: 500px;
+  }
 `
 
 const Card = styled.div`
@@ -21,8 +25,12 @@ const List = styled.li`
   font-weight: normal;
   margin-bottom: 5px;
 `
-const Text = styled.span`
+const Text = styled.div`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `
 
 export default function Overview() {
@@ -53,35 +61,21 @@ export default function Overview() {
               <Text>Total Staked</Text>
             </p>
             <div className="text-black font-semibold text-xl text-black">
-              <Text>{totalContractBalance}</Text>
+              <Text>
+                <span>{totalContractBalance}</span>
+              </Text>
             </div>
           </Card>
-        </div>
-        <div>
-          <p className="font-semibold mb-2 text-black text-xl">
-            <Text>Stake Information</Text>
-          </p>
-
-          <List>Claim your share of protocol revenue generated.</List>
-          <List>
-            A % fee is deducted from every swap and used to buy a stablecoin which is distributed to all sJOE stakers.
-          </List>
-          <List>Rewards are distributed every few days, and you can Harvest at any time.</List>
-          <List>
-            The APR (YR) metric shows an annualized return that is forecasted, based on the revenue collected over the
-            previous thirty days.
-          </List>
         </div>
       </header>
       <div>
         <p className="font-semibold text-black text-xl">
-          <Text>Total Staked</Text>
+          <Text>Charts coming soon</Text>
         </p>
         <div className="my-5 sm:h-[280px] h-[200px]">
           <RechartGraph />
         </div>
       </div>
-      <RemittancesTable />
     </Container>
   )
 }

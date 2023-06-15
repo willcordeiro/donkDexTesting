@@ -44,7 +44,7 @@ export default function DonkToken() {
               <tr>
                 <td>
                   {' '}
-                  <img src={logo} alt="logo" height={70} />
+                  <img src={logo} alt="logo" height={45} />
                 </td>
                 <td>
                   <p className="font-semibold text-black">
@@ -56,9 +56,6 @@ export default function DonkToken() {
               </tr>
             </table>
           </div>
-          <p className="text-sm ">
-            <Text2>Rewards distributed very few days</Text2>
-          </p>
         </header>
       </Header>
       <main className="grid lg:grid-cols-2 grid-cols-1 gap-10">

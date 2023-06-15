@@ -76,7 +76,7 @@ export default function Card() {
           <Header>
             <header className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <img src={logo} alt="logo" width="60" />
+                <img src={logo} alt="logo" width="50" />
                 <span className="font-semibold text-black">
                   <Text>Donk</Text>
                 </span>

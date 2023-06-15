@@ -64,6 +64,32 @@ const HeaderFrame = styled.div`
   `}
 `
 
+const Links = styled.a`
+  ${({ theme }) => theme.flexRowNoWrap}
+  align-items: left;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+  width: fit-content;
+  margin: 0 12px;
+  font-weight: 500;
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#736666' : 'white')};
+  text-decoration: none;
+  text-decoration: inherit;
+  flex-basis: 100%;
+  border-radius: 0.375rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  background-color: #ff8e4c;
+  :hover {
+    opacity: 0.5;
+  }
+`
+
 const HeaderControls = styled.div`
   display: flex;
   flex-direction: row;
@@ -201,6 +227,7 @@ const Title = styled.a`
 
 const UniIcon = styled.div`
   transition: transform 0.3s ease;
+
   :hover {
     transform: rotate(-5deg);
   }
@@ -225,7 +252,7 @@ const StyledNavLink = styled(NavLink).attrs({
   width: fit-content;
   margin: 0 12px;
   font-weight: 500;
-  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#736666' : '#9b9bb0')};
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#736666' : 'white')};
   text-decoration: none;
   text-decoration: inherit;
   flex-basis: 100%;
@@ -362,7 +389,7 @@ export default function Header() {
       <HeaderRow>
         <Title href=".">
           <UniIcon>
-            <img width={'62x'} src={darkMode ? logoDark : logo} alt="logo" />
+            <img width={'45x'} src={darkMode ? logoDark : logo} alt="logo" />
           </UniIcon>
         </Title>
         <HeaderLinks>
@@ -399,7 +426,11 @@ export default function Header() {
           )}
         </HeaderLinks>
       </HeaderRow>
+
       <HeaderControls>
+        <Links href="https://drive.google.com/file/d/17VtLDNGbfrm6rjCa_vlPDLWt1YMNIk1L/view" target="_blank">
+          <span>WHITEPAPER</span>
+        </Links>
         <HeaderElement>
           <HideSmall>
             {account && chainId && NETWORK_LABELS[chainId] && (

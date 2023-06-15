@@ -66,6 +66,13 @@ const ButtonContainer = styled.div`
 
 const Card = styled.div`
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
+
+  p {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `
 
 export default function StakeUnStake() {
@@ -276,9 +283,9 @@ export default function StakeUnStake() {
             <Text>Staked Balance</Text>
           </p>
           <div className="gap-2 flex">
-            <img src={logo} alt="bitcoin" width={60} />
+            <img src={logo} alt="bitcoin" width={50} />
             <p>
-              <Text>{totalUserStaked} Donk</Text>
+              <Text>{totalUserStaked}</Text>
             </p>
           </div>
         </div>
@@ -287,9 +294,9 @@ export default function StakeUnStake() {
             <Text>Pending Rewards</Text>
           </p>
           <div className="gap-2 flex">
-            <img src={logo} alt="litecoin" width={60} />
+            <img src={logo} alt="litecoin" width={50} />
             <p>
-              <Text>{stakeReward} Donk</Text>
+              <Text>{stakeReward}</Text>
             </p>
           </div>
         </div>

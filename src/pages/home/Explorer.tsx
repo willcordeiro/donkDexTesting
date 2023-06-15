@@ -77,6 +77,7 @@ export default function Explore() {
           <p className="mt-5 font-semibold text-black">
             <Text>Trade</Text>
           </p>
+          <Text>Coming at July 1st</Text>
         </CardTrade>
 
         <CardLiquidity
@@ -87,6 +88,7 @@ export default function Explore() {
           <p className="mt-5 font-semibold text-black">
             <Text>Provide Liquidity</Text>
           </p>
+          <Text>Coming at July 1st</Text>
         </CardLiquidity>
 
         <CardFarm
@@ -97,6 +99,7 @@ export default function Explore() {
           <p className="mt-5 font-semibold text-black">
             <Text>Farm</Text>
           </p>
+          <Text>Coming at July 15th</Text>
         </CardFarm>
 
         <CardStake
@@ -107,6 +110,7 @@ export default function Explore() {
           <p className="mt-5 font-semibold text-black">
             <Text>Stake</Text>
           </p>
+          <Text>Coming at July 7th</Text>
         </CardStake>
         <CardNFT
           to="/NFTs"
@@ -116,6 +120,7 @@ export default function Explore() {
           <p className="mt-5 font-semibold text-black">
             <Text>Trade NFTs</Text>
           </p>
+          <Text>Coming at July AUGUST 1st</Text>
         </CardNFT>
         {/* <div
                   className="flex flex-col items-center justify-center p-12 rounded-xl border-2 border-transparent hover:border-[#8381b7]  group transition-all duration-300 "

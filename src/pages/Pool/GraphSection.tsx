@@ -35,7 +35,7 @@ export default function GraphSection() {
             <Text>TVL (Total Value Locked)</Text>
           </p>
           <p className="text-2xl font-semibold text-left	text-black">
-            <Text>$86,029,43</Text>
+            <Text>Coming soon</Text>
           </p>
         </div>
         <ChartContainer className="flex items-center gap-1 font-medium px-1 py-1 rounded-md border border-pink900 dark:border-dark900 text-pink900 dark:text-dark900 w-fit">

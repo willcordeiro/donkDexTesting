@@ -22,8 +22,8 @@ export default function Overview() {
               <Text>Liquidity</Text>
             </p>
             <div className=" font-semibold text-[22px]">
-              <Text>120,863,779</Text>
-              <span className="font-normal text-green-500 text-sm ml-2">5.38%</span>
+              <Text>Coming soon</Text>
+              <span className="font-normal text-green-500 text-sm ml-2">...</span>
             </div>
           </CardContainer>
           <CardContainer className="py-4 px-5 bg-white  rounded-xl">
@@ -31,8 +31,8 @@ export default function Overview() {
               <Text>Volume (24h)</Text>
             </p>
             <div className=" font-semibold text-[22px]">
-              <Text>120,863,779</Text>
-              <span className="font-normal text-green-500 text-sm ml-2">5.38%</span>
+              <Text>Coming soon</Text>
+              <span className="font-normal text-green-500 text-sm ml-2">...</span>
             </div>
           </CardContainer>
           <CardContainer className="py-4 px-5 bg-white rounded-xl">
@@ -40,8 +40,8 @@ export default function Overview() {
               <Text>Fees (24h)</Text>
             </p>
             <div className=" font-semibold text-[22px]">
-              <Text>120,863,779</Text>
-              <span className="font-normal text-red-500 text-sm ml-2">5.38%</span>
+              <Text>Coming soon</Text>
+              <span className="font-normal text-red-500 text-sm ml-2">...</span>
             </div>
           </CardContainer>
           <CardContainer className="py-4 px-5 bg-white rounded-xl">
@@ -49,8 +49,8 @@ export default function Overview() {
               <Text>APR</Text>
             </p>
             <div className="font-semibold text-[22px]">
-              <Text>120,863,779</Text>
-              <span className="font-normal text-green-500 text-sm ml-2">5.38%</span>
+              <Text>Coming soon</Text>
+              <span className="font-normal text-green-500 text-sm ml-2">...</span>
             </div>
           </CardContainer>
         </div>
