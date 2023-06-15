@@ -120,7 +120,7 @@ export default function Explore() {
           <p className="mt-5 font-semibold text-black">
             <Text>Trade NFTs</Text>
           </p>
-          <Text>Coming at July AUGUST 1st</Text>
+          <Text>Coming at AUGUST 1st</Text>
         </CardNFT>
         {/* <div
                   className="flex flex-col items-center justify-center p-12 rounded-xl border-2 border-transparent hover:border-[#8381b7]  group transition-all duration-300 "
