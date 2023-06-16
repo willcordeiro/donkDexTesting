@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { Route, Switch, useLocation } from 'react-router-dom'
+import { Route, Switch, useLocation, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import { Blockchain } from '@donkswap/sdk'
 //import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
@@ -52,6 +52,7 @@ import Farm from './Farm'
 import ManageFarm from './manageFarm'
 import PropTypes from 'prop-types'
 import { ToastContainer } from 'react-toastify'
+import { useWeb3React } from '@web3-react/core'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -116,8 +117,14 @@ export default function App() {
   useEffect(() => {
     document.title = platformName
   }, [platformName])*/
-
+  const { account, library } = useWeb3React()
   const location = useLocation()
+
+  const adminVerification = () => {
+    const user = account == '0x9cf363fF78B6B6Caf919886A28f47F1fA10a52e1' //Admin wallet
+
+    return user
+  }
 
   return (
     <Suspense fallback={null}>
@@ -135,18 +142,46 @@ export default function App() {
           <Web3ReactManager>
             <Switch>
               <Route exact strict path="/" component={Home} />
-              <Route exact strict path="/swap" component={Swap} />
-              <Route exact strict path="/claim" component={OpenClaimAddressModalAndRedirectToSwap} />
-              <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
-              <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
-
-              <Route exact strict path="/find" component={PoolFinder} />
-
-              <Route exact strict path="/pool" component={Pool} />
-              <Route exact strict path="/stake" component={DonkStaking} />
-              <Route exact strict path="/stake/token" component={DonkToken} />
-              <Route exact strict path="/Farm" component={Farm} />
-              <Route path="/farm/manage/:id" component={ManageFarm} />
+              <Route exact path="/swap" component={adminVerification() ? Swap : () => <Redirect to="/" />} />
+              <Route
+                exact
+                strict
+                path="/claim"
+                component={adminVerification() ? OpenClaimAddressModalAndRedirectToSwap : () => <Redirect to="/" />}
+              />
+              <Route
+                exact
+                strict
+                path="/swap/:outputCurrency"
+                component={adminVerification() ? RedirectToSwap : () => <Redirect to="/" />}
+              />
+              <Route
+                exact
+                strict
+                path="/send"
+                component={adminVerification() ? RedirectPathToSwapOnly : () => <Redirect to="/" />}
+              />
+              <Route
+                exact
+                strict
+                path="/find"
+                component={adminVerification() ? PoolFinder : () => <Redirect to="/" />}
+              />
+              <Route exact strict path="/pool" component={adminVerification() ? Pool : () => <Redirect to="/" />} />
+              <Route
+                exact
+                strict
+                path="/stake"
+                component={adminVerification() ? DonkStaking : () => <Redirect to="/" />}
+              />
+              <Route
+                exact
+                strict
+                path="/stake/token"
+                component={adminVerification() ? DonkToken : () => <Redirect to="/" />}
+              />
+              <Route exact strict path="/Farm" component={adminVerification() ? Farm : () => <Redirect to="/" />} />
+              <Route path="/farm/manage/:id" component={adminVerification() ? ManageFarm : () => <Redirect to="/" />} />
               {/*  
               <Route exact strict path="/staking/pools" component={Earn} />
               <Route exact strict path="/staking/pools/archived" component={EarnArchived} />
@@ -194,28 +229,83 @@ export default function App() {
               <Route exact strict path="/staking/unlock" component={Unlock} />
               
               { /* blockchain === Blockchain.ETHEREUM && <Route exact strict path="/vote" component={Vote} />  */}
-              <Route exact strict path="/create" component={RedirectToAddLiquidity} />
-              <Route exact path="/add" component={AddLiquidity} />
-              <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
-              <Route exact path="/add/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
-              <Route exact path="/create" component={AddLiquidity} />
-              <Route exact path="/create/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
-              <Route exact path="/create/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
-              <Route exact strict path="/remove/v1/:address" component={RemoveV1Exchange} />
-              <Route exact strict path="/remove/:tokens" component={RedirectOldRemoveLiquidityPathStructure} />
-              <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
-              <Route exact strict path="/migrate/v1" component={MigrateV1} />
-              <Route exact strict path="/migrate/v1/:address" component={MigrateV1Exchange} />
-              <Route exact strict path="/staking/pools/:currencyIdA/:currencyIdB" component={Manage} />
-
+              <Route
+                exact
+                strict
+                path="/create"
+                component={adminVerification() ? RedirectToAddLiquidity : () => <Redirect to="/" />}
+              />
+              <Route exact path="/add" component={adminVerification() ? AddLiquidity : () => <Redirect to="/" />} />
+              <Route
+                exact
+                path="/add/:currencyIdA"
+                component={adminVerification() ? RedirectOldAddLiquidityPathStructure : () => <Redirect to="/" />}
+              />
+              <Route
+                exact
+                path="/add/:currencyIdA/:currencyIdB"
+                component={adminVerification() ? RedirectDuplicateTokenIds : () => <Redirect to="/" />}
+              />
+              <Route
+                exact
+                strict
+                path="/remove/v1/:address"
+                component={adminVerification() ? RemoveV1Exchange : () => <Redirect to="/" />}
+              />
+              <Route
+                exact
+                strict
+                path="/remove/:tokens"
+                component={adminVerification() ? RedirectOldRemoveLiquidityPathStructure : () => <Redirect to="/" />}
+              />
+              <Route
+                exact
+                strict
+                path="/remove/:currencyIdA/:currencyIdB"
+                component={adminVerification() ? RemoveLiquidity : () => <Redirect to="/" />}
+              />
+              <Route
+                exact
+                strict
+                path="/migrate/v1"
+                component={adminVerification() ? MigrateV1 : () => <Redirect to="/" />}
+              />
+              <Route
+                exact
+                strict
+                path="/migrate/v1/:address"
+                component={adminVerification() ? MigrateV1Exchange : () => <Redirect to="/" />}
+              />
+              <Route
+                exact
+                strict
+                path="/staking/pools/:currencyIdA/:currencyIdB"
+                component={adminVerification() ? Manage : () => <Redirect to="/" />}
+              />
               {[Blockchain.HARMONY].includes(blockchain) && (
-                <Route exact strict path="/staking/single/:address" component={SmartChefSingleManage} />
+                <Route
+                  exact
+                  strict
+                  path="/staking/single/:address"
+                  component={adminVerification() ? SmartChefSingleManage : () => <Redirect to="/" />}
+                />
               )}
               {blockchain === Blockchain.HARMONY && (
-                <Route exact strict path="/staking/:category/:address" component={SmartChefLPManage} />
+                <Route
+                  exact
+                  strict
+                  path="/staking/:category/:address"
+                  component={adminVerification() ? SmartChefLPManage : () => <Redirect to="/" />}
+                />
               )}
-              {blockchain === Blockchain.ETHEREUM && <Route exact strict path="/vote/:id" component={VotePage} />}
-
+              {blockchain === Blockchain.ETHEREUM && (
+                <Route
+                  exact
+                  strict
+                  path="/vote/:id"
+                  component={adminVerification() ? VotePage : () => <Redirect to="/" />}
+                />
+              )}
               <Route component={RedirectPathToSwapOnly} />
             </Switch>
           </Web3ReactManager>

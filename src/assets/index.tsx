@@ -6,7 +6,7 @@ import connect from './connect.png'
 import d from './d.webp'
 import discord from './discord.svg'
 import a from './e.webp'
-import etherium from './etherium.png'
+import Ethereum from './etherium.png'
 import github from './github.svg'
 import litecoin from './litecoin.png'
 import logo from './logo.png'
@@ -37,7 +37,7 @@ export {
   e,
   bitcoin,
   connect,
-  etherium,
+  Ethereum,
   litecoin,
   logo,
   m,

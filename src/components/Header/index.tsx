@@ -414,6 +414,7 @@ export default function Header() {
           >
             {t('pool')}
           </StyledNavLink>
+
           <StyledNavLink id={`swap-nav-link`} to={'/stake'}>
             {t('Stake')}
           </StyledNavLink>

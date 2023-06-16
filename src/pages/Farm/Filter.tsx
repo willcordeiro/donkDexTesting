@@ -2,7 +2,7 @@ import { BiSearch } from 'react-icons/bi'
 import React, { useState } from 'react'
 import { useSearch } from 'react-use-search'
 import FarmsCardss from './FarmCards'
-import { etherium, terra, solona, bitcoin, logo } from '../../assets'
+import { Ethereum, terra, solona, bitcoin, logo } from '../../assets'
 import styled from 'styled-components'
 const predicate = (user: { name: string }, query: string) => user.name.toLowerCase().includes(query.toLowerCase())
 
@@ -38,7 +38,7 @@ export default function Filter() {
     {
       id: 1,
       icon: logo,
-      icon2: etherium,
+      icon2: Ethereum,
       name: 'Etherium',
       totalStaked: '345,564,839',
       yourStake: '67',

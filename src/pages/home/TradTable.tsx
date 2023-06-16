@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import TradTableRow from './TradTableRow'
-import { terra, bitcoin, litecoin, solona, etherium } from '../../assets'
+import { terra, bitcoin, litecoin, solona, Ethereum } from '../../assets'
 
 export default function TradTable() {
   const tradInfo = [
@@ -44,7 +44,7 @@ export default function TradTable() {
     },
     {
       uuid: 5,
-      icon: etherium,
+      icon: Ethereum,
       name: 'Etherium',
       volume: '000',
       price: '000',

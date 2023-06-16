@@ -17,7 +17,7 @@ export default function FarmsCards({ data }: any) {
       <header className="flex items-center gap-2 justify-between mb-5" id={id}>
         <div className="flex items-center gap-1">
           <img src={icon} alt="terra" className="w-8 sm:w-10" />
-          <img src={icon2} alt="etherium" className="w-8 sm:w-10" />
+          <img src={icon2} alt="Ethereum" className="w-8 sm:w-10" />
           <span className="font-semibold text-black">
             <Text>{name}</Text>
           </span>

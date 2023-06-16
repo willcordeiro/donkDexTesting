@@ -1,7 +1,7 @@
 import React from 'react'
 import Rewards from './Rewards'
 import { useParams } from 'react-router-dom'
-import { etherium, solona, bitcoin, terra, logo } from '../../assets'
+import { Ethereum, solona, bitcoin, terra, logo } from '../../assets'
 import styled from 'styled-components'
 
 const ContainerHarvest = styled.div`
@@ -22,7 +22,7 @@ export default function Harvest() {
     {
       id2: 1,
       icon: logo,
-      icon2: etherium,
+      icon2: Ethereum,
       name: 'Etherium',
       totalStaked: '859,564,49',
       yourStake: '67',
