@@ -9,83 +9,83 @@ export default function TradTable() {
       uuid: 1,
       icon: terra,
       name: 'Terra',
-      volume: '$345,564,839',
-      price: '$67',
+      volume: '000',
+      price: '000',
       symbol: 'btc.b',
-      _24H: '24.45%',
-      _7D: '7.90%'
+      _24H: '000',
+      _7D: '000'
     },
     {
       uuid: 2,
       icon: bitcoin,
       name: 'Bitcoin',
-      volume: '$345,564,839',
+      volume: '000',
       price: '$23,050',
-      _24H: '24.45%',
-      _7D: '7.90%'
+      _24H: '000',
+      _7D: '000'
     },
     {
       uuid: 3,
       icon: litecoin,
       name: 'Litecoin',
-      volume: '$345,564,839',
-      price: '$67',
-      _24H: '24.45%',
-      _7D: '7.90%'
+      volume: '000',
+      price: '000',
+      _24H: '000',
+      _7D: '000'
     },
     {
       uuid: 4,
       icon: solona,
       name: 'Solana',
-      volume: '$345,564,839',
-      price: '$67',
-      _24H: '24.45%',
-      _7D: '7.90%'
+      volume: '000',
+      price: '000',
+      _24H: '000',
+      _7D: '000'
     },
     {
       uuid: 5,
       icon: etherium,
       name: 'Etherium',
-      volume: '$345,564,839',
-      price: '$67',
-      _24H: '24.45%',
-      _7D: '7.90%'
+      volume: '000',
+      price: '000',
+      _24H: '000',
+      _7D: '000'
     },
     {
       uuid: 6,
       icon: litecoin,
       name: 'Litecoin',
-      volume: '$345,564,839',
-      price: '$67',
-      _24H: '24.45%',
-      _7D: '7.90%'
+      volume: '000',
+      price: '000',
+      _24H: '000',
+      _7D: '000'
     },
     {
       uuid: 7,
       icon: terra,
       name: 'Terra',
-      volume: '$345,564,839',
-      price: '$67',
-      _24H: '24.45%',
-      _7D: '7.90%'
+      volume: '000',
+      price: '000',
+      _24H: '000',
+      _7D: '000'
     },
     {
       uuid: 8,
       icon: terra,
       name: 'Terra',
-      volume: '$345,564,839',
-      price: '$67',
-      _24H: '24.45%',
-      _7D: '7.90%'
+      volume: '000',
+      price: '000',
+      _24H: '000',
+      _7D: '000'
     },
     {
       uuid: 9,
       icon: terra,
       name: 'Terra',
-      volume: '$345,564,839',
-      price: '$67',
-      _24H: '24.45%',
-      _7D: '7.90%'
+      volume: '000',
+      price: '000',
+      _24H: '000',
+      _7D: '000'
     }
   ]
 

@@ -11,7 +11,6 @@ const Span = styled.span``
 
 const List = styled.li`
   list-style: none;
-
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : '#9b9bb0')};
   a {
     color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : '#9b9bb0')};

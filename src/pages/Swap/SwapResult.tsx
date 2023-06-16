@@ -75,7 +75,7 @@ export default function SwipResult({ FieldOne, FieldTwo }: any) {
               ))}
             </ChartContainer>
             <div className="font-bold text-xl max-xl:col-span-2 text-black text-left">
-              <Text>$0.0567</Text>
+              <Text>Charts coming soon</Text>
             </div>
           </header>
           <div className="my-5 sm:h-[300px] h-[200px]">

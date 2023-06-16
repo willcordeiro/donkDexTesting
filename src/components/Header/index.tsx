@@ -38,6 +38,8 @@ import { ANALYTICS_URLS } from '../../constants'
 import logoLight from '../../assets/images/logo/logo_-_discord_icon_1.png'
 import logoDarkOne from '../../assets/images/logo/logo_-_white_bg.png'
 
+import whitepaper from '../../assets/files/DONK-Whitepaper.pdf'
+
 const HeaderFrame = styled.div`
   display: grid;
   grid-template-columns: 1fr 120px;
@@ -73,9 +75,10 @@ const Links = styled.a`
   text-decoration: none;
   font-size: 16px;
   width: fit-content;
+  max-width: 130px;
   margin: 0 12px;
   font-weight: 500;
-  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#736666' : 'white')};
+  color: white;
   text-decoration: none;
   text-decoration: inherit;
   flex-basis: 100%;
@@ -135,7 +138,7 @@ const HeaderElementWrap = styled.div`
 
 const HeaderRow = styled(RowFixed)`
   ${({ theme }) => theme.mediaWidth.upToMedium`
-   width: 109%;
+   width: 100%;
   `};
 `
 
@@ -216,7 +219,7 @@ const Title = styled.a`
   align-items: center;
   pointer-events: auto;
   justify-self: flex-start;
-  margin-right: 12px;
+
   ${({ theme }) => theme.mediaWidth.upToSmall`
     justify-self: center;
   `};
@@ -230,10 +233,6 @@ const UniIcon = styled.div`
 
   :hover {
     transform: rotate(-5deg);
-  }
-
-  @media (max-width: 768px) {
-    display: none;
   }
 `
 
@@ -271,6 +270,11 @@ const StyledNavLink = styled(NavLink).attrs({
   :focus {
     background-color: rgba(205, 205, 205, 0.416);
     color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'theme.text1' : '#9b9bb0')};
+  }
+
+  @media (max-width: 1024px) {
+    padding-left: 0rem;
+    padding-right: 0rem;
   }
 `
 
@@ -387,11 +391,11 @@ export default function Header() {
         <GovTokenBalanceContent setShowUniBalanceModal={setShowUniBalanceModal} />
       </Modal>
       <HeaderRow>
-        <Title href=".">
+        <NavLink id={`swap-nav-link`} to={'/'}>
           <UniIcon>
             <img width={'45x'} src={darkMode ? logoDark : logo} alt="logo" />
           </UniIcon>
-        </Title>
+        </NavLink>
         <HeaderLinks>
           <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
             {t('Trade')}
@@ -428,8 +432,8 @@ export default function Header() {
       </HeaderRow>
 
       <HeaderControls>
-        <Links href="https://drive.google.com/file/d/17VtLDNGbfrm6rjCa_vlPDLWt1YMNIk1L/view" target="_blank">
-          <span>WHITEPAPER</span>
+        <Links href={whitepaper} download>
+          WHITEPAPER
         </Links>
         <HeaderElement>
           <HideSmall>

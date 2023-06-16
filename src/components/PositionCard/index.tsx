@@ -222,22 +222,22 @@ export default function FullPositionCard({ pair, border, stakedBalance }: any) {
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                <Text2>{!currency0 || !currency1 ? <Dots>Loading</Dots> : `$345,564,839`}</Text2>
+                <Text2>{!currency0 || !currency1 ? <Dots>Loading</Dots> : `000`}</Text2>
               </Text>
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `$67`}</Text2>
+                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `000`}</Text2>
               </Text>
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `24.45%`}</Text2>
+                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `000`}</Text2>
               </Text>
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `7.90%`}</Text2>
+                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `000`}</Text2>
               </Text>
             </td>
           </tr>

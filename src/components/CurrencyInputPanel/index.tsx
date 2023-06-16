@@ -34,6 +34,16 @@ const CurrencySelect = styled.button<{ selected: boolean }>`
   user-select: none;
   border: none;
   padding: 0 0.7rem;
+
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    max-width: 170px;
+  }
+
+  @media (max-width: 375px) {
+    max-width: 160px;
+  }
 `
 
 const LabelRow = styled.div`

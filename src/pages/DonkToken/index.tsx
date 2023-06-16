@@ -25,6 +25,7 @@ const TextLink = styled.span`
 `
 const Text2 = styled.span`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
+  font-size: 25px;
 `
 export default function DonkToken() {
   return (
