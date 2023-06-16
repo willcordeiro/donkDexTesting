@@ -384,6 +384,10 @@ export default function Header() {
   const countUpValue = aggregateBalance?.toFixed(0) ?? '0'
   const countUpValuePrevious = usePrevious(countUpValue) ?? '0'
 
+  function openWhitepaper() {
+    window.open(whitepaper, '_blank')
+  }
+
   return (
     <HeaderFrame>
       <ClaimModal />
@@ -433,7 +437,11 @@ export default function Header() {
       </HeaderRow>
 
       <HeaderControls>
-        <Links href={whitepaper} download>
+        <Links
+          onClick={() => {
+            openWhitepaper()
+          }}
+        >
           WHITEPAPER
         </Links>
         <HeaderElement>
