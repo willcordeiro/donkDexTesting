@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -17,11 +16,23 @@ const Text = styled.span`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
 `
 
-export default function PoolCard({ data }: any) {
+export default function PoolCard({ data, func, clicked, isClicked }: any) {
   const { id, icon, icon2, name, address } = data || {}
 
+  const handleClick = () => {
+    if (func) {
+      func(id)
+    }
+
+    if (isClicked) {
+      clicked(false)
+    } else {
+      clicked(true)
+    }
+  }
+
   return (
-    <Container className="bg-white rounded-md w-full">
+    <Container className="bg-white rounded-md w-full" onClick={handleClick}>
       <header className="flex items-center  justify-between " id={id}>
         <div className="flex items-center ">
           <img src={icon} alt="terra" className="w-8" />
