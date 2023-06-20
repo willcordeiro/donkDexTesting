@@ -53,6 +53,7 @@ import ManageFarm from './manageFarm'
 import PropTypes from 'prop-types'
 import { ToastContainer } from 'react-toastify'
 import { useWeb3React } from '@web3-react/core'
+import CreateFarm from './CreatFarm'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -121,7 +122,7 @@ export default function App() {
   const location = useLocation()
 
   const adminVerification = () => {
-    const user = account == '0x9cf363fF78B6B6Caf919886A28f47F1fA10a52e1' //Admin wallet
+    const user = account == '0xfB4c38FC6E72923a594A6B00cb8a7D449409C5e2' //Admin wallet
 
     return user
   }
@@ -182,6 +183,7 @@ export default function App() {
               />
               <Route exact strict path="/Farm" component={adminVerification() ? Farm : () => <Redirect to="/" />} />
               <Route path="/farm/manage/:id" component={adminVerification() ? ManageFarm : () => <Redirect to="/" />} />
+              <Route path="/farm/create" component={adminVerification() ? CreateFarm : () => <Redirect to="/" />} />
               {/*  
               <Route exact strict path="/staking/pools" component={Earn} />
               <Route exact strict path="/staking/pools/archived" component={EarnArchived} />

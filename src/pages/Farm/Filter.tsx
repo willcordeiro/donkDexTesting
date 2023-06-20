@@ -9,6 +9,7 @@ const predicate = (user: { name: string }, query: string) => user.name.toLowerCa
 const Label = styled.label`
   border: 1px solid #9ca6b9;
   max-width: 24rem;
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
 `
 
 const Input = styled.input`
@@ -16,19 +17,12 @@ const Input = styled.input`
   outline: none;
   border: none;
   font-size: 15px;
-
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
   ::placeholder {
     font-size: 15px;
     font-weight: 500;
     color: #9ca6b9;
   }
-`
-
-const Btn = styled.button`
-  outline: none;
-  border: none;
-  cursor: pointer;
-  font-size: 15px;
 `
 
 export default function Filter() {

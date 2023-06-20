@@ -63,6 +63,7 @@ const ResponsiveButtonSecondary = styled(ButtonSecondary)`
   width: fit-content;
   border-radius: 0.375rem;
   border: solid rgb(209 213 219) 1px;
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
   ${({ theme }) => theme.mediaWidth.upToSmall`
     width: 48%;
   `};
@@ -86,6 +87,7 @@ const Label = styled.label`
   border-radius: 0.375rem;
   border: rgb(209 213 219) solid 1px;
   padding: 0.8rem;
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
 `
 
 const Input = styled.input`
@@ -96,6 +98,7 @@ const Input = styled.input`
   background-color: transparent;
   outline: transparent solid 2px;
   border: none;
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
 `
 
 const Text2 = styled.span`
@@ -110,7 +113,7 @@ export default function Pool() {
   const baseCurrency = baseCurrencies(chainId)[0]
 
   const addLiquidityUrl = `/add/${baseCurrency.symbol}`
-  const createPoolUrl = `/create/${baseCurrency.symbol}`
+  const createPoolUrl = `/add/${baseCurrency.symbol}`
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
