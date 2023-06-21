@@ -50,6 +50,8 @@ const PoolCardsContainer = styled.div`
   max-height: 400px;
   overflow: scroll;
   overflow-x: hidden;
+  z-index: 2;
+  position: relative;
 `
 
 const SelectedContainer = styled.div`

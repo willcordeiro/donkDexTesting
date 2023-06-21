@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import SelectPool from './SelectPool'
+import RewardSection from './RewardSeciton'
 const Container = styled.div`
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#191924')};
   text-align: left;
@@ -23,6 +24,9 @@ export default function CreateFarm() {
         </header>
         <section>
           <SelectPool />
+        </section>
+        <section>
+          <RewardSection />{' '}
         </section>
       </section>
     </Container>
