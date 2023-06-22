@@ -20,6 +20,13 @@ const Text = styled.span`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
 `
 
+const SubText = styled.span`
+  font-size: 0.9rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : '#f06e4d')};
+`
+
 const Parent = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -115,6 +122,10 @@ export default function RewardSection() {
   const [endDate, setEndDate] = useState<any>()
   const [endNormal, setEndNormal] = useState<any>()
   const [durationDays, setDurationDays] = useState<any>()
+  const [tokenAmount, setTokenAmount] = useState<any>()
+  const [estimateReward, setEstimateReward] = useState<any>()
+  const [error, setError] = useState<any>()
+
   const today = new Date()
   const minDate = new Date()
   minDate.setHours(today.getHours(), today.getMinutes(), today.getSeconds(), today.getMilliseconds())
@@ -128,10 +139,10 @@ export default function RewardSection() {
     setStartDate(timestamp)
     setStartDateNormal(date)
 
-    if (durationDays != 0) {
+    if (durationDays != '') {
       const newDate = new Date(date)
 
-      newDate.setDate(newDate.getDate() + durationDays)
+      newDate.setDate(newDate.getDate() + parseInt(durationDays))
 
       setEndNormal(newDate)
 
@@ -140,14 +151,23 @@ export default function RewardSection() {
       setEndDate(timestampEnd)
     }
   }
-
-  const handleDurantion = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDuration = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
 
-    // Verificar se o valor é um número inteiro
     const isInteger = Number.isInteger(+value)
 
-    // Utilize a variável 'isInteger' como desejar
+    const intValue = parseInt(value)
+
+    if (intValue < 7) {
+      setError('Period is shorter than min duration of 7 days')
+      console.log(true)
+    } else if (intValue > 90) {
+      setError(' Period is longer than max duration of 90 days')
+      console.log(true)
+    } else {
+      setError('')
+    }
+
     if (isInteger) {
       setDurationDays(value)
     } else {
@@ -167,8 +187,61 @@ export default function RewardSection() {
     }
   }, [startDateNormal, durationDays])
 
+  const handleTokenAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+
+    setTokenAmount(value)
+  }
+
+  const handleEstimateReward = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+
+    setEstimateReward(value)
+  }
+
+  useEffect(() => {
+    if (estimateReward && durationDays) {
+      const valueConverted = estimateReward * durationDays
+
+      setTokenAmount(valueConverted)
+    }
+  }, [estimateReward])
+
+  useEffect(() => {
+    if (tokenAmount && durationDays) {
+      const valueConverted = tokenAmount / durationDays
+      setEstimateReward(valueConverted)
+    }
+  }, [tokenAmount])
+
+  useEffect(() => {
+    if (tokenAmount && durationDays) {
+      const valueConverted = tokenAmount / durationDays
+      setEstimateReward(valueConverted)
+    }
+  }, [durationDays])
+
+  async function add() {
+    if (window?.ethereum?.request) {
+      await window.ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: '0x91158D94CAAe6503fa42bB6E68892C2EA42963A8',
+            symbol: 'DNK',
+            decimals: 18,
+            image:
+              'https://github.com/DonkProtocol/donk-interface/blob/main/src/assets/images/logo/logo_-_white_bg.png?raw=true'
+          }
+        }
+      })
+    }
+  }
+
   return (
     <>
+      <button onClick={add}>here</button>
       <ContainerText>
         <Text>Farming Reward</Text>
       </ContainerText>
@@ -177,16 +250,17 @@ export default function RewardSection() {
           <div className="div1">
             <Text>Token</Text>
             <Label>
-              <Input placeholder="0.0" type="number" />
+              <Input placeholder="0.0" type="number" onChange={handleTokenAmount} value={tokenAmount} />
             </Label>
           </div>
           <div className="div2">
             {' '}
             <Text>Duration</Text>
             <Label>
-              <Input placeholder="7 - 90" type="number" onChange={handleDurantion} value={durationDays} />{' '}
+              <Input placeholder="7 - 90" type="number" onChange={handleDuration} min={7} max={90} />
             </Label>
           </div>
+          <SubText>{error}</SubText>
           <div className="div3">
             {' '}
             <Text>Farming Starts</Text>
@@ -223,7 +297,7 @@ export default function RewardSection() {
           <div className="div5">
             <Text>Estimated rewards / day</Text>
             <Label>
-              <Input type="number" />{' '}
+              <Input type="number" onChange={handleEstimateReward} value={estimateReward} />{' '}
             </Label>
           </div>
         </Parent>

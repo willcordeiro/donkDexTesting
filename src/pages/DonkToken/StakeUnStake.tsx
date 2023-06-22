@@ -196,7 +196,7 @@ export default function StakeUnStake() {
 
   setInterval(() => {
     getCurrentRewardAmount()
-  }, 10000)
+  }, 60000)
 
   const restake = async () => {
     const signer = library.getSigner(account)
