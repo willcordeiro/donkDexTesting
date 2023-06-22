@@ -1,16 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import moment from 'moment'
+import { ButtonDropdownLight } from 'components/Button'
+import CurrencyLogo from 'components/CurrencyLogo'
+import Row from 'components/Row'
+import CurrencySearchModal from 'components/SearchModal/CurrencySearchModal'
+import { Currency } from '@donkswap/sdk'
 
 const Container = styled.div`
-  text-align: left;
   z-index: 1;
   position: relative;
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
   height: 100%;
   padding: 20px;
   border-radius: 1.25rem;
+  margin-top: 20px;
+  min-width: 330px;
+
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
 `
 
 const Text = styled.span`
@@ -24,7 +35,23 @@ const SubText = styled.span`
   font-size: 0.9rem;
   line-height: 1.75rem;
   font-weight: 500;
-  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : '#f06e4d')};
+  color: #f06e4d;
+`
+
+const ClusterTime = styled.span`
+  font-size: 1rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  color: white;
+  text-align: left;
+  z-index: 1;
+  position: relative;
+
+  height: 100%;
+  max-height: 100px;
+  padding: 7px;
+  border-radius: 0.4rem;
+  background-color: #ff8e4c;
 `
 
 const Parent = styled.div`
@@ -34,41 +61,61 @@ const Parent = styled.div`
   grid-column-gap: 20px;
   grid-row-gap: 20px;
 
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
   .div1 {
     grid-area: 1 / 1 / 2 / 4;
-    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#dfdfe6' : '#1f202e')};
+    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#e9e9f1' : '#1f202e')};
     border-radius: 0.3rem;
     padding: 10px;
+
+    @media (max-width: 768px) {
+      grid-area: 1 / 1 / 2 / 2;
+    }
   }
   .div2 {
     grid-area: 2 / 1 / 3 / 2;
-    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#dfdfe6' : '#1f202e')};
+    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#e9e9f1' : '#1f202e')};
     border-radius: 0.3rem;
     padding: 10px;
+    @media (max-width: 768px) {
+      grid-area: 2 / 1 / 3 / 2;
+    }
   }
   .div3 {
     grid-area: 2 / 2 / 3 / 3;
-    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#dfdfe6' : '#1f202e')};
+    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#e9e9f1' : '#1f202e')};
     border-radius: 0.3rem;
     padding: 10px;
+    @media (max-width: 768px) {
+      grid-area: 3 / 1 / 4 / 2;
+    }
   }
   .div4 {
     grid-area: 2 / 3 / 3 / 4;
-    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#dfdfe6' : '#1f202e')};
+    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#e9e9f1' : '#1f202e')};
     border-radius: 0.3rem;
     padding: 10px;
+    @media (max-width: 768px) {
+      grid-area: 4 / 1 / 5 / 2;
+    }
   }
   .div5 {
     grid-area: 3 / 1 / 4 / 4;
-    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#dfdfe6' : '#1f202e')};
+    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#e9e9f1' : '#1f202e')};
     border-radius: 0.3rem;
     padding: 10px;
+    @media (max-width: 768px) {
+      grid-area: 5 / 1 / 6 / 2;
+    }
   }
 `
 const Label = styled.label`
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#dfdfe6' : '#1f202e')};
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#e9e9f1' : '#1f202e')};
   border-radius: 0.2rem;
 `
 
@@ -98,10 +145,10 @@ const ContainerText = styled.div`
   text-align: left;
   z-index: 1;
   position: relative;
-  margin-top: 150px;
+  margin-top: 50px;
   height: 100%;
   max-height: 100px;
-  padding: 20px;
+  margin-bottom: 10px;
   border-radius: 1.25rem;
 `
 
@@ -110,11 +157,21 @@ const StyledDatePicker = styled(DatePicker)`
   font-size: 16px;
   border: none;
   border-radius: 4px;
-  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#dfdfe6' : '#1f202e')};
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#e9e9f1' : '#1f202e')};
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
   outline: none;
   border: none;
 `
+
+const TokenDropDown = styled.div`
+  max-width: 300px;
+  margin-bottom: 20px;
+`
+
+enum Fields {
+  TOKEN0 = 0,
+  TOKEN1 = 1
+}
 
 export default function RewardSection() {
   const [startDate, setStartDate] = useState(null)
@@ -125,6 +182,26 @@ export default function RewardSection() {
   const [tokenAmount, setTokenAmount] = useState<any>()
   const [estimateReward, setEstimateReward] = useState<any>()
   const [error, setError] = useState<any>()
+  const [dataAtualUTC, setDataAtualUTC] = useState(moment().utc())
+  const [showSearch, setShowSearch] = useState<boolean>(false)
+  const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
+  const [currency0, setCurrency0] = useState<any>(null)
+  const [currency1, setCurrency1] = useState<any>(null)
+
+  const handleCurrencySelect = useCallback(
+    (currency: Currency) => {
+      if (activeField === Fields.TOKEN0) {
+        setCurrency0(currency)
+      } else {
+        setCurrency1(currency)
+      }
+    },
+    [activeField]
+  )
+
+  const handleSearchDismiss = useCallback(() => {
+    setShowSearch(false)
+  }, [setShowSearch])
 
   const today = new Date()
   const minDate = new Date()
@@ -160,10 +237,8 @@ export default function RewardSection() {
 
     if (intValue < 7) {
       setError('Period is shorter than min duration of 7 days')
-      console.log(true)
     } else if (intValue > 90) {
       setError(' Period is longer than max duration of 90 days')
-      console.log(true)
     } else {
       setError('')
     }
@@ -239,16 +314,49 @@ export default function RewardSection() {
     }
   }
 
+  useEffect(() => {
+    setInterval(() => {
+      setDataAtualUTC(moment().utc())
+    }, 1000)
+  }, [])
+
+  const formatoDataUTC = dataAtualUTC.format('MM/DD/YY HH:mm [UTC]')
+
+  moment()
+    .utc()
+    .toDate()
+
   return (
     <>
       <button onClick={add}>here</button>
       <ContainerText>
         <Text>Farming Reward</Text>
       </ContainerText>
+      <ClusterTime>{formatoDataUTC}</ClusterTime>
+
       <Container>
+        <TokenDropDown>
+          <ButtonDropdownLight
+            onClick={() => {
+              setShowSearch(true)
+              setActiveField(Fields.TOKEN0)
+            }}
+          >
+            {currency0 ? (
+              <Row>
+                <CurrencyLogo currency={currency0} />
+                <Text>{currency0.symbol}</Text>
+              </Row>
+            ) : (
+              <Text>Select a Reward Token</Text>
+            )}
+          </ButtonDropdownLight>{' '}
+        </TokenDropDown>
+
         <Parent>
           <div className="div1">
-            <Text>Token</Text>
+            <Text>Reward Amount</Text>
+
             <Label>
               <Input placeholder="0.0" type="number" onChange={handleTokenAmount} value={tokenAmount} />
             </Label>
@@ -265,6 +373,8 @@ export default function RewardSection() {
             {' '}
             <Text>Farming Starts</Text>
             <Label>
+              {' '}
+              <Text>(UTC)</Text>
               <StyledDatePicker
                 selected={startDate}
                 placeholderText="Select a date"
@@ -280,6 +390,8 @@ export default function RewardSection() {
             {' '}
             <Text>Farming Ends</Text>
             <Label>
+              {' '}
+              <Text>(UTC)</Text>
               <StyledDatePicker
                 selected={endDate}
                 onChange={() => {
@@ -301,6 +413,14 @@ export default function RewardSection() {
             </Label>
           </div>
         </Parent>
+
+        <CurrencySearchModal
+          isOpen={showSearch}
+          onCurrencySelect={handleCurrencySelect}
+          onDismiss={handleSearchDismiss}
+          showCommonBases
+          selectedCurrency={(activeField === Fields.TOKEN0 ? currency1 : currency0) ?? undefined}
+        />
       </Container>
     </>
   )

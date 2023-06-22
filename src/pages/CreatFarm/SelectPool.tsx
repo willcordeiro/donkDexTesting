@@ -1,25 +1,37 @@
 import { BiSearch } from 'react-icons/bi'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { useSearch } from 'react-use-search'
 import PoolCard from './PoolCard'
-import { Ethereum, terra, solona, bitcoin, logo } from '../../assets'
 import styled from 'styled-components'
+import { Pair, JSBI } from '@donkswap/sdk'
+import { usePairs } from 'data/Reserves'
+import EthereumLogo from '../../assets/images/ethereum-logo.png'
+import { useActiveWeb3React } from 'hooks'
+import useExtendWithStakedAmount from 'hooks/staking/pools/useExtendWithStakedAmount'
+
+import { useDefaultStakingPools } from 'state/stake/hooks'
+import { useTrackedTokenPairs, toV2LiquidityToken } from 'state/user/hooks'
+import { useTokenBalancesWithLoadingIndicator } from 'state/wallet/hooks'
+import { BIG_INT_ZERO } from '../../constants/'
+import { PulseLoader } from 'react-spinners'
 const predicate = (user: { name: string }, query: string) => user.name.toLowerCase().includes(query.toLowerCase())
 
 const Label = styled.label`
   border: 1px solid #9ca6b9;
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
+  border: none;
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#e9e9f1' : '#1f202e')};
 `
 
 const Input = styled.input`
-  background: none;
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#e9e9f1' : '#1f202e')};
   outline: none;
   border: none;
   font-size: 15px;
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
+
   ::placeholder {
     font-size: 15px;
     font-weight: 500;
@@ -37,9 +49,12 @@ const Container = styled.div`
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
   height: 100%;
   max-height: 100px;
-  padding: 20px;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
   border-radius: 1.25rem;
   margin-top: 10px;
+  min-width: 320px;
 `
 
 const PoolCardsContainer = styled.div`
@@ -52,6 +67,7 @@ const PoolCardsContainer = styled.div`
   overflow-x: hidden;
   z-index: 2;
   position: relative;
+  border: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#d0d0d4' : 'white')} solid 1px;
 `
 
 const SelectedContainer = styled.div`
@@ -68,10 +84,94 @@ const RemovePoolBTN = styled.div`
 `
 
 export default function SelectPool() {
-  const [sort, setSort] = useState('Liquidity')
-  const [pool, setPool] = useState(0)
+  const [pool, setPool] = useState('')
   const [isClicked, setIsClicked] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const { account } = useActiveWeb3React()
+
+  // fetch the user's balances of all tracked V2 LP tokens
+  const trackedTokenPairs = useTrackedTokenPairs()
+
+  const tokenPairsWithLiquidityTokens = useMemo(
+    () => trackedTokenPairs.map(tokens => ({ liquidityToken: toV2LiquidityToken(tokens), tokens })),
+    [trackedTokenPairs]
+  )
+  const liquidityTokens = useMemo(() => tokenPairsWithLiquidityTokens.map(tpwlt => tpwlt.liquidityToken), [
+    tokenPairsWithLiquidityTokens
+  ])
+  const [v2PairsBalances] = useTokenBalancesWithLoadingIndicator(account ?? undefined, liquidityTokens)
+
+  // fetch the reserves for all V2 pools in which the user has a balance
+  const liquidityTokensWithBalances = useMemo(
+    () => tokenPairsWithLiquidityTokens.filter(({ liquidityToken }) => liquidityToken.address),
+    [tokenPairsWithLiquidityTokens, v2PairsBalances]
+  )
+
+  const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
+
+  const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
+
+  // show liquidity even if its deposited in rewards contract
+  let stakingInfo = useDefaultStakingPools(true)
+  stakingInfo = useExtendWithStakedAmount(stakingInfo)
+  const stakingInfosWithBalance = stakingInfo?.filter(
+    pool => pool.stakedAmount && JSBI.greaterThan(pool.stakedAmount.raw, BIG_INT_ZERO)
+  )
+  const stakingPairs = usePairs(stakingInfosWithBalance?.map(stakingInfo => stakingInfo.tokens))
+
+  // remove any pairs that also are included in pairs with stake in mining pool
+  const v2PairsWithoutStakedAmount = allV2PairsWithLiquidity.filter(v2Pair => {
+    return (
+      stakingPairs
+        ?.map(stakingPair => stakingPair[1])
+        .filter(stakingPair => stakingPair?.liquidityToken.address === v2Pair.liquidityToken.address).length === 0
+    )
+  })
+
+  const pairInfo: any = []
+
+  pairInfo.push(v2PairsWithoutStakedAmount)
+
+  const [data, setdata] = useState<any[]>([])
+
+  const fetchPools = (pairInfo: { pairName: { pairName: any }[]; liquidityToken: { address: any } }[][]) => {
+    const newData: any = pairInfo[0].map(
+      (item: { pairName: { pairName: any }[]; liquidityToken: { address: any } }) => ({
+        id: generateUniqueId(),
+        icon: EthereumLogo,
+        icon2: EthereumLogo,
+        name: item.pairName[0].pairName,
+        address: item.liquidityToken.address
+      })
+    )
+
+    setdata(newData)
+  }
+
+  for (let i = 0; i < v2PairsWithoutStakedAmount.length; i++) {
+    if (pairInfo[0].length != 0) {
+      const obj = []
+      obj.push({
+        pairName: pairInfo[0][i].tokenAmounts[0].token.symbol + '/' + pairInfo[0][i].tokenAmounts[1].token.symbol
+      })
+      pairInfo[0][i].pairName = obj
+    }
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (data.length === 0) {
+        fetchPools(pairInfo)
+      } else {
+        clearInterval(interval) // Cancela o intervalo quando o data tem itens
+      }
+    }, 1000)
+
+    return () => {
+      clearInterval(interval) // Limpa o intervalo quando o componente é desmontado
+    }
+  }, [pairInfo])
 
   const handleClick = () => {
     setIsClicked(true)
@@ -91,85 +191,14 @@ export default function SelectPool() {
     }
   }, [])
 
-  const data = [
-    {
-      id: 1,
-      icon: logo,
-      icon2: Ethereum,
-      name: 'DONK-ETH',
-      totalStaked: '345,564,839',
-      yourStake: '67',
-      FEES: '0.2',
-      APR: '7.90',
-      address: '13uCPybN...MVgKy6UJ'
-    },
-    {
-      id: 2,
-      icon: logo,
-      icon2: Ethereum,
-      name: 'USDC-ETH',
-      totalStaked: '345,564,839',
-      yourStake: '67',
-      FEES: '0.2',
-      APR: '7.90',
-      address: '13uCPybN...MVgKy6UJ'
-    },
-    {
-      id: 3,
-      icon: logo,
-      icon2: Ethereum,
-      name: 'USDT-ETH',
-      totalStaked: '345,564,839',
-      yourStake: '67',
-      FEES: '0.2',
-      APR: '7.90',
-      address: '13uCPybN...MVgKy6UJ'
-    },
-    {
-      id: 4,
-      icon: logo,
-      icon2: Ethereum,
-      name: 'BITCOIN-ETH',
-      totalStaked: '345,564,839',
-      yourStake: '67',
-      FEES: '0.2',
-      APR: '7.90',
-      address: '13uCPybN...MVgKy6UJ'
-    },
-    {
-      id: 5,
-      icon: logo,
-      icon2: Ethereum,
-      name: 'DONKy-ETH',
-      totalStaked: '345,564,839',
-      yourStake: '67',
-      FEES: '0.2',
-      APR: '7.90',
-      address: '13uCPybN...MVgKy6UJ'
-    },
-    {
-      id: 6,
-      icon: logo,
-      icon2: Ethereum,
-      name: 'WETH-ETH',
-      totalStaked: '345,564,839',
-      yourStake: '67',
-      FEES: '0.2',
-      APR: '7.90',
-      address: '13uCPybN...MVgKy6UJ'
-    },
-    {
-      id: 7,
-      icon: logo,
-      icon2: Ethereum,
-      name: 'WBUSD-ETH',
-      totalStaked: '345,564,839',
-      yourStake: '67',
-      FEES: '0.2',
-      APR: '7.90',
-      address: '13uCPybN...MVgKy6UJ'
-    }
-  ]
+  function generateUniqueId() {
+    const timestamp = Date.now().toString(36) // Obtém o timestamp atual como uma string em base 36
+    const randomNum = Math.random()
+      .toString(36)
+      .substr(2, 5) // Obtém um número aleatório como uma string em base 36
+
+    return `${timestamp}-${randomNum}`
+  }
 
   const filteredData = data.filter(item => item.id === pool)
 
@@ -182,7 +211,7 @@ export default function SelectPool() {
     <>
       <Text>Select a pool</Text>
       <Container>
-        {pool == 0 ? (
+        {pool == '' ? (
           <div className="flex justify-between">
             <Label
               htmlFor="cardsearch"
@@ -205,24 +234,29 @@ export default function SelectPool() {
           <SelectedContainer>
             <PoolCard data={filteredData[0]} clicked={setIsClicked} isClicked={isClicked} />
 
-            <RemovePoolBTN onClick={() => setPool(0)}>
+            <RemovePoolBTN onClick={() => setPool('')}>
               <AiFillCloseCircle size={30} />
             </RemovePoolBTN>
           </SelectedContainer>
         )}
 
-        {isClicked ? (
+        {isClicked && (
           <PoolCardsContainer className="grid grid-cols-1 gap-5">
-            {filteredUsers.length !== 0 ? (
-              filteredUsers.map((data, index) => (
-                <PoolCard key={index} data={data} func={setPool} clicked={setIsClicked} isClicked={isClicked} />
-              ))
+            {data.length !== 0 ? (
+              filteredUsers.length !== 0 ? (
+                filteredUsers.map((data, index) => (
+                  <PoolCard key={index} data={data} func={setPool} clicked={setIsClicked} isClicked={isClicked} />
+                ))
+              ) : (
+                <Text className="text-sm text-center pt-8">There is no pool matched, please try again!</Text>
+              )
             ) : (
-              <div className="text-sm text-center pt-8">There is no pool matched, please try again!</div>
+              <Text className="text-sm text-center pt-8">
+                {' '}
+                <PulseLoader color="#ff8e4c" size={20} />
+              </Text>
             )}
           </PoolCardsContainer>
-        ) : (
-          ''
         )}
       </Container>
     </>

@@ -8,9 +8,18 @@ const Container = styled.div`
   cursor: pointer;
   padding: 10px;
   :hover {
-    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'rgb(232 226 222)' : '#474a66')};
+    background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#e9e9f1' : '#474a66')};
   }
   z-index: 9999;
+
+  header {
+    display: flex;
+  }
+  @media (max-width: 768px) {
+    header {
+      display: block;
+    }
+  }
 `
 const Text = styled.span`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
@@ -31,9 +40,19 @@ export default function PoolCard({ data, func, clicked, isClicked }: any) {
     }
   }
 
+  function addDotsToAddress(address: string) {
+    if (address.length <= 8) {
+      return address // Endereço curto, não precisa de pontos intermediários
+    }
+
+    const startChunk = address.substring(0, 4)
+    const endChunk = address.substring(address.length - 4)
+    return `${startChunk}...${endChunk}`
+  }
+
   return (
     <Container className="bg-white rounded-md w-full" onClick={handleClick}>
-      <header className="flex items-center  justify-between " id={id}>
+      <header className="items-center  justify-between " id={id}>
         <div className="flex items-center ">
           <img src={icon} alt="terra" className="w-8" />
           <img src={icon2} alt="Ethereum" className="w-8" />
@@ -42,7 +61,7 @@ export default function PoolCard({ data, func, clicked, isClicked }: any) {
           </span>
         </div>
         <div className="text-xs px-2 py-1 bg-[#cdcdcd6a] font-medium text-black">
-          <Text>{address}</Text>
+          <Text>{addDotsToAddress(address)}</Text>
         </div>
       </header>
     </Container>
