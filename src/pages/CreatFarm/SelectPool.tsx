@@ -83,9 +83,10 @@ const RemovePoolBTN = styled.div`
   }
 `
 
-export default function SelectPool() {
+export default function SelectPool({ farm }: any) {
   const [pool, setPool] = useState('')
   const [isClicked, setIsClicked] = useState(false)
+
   const inputRef = useRef<HTMLInputElement>(null)
 
   const { account } = useActiveWeb3React()
@@ -206,6 +207,12 @@ export default function SelectPool() {
     filter: true,
     debounce: 200
   })
+
+  useEffect(() => {
+    farm({
+      pool: filteredData[0]
+    })
+  }, [pool])
 
   return (
     <>

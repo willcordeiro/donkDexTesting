@@ -8,6 +8,7 @@ import CurrencyLogo from 'components/CurrencyLogo'
 import Row from 'components/Row'
 import CurrencySearchModal from 'components/SearchModal/CurrencySearchModal'
 import { Currency } from '@donkswap/sdk'
+import { format } from 'date-fns'
 
 const Container = styled.div`
   z-index: 1;
@@ -173,8 +174,8 @@ enum Fields {
   TOKEN1 = 1
 }
 
-export default function RewardSection() {
-  const [startDate, setStartDate] = useState(null)
+export default function RewardSection({ farm, msg }: any) {
+  const [startDate, setStartDate] = useState<any>()
   const [startDateNormal, setStartDateNormal] = useState<any>()
   const [endDate, setEndDate] = useState<any>()
   const [endNormal, setEndNormal] = useState<any>()
@@ -187,6 +188,20 @@ export default function RewardSection() {
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
   const [currency0, setCurrency0] = useState<any>(null)
   const [currency1, setCurrency1] = useState<any>(null)
+
+  useEffect(() => {
+    farm({
+      startDate: startDate,
+      startDateNormal: startDateNormal,
+      endDate: endDate,
+      endNormal: endNormal,
+      durationDays: durationDays,
+      tokenAmount: tokenAmount,
+      estimateReward: estimateReward,
+      error: error,
+      currency0: currency0
+    })
+  }, [startDate, startDateNormal, endDate, endNormal, durationDays, tokenAmount, estimateReward, error, currency0])
 
   const handleCurrencySelect = useCallback(
     (currency: Currency) => {
@@ -211,17 +226,17 @@ export default function RewardSection() {
   maxDate.setHours(23, 59, 59, 999)
 
   const handleDateChangeStart = (date: any) => {
-    const timestamp = date ? date.getTime() : null
+    const UTC = date.toISOString()
+    const timestamp = UTC ? new Date(UTC).getTime() : null
 
     setStartDate(timestamp)
-    setStartDateNormal(date)
+    setStartDateNormal(format(new Date(UTC), 'MM/dd/yy HH:mm'))
 
-    if (durationDays != '') {
-      const newDate = new Date(date)
+    if (durationDays !== '' && durationDays !== undefined) {
+      const newDate = new Date(UTC)
+      newDate.setDate(newDate.getDate() + parseInt(durationDays, 10))
 
-      newDate.setDate(newDate.getDate() + parseInt(durationDays))
-
-      setEndNormal(newDate)
+      setEndNormal(format(newDate, 'MM/dd/yy HH:mm'))
 
       const timestampEnd = newDate.getTime()
 
@@ -237,10 +252,13 @@ export default function RewardSection() {
 
     if (intValue < 7) {
       setError('Period is shorter than min duration of 7 days')
+      msg(true)
     } else if (intValue > 90) {
       setError(' Period is longer than max duration of 90 days')
+      msg(true)
     } else {
       setError('')
+      msg(false)
     }
 
     if (isInteger) {
@@ -252,7 +270,7 @@ export default function RewardSection() {
   }
 
   useEffect(() => {
-    if (startDateNormal && durationDays) {
+    if (durationDays) {
       const newDate = new Date(startDateNormal)
       const duration = parseInt(durationDays)
       newDate.setDate(newDate.getDate() + duration)
@@ -383,6 +401,9 @@ export default function RewardSection() {
                 showTimeSelect
                 minDate={today}
                 maxDate={maxDate}
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                timeCaption="Time"
               />
             </Label>
           </div>

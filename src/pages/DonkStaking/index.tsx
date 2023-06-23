@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Cards from './Card'
 import GraphSection from './GraphSection'
 import styled from 'styled-components'
@@ -12,8 +12,6 @@ const Text = styled.span`
 `
 
 export default function Stake() {
-  const [activeBtn, setActiveBtn] = useState('DONK')
-
   return (
     <Container className="bg-pink100  min-h-[80vh]">
       <section className="max-w-6xl w-[90%] mx-auto">
