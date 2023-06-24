@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import SelectPool from './SelectPool'
 import RewardSection from './RewardSeciton'
 import { Link } from 'react-router-dom'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { toast } from 'react-toastify'
+import { useFarmStakingContract } from 'hooks/useContract'
+import { useWeb3React } from '@web3-react/core'
+import { Contract, ethers } from 'ethers'
+import { getContract } from 'utils'
+import { ERC20_ABI } from 'constants/abis/erc20'
 
 const Container = styled.div`
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#191924')};
@@ -38,7 +43,6 @@ const Text = styled.p`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
   margin-top: 10px;
 `
-const msg = `Don't see a pool you joined?`
 
 const PopupContainer = styled.div`
   position: fixed;
@@ -93,10 +97,12 @@ const ListReview = styled.p`
 `
 
 export default function CreateFarm() {
+  const { account, library } = useWeb3React()
+  const farmContract: any = useFarmStakingContract()
   const [isOpen, setIsOpen] = useState(false)
   const [msg, setMsg] = useState(false)
   const [farmPool, setFarmPool] = useState({
-    pool: { name: '' }
+    pool: { address: '', name: '' }
   })
 
   const [farm, setFarm] = useState({
@@ -108,14 +114,14 @@ export default function CreateFarm() {
     tokenAmount: '',
     estimateReward: '',
     error: '',
-    currency0: { symbol: '' }
+    currency0: { address: '', symbol: '' }
   })
 
   const togglePopup = () => {
     setIsOpen(!isOpen)
   }
 
-  const CreateFarm = () => {
+  const CheckFields = () => {
     if (
       farmPool.pool !== undefined &&
       farm.startDate !== undefined &&
@@ -129,9 +135,86 @@ export default function CreateFarm() {
       farm.currency0 !== null &&
       msg === false
     ) {
-      toast.success('OK 200')
+      CreateFarm()
     } else {
       toast.error('Something went wrong! Please check the fields')
+    }
+  }
+
+  function contract(address: string, ABI: any, withSignerIfPossible = true): Contract | null {
+    return getContract(address, ABI, library, withSignerIfPossible && account ? account : undefined)
+  }
+
+  const CreateFarm = async () => {
+    //converting amount
+    const rewardTokenAmount = ethers.utils.parseUnits(farm.tokenAmount.toString(), 18).toString()
+    const estimateTokenAmount = ethers.utils.parseUnits(farm.estimateReward.toString(), 18).toString()
+
+    // Aproving Token
+
+    //fee token
+    const feeAmount = await farmContract.callStatic.getCreatorTaxes()
+    const feeTokenAddress = await farmContract.callStatic.getCreatorTaxToken()
+
+    const feeTokenContract: any = contract(feeTokenAddress, ERC20_ABI)
+
+    const currentTaxAllowance = await feeTokenContract.allowance(account, farmContract.address)
+
+    if (currentTaxAllowance < feeAmount) {
+      await feeTokenContract.approve(farmContract.address, feeAmount)
+    }
+
+    //reward token
+    const rewardTokenContract: any = contract(farm.currency0.address, ERC20_ABI)
+
+    console.log(feeAmount, rewardTokenAmount, 'amount')
+    //TODO: reward token address allowance issue
+
+    const rewardAllowance = await rewardTokenContract.allowance(account, farmContract.address)
+
+    if (rewardAllowance < rewardTokenAmount) {
+      await rewardTokenContract.approve(farmContract.address, rewardTokenAmount)
+    }
+
+    //creating farm
+    const signer = library.getSigner(account)
+
+    const farmContractWithSigner = farmContract.connect(signer)
+
+    try {
+      const farmCreation: any = await farmContractWithSigner.createFarm(
+        farm.currency0.address,
+        farmPool.pool.address,
+        farm.currency0.symbol,
+        rewardTokenAmount,
+        farm.startDate,
+        farm.endDate,
+        estimateTokenAmount
+      )
+      await farmCreation.wait()
+      toast.success('The farm has been created successfully')
+
+      //checking the farm
+      const allFarmsID = await farmContractWithSigner.callStatic.getFarmKeys()
+
+      const allFarms = await farmContract.getFarmByID(allFarmsID[0])
+      const farmData = {
+        farmID: allFarms[0],
+        creator: allFarms[1],
+        rewardTokenAddress: allFarms[2],
+        farmTokenAddress: allFarms[3],
+        rewardTokenName: allFarms[4],
+        rewardTokenAmount: allFarms[5].toString(),
+        initialDate: allFarms[6].toString(),
+        endDate: allFarms[7].toString(),
+        rewardPerDay: allFarms[8].toString(),
+        isActive: allFarms[9]
+      }
+
+      console.log(farmData)
+    } catch (error) {
+      console.log(error)
+      toast.error('Something went wrong.')
     }
   }
 
@@ -201,7 +284,7 @@ export default function CreateFarm() {
               <Text>Estimated rewards / day: </Text>
               <ListReview> {farm.estimateReward} tokens</ListReview>
             </div>
-            <ButtonCreate onClick={CreateFarm}>Create Farm</ButtonCreate>
+            <ButtonCreate onClick={CheckFields}>Create Farm</ButtonCreate>
           </PopupContainer>
         )}
       </div>

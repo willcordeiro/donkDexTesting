@@ -118,11 +118,11 @@ export default function App() {
   useEffect(() => {
     document.title = platformName
   }, [platformName])*/
-  //const { account, library } = useWeb3React()
+  const { account, library } = useWeb3React()
   const location = useLocation()
 
   const adminVerification = () => {
-    const user = true //Admin wallet
+    const user = account == '0xfB4c38FC6E72923a594A6B00cb8a7D449409C5e2' //Admin wallet
 
     return user
   }
