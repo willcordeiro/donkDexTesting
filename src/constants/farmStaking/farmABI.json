@@ -3,6 +3,40 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "_taxTokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_adminWallet",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_taxAmount",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "adminWallet",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "_rewardTokenAddress",
         "type": "address"
       },
@@ -35,6 +69,16 @@
         "internalType": "uint256",
         "name": "_rewardPerDay",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_pair0",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_pair1",
+        "type": "address"
       }
     ],
     "name": "createFarm",
@@ -50,112 +94,15 @@
         "type": "string"
       }
     ],
-    "name": "harvestFarm",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_taxAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "setCreatorTaxes",
+    "name": "farmEnd",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "bool",
         "name": "",
-        "type": "uint256"
+        "type": "bool"
       }
     ],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_taxTokenAddress",
-        "type": "address"
-      }
-    ],
-    "name": "setCreatorTaxToken",
-    "outputs": [
-      {
-        "internalType": "contract IERC20",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "_farmID",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_amountStaked",
-        "type": "uint256"
-      }
-    ],
-    "name": "startFarm",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_taxTokenAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_adminWallet",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_taxAmount",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "_farmID",
-        "type": "string"
-      }
-    ],
-    "name": "unstakeFarm",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "adminWallet",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -175,6 +122,25 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_farmID",
+        "type": "string"
+      }
+    ],
+    "name": "farmStart",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -233,6 +199,16 @@
         "type": "uint256"
       },
       {
+        "internalType": "address",
+        "name": "pair0",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "pair1",
+        "type": "address"
+      },
+      {
         "internalType": "bool",
         "name": "isActive",
         "type": "bool"
@@ -262,12 +238,12 @@
   },
   {
     "inputs": [],
-    "name": "getCreatorTaxes",
+    "name": "getCreatorTaxToken",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "contract IERC20",
         "name": "",
-        "type": "uint256"
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -275,12 +251,12 @@
   },
   {
     "inputs": [],
-    "name": "getCreatorTaxToken",
+    "name": "getCreatorTaxes",
     "outputs": [
       {
-        "internalType": "contract IERC20",
+        "internalType": "uint256",
         "name": "",
-        "type": "address"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -502,7 +478,64 @@
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_farmID",
+        "type": "string"
+      }
+    ],
+    "name": "harvestFarm",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_taxTokenAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setCreatorTaxToken",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taxAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "setCreatorTaxes",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
     "name": "stakedAmount",
     "outputs": [
       {
@@ -512,6 +545,24 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_farmID",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amountStaked",
+        "type": "uint256"
+      }
+    ],
+    "name": "startFarm",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -525,6 +576,19 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_farmID",
+        "type": "string"
+      }
+    ],
+    "name": "unstakeFarm",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

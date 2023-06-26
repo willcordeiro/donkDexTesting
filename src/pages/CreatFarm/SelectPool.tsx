@@ -136,16 +136,22 @@ export default function SelectPool({ farm }: any) {
 
   const [data, setdata] = useState<any[]>([])
 
-  const fetchPools = (pairInfo: { pairName: { pairName: any }[]; liquidityToken: { address: any } }[][]) => {
-    const newData: any = pairInfo[0].map(
-      (item: { pairName: { pairName: any }[]; liquidityToken: { address: any } }) => ({
-        id: generateUniqueId(),
-        icon: EthereumLogo,
-        icon2: EthereumLogo,
-        name: item.pairName[0].pairName,
-        address: item.liquidityToken.address
-      })
-    )
+  const fetchPools = (
+    pairInfo: {
+      tokenAmounts: any
+      pairName: { pairName: any }[]
+      liquidityToken: { address: any }
+    }[][]
+  ) => {
+    const newData: any = pairInfo[0].map(item => ({
+      id: generateUniqueId(),
+      icon: EthereumLogo,
+      icon2: EthereumLogo,
+      name: item.pairName[0].pairName,
+      address: item.liquidityToken.address,
+      pair1: item.tokenAmounts[0]?.currency.address,
+      pair2: item.tokenAmounts[1]?.currency.address
+    }))
 
     setdata(newData)
   }
@@ -165,12 +171,12 @@ export default function SelectPool({ farm }: any) {
       if (data.length === 0) {
         fetchPools(pairInfo)
       } else {
-        clearInterval(interval) // Cancela o intervalo quando o data tem itens
+        clearInterval(interval)
       }
     }, 1000)
 
     return () => {
-      clearInterval(interval) // Limpa o intervalo quando o componente é desmontado
+      clearInterval(interval)
     }
   }, [pairInfo])
 
@@ -193,10 +199,10 @@ export default function SelectPool({ farm }: any) {
   }, [])
 
   function generateUniqueId() {
-    const timestamp = Date.now().toString(36) // Obtém o timestamp atual como uma string em base 36
+    const timestamp = Date.now().toString(36)
     const randomNum = Math.random()
       .toString(36)
-      .substr(2, 5) // Obtém um número aleatório como uma string em base 36
+      .substr(2, 5)
 
     return `${timestamp}-${randomNum}`
   }

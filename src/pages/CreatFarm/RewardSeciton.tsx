@@ -9,6 +9,9 @@ import Row from 'components/Row'
 import CurrencySearchModal from 'components/SearchModal/CurrencySearchModal'
 import { Currency } from '@donkswap/sdk'
 import { format } from 'date-fns'
+import { useFarmStakingContract } from 'hooks/useContract'
+import { useWeb3React } from '@web3-react/core'
+import { ethers } from 'ethers'
 
 const Container = styled.div`
   z-index: 1;
@@ -169,6 +172,13 @@ const TokenDropDown = styled.div`
   margin-bottom: 20px;
 `
 
+const SubTextCluster = styled.span`
+  font-size: 0.9rem;
+
+  font-weight: 500;
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
+`
+
 enum Fields {
   TOKEN0 = 0,
   TOKEN1 = 1
@@ -183,11 +193,15 @@ export default function RewardSection({ farm, msg }: any) {
   const [tokenAmount, setTokenAmount] = useState<any>()
   const [estimateReward, setEstimateReward] = useState<any>()
   const [error, setError] = useState<any>()
-  const [dataAtualUTC, setDataAtualUTC] = useState(moment().utc())
   const [showSearch, setShowSearch] = useState<boolean>(false)
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
   const [currency0, setCurrency0] = useState<any>(null)
   const [currency1, setCurrency1] = useState<any>(null)
+  const { account, library } = useWeb3React()
+  const signer = library.getSigner(account)
+  const farmContract: any = useFarmStakingContract()
+  const farmContractWithSigner = farmContract.connect(signer)
+  const [chainTime, setChainTime] = useState<string>()
 
   useEffect(() => {
     farm({
@@ -225,11 +239,18 @@ export default function RewardSection({ farm, msg }: any) {
   maxDate.setDate(today.getDate() + 90)
   maxDate.setHours(23, 59, 59, 999)
 
-  const handleDateChangeStart = (date: any) => {
-    const UTC = date.toISOString()
-    const timestamp = UTC ? new Date(UTC).getTime() : null
+  const handleDateChangeStart = (date: Date) => {
+    const UTC = date
+    const timestamp: any = UTC ? new Date(UTC).getTime() : null
 
-    setStartDate(timestamp)
+    const time = Math.floor(timestamp / 1000)
+
+    const timer = moment.unix(time)
+
+    console.log(timer.toString(), 'timestamp convertido')
+
+    setStartDate(time)
+    console.log(time, 'start date')
     setStartDateNormal(format(new Date(UTC), 'MM/dd/yy HH:mm'))
 
     if (durationDays !== '' && durationDays !== undefined) {
@@ -239,8 +260,10 @@ export default function RewardSection({ farm, msg }: any) {
       setEndNormal(format(newDate, 'MM/dd/yy HH:mm'))
 
       const timestampEnd = newDate.getTime()
+      const timeEnd = Math.floor(timestampEnd / 1000)
 
-      setEndDate(timestampEnd)
+      setEndDate(timeEnd)
+      console.log(timeEnd, 'end date')
     }
   }
   const handleDuration = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -332,17 +355,29 @@ export default function RewardSection({ farm, msg }: any) {
     }
   }
 
+  async function getChainTime() {
+    const timestemp = await farmContractWithSigner.callStatic.getTimestamp()
+    const bigNumber = ethers.BigNumber.from(timestemp)
+    const value = bigNumber.toNumber()
+    const timestamp = value
+    const date = new Date(timestamp * 1000)
+
+    const year = date.getFullYear()
+    const month = ('0' + (date.getMonth() + 1)).slice(-2)
+    const day = ('0' + date.getDate()).slice(-2)
+    const hours = ('0' + date.getHours()).slice(-2)
+    const minutes = ('0' + date.getMinutes()).slice(-2)
+
+    const dateString = `${month}/${day}/${year} ${hours}:${minutes}`
+
+    setChainTime(dateString)
+  }
+
   useEffect(() => {
     setInterval(() => {
-      setDataAtualUTC(moment().utc())
+      getChainTime()
     }, 1000)
   }, [])
-
-  const formatoDataUTC = dataAtualUTC.format('MM/DD/YY HH:mm [UTC]')
-
-  moment()
-    .utc()
-    .toDate()
 
   return (
     <>
@@ -350,8 +385,10 @@ export default function RewardSection({ farm, msg }: any) {
       <ContainerText>
         <Text>Farming Reward</Text>
       </ContainerText>
-      <ClusterTime>{formatoDataUTC}</ClusterTime>
-
+      <ClusterTime>{chainTime}</ClusterTime>
+      <SubTextCluster>
+        <p> {`The date is retrieved from the blockchain and converted to the current user's local date.`} </p>
+      </SubTextCluster>
       <Container>
         <TokenDropDown>
           <ButtonDropdownLight
@@ -394,7 +431,7 @@ export default function RewardSection({ farm, msg }: any) {
               {' '}
               <Text>(UTC)</Text>
               <StyledDatePicker
-                selected={startDate}
+                value={startDateNormal}
                 placeholderText="Select a date"
                 onChange={handleDateChangeStart}
                 dateFormat="MM-dd-yyyy HH:mm"
@@ -414,7 +451,6 @@ export default function RewardSection({ farm, msg }: any) {
               {' '}
               <Text>(UTC)</Text>
               <StyledDatePicker
-                selected={endDate}
                 onChange={() => {
                   ''
                 }}

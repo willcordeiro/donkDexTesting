@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import SelectPool from './SelectPool'
 import RewardSection from './RewardSeciton'
@@ -102,7 +102,7 @@ export default function CreateFarm() {
   const [isOpen, setIsOpen] = useState(false)
   const [msg, setMsg] = useState(false)
   const [farmPool, setFarmPool] = useState({
-    pool: { address: '', name: '' }
+    pool: { address: '', name: '', pair1: '', pair2: '' }
   })
 
   const [farm, setFarm] = useState({
@@ -189,35 +189,24 @@ export default function CreateFarm() {
         rewardTokenAmount,
         farm.startDate,
         farm.endDate,
-        estimateTokenAmount
+        estimateTokenAmount,
+        farmPool.pool.pair1,
+        farmPool.pool.pair2
       )
+
       await farmCreation.wait()
       toast.success('The farm has been created successfully')
-
-      //checking the farm
-      const allFarmsID = await farmContractWithSigner.callStatic.getFarmKeys()
-
-      const allFarms = await farmContract.getFarmByID(allFarmsID[0])
-      const farmData = {
-        farmID: allFarms[0],
-        creator: allFarms[1],
-        rewardTokenAddress: allFarms[2],
-        farmTokenAddress: allFarms[3],
-        rewardTokenName: allFarms[4],
-        rewardTokenAmount: allFarms[5].toString(),
-        initialDate: allFarms[6].toString(),
-        endDate: allFarms[7].toString(),
-        rewardPerDay: allFarms[8].toString(),
-        isActive: allFarms[9]
-      }
-
-      console.log(farmData)
     } catch (error) {
       console.log(error)
       toast.error('Something went wrong.')
     }
   }
 
+  /*
+  useEffect(() => {
+    console.log(farmPool.pool.pair2)
+  }, [farmPool])
+*/
   return (
     <Container className="bg-pink100  min-h-[80vh]">
       <section className="max-w-6xl w-[90%] mx-auto">
@@ -236,10 +225,9 @@ export default function CreateFarm() {
             </h2>
           </div>
         </header>
-        <Text2>{msg}</Text2>
+        <Text2> {` Don't see a pool you joined?`}</Text2>
         <ButtonLink type="button" className="fic gap-1 font-semibold px-2 py-2 mb-4">
           <Link to="/find">
-            {' '}
             <span style={{ color: '#ff8e4c' }}>Import it.</span>{' '}
           </Link>
         </ButtonLink>
