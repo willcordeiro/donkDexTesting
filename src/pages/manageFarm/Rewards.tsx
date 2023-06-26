@@ -1,6 +1,7 @@
 import React from 'react'
 import { logo } from '../../assets'
 import styled from 'styled-components'
+import { useWeb3React } from '@web3-react/core'
 
 const ContainerRewards = styled.div`
   background-color: #ff894596;
@@ -16,6 +17,11 @@ const Button = styled.button`
 `
 
 export default function Rewards() {
+  const { account, library } = useWeb3React()
+  function toggleWalletModal(event: any): void {
+    throw new Error('Function not implemented.')
+  }
+
   return (
     <ContainerRewards className="basis-3/5 bg-[#ff894596] p-5 rounded-2xl text-left">
       <div>
@@ -25,10 +31,10 @@ export default function Rewards() {
           <span>0</span>
           <span>DONK</span>
         </div>
-        <p className="text-gray-600 ">$0.00</p>
+        <p className="text-gray-600 ">0.00</p>
       </div>
       <Button className="bg-orange500 text-white w-full py-[14px] rounded-2xl custom-shadow font-semibold mt-8 hover:bg-[#ff8138]">
-        Harvast
+        {account ? <span>Harvest</span> : <span onClick={toggleWalletModal}>Connect Wallet</span>}
       </Button>
     </ContainerRewards>
   )

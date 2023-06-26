@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { c } from '../../assets'
 import Harvest from './Harvest'
 import ManageStakeUnstake from './ManageStakeUnstake'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import styled from 'styled-components'
+import { useWeb3React } from '@web3-react/core'
+import { useFarmStakingContract } from 'hooks/useContract'
+import { ethers } from 'ethers'
+import { toast } from 'react-toastify'
 
 const ContainerHeader = styled.button`
   padding: 1rem;
@@ -28,6 +32,88 @@ const Container = styled.div`
 `
 
 export default function ManageFarm() {
+  const { id }: any = useParams()
+  const { account, library } = useWeb3React()
+  const farmContract: any = useFarmStakingContract()
+  const signer = library.getSigner(account)
+  const farmContractWithSigner = farmContract.connect(signer)
+  const [data, setData] = useState<any>()
+  const allFarmData: any[] = []
+  const mappedData: any[] = []
+  const [stakeUnStake, setStakeUnStake] = useState('Stake')
+  const [farm, setFarm] = useState({
+    LpTokenAmount: ''
+  })
+
+  const CheckFields = () => {
+    if (farm.LpTokenAmount !== undefined && farm.LpTokenAmount !== '') {
+      if (stakeUnStake === 'Stake') {
+        stakeFarm()
+      } else {
+        unstakeFarm()
+      }
+    } else {
+      toast.error('Something went wrong! Please add an amount to start a farm')
+    }
+  }
+
+  useEffect(() => {
+    console.log(farm)
+  }, [farm])
+
+  const stakeFarm = () => {
+    const lpTokenAmount = ethers.utils.parseUnits(farm.LpTokenAmount.toString(), 18).toString()
+  }
+
+  const unstakeFarm = () => {
+    const lpTokenAmount = ethers.utils.parseUnits(farm.LpTokenAmount.toString(), 18).toString()
+  }
+
+  async function getkeys() {
+    const allFarmsID = await farmContractWithSigner.callStatic.getFarmKeys()
+
+    for (let i = 0; i < allFarmsID.length; i++) {
+      const farmID = allFarmsID[i]
+      const allFarms = await farmContract.getFarmByID(farmID)
+
+      const farmData: any = {
+        farmID: allFarms[0],
+        creator: allFarms[1],
+        rewardTokenAddress: allFarms[2],
+        farmTokenAddress: allFarms[3],
+        rewardTokenName: allFarms[4],
+        rewardTokenAmount: allFarms[5].toString(),
+        initialDate: allFarms[6].toString(),
+        endDate: allFarms[7].toString(),
+        rewardPerDay: allFarms[8].toString(),
+        isActive: allFarms[9],
+        pair0: allFarms[10],
+        pair1: allFarms[11]
+      }
+
+      const existingFarm = allFarmData.find(farm => farm.farmID === farmData.farmID)
+
+      if (!existingFarm) {
+        allFarmData.push(farmData)
+
+        if (farmData.farmID === id) {
+          mappedData.push(farmData)
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      await getkeys()
+      setData(mappedData[0])
+    }, 1000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
   return (
     <Container className="bg-pink100 pt-3 pb-14">
       <section className="max-w-5xl w-[90%] mx-auto">
@@ -46,8 +132,14 @@ export default function ManageFarm() {
         </div>
 
         <main className="flex max-lg:flex-col gap-5 mt-8">
-          <Harvest />
-          <ManageStakeUnstake />
+          <Harvest data={data} />
+          <ManageStakeUnstake
+            data={data}
+            farm={setFarm}
+            startFarm={CheckFields}
+            stakeUnStake={stakeUnStake}
+            setStakeUnStake={setStakeUnStake}
+          />
         </main>
       </section>
     </Container>

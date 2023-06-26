@@ -6,7 +6,7 @@ import { logo } from '../../assets'
 import { ethers } from 'ethers'
 import { useFarmStakingContract } from 'hooks/useContract'
 import { useWeb3React } from '@web3-react/core'
-import moment from 'moment'
+
 const Container = styled(Link)`
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
 `
@@ -27,6 +27,7 @@ export default function FarmsCards({ data }: any) {
   const [start, setStart] = useState<any>()
   const [end, setEnd] = useState<any>()
 
+  //TODO: add your staked
   async function getUserValues() {
     const totalStaked = await farmContractWithSigner.callStatic.stakedAmount(farmID)
     const yourStake = await farmContractWithSigner.callStatic.getPositionByUser(farmID, account)

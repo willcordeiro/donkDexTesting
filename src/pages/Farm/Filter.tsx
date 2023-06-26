@@ -80,7 +80,7 @@ export default function Filter() {
   const farmContract: any = useFarmStakingContract()
   const signer = library.getSigner(account)
   const farmContractWithSigner = farmContract.connect(signer)
-  const [data, setData] = useState<any[]>([]) // Renomeado o estado para setData
+  const [data, setData] = useState<any[]>([])
   const [chainTime, setChainTime] = useState<string>()
   const allFarmData: any[] = []
 

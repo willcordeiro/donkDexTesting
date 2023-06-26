@@ -1,7 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { useWeb3React } from '@web3-react/core'
+import { useWalletModalToggle } from 'state/application/hooks'
+import { ButtonLight } from '../../components/Button'
+import PulseLoader from 'react-spinners/PulseLoader'
+import { ethers } from 'ethers'
+import { error } from 'console'
 
 const Container = styled.div`
   padding-bottom: 15px;
@@ -53,67 +59,91 @@ const Text = styled.span`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
 `
 
-export default function ManageStakeUnstake() {
-  const [stakeUnStake, setStakeUnStake] = useState('Stake')
+export default function ManageStakeUnstake({ data, farm, startFarm, stakeUnStake, setStakeUnStake }: any) {
+  const { account, library } = useWeb3React()
+  const toggleWalletModal = useWalletModalToggle()
+  const [lpTokenAmount, setLpTokenAmount] = useState<any>()
+
+  useEffect(() => {
+    farm({
+      LpTokenAmount: lpTokenAmount
+    })
+  }, [lpTokenAmount])
+
+  const handleTokenAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+
+    setLpTokenAmount(value)
+  }
 
   return (
     <ContainerSection className="rounded-2xl bg-white  flex-1">
-      <Container className="fic font-semibold border-gray-300 ">
-        <Button
-          type="button"
-          className={`${stakeUnStake === 'Stake' ? 'border-black  border-b-2' : ''} text-center flex-1 pb-3 pt-5`}
-          onClick={() => setStakeUnStake('Stake')}
-          borderBottom={stakeUnStake == 'Stake' ? 'solid 2px black' : ''}
-        >
-          <Text>Stake</Text>
-        </Button>
-        <Button
-          type="button"
-          className={`${stakeUnStake === 'Unstake' ? 'border-black  border-b-2' : ''} text-center flex-1 pb-3 pt-5`}
-          onClick={() => setStakeUnStake('Unstake')}
-          borderBottom={stakeUnStake == 'Unstake' ? 'solid 2px black' : ''}
-        >
-          <Text> Unstake</Text>
-        </Button>
-      </Container>
-      <div className="px-6 py-4 flex justify-between flex-col h-[87%]">
-        <div>
-          <label htmlFor="minute" className="flex items-center gap-1 rounded-xl border  p-1 pl-4 border-gray-300 my-3">
-            <Input
-              type="number"
-              className=" bg-transparent focus:bg-transparent outline-none flex-1 w-full"
-              placeholder="Enter Amount of LP Tokens"
-            />
-          </label>
-          <label htmlFor="minute" className="flex items-center gap-1 rounded-xl border  p-1 pl-4 border-gray-300 my-3">
-            <Input
-              type="number"
-              className=" bg-transparent focus:bg-transparent outline-none flex-1 w-full"
-              placeholder="Enter the APR"
-            />
-          </label>
-          <div className="fic justify-between gap-3 px-1 my-1">
-            <p className="text-sm font-medium text-black">
-              <Text>LP Token Balance</Text>
-            </p>
-            <p className="text-black">
-              <Text>0</Text>
-            </p>
+      {data?.rewardTokenName ? (
+        <>
+          <Container className="fic font-semibold border-gray-300 ">
+            <Button
+              type="button"
+              className={`${stakeUnStake === 'Stake' ? 'border-black  border-b-2' : ''} text-center flex-1 pb-3 pt-5`}
+              onClick={() => setStakeUnStake('Stake')}
+              borderBottom={stakeUnStake == 'Stake' ? 'solid 2px black' : ''}
+            >
+              <Text>Stake</Text>
+            </Button>
+            <Button
+              type="button"
+              className={`${stakeUnStake === 'Unstake' ? 'border-black  border-b-2' : ''} text-center flex-1 pb-3 pt-5`}
+              onClick={() => setStakeUnStake('Unstake')}
+              borderBottom={stakeUnStake == 'Unstake' ? 'solid 2px black' : ''}
+            >
+              <Text>Unstake</Text>
+            </Button>
+          </Container>
+          <div className="px-6 py-4 flex justify-between flex-col h-[87%]">
+            <div>
+              <label
+                htmlFor="minute"
+                className="flex items-center gap-1 rounded-xl border  p-1 pl-4 border-gray-300 my-3"
+              >
+                <Input
+                  type="number"
+                  className=" bg-transparent focus:bg-transparent outline-none flex-1 w-full"
+                  placeholder="Enter Amount of LP Tokens"
+                  onChange={handleTokenAmount}
+                />
+              </label>
+
+              <div className="fic justify-between gap-3 px-1 my-1">
+                <p className="text-sm font-medium text-black">
+                  <Text>LP Token Balance</Text>
+                </p>
+                <p className="text-black">
+                  <Text>0</Text>
+                </p>
+              </div>
+              <div className="fic justify-between px-1 mt-5 relative ">
+                <Link to="/pool/lp-token" className="font-medium  hover:underline text-black">
+                  <Text>Get LP Token</Text>
+                </Link>
+              </div>
+            </div>
+            <div>
+              {' '}
+              <ButtonSubmit className="bg-orange500 text-white w-full py-[14px] rounded-2xl custom-shadow font-semibold mt-8 hover:bg-[#ff8138]">
+                {account ? (
+                  <span onClick={startFarm}>{stakeUnStake}</span>
+                ) : (
+                  <span onClick={toggleWalletModal}>Connect Wallet</span>
+                )}
+              </ButtonSubmit>
+            </div>
           </div>
-          <div className="fic justify-between px-1 mt-5 relative ">
-            <Link to="/pool/lp-token" className="font-medium  hover:underline text-black">
-              <Text> Get LP Token</Text>
-            </Link>
-            {/*<Settings />*/}
-          </div>
-        </div>
-        <div>
+        </>
+      ) : (
+        <Text className="text-sm text-center ">
           {' '}
-          <ButtonSubmit className="bg-orange500 text-white w-full py-[14px] rounded-2xl custom-shadow font-semibold mt-8 hover:bg-[#ff8138]">
-            <Text>Connect Wallet</Text>
-          </ButtonSubmit>
-        </div>
-      </div>
+          <PulseLoader color="#ff8e4c" size={20} />
+        </Text>
+      )}
     </ContainerSection>
   )
 }
