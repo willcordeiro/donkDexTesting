@@ -114,14 +114,12 @@ export default function Filter() {
     }
 
     setData(allFarmData)
-    console.log(allFarmData)
   }
 
   useEffect(() => {
     const interval = setInterval(function() {
       getkeys()
       getChainTime()
-      console.log(data)
     }, 1000)
 
     return () => {

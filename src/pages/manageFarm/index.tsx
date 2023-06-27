@@ -7,8 +7,10 @@ import { AiOutlineArrowLeft } from 'react-icons/ai'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
 import { useFarmStakingContract } from 'hooks/useContract'
-import { ethers } from 'ethers'
+import { Contract, ethers } from 'ethers'
 import { toast } from 'react-toastify'
+import { ERC20_ABI } from 'constants/abis/erc20'
+import { getContract } from 'utils'
 
 const ContainerHeader = styled.button`
   padding: 1rem;
@@ -58,15 +60,51 @@ export default function ManageFarm() {
   }
 
   useEffect(() => {
-    console.log(farm)
-  }, [farm])
+    console.log(data)
+  }, [data])
 
-  const stakeFarm = () => {
-    const lpTokenAmount = ethers.utils.parseUnits(farm.LpTokenAmount.toString(), 18).toString()
+  function contract(address: string, ABI: any, withSignerIfPossible = true): Contract | null {
+    return getContract(address, ABI, library, withSignerIfPossible && account ? account : undefined)
   }
 
-  const unstakeFarm = () => {
+  const stakeFarm = async () => {
     const lpTokenAmount = ethers.utils.parseUnits(farm.LpTokenAmount.toString(), 18).toString()
+
+    const TokenContract: any = contract(data.farmTokenAddress, ERC20_ABI)
+
+    const currentTaxAllowance = await TokenContract.allowance(account, farmContract.address)
+
+    if (currentTaxAllowance < lpTokenAmount) {
+      try {
+        await TokenContract.approve(farmContract.address, lpTokenAmount)
+      } catch (error) {
+        console.log(error)
+        toast.error('Something went wrong with token approval.')
+        return
+      }
+    }
+
+    try {
+      const farmStart: any = await farmContractWithSigner.startFarm(id, lpTokenAmount)
+
+      await farmStart.wait()
+      toast.success('You have joined the farm successfully')
+    } catch (error) {
+      console.log(error)
+      toast.error('Something went wrong with starting the farm.')
+    }
+  }
+
+  const unstakeFarm = async () => {
+    try {
+      const farmUntake: any = await farmContractWithSigner.unstakeFarm(id)
+
+      await farmUntake.wait()
+      toast.success('You have left the farm successfully')
+    } catch (error) {
+      console.log(error)
+      toast.error('Something went wrong.')
+    }
   }
 
   async function getkeys() {

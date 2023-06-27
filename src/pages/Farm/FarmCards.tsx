@@ -27,16 +27,25 @@ export default function FarmsCards({ data }: any) {
   const [start, setStart] = useState<any>()
   const [end, setEnd] = useState<any>()
 
-  //TODO: add your staked
   async function getUserValues() {
     const totalStaked = await farmContractWithSigner.callStatic.stakedAmount(farmID)
     const yourStake = await farmContractWithSigner.callStatic.getPositionByUser(farmID, account)
 
-    const bigNumber = ethers.BigNumber.from(totalStaked)
-    const value = bigNumber.toNumber()
+    const [walletAddress, createdDate, amountStaked, rewardStaked, savedReward] = yourStake
 
-    const bigNumber2 = ethers.BigNumber.from(yourStake[0])
-    const value2 = bigNumber2.toNumber()
+    const stakeObject = {
+      walletAddress: walletAddress,
+      createdDate: createdDate,
+      amountStaked: amountStaked,
+      rewardStaked: rewardStaked,
+      savedReward: savedReward
+    }
+
+    const bigNumber = ethers.BigNumber.from(totalStaked)
+    const value = ethers.utils.formatUnits(bigNumber)
+
+    const bigNumber2 = ethers.BigNumber.from(stakeObject.amountStaked)
+    const value2 = ethers.utils.formatUnits(bigNumber2)
 
     setTotalStaked(value)
     setYourStake(value2)

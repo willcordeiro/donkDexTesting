@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Rewards from './Rewards'
 import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { logo } from '../../assets'
+import { c, logo } from '../../assets'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import { PulseLoader } from 'react-spinners'
 import { useWeb3React } from '@web3-react/core'
 import { useFarmStakingContract } from 'hooks/useContract'
 import { ethers } from 'ethers'
+import { Console } from 'console'
 
 const ContainerHarvest = styled.div`
   padding-right: 10px;
@@ -27,25 +28,34 @@ export default function Harvest({ data }: any) {
   const farmContractWithSigner = farmContract.connect(signer)
   const [totalStaked, setTotalStaked] = useState<any>()
   const [yourStake, setYourStake] = useState<any>()
+  const [yourShare, setYourShare] = useState<any>()
   const { id }: any = useParams()
 
   async function getUserValues() {
     const totalStaked = await farmContractWithSigner.callStatic.stakedAmount(id)
     const yourStake = await farmContractWithSigner.callStatic.getPositionByUser(id, account)
 
-    const bigNumber = ethers.BigNumber.from(totalStaked)
-    const value = bigNumber.toNumber()
+    const [walletAddress, createdDate, amountStaked, rewardStaked, savedReward] = yourStake
 
-    const bigNumber2 = ethers.BigNumber.from(yourStake[0])
-    const value2 = bigNumber2.toNumber()
+    const stakeObject = {
+      walletAddress: walletAddress,
+      createdDate: createdDate,
+      amountStaked: amountStaked,
+      rewardStaked: rewardStaked,
+      savedReward: savedReward
+    }
+
+    const bigNumber = ethers.BigNumber.from(totalStaked)
+    const value = ethers.utils.formatUnits(bigNumber)
+
+    const bigNumber2 = ethers.BigNumber.from(stakeObject.amountStaked)
+    const value2 = ethers.utils.formatUnits(bigNumber2)
 
     setTotalStaked(value)
     setYourStake(value2)
-  }
 
-  //TODO: add your share function
-  async function getShareValue() {
-    const totalStaked = await farmContractWithSigner.callStatic.stakedAmount(id)
+    const share: number = (parseFloat(value) / parseFloat(value2)) * 100
+    setYourShare(share)
   }
 
   useEffect(() => {
@@ -99,7 +109,7 @@ export default function Harvest({ data }: any) {
                   <Text>Your share</Text>
                 </p>
                 <div className=" font-medium text-[15px] text-black">
-                  <Text>%{0}</Text>
+                  <Text>{yourShare}%</Text>
                 </div>
               </div>
             </ContainerHarvest>

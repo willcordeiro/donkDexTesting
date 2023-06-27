@@ -161,7 +161,13 @@ export default function CreateFarm() {
     const currentTaxAllowance = await feeTokenContract.allowance(account, farmContract.address)
 
     if (currentTaxAllowance < feeAmount) {
-      await feeTokenContract.approve(farmContract.address, feeAmount)
+      try {
+        await feeTokenContract.approve(farmContract.address, feeAmount)
+      } catch (error) {
+        console.log(error)
+        toast.error('Something went wrong with fee token approval.')
+        return
+      }
     }
 
     //reward token
@@ -173,7 +179,13 @@ export default function CreateFarm() {
     const rewardAllowance = await rewardTokenContract.allowance(account, farmContract.address)
 
     if (rewardAllowance < rewardTokenAmount) {
-      await rewardTokenContract.approve(farmContract.address, rewardTokenAmount)
+      try {
+        await rewardTokenContract.approve(farmContract.address, rewardTokenAmount)
+      } catch (error) {
+        console.log(error)
+        toast.error('Something went wrong with reward token approval.')
+        return
+      }
     }
 
     //creating farm
@@ -182,7 +194,7 @@ export default function CreateFarm() {
     const farmContractWithSigner = farmContract.connect(signer)
 
     try {
-      const farmCreation: any = await farmContractWithSigner.createFarm(
+      await farmContractWithSigner.createFarm(
         farm.currency0.address,
         farmPool.pool.address,
         farm.currency0.symbol,
@@ -194,11 +206,10 @@ export default function CreateFarm() {
         farmPool.pool.pair2
       )
 
-      await farmCreation.wait()
       toast.success('The farm has been created successfully')
     } catch (error) {
       console.log(error)
-      toast.error('Something went wrong.')
+      toast.error('Something went wrong with farm creation.')
     }
   }
 
