@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Rewards from './Rewards'
 import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { c, logo } from '../../assets'
+import { logo } from '../../assets'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import { PulseLoader } from 'react-spinners'
 import { useWeb3React } from '@web3-react/core'
 import { useFarmStakingContract } from 'hooks/useContract'
 import { ethers } from 'ethers'
-import { Console } from 'console'
 
 const ContainerHarvest = styled.div`
   padding-right: 10px;
@@ -16,6 +15,13 @@ const ContainerHarvest = styled.div`
 `
 const Container = styled.section`
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#2f3146')};
+
+  .elips {
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `
 const Text = styled.span`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
@@ -92,7 +98,7 @@ export default function Harvest({ data }: any) {
                 <p className="font-medium text-pink900 mb-[1px] text-[15px] ">
                   <Text>Staked</Text>
                 </p>
-                <div className=" font-medium text-[15px] text-black">
+                <div className=" font-medium text-[15px] text-black elips ">
                   <Text>{yourStake}</Text>
                 </div>
               </div>
@@ -100,7 +106,7 @@ export default function Harvest({ data }: any) {
                 <p className="font-medium text-pink900 mb-[1px] text-[15px] ">
                   <Text>Total staked</Text>
                 </p>
-                <div className=" font-medium text-[15px] text-black">
+                <div className=" font-medium text-[15px] text-black elips ">
                   <Text>{totalStaked}</Text>
                 </div>
               </div>
@@ -108,7 +114,7 @@ export default function Harvest({ data }: any) {
                 <p className="font-medium text-pink900 mb-[1px] text-[15px] ">
                   <Text>Your share</Text>
                 </p>
-                <div className=" font-medium text-[15px] text-black">
+                <div className=" font-medium text-[15px] text-black  ">
                   <Text>{yourShare}%</Text>
                 </div>
               </div>

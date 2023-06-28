@@ -12,6 +12,13 @@ const Container = styled(Link)`
 `
 const Text = styled.span`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
+
+  .elips {
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `
 
 export default function FarmsCards({ data }: any) {
@@ -166,7 +173,9 @@ export default function FarmsCards({ data }: any) {
             <Text>Total Staked</Text>
           </p>
           <p className="font-semibold text-black">
-            <Text>{totalStaked}</Text>
+            <Text>
+              <p className="elips">{totalStaked}</p>
+            </Text>
           </p>
         </div>
         <div>
@@ -174,7 +183,9 @@ export default function FarmsCards({ data }: any) {
             <Text>Your Stake</Text>
           </p>
           <p className="font-semibold text-black">
-            <Text>{yourStake}</Text>
+            <Text>
+              <p className="elips">{yourStake}</p>
+            </Text>
           </p>
         </div>
         <div>
@@ -183,7 +194,9 @@ export default function FarmsCards({ data }: any) {
           </p>
 
           <p className="font-semibold text-black">
-            <Text>{ethers.utils.formatEther(rewardPerDay)}</Text>
+            <Text>
+              <p className="elips">{ethers.utils.formatEther(rewardPerDay)}</p>
+            </Text>
           </p>
         </div>
 
@@ -192,7 +205,9 @@ export default function FarmsCards({ data }: any) {
             <Text>Amount of Rewards</Text>
           </p>
           <p className="font-semibold text-black">
-            <Text>{ethers.utils.formatEther(rewardTokenAmount)}</Text>
+            <Text>
+              <p className="elips">{ethers.utils.formatEther(rewardTokenAmount)}</p>
+            </Text>
           </p>
         </div>
       </div>

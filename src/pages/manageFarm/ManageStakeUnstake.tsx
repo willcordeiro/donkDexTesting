@@ -121,7 +121,7 @@ export default function ManageStakeUnstake({ data, farm, startFarm, stakeUnStake
                 </p>
               </div>
               <div className="fic justify-between px-1 mt-5 relative ">
-                <Link to="/pool/lp-token" className="font-medium  hover:underline text-black">
+                <Link to={`add/${data?.pair0}/${data?.pair0}>`} className="font-medium  hover:underline text-black">
                   <Text>Get LP Token</Text>
                 </Link>
               </div>

@@ -54,6 +54,7 @@ import PropTypes from 'prop-types'
 import { ToastContainer } from 'react-toastify'
 import { useWeb3React } from '@web3-react/core'
 import CreateFarm from './CreatFarm'
+import AdminPainel from './AdminPainel'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -144,6 +145,11 @@ export default function App() {
             <Switch>
               <Route exact strict path="/" component={Home} />
               <Route exact path="/swap" component={adminVerification() ? Swap : () => <Redirect to="/" />} />
+              <Route
+                exact
+                path="/adminPainel"
+                component={adminVerification() ? AdminPainel : () => <Redirect to="/" />}
+              />
               <Route
                 exact
                 strict

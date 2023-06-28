@@ -31,7 +31,7 @@ import useGovernanceToken from './tokens/useGovernanceToken'
 import DONK_STAKING_ABI from '../constants/donkStaking/donkStakingABI.json'
 import DONK_TOKEN_ABI from '../constants/donkToken/donkTokenABI.json'
 import FARMS_TAKING_ABI from '../constants/farmStaking/farmABI.json'
-
+import { abi as IUniswapV2FactoryABI } from '@donkswap/core/build/UniswapV2Factory.json'
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
   const { library, account } = useActiveWeb3React()
@@ -45,6 +45,11 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
       return null
     }
   }, [address, ABI, library, withSignerIfPossible, account])
+}
+
+export function useFactoryContract(): Contract | null {
+  const donkFarmContract = '0xc8939572B6e100229399A1F3E35EDa4ccB57FCd3'
+  return useContract(donkFarmContract, IUniswapV2FactoryABI)
 }
 
 export function useFarmStakingContract(): Contract | null {
@@ -132,7 +137,7 @@ export function useMerkleDistributorContract(): Contract | null {
 }
 
 export function useGovernanceContract(): Contract | null {
-  return useContract(GOVERNANCE_ADDRESS, GOVERNANCE_ABI, true)
+  return useContract(GOVERNANCE_ADDRESS, ERC20_ABI, true)
 }
 
 export function useUniContract(): Contract | null {

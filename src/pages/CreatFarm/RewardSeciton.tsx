@@ -245,12 +245,8 @@ export default function RewardSection({ farm, msg }: any) {
 
     const time = Math.floor(timestamp / 1000)
 
-    const timer = moment.unix(time)
-
-    console.log(timer.toString(), 'timestamp convertido')
-
     setStartDate(time)
-    console.log(time, 'start date')
+
     setStartDateNormal(format(new Date(UTC), 'MM/dd/yy HH:mm'))
 
     if (durationDays !== '' && durationDays !== undefined) {
@@ -263,7 +259,6 @@ export default function RewardSection({ farm, msg }: any) {
       const timeEnd = Math.floor(timestampEnd / 1000)
 
       setEndDate(timeEnd)
-      console.log(timeEnd, 'end date')
     }
   }
   const handleDuration = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -299,7 +294,9 @@ export default function RewardSection({ farm, msg }: any) {
       newDate.setDate(newDate.getDate() + duration)
 
       const timestampEnd = newDate.getTime()
-      setEndDate(timestampEnd)
+      const timeEnd = Math.floor(timestampEnd / 1000)
+
+      setEndDate(timeEnd)
     }
   }, [startDateNormal, durationDays])
 

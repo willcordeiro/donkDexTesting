@@ -9,6 +9,13 @@ import { ethers } from 'ethers'
 
 const ContainerRewards = styled.div`
   background-color: #ff894596;
+
+  .elips {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `
 
 const Button = styled.button`
@@ -47,6 +54,7 @@ export default function Rewards() {
       const farmReward: any = await farmContractWithSigner.callStatic.getCompleteReward(id)
 
       const etherValue = ethers.utils.formatEther(farmReward)
+
       console.log(farmReward)
       setReward(etherValue)
     } catch (error) {
@@ -54,11 +62,11 @@ export default function Rewards() {
       console.log(error)
     }
   }
-
+  getUserRewards()
   useEffect(() => {
     const interval = setInterval(async () => {
       await getUserRewards()
-    }, 1000)
+    }, 60000)
 
     return () => {
       clearInterval(interval)
@@ -70,7 +78,7 @@ export default function Rewards() {
       <div>
         <p className="text-gray-600 font-medium mb-1 text-gray">Pending Rewards</p>
         <div className="font-medium mb-1 text-xl fic gap-1 text-white">
-          <span>{reward}</span>
+          <p className="elips">{reward}</p>
         </div>
       </div>
       <Button className="bg-orange500 text-white w-full py-[14px] rounded-2xl custom-shadow font-semibold mt-8 hover:bg-[#ff8138]">

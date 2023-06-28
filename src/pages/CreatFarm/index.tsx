@@ -213,11 +213,10 @@ export default function CreateFarm() {
     }
   }
 
-  /*
   useEffect(() => {
-    console.log(farmPool.pool.pair2)
-  }, [farmPool])
-*/
+    console.log(farm)
+  }, [farm])
+
   return (
     <Container className="bg-pink100  min-h-[80vh]">
       <section className="max-w-6xl w-[90%] mx-auto">
