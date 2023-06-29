@@ -32,6 +32,7 @@ import DONK_STAKING_ABI from '../constants/donkStaking/donkStakingABI.json'
 import DONK_TOKEN_ABI from '../constants/donkToken/donkTokenABI.json'
 import FARMS_TAKING_ABI from '../constants/farmStaking/farmABI.json'
 import { abi as IUniswapV2FactoryABI } from '@donkswap/core/build/UniswapV2Factory.json'
+import { FACTORY_ADDRESSES } from '@donkswap/sdk'
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
   const { library, account } = useActiveWeb3React()
@@ -48,8 +49,10 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
 }
 
 export function useFactoryContract(): Contract | null {
-  const donkFarmContract = '0xc8939572B6e100229399A1F3E35EDa4ccB57FCd3'
-  return useContract(donkFarmContract, IUniswapV2FactoryABI)
+  const { chainId } = useActiveWeb3React()
+  const donkFactoryContract = chainId ? FACTORY_ADDRESSES[chainId] : undefined
+
+  return useContract(donkFactoryContract, IUniswapV2FactoryABI)
 }
 
 export function useFarmStakingContract(): Contract | null {

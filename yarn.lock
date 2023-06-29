@@ -1268,10 +1268,17 @@
   dependencies:
     "@remix-project/remixd" "^0.6.12"
 
-"@donkswap/core@1.0.17", "@donkswap/core@^1.0.17":
+"@donkswap/core@1.0.17":
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/@donkswap/core/-/core-1.0.17.tgz#f74f32580439bb57f59608050a988a1f57b1584c"
   integrity sha512-SIvWrzwfL8VtuZb71xN5vqMS0HBvtds4Vx53aCLujKdw/oygJZYruizFrFKPbWc4e9OmVC141UTA6z+mbq75Zw==
+  dependencies:
+    web3 "^1.10.0"
+
+"@donkswap/core@^1.0.18":
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/@donkswap/core/-/core-1.0.18.tgz#91e10ccf941350a01a16fd5c271fc91e68b2b44b"
+  integrity sha512-KmEZTAp3m0wZ4NVXRWn/+RdXx7wap3odSrjbwXzlLGaoVXC0TB6XLMdz/WjL4MzulWojgtKv1Y9332lLh7/21g==
   dependencies:
     web3 "^1.10.0"
 
@@ -1380,10 +1387,10 @@
   resolved "https://registry.npmjs.org/@donkswap/lib/-/lib-1.0.1.tgz"
   integrity "sha1-rhU4uQ4Y6LkyZa7a7AvINDpyf0A= sha512-kySMNsQx6JNHQOmcmlTO8CspAxZ1ZzmAZAOw0sxyYIc4h3SM46wrzJGqBhOlGLG4VDFNCR+dDnhRfoFLpBHJBQ=="
 
-"@donkswap/periphery@^1.0.24":
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/@donkswap/periphery/-/periphery-1.0.24.tgz#093338d3115eb6fa02b2b77a3916b84345b2b860"
-  integrity sha512-yOpkVyeMweeM9DW4IzsOSzo+t5aenf/Fr0SKADGDvlridoI9dz2ymGE5nlI8ADLJTZNbicZsy+Wk2vzrAeOFCQ==
+"@donkswap/periphery@^1.0.25":
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/@donkswap/periphery/-/periphery-1.0.25.tgz#d1ced40e869bf27378d399e89e1eb4dcce4bf4dd"
+  integrity sha512-wxEWmCcCF9m0fgYwuUTIoiPGEN0C7Xmi/UU68KjCYQLy0VYo45UuNCJNnPugY5bjgtDZ3erc2yCXptyEhMZPNA==
   dependencies:
     "@donkswap/core" "1.0.17"
     "@donkswap/lib" "1.0.1"
@@ -1416,12 +1423,12 @@
     tiny-warning "^1.0.3"
     toformat "^2.0.0"
 
-"@donkswap/sdk@^1.0.30":
-  version "1.0.30"
-  resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.30.tgz#f8dcd1b6540981afcf24d08078d35ca48719c0a0"
-  integrity sha512-7XGDYgWJcm/WVUP0SbCNV8+Wdx90ozswHDwuV1Pgq4+wcaqGnbh/weoFqg6IoU89PZDXIrsBDV9QsErwnz3lFQ==
+"@donkswap/sdk@^1.0.31":
+  version "1.0.31"
+  resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.31.tgz#e0c949cad12300ddaa87b4f558ffe2c7bd5986ff"
+  integrity sha512-tNIJ+wlVhNqYZ3PCuSMdpum7wZATOZux7E9svG1VcTQi+wYZlr0SfZZ9HKQgHn2lwdtI0E2LBTiIGsYg+bV2Jw==
   dependencies:
-    "@donkswap/core" "^1.0.17"
+    "@donkswap/core" "^1.0.18"
     big.js "^5.2.2"
     decimal.js-light "^2.5.0"
     jsbi "^3.1.1"
