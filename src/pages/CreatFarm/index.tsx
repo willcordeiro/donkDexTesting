@@ -162,7 +162,8 @@ export default function CreateFarm() {
 
     if (currentTaxAllowance < feeAmount) {
       try {
-        await feeTokenContract.approve(farmContract.address, feeAmount)
+        const approveTx = await feeTokenContract.approve(farmContract.address, feeAmount)
+        await library.waitForTransaction(approveTx.hash)
       } catch (error) {
         console.log(error)
         toast.error('Something went wrong with fee token approval.')
@@ -180,7 +181,8 @@ export default function CreateFarm() {
 
     if (rewardAllowance < rewardTokenAmount) {
       try {
-        await rewardTokenContract.approve(farmContract.address, rewardTokenAmount)
+        const approveTx = await rewardTokenContract.approve(farmContract.address, rewardTokenAmount)
+        await library.waitForTransaction(approveTx.hash)
       } catch (error) {
         console.log(error)
         toast.error('Something went wrong with reward token approval.')

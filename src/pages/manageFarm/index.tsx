@@ -67,16 +67,19 @@ export default function ManageFarm() {
     return getContract(address, ABI, library, withSignerIfPossible && account ? account : undefined)
   }
 
+  //TODO: MAYBE IT FIX THE APPROVE PROBLEM
   const stakeFarm = async () => {
     const lpTokenAmount = ethers.utils.parseUnits(farm.LpTokenAmount.toString(), 18).toString()
 
     const TokenContract: any = contract(data.farmTokenAddress, ERC20_ABI)
+    const farmContractWithSigner = farmContract.connect(library.getSigner())
 
     const currentTaxAllowance = await TokenContract.allowance(account, farmContract.address)
 
     if (currentTaxAllowance < lpTokenAmount) {
       try {
-        await TokenContract.approve(farmContract.address, lpTokenAmount)
+        const approveTx = await TokenContract.approve(farmContract.address, lpTokenAmount)
+        await library.waitForTransaction(approveTx.hash)
       } catch (error) {
         console.log(error)
         toast.error('Something went wrong with token approval.')
@@ -85,9 +88,8 @@ export default function ManageFarm() {
     }
 
     try {
-      const farmStart: any = await farmContractWithSigner.startFarm(id, lpTokenAmount)
-
-      await farmStart.wait()
+      const farmStartTx = await farmContractWithSigner.startFarm(id, lpTokenAmount)
+      await library.waitForTransaction(farmStartTx.hash)
       toast.success('You have joined the farm successfully')
     } catch (error) {
       console.log(error)
