@@ -201,7 +201,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: any) {
       <table className="w-full cursor-pointer" style={{ tableLayout: 'auto' }} onClick={() => setShowMore(!showMore)}>
         <thead>
           <tr>
-            <th className="text-left font-medium text-[rgb(150,150,150)]">POOL NAME</th>
+            <th className="text-left font-medium text-[rgb(150,150,150)]">POOL NAMEr</th>
             <th className="text-center font-medium text-[rgb(150,150,150)]">LIQUIDITY</th>
             <th className="text-center font-medium text-[rgb(150,150,150)]">VOLUME (24H)</th>
             <th className="text-center font-medium text-[rgb(150,150,150)]">FEES (24H)</th>

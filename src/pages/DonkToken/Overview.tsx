@@ -47,7 +47,7 @@ export default function Overview() {
   }
   setInterval(() => {
     checkContractBalance()
-  }, 1000)
+  }, 60000)
 
   return (
     <Container>
