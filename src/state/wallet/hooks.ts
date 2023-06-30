@@ -65,7 +65,6 @@ export function useETHBalance(): CurrencyAmount | undefined {
   useEffect(() => {
     if (storedBalance) {
       userEthBalance = retrieveETHAmount(userEthBalance, storedBalance.balance, storedBalance.timestamp)
-
       if (chainId && account && userEthBalance) {
         setBalance({ [account]: userEthBalance })
         balanceUpdater(chainId, account, userEthBalance.raw.toString())
@@ -132,9 +131,7 @@ export function useTokenBalance(
   tokenInterface = ERC20_INTERFACE
 ): TokenAmount | undefined {
   const tokenBalances = useTokenBalances(account, [token], method, tokenInterface)
-
   if (!token) return undefined
-
   return tokenBalances[token.address]
 }
 
@@ -147,12 +144,10 @@ export function useCurrencyBalances(
   ])
 
   const tokenBalances = useTokenBalances(account, tokens)
-
   const containsETH: boolean = useMemo(
     () => currencies?.some(currency => currency && DEFAULT_CURRENCIES.includes(currency)) ?? false,
     [currencies]
   )
-
   const ethBalance = useETHBalances(containsETH ? [account] : [])
 
   return useMemo(

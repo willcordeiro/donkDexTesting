@@ -440,7 +440,11 @@ export default function AddLiquidity({
                       </Button>
                     </div>
                     <div className="w-full">
-                      <Link to={`/remove/${twoCurrencies[0].address}/${twoCurrencies[1].address}`}>
+                      <Link
+                        to={`/remove/${
+                          twoCurrencies[0].symbol === 'ETH' ? twoCurrencies[0].symbol : twoCurrencies[0].address
+                        }/${twoCurrencies[1].symbol === 'ETH' ? twoCurrencies[1].symbol : twoCurrencies[1].address}`}
+                      >
                         <ButtonLink type="button">
                           {' '}
                           <Text2>Remove Liquidity</Text2>
@@ -452,7 +456,7 @@ export default function AddLiquidity({
               ) : (
                 ''
               )}
-              <Container>
+              <div className="container-appBody">
                 <AppBody>
                   <AddRemoveTabs creating={isCreate} adding={true} />
                   <Wrapper>
@@ -577,7 +581,7 @@ export default function AddLiquidity({
                     </AutoColumn>
                   </Wrapper>
                 </AppBody>
-              </Container>
+              </div>
               {!addIsUnsupported ? (
                 pair && !noLiquidity && pairState !== PairState.INVALID ? (
                   <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>

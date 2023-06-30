@@ -549,16 +549,6 @@ export default function RemoveLiquidity({
     maxWidth: twoCurrencies[0] && twoCurrencies[1] ? '72rem' : '32rem'
   }
 
-  const Container = styled.div`
-    @media (max-width: 1024px) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding-top: 10px;
-    }
-  `
-
   return (
     <>
       <div className="pt-4 pb-4">
@@ -599,7 +589,11 @@ export default function RemoveLiquidity({
                 <>
                   <ButtonList>
                     <div className="w-full">
-                      <Link to={`/add/${twoCurrencies[0].address}/${twoCurrencies[1].address}`}>
+                      <Link
+                        to={`/add/${
+                          twoCurrencies[0].symbol === 'ETH' ? twoCurrencies[0].symbol : twoCurrencies[0].address
+                        }/${twoCurrencies[1].symbol === 'ETH' ? twoCurrencies[1].symbol : twoCurrencies[1].address}`}
+                      >
                         <ButtonLink type="button">
                           <Text2> Add Liquidity</Text2>
                         </ButtonLink>
@@ -615,7 +609,7 @@ export default function RemoveLiquidity({
               ) : (
                 ''
               )}
-              <Container>
+              <div className="container-appBody">
                 <AppBody>
                   <AddRemoveTabs creating={false} adding={false} />
                   <Wrapper>
@@ -860,7 +854,7 @@ export default function RemoveLiquidity({
                     </AutoColumn>
                   </Wrapper>
                 </AppBody>
-              </Container>
+              </div>
               {pair ? (
                 <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
                   <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
