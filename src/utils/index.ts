@@ -33,7 +33,7 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   11155111: 'sepolia.etherscan.io',
   42: 'kovan.',
   1666600000: 'explorer.harmony.one',
-  42161: 'https://arbiscan.io/'
+  42161: 'arbiscan.io/'
 }
 
 export function getEtherscanLink(
