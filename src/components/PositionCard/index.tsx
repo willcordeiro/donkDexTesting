@@ -201,11 +201,11 @@ export default function FullPositionCard({ pair, border, stakedBalance }: any) {
       <table className="w-full cursor-pointer" style={{ tableLayout: 'auto' }} onClick={() => setShowMore(!showMore)}>
         <thead>
           <tr>
-            <th className="text-left font-medium text-[rgb(150,150,150)]">POOL NAMEr</th>
-            <th className="text-center font-medium text-[rgb(150,150,150)]">LIQUIDITY</th>
-            <th className="text-center font-medium text-[rgb(150,150,150)]">VOLUME (24H)</th>
-            <th className="text-center font-medium text-[rgb(150,150,150)]">FEES (24H)</th>
-            <th className="text-right font-medium text-[rgb(150,150,150)]">APR (24H)</th>
+            <th className="text-left font-medium text-[rgb(150,150,150)]">POOL NAME</th>
+            <th className="text-center font-medium text-[rgb(150,150,150)]"></th>
+            <th className="text-center font-medium text-[rgb(150,150,150)]"></th>
+            <th className="text-center font-medium text-[rgb(150,150,150)]"></th>
+            <th className="text-right font-medium text-[rgb(150,150,150)]"></th>
           </tr>
         </thead>
         <tbody>
@@ -218,26 +218,28 @@ export default function FullPositionCard({ pair, border, stakedBalance }: any) {
                   {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
                 </Text2>
               </Text>
+              {/* 
               <span className="px-2 py-[6px] text-xs bg-[#dbdbdb91]">2.08%</span>
+              */}
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                <Text2>{!currency0 || !currency1 ? <Dots>Loading</Dots> : `000`}</Text2>
+                <Text2>{!currency0 || !currency1 ? <Dots>Loading</Dots> : ``}</Text2>
               </Text>
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `000`}</Text2>
+                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : ``}</Text2>
               </Text>
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `000`}</Text2>
+                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : ``}</Text2>
               </Text>
             </td>
             <td className="text-center">
               <Text fontWeight={600} fontSize={14} color={'black'}>
-                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : `000`}</Text2>
+                <Text2> {!currency0 || !currency1 ? <Dots>Loading</Dots> : ``}</Text2>
               </Text>
             </td>
           </tr>

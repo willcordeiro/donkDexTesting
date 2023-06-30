@@ -77,7 +77,6 @@ export default function Explore() {
           <p className="mt-5 font-semibold text-black">
             <Text>Trade</Text>
           </p>
-          <Text>Launches 1st JULY </Text>
         </CardTrade>
 
         <CardLiquidity
@@ -88,7 +87,6 @@ export default function Explore() {
           <p className="mt-5 font-semibold text-black">
             <Text>Provide Liquidity</Text>
           </p>
-          <Text>Launches 1st JULY </Text>
         </CardLiquidity>
 
         <CardFarm
