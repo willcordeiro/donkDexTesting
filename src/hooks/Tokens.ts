@@ -188,7 +188,6 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
   const isETH = currencyId === BASE_CURRENCY.symbol
   const token = useToken(isETH ? undefined : currencyId)
-  // console.log(WETH[2153])
-  //console.log(isETH ? BASE_CURRENCY : token)
+
   return isETH ? BASE_CURRENCY : token
 }

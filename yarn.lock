@@ -1418,6 +1418,20 @@
     tiny-warning "^1.0.3"
     toformat "^2.0.0"
 
+"@donkswap/sdk@^1.0.34":
+  version "1.0.34"
+  resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.34.tgz#355128ec5e6d7c284cdc213e3f85f654a4be4210"
+  integrity sha512-8GYCnaZj3LPk/4ENBei5cYqvCzHNnGp64KAwi6JUwYzlqdem0UKzEFaNq5hTURDa2eHUmV3uU/q6MrugjwRh0w==
+  dependencies:
+    "@donkswap/core" "^1.0.18"
+    big.js "^5.2.2"
+    decimal.js-light "^2.5.0"
+    jsbi "^3.1.1"
+    lodash.random "^3.2.0"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.3"
+    toformat "^2.0.0"
+
 "@emotion/cache@^10.0.27":
   version "10.0.29"
   resolved "https://registry.npmjs.org/@emotion/cache/-/cache-10.0.29.tgz"

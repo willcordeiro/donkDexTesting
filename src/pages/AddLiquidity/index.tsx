@@ -205,6 +205,7 @@ export default function AddLiquidity({
       (currencyB && DEFAULT_CURRENCIES.includes(currencyB))
     ) {
       const tokenBIsETH = currencyB && DEFAULT_CURRENCIES.includes(currencyB)
+
       estimate = router.estimateGas.addLiquidityETH
       method = router.addLiquidityETH
 
@@ -384,16 +385,6 @@ export default function AddLiquidity({
   const styles = {
     maxWidth: twoCurrencies[0] && twoCurrencies[1] ? '72rem' : '32rem'
   }
-
-  const Container = styled.div`
-    @media (max-width: 1024px) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding-top: 10px;
-    }
-  `
 
   return (
     <>
