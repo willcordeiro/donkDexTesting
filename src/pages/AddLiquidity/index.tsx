@@ -186,6 +186,7 @@ export default function AddLiquidity({
     const router = getRouterContract(chainId, library, account)
 
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
+    console.log(parsedAmounts, 'parsed amounts')
     if (!parsedAmountA || !parsedAmountB || !currencyA || !currencyB || !deadline) {
       return
     }
@@ -195,10 +196,7 @@ export default function AddLiquidity({
       [Field.CURRENCY_B]: calculateSlippageAmount(parsedAmountB, noLiquidity ? 0 : allowedSlippage)[0]
     }
 
-    let estimate,
-      method: (...args: any) => Promise<TransactionResponse>,
-      args: Array<string | string[] | number>,
-      value: BigNumber | null
+    let estimate, method: (...args: any) => Promise<TransactionResponse>, args: Array<string | string[] | number>
 
     if (
       (currencyA && DEFAULT_CURRENCIES.includes(currencyA)) ||
@@ -209,6 +207,13 @@ export default function AddLiquidity({
       estimate = router.estimateGas.removeLiquidityETH
       method = router.removeLiquidityETH
 
+      console.log(currencyA, 'currency a')
+      console.log(parsedAmountA, 'parsedAmount A')
+      console.log(parsedAmountB, 'parsedAmount B')
+      console.log(amountsMin[Field.CURRENCY_A], 'amountsMin1')
+      console.log(amountsMin[Field.CURRENCY_B], 'amountsMin2')
+      console.log(account, 'account')
+      console.log(deadline.toHexString(), 'deadline')
       args = [
         wrappedCurrency(tokenBIsETH ? currencyA : currencyB, chainId)?.address ?? '', // token
         (tokenBIsETH ? parsedAmountA : parsedAmountB).raw.toString(), // token desired
@@ -217,7 +222,6 @@ export default function AddLiquidity({
         account,
         deadline.toHexString()
       ]
-      value = BigNumber.from((tokenBIsETH ? parsedAmountB : parsedAmountA).raw.toString())
     } else {
       estimate = router.estimateGas.addLiquidity
       method = router.addLiquidity
@@ -231,40 +235,37 @@ export default function AddLiquidity({
         account,
         deadline.toHexString()
       ]
-      value = null
     }
 
     setAttemptingTxn(true)
 
-    await estimate(...args, value ? { value } : {})
+    await estimate(...args)
       .then(estimatedGasLimit => {
         const callOptions: CallOverrides = {
           gasLimit: calculateGasMargin(estimatedGasLimit)
         }
-
-        if (value) callOptions.value = value
 
         method(...args, callOptions).then(response => {
           setAttemptingTxn(false)
 
           addTransaction(response, {
             summary:
-              'Add ' +
+              'Remove ' +
               parsedAmounts[Field.CURRENCY_A]?.toSignificant(3) +
               ' ' +
-              currencies[Field.CURRENCY_A]?.symbol +
+              currencyA?.symbol +
               ' and ' +
               parsedAmounts[Field.CURRENCY_B]?.toSignificant(3) +
               ' ' +
-              currencies[Field.CURRENCY_B]?.symbol
+              currencyB?.symbol
           })
 
           setTxHash(response.hash)
 
           ReactGA.event({
             category: 'Liquidity',
-            action: 'Add',
-            label: [currencies[Field.CURRENCY_A]?.symbol, currencies[Field.CURRENCY_B]?.symbol].join('/')
+            action: 'Remove',
+            label: [currencyA?.symbol, currencyB?.symbol].join('/')
           })
         })
       })
@@ -389,6 +390,13 @@ export default function AddLiquidity({
   return (
     <>
       <div className="pt-4 pb-4">
+        <button
+          onClick={() => {
+            onAdd()
+          }}
+        >
+          remove
+        </button>
         <ContainerApp style={styles}>
           {twoCurrencies[0] && twoCurrencies[1] ? (
             <header className="pb-14">

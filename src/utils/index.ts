@@ -80,7 +80,7 @@ export function basisPointsToPercent(num: number): Percent {
   return new Percent(JSBI.BigInt(num), JSBI.BigInt(10000))
 }
 
-export function calculateSlippageAmount(value: CurrencyAmount, slippage: number): [JSBI, JSBI] {
+export function calculateSlippageAmount(value: any, slippage: number): [JSBI, JSBI] {
   if (slippage < 0 || slippage > 10000) {
     throw Error(`Unexpected slippage value: ${slippage}`)
   }
