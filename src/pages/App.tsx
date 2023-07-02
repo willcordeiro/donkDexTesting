@@ -164,7 +164,7 @@ export default function App() {
               />
               <Route exact strict path="/send" component={true ? RedirectPathToSwapOnly : () => <Redirect to="/" />} />
               <Route exact strict path="/find" component={true ? PoolFinder : () => <Redirect to="/" />} />
-              <Route exact strict path="/pool" component={adminVerification() ? Pool : () => <Redirect to="/" />} />
+              <Route exact strict path="/pool" component={true ? Pool : () => <Redirect to="/" />} />
               <Route
                 exact
                 strict

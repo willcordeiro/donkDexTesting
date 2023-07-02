@@ -50,7 +50,6 @@ import useBlockchain from '../../hooks/useBlockchain'
 import { Link } from 'react-router-dom'
 import Overview from './Overview'
 import ETHlogo from '../../assets/images/ethereum-logo.png'
-import { ethers } from 'ethers'
 
 const ButtonList = styled.div`
   display: flex;
@@ -261,15 +260,11 @@ export default function RemoveLiquidity({
   // tx sending
   const addTransaction = useTransactionAdder()
   async function onRemove() {
-    const value = ethers.BigNumber.from('3900000000000000000')
-    // if (!chainId || !library || !account || !deadline) throw new Error('missing dependencies')
-    const currencyAmountA: any = value
-    const currencyAmountB: any = value
-
+    if (!chainId || !library || !account || !deadline) throw new Error('missing dependencies')
+    const { [Field.CURRENCY_A]: currencyAmountA, [Field.CURRENCY_B]: currencyAmountB } = parsedAmounts
     if (!currencyAmountA || !currencyAmountB) {
       throw new Error('missing currency amounts')
     }
-
     const router = getRouterContract(chainId, library, account)
 
     const amountsMin = {
@@ -290,13 +285,26 @@ export default function RemoveLiquidity({
     // we have approval, use normal remove liquidity
     if (approval === ApprovalState.APPROVED) {
       // removeLiquidityETH
-      if (true) {
+      if (oneCurrencyIsETH) {
         methodNames = ['removeLiquidityETH', 'removeLiquidityETHSupportingFeeOnTransferTokens']
         args = [
-          tokenA.address,
+          currencyBIsETH ? tokenA.address : tokenB.address,
           liquidityAmount.raw.toString(),
           amountsMin[currencyBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(),
           amountsMin[currencyBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(),
+          account,
+          deadline.toHexString()
+        ]
+      }
+      // removeLiquidity
+      else {
+        methodNames = ['removeLiquidity']
+        args = [
+          tokenA.address,
+          tokenB.address,
+          liquidityAmount.raw.toString(),
+          amountsMin[Field.CURRENCY_A].toString(),
+          amountsMin[Field.CURRENCY_B].toString(),
           account,
           deadline.toHexString()
         ]
@@ -581,13 +589,6 @@ export default function RemoveLiquidity({
               {twoCurrencies[0] && twoCurrencies[1] ? (
                 <>
                   <ButtonList>
-                    <button
-                      onClick={() => {
-                        onRemove()
-                      }}
-                    >
-                      remove
-                    </button>
                     <div className="w-full">
                       <Link
                         to={`/add/${
