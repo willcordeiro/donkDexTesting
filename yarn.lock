@@ -1418,10 +1418,10 @@
     tiny-warning "^1.0.3"
     toformat "^2.0.0"
 
-"@donkswap/sdk@^1.0.52":
-  version "1.0.52"
-  resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.52.tgz#8409db69af826588a9519df8ad3dc6ed1516ed14"
-  integrity sha512-Vxs3vYW4yObXAMxpVQ8C76eN5b/vg+l/ZBrgJQtPPvHo0Ho6wF7Z23a8u0yxjX/J1+X5OC7Ew853dFJlmhZBuA==
+"@donkswap/sdk@^1.0.53":
+  version "1.0.53"
+  resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.53.tgz#c1d3fc242f1dc89ac9601165efc2783dcec2b675"
+  integrity sha512-frJePhqmHXZquehcPZdY23vWSkIv8eBTd9zMCTi8jufgrntDElpUeLniUndw/I2ac1qk0KIs2+eY7TyVcfQJhg==
   dependencies:
     "@donkswap/core" "^1.0.26"
     big.js "^5.2.2"

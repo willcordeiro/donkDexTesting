@@ -119,11 +119,11 @@ export default function App() {
   useEffect(() => {
     document.title = platformName
   }, [platformName])*/
-  //const { account, library } = useWeb3React()
+  const { account, library } = useWeb3React()
   const location = useLocation()
 
   const adminVerification = () => {
-    const user = true //Admin wallet
+    const user = account == '0x9cf363fF78B6B6Caf919886A28f47F1fA10a52e1' //Admin wallet
 
     return user
   }
@@ -231,36 +231,36 @@ export default function App() {
                 exact
                 strict
                 path="/create"
-                component={adminVerification() ? RedirectToAddLiquidity : () => <Redirect to="/" />}
+                component={true ? RedirectToAddLiquidity : () => <Redirect to="/" />}
               />
-              <Route exact path="/add" component={adminVerification() ? AddLiquidity : () => <Redirect to="/" />} />
+              <Route exact path="/add" component={true ? AddLiquidity : () => <Redirect to="/" />} />
               <Route
                 exact
                 path="/add/:currencyIdA"
-                component={adminVerification() ? RedirectOldAddLiquidityPathStructure : () => <Redirect to="/" />}
+                component={true ? RedirectOldAddLiquidityPathStructure : () => <Redirect to="/" />}
               />
               <Route
                 exact
                 path="/add/:currencyIdA/:currencyIdB"
-                component={adminVerification() ? RedirectDuplicateTokenIds : () => <Redirect to="/" />}
+                component={true ? RedirectDuplicateTokenIds : () => <Redirect to="/" />}
               />
               <Route
                 exact
                 strict
                 path="/remove/v1/:address"
-                component={adminVerification() ? RemoveV1Exchange : () => <Redirect to="/" />}
+                component={true ? RemoveV1Exchange : () => <Redirect to="/" />}
               />
               <Route
                 exact
                 strict
                 path="/remove/:tokens"
-                component={adminVerification() ? RedirectOldRemoveLiquidityPathStructure : () => <Redirect to="/" />}
+                component={true ? RedirectOldRemoveLiquidityPathStructure : () => <Redirect to="/" />}
               />
               <Route
                 exact
                 strict
                 path="/remove/:currencyIdA/:currencyIdB"
-                component={adminVerification() ? RemoveLiquidity : () => <Redirect to="/" />}
+                component={true ? RemoveLiquidity : () => <Redirect to="/" />}
               />
               <Route
                 exact
