@@ -89,7 +89,7 @@ export function useApproveCallback(
       .approve(spender, useExact ? amountToApprove.raw.toString() : MaxUint256, callOptions)
       .then((response: TransactionResponse) => {
         addTransaction(response, {
-          summary: 'Approve ' + amountToApprove.currency.symbol,
+          summary: 'Approve ' + 'DONK LP',
           approval: { tokenAddress: token.address, spender: spender }
         })
       })

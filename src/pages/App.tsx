@@ -123,7 +123,7 @@ export default function App() {
   const location = useLocation()
 
   const adminVerification = () => {
-    const user = account == '0x9cf363fF78B6B6Caf919886A28f47F1fA10a52e1' //Admin wallet
+    const user = account == '0xfB4c38FC6E72923a594A6B00cb8a7D449409C5e2' //Admin wallet
 
     return user
   }
