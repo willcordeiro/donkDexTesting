@@ -119,11 +119,11 @@ export default function App() {
   useEffect(() => {
     document.title = platformName
   }, [platformName])*/
-  const { account, library } = useWeb3React()
+  //const { account, library } = useWeb3React()
   const location = useLocation()
 
   const adminVerification = () => {
-    const user = account == '0x9cf363fF78B6B6Caf919886A28f47F1fA10a52e1' //Admin wallet
+    const user = true //Admin wallet
 
     return user
   }
@@ -144,7 +144,7 @@ export default function App() {
           <Web3ReactManager>
             <Switch>
               <Route exact strict path="/" component={Home} />
-              <Route exact path="/swap" component={adminVerification() ? Swap : () => <Redirect to="/" />} />
+              <Route exact path="/swap" component={true ? Swap : () => <Redirect to="/" />} />
               <Route
                 exact
                 path="/adminPainel"
@@ -160,20 +160,10 @@ export default function App() {
                 exact
                 strict
                 path="/swap/:outputCurrency"
-                component={adminVerification() ? RedirectToSwap : () => <Redirect to="/" />}
+                component={true ? RedirectToSwap : () => <Redirect to="/" />}
               />
-              <Route
-                exact
-                strict
-                path="/send"
-                component={adminVerification() ? RedirectPathToSwapOnly : () => <Redirect to="/" />}
-              />
-              <Route
-                exact
-                strict
-                path="/find"
-                component={adminVerification() ? PoolFinder : () => <Redirect to="/" />}
-              />
+              <Route exact strict path="/send" component={true ? RedirectPathToSwapOnly : () => <Redirect to="/" />} />
+              <Route exact strict path="/find" component={true ? PoolFinder : () => <Redirect to="/" />} />
               <Route exact strict path="/pool" component={adminVerification() ? Pool : () => <Redirect to="/" />} />
               <Route
                 exact

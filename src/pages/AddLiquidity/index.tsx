@@ -206,8 +206,8 @@ export default function AddLiquidity({
     ) {
       const tokenBIsETH = currencyB && DEFAULT_CURRENCIES.includes(currencyB)
 
-      estimate = router.estimateGas.addLiquidityETH
-      method = router.addLiquidityETH
+      estimate = router.estimateGas.removeLiquidityETH
+      method = router.removeLiquidityETH
 
       args = [
         wrappedCurrency(tokenBIsETH ? currencyA : currencyB, chainId)?.address ?? '', // token

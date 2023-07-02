@@ -1268,7 +1268,7 @@
   dependencies:
     "@remix-project/remixd" "^0.6.12"
 
-"@donkswap/core@1.0.29", "@donkswap/core@^1.0.29":
+"@donkswap/core@1.0.29", "@donkswap/core@^1.0.26", "@donkswap/core@^1.0.29":
   version "1.0.29"
   resolved "https://registry.yarnpkg.com/@donkswap/core/-/core-1.0.29.tgz#1ea3e8857735543d0a53b40b89bc93644b8f0955"
   integrity sha512-mXH30u/GUN3KkzUMa9b5PVeePS8aHAKxSsCNbDHKhS8fUBVK+sH8RGJN1Ez7+cQpuDrhVv2rZBskMVv2pC+TcA==
@@ -1279,13 +1279,6 @@
   version "1.0.18"
   resolved "https://registry.yarnpkg.com/@donkswap/core/-/core-1.0.18.tgz#91e10ccf941350a01a16fd5c271fc91e68b2b44b"
   integrity sha512-KmEZTAp3m0wZ4NVXRWn/+RdXx7wap3odSrjbwXzlLGaoVXC0TB6XLMdz/WjL4MzulWojgtKv1Y9332lLh7/21g==
-  dependencies:
-    web3 "^1.10.0"
-
-"@donkswap/core@^1.0.26":
-  version "1.0.26"
-  resolved "https://registry.yarnpkg.com/@donkswap/core/-/core-1.0.26.tgz#35412cd6828dcda822c380b6868a4403125ece93"
-  integrity sha512-GLEeQeNQNwGP3eOl1MsfJ1ujqH75b2QBp/2fTKbieXlupAbCkYKoaUDMLJd4wlabhth7Bc8lROEZ5bEQTpghfg==
   dependencies:
     web3 "^1.10.0"
 
