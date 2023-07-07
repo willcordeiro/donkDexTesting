@@ -9,6 +9,63 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_adminWallet",
+        "type": "address"
+      }
+    ],
+    "name": "setAdminWallet",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_apr",
+        "type": "uint256"
+      }
+    ],
+    "name": "setApr",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_daysFee",
+        "type": "uint256"
+      }
+    ],
+    "name": "setDaysFee",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "fee",
         "type": "uint256"
@@ -44,6 +101,16 @@
         "internalType": "address",
         "name": "token",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_daysFee",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_apr",
+        "type": "uint256"
       }
     ],
     "stateMutability": "nonpayable",
@@ -72,12 +139,12 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "totalStakedPercentage",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
       }
     ],
-    "name": "calculateAPR",
+    "name": "checkBalance",
     "outputs": [
       {
         "internalType": "uint256",
@@ -85,18 +152,25 @@
         "type": "uint256"
       }
     ],
-    "stateMutability": "pure",
+    "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "currentApr",
+    "outputs": [
       {
-        "internalType": "address",
-        "name": "account",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name": "checkBalance",
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "daysFee",
     "outputs": [
       {
         "internalType": "uint256",
@@ -149,6 +223,11 @@
           {
             "internalType": "uint256",
             "name": "savedReward",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "firstDate",
             "type": "uint256"
           }
         ],
@@ -232,6 +311,11 @@
       {
         "internalType": "uint256",
         "name": "savedReward",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "firstDate",
         "type": "uint256"
       }
     ],

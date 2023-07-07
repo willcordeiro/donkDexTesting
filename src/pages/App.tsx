@@ -165,18 +165,8 @@ export default function App() {
               <Route exact strict path="/send" component={true ? RedirectPathToSwapOnly : () => <Redirect to="/" />} />
               <Route exact strict path="/find" component={true ? PoolFinder : () => <Redirect to="/" />} />
               <Route exact strict path="/pool" component={true ? Pool : () => <Redirect to="/" />} />
-              <Route
-                exact
-                strict
-                path="/stake"
-                component={adminVerification() ? DonkStaking : () => <Redirect to="/" />}
-              />
-              <Route
-                exact
-                strict
-                path="/stake/token"
-                component={adminVerification() ? DonkToken : () => <Redirect to="/" />}
-              />
+              <Route exact strict path="/stake" component={true ? DonkStaking : () => <Redirect to="/" />} />
+              <Route exact strict path="/stake/token" component={true ? DonkToken : () => <Redirect to="/" />} />
               <Route exact strict path="/Farm" component={adminVerification() ? Farm : () => <Redirect to="/" />} />
               <Route path="/farm/manage/:id" component={adminVerification() ? ManageFarm : () => <Redirect to="/" />} />
               <Route path="/farm/create" component={adminVerification() ? CreateFarm : () => <Redirect to="/" />} />

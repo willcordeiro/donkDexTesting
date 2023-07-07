@@ -44,6 +44,12 @@ const Label = styled.label`
 
 const Text = styled.span`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
+  max-width: 50px;
+`
+
+const Ptag = styled.div`
+  max-width: 150px;
+  color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
 `
 
 const Input = styled.input`
@@ -89,28 +95,37 @@ export default function StakeUnStake() {
     if (stakeAmount == '') return toast.warning('You should have an amount to stake!')
 
     toast.info(`Starting the staking with ${stakeAmount} amount of tokens.`)
-    //converting amount
+    // Converting amount
     const amount = ethers.utils.parseUnits(stakeAmount, 18)
 
-    // Aproving Token
+    // Approving Token
 
     const currentAllowance = await tokenContract.allowance(account, stakingContract.address)
 
     if (currentAllowance < amount) {
       await tokenContract.approve(stakingContract.address, amount)
+      await new Promise(resolve => {
+        // Wait for approval confirmation
+        const intervalId = setInterval(async () => {
+          const updatedAllowance = await tokenContract.allowance(account, stakingContract.address)
+          if (updatedAllowance >= amount) {
+            clearInterval(intervalId)
+            resolve()
+          }
+        }, 1000)
+      })
     }
 
     // Staking tokens
 
     const signer = library.getSigner(account)
-
     const stakingContractWithSigner = stakingContract.connect(signer)
 
     try {
       const staking = await stakingContractWithSigner.stake(amount)
       await staking.wait()
 
-      toast.success(`Sucessfully staked ${stakeAmount} amount of tokens.`)
+      toast.success(`Successfully staked ${stakeAmount} amount of tokens.`)
       return getStakedBalance()
     } catch (error) {
       console.log(error)
@@ -190,7 +205,7 @@ export default function StakeUnStake() {
 
     const amount = ethers.utils.formatUnits(reward)
 
-    setStakeReward(parseFloat(amount).toFixed(0))
+    setStakeReward(amount)
   }
   getCurrentRewardAmount()
 
@@ -218,6 +233,22 @@ export default function StakeUnStake() {
 
       toast.success(`Successfully harvested ${stakeReward} amount of tokens.`)
       await getCurrentRewardAmount()
+
+      const currentAllowance = await tokenContract.allowance(account, stakingContract.address)
+
+      if (currentAllowance < amount) {
+        await tokenContract.approve(stakingContract.address, amount)
+        await new Promise(resolve => {
+          // Wait for approval confirmation
+          const intervalId = setInterval(async () => {
+            const updatedAllowance = await tokenContract.allowance(account, stakingContract.address)
+            if (updatedAllowance >= amount) {
+              clearInterval(intervalId)
+              resolve()
+            }
+          }, 1000)
+        })
+      }
 
       // Staking tokens
       const staking = await stakingContractWithSigner.stake(amount)
@@ -293,12 +324,12 @@ export default function StakeUnStake() {
           <p className="mb-1">
             <Text>Pending Rewards</Text>
           </p>
-          <div className="gap-2 flex">
+          <Ptag className="gap-2 flex">
             <img src={logo} alt="litecoin" width={50} />
             <p>
               <Text>{stakeReward}</Text>
             </p>
-          </div>
+          </Ptag>
         </div>
       </Card>
       <ButtonContainer>

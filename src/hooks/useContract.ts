@@ -61,12 +61,12 @@ export function useFarmStakingContract(): Contract | null {
 }
 
 export function useDonkStakingContract(): Contract | null {
-  const donkStakingContract = '0xE513c6BDA225945e265Aad7257a14FfA4ee190bB'
+  const donkStakingContract = '0x9B7e65f6F99947A81F8ff729d2f559C6b8DB2323'
   return useContract(donkStakingContract, DONK_STAKING_ABI)
 }
 
 export function useDonkTokenContract(): Contract | null {
-  const donkTokenContract = '0x42Fb5CE5fe683c301eD6Ed24ED1BE4B81804aD30'
+  const donkTokenContract = '0x1901AFaF3a3e0Ac8Ba66A41E9EB179d7F91dAFC4'
   return useContract(donkTokenContract, DONK_TOKEN_ABI)
 }
 

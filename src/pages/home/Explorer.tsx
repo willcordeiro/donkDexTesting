@@ -108,7 +108,6 @@ export default function Explore() {
           <p className="mt-5 font-semibold text-black">
             <Text>Stake</Text>
           </p>
-          <Text>Launches 7th JULY </Text>
         </CardStake>
         <CardNFT
           to="/NFTs"
