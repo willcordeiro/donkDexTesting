@@ -141,10 +141,10 @@ export default function Footer() {
               <a href="mailto:donkcoin.relations@gmail.com">Apply for Partnership</a>
             </List>
             <List className="hover:underListne mb-2 text-sm">
-              <a href="mailto:donkcoin.relations@gmail.com">Token Liststing</a>
+              <a href="mailto:donkcoin.relations@gmail.com">token Listing</a>
             </List>
             <List className="hover:underListne mb-2 text-sm">
-              <a href="mailto:donkcoin.relations@gmail.com">NFT Liststing</a>
+              <a href="mailto:donkcoin.relations@gmail.com">NFT Listing</a>
             </List>
             <List className="hover:underListne mb-2 text-sm">
               <a href="mailto:donkcoin.relations@gmail.com">Contact Us</a>
