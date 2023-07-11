@@ -47,8 +47,8 @@ export default function ManageFarm() {
     LpTokenAmount: ''
   })
 
-  const CheckFields = () => {
-    if (farm.LpTokenAmount !== undefined && farm.LpTokenAmount !== '') {
+  const CheckFields = (value: boolean) => {
+    if ((farm.LpTokenAmount !== undefined && farm.LpTokenAmount !== '') || value) {
       if (stakeUnStake === 'Stake') {
         stakeFarm()
       } else {
@@ -77,14 +77,17 @@ export default function ManageFarm() {
     const currentTaxAllowance = await TokenContract.allowance(account, farmContract.address)
 
     if (currentTaxAllowance < lpTokenAmount) {
-      try {
-        const approveTx = await TokenContract.approve(farmContract.address, lpTokenAmount)
-        await library.waitForTransaction(approveTx.hash)
-      } catch (error) {
-        console.log(error)
-        toast.error('Something went wrong with token approval.')
-        return
-      }
+      await TokenContract.approve(farmContract.address, lpTokenAmount)
+      await new Promise(resolve => {
+        // Wait for approval confirmation
+        const intervalId = setInterval(async () => {
+          const updatedAllowance = await TokenContract.allowance(account, farmContract.address)
+          if (updatedAllowance < lpTokenAmount) {
+            clearInterval(intervalId)
+            resolve()
+          }
+        }, 1000)
+      })
     }
 
     try {

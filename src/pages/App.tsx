@@ -119,7 +119,7 @@ export default function App() {
   useEffect(() => {
     document.title = platformName
   }, [platformName])*/
-  const { account, library } = useWeb3React()
+  //const { account, library } = useWeb3React()
   const location = useLocation()
 
   const adminVerification = () => {

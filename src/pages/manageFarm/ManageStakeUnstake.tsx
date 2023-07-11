@@ -6,9 +6,10 @@ import { useWeb3React } from '@web3-react/core'
 import { useWalletModalToggle } from 'state/application/hooks'
 import { ButtonLight } from '../../components/Button'
 import PulseLoader from 'react-spinners/PulseLoader'
-import { ethers } from 'ethers'
+import { Contract, ethers } from 'ethers'
 import { error } from 'console'
-
+import ERC20_ABI from '../../constants/abis/erc20.json'
+import { getContract } from 'utils'
 const Container = styled.div`
   padding-bottom: 15px;
 `
@@ -63,12 +64,31 @@ export default function ManageStakeUnstake({ data, farm, startFarm, stakeUnStake
   const { account, library } = useWeb3React()
   const toggleWalletModal = useWalletModalToggle()
   const [lpTokenAmount, setLpTokenAmount] = useState<any>()
+  const [balance, setBalance] = useState<any>()
 
   useEffect(() => {
     farm({
       LpTokenAmount: lpTokenAmount
     })
   }, [lpTokenAmount])
+
+  function contract(address: string, ABI: any, withSignerIfPossible = true): Contract | null {
+    return getContract(address, ABI, library, withSignerIfPossible && account ? account : undefined)
+  }
+
+  useEffect(() => {
+    const fetchTokenBalance = async () => {
+      if (data) {
+        const tokenContract: any = contract(data?.farmTokenAddress, ERC20_ABI)
+
+        const balance = await tokenContract.balanceOf(account)
+
+        setBalance(ethers.utils.formatUnits(balance.toString()))
+      }
+    }
+
+    fetchTokenBalance()
+  }, [data])
 
   const handleTokenAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
@@ -100,28 +120,32 @@ export default function ManageStakeUnstake({ data, farm, startFarm, stakeUnStake
           </Container>
           <div className="px-6 py-4 flex justify-between flex-col h-[87%]">
             <div>
-              <label
-                htmlFor="minute"
-                className="flex items-center gap-1 rounded-xl border  p-1 pl-4 border-gray-300 my-3"
-              >
-                <Input
-                  type="number"
-                  className=" bg-transparent focus:bg-transparent outline-none flex-1 w-full"
-                  placeholder="Enter Amount of LP Tokens"
-                  onChange={handleTokenAmount}
-                />
-              </label>
+              {stakeUnStake === 'Stake' ? (
+                <label
+                  htmlFor="minute"
+                  className="flex items-center gap-1 rounded-xl border  p-1 pl-4 border-gray-300 my-3"
+                >
+                  <Input
+                    type="number"
+                    className=" bg-transparent focus:bg-transparent outline-none flex-1 w-full"
+                    placeholder="Enter Amount of LP Tokens"
+                    onChange={handleTokenAmount}
+                  />{' '}
+                </label>
+              ) : (
+                ''
+              )}
 
               <div className="fic justify-between gap-3 px-1 my-1">
                 <p className="text-sm font-medium text-black">
                   <Text>LP Token Balance</Text>
                 </p>
                 <p className="text-black">
-                  <Text>0</Text>
+                  <Text>{balance}</Text>
                 </p>
               </div>
               <div className="fic justify-between px-1 mt-5 relative ">
-                <Link to={`/add/${data?.pair0}/${data?.pair0}>`} className="font-medium  hover:underline text-black">
+                <Link to={`/add/${data?.pair0}/${data?.pair0}`} className="font-medium  hover:underline text-black">
                   <Text>Get LP Token</Text>
                 </Link>
               </div>
@@ -130,7 +154,9 @@ export default function ManageStakeUnstake({ data, farm, startFarm, stakeUnStake
               {' '}
               <ButtonSubmit className="bg-orange500 text-white w-full py-[14px] rounded-2xl custom-shadow font-semibold mt-8 hover:bg-[#ff8138]">
                 {account ? (
-                  <span onClick={startFarm}>{stakeUnStake}</span>
+                  <span onClick={() => (stakeUnStake === 'Stake' ? startFarm(false) : startFarm(true))}>
+                    {stakeUnStake}
+                  </span>
                 ) : (
                   <span onClick={toggleWalletModal}>Connect Wallet</span>
                 )}
