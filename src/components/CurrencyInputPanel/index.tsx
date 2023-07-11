@@ -135,6 +135,25 @@ interface CurrencyInputPanelProps {
   overrideSelectedCurrencyBalance?: CurrencyAmount | null
 }
 
+interface CurrencyInputPanelProps {
+  value: string
+  onUserInput: (value: string) => void
+  onMax?: () => void
+  showMaxButton: boolean
+  label?: string
+  onCurrencySelect?: (currency: Currency) => void
+  currency?: Currency | null
+  disableCurrencySelect?: boolean
+  hideBalance?: boolean
+  pair?: Pair | null
+  hideInput?: boolean
+  otherCurrency?: Currency | null
+  id: string
+  showCommonBases?: boolean
+  customBalanceText?: string
+  overrideSelectedCurrencyBalance?: CurrencyAmount | null
+}
+
 export default function CurrencyInputPanel({
   value,
   onUserInput,
@@ -161,6 +180,7 @@ export default function CurrencyInputPanel({
   if (overrideSelectedCurrencyBalance) {
     selectedCurrencyBalance = overrideSelectedCurrencyBalance
   }
+
   const theme = useTheme()
 
   const handleDismissSearch = useCallback(() => {
@@ -173,14 +193,14 @@ export default function CurrencyInputPanel({
         {!hideInput && (
           <LabelRow>
             <RowBetween>
-              <TYPE.body color={'#6b7280'} fontWeight={600} fontSize={18}>
+              <TYPE.body color={theme.text2} fontWeight={500} fontSize={14}>
                 {label}
               </TYPE.body>
               {account && (
                 <TYPE.body
                   onClick={onMax}
-                  color={theme.text4}
-                  fontWeight={600}
+                  color={theme.text2}
+                  fontWeight={500}
                   fontSize={14}
                   style={{ display: 'inline', cursor: 'pointer' }}
                 >
@@ -192,7 +212,7 @@ export default function CurrencyInputPanel({
             </RowBetween>
           </LabelRow>
         )}
-        <InputRow style={hideInput ? { padding: '0', borderRadius: '5px' } : {}} selected={disableCurrencySelect}>
+        <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}} selected={disableCurrencySelect}>
           {!hideInput && (
             <>
               <NumericalInput

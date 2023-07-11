@@ -139,7 +139,7 @@ export default function GovTokenBalanceContent({ setShowUniBalanceModal }: { set
                 <RowBetween>
                   <TYPE.white color="white">Balance:</TYPE.white>
                   <TYPE.white color="white">
-                    {govTokenUserDetails?.unlockedBalance?.toFixed(2, { groupSeparator: ',' })} OV / {userBalanceUsd}{' '}
+                    {govTokenUserDetails?.unlockedBalance?.toFixed(2, { groupSeparator: ',' })} DNK / {userBalanceUsd}{' '}
                     USD
                   </TYPE.white>
                 </RowBetween>

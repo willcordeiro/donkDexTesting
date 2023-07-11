@@ -11,6 +11,20 @@
   text-decoration: none;
 }
 
+.container-appBody {
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .container-appBody {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-top: 10px;
+  }
+}
+
 .borderBottom {
   border-bottom: solid 1px black;
 }

@@ -117,7 +117,7 @@ function TransactionSubmittedContent({
                 </RowFixed>
               ) : (
                 <RowFixed>
-                  Added {currencyToAddAdjusted.symbol}{' '}
+                  Added DONK-LP
                   <CheckCircle size={'16px'} stroke={theme.green1} style={{ marginLeft: '6px' }} />
                 </RowFixed>
               )}

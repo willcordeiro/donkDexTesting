@@ -89,7 +89,7 @@ export default function Card() {
           <div className="grid grid-cols-2 p-5">
             <div>
               <p className="text-xs text-pink900 mb-[2px]">
-                <Text>Total Stacked </Text>
+                <Text>Total Staked </Text>
               </p>
               <p className="font-semibold text-black">
                 <Text>{totalContractBalance}</Text>

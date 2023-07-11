@@ -29,7 +29,7 @@ import { PlusHelper } from '../QuestionHelper'
 import useAddTokenToMetamask from 'hooks/useAddTokenToMetamask'
 
 function currencyKey(currency: Currency): string {
-  const name: string = BASE_CURRENCY && BASE_CURRENCY.name ? BASE_CURRENCY.name.toUpperCase() : 'ETH'
+  const name: string = BASE_CURRENCY && BASE_CURRENCY.name ? BASE_CURRENCY.name.toUpperCase() : ''
   return currency instanceof Token ? currency.address : currency === BASE_CURRENCY ? name : ''
 }
 
@@ -193,7 +193,7 @@ export default function CurrencyList({
 }) {
   const { chainId } = useActiveWeb3React()
   const baseCurrencyList = baseCurrencies(chainId)
-  // const baseCurrency = baseCurrencyList[0]
+  const baseCurrency = baseCurrencyList[0]
   const governanceToken = baseCurrencyList[2]
 
   const stickied = [governanceToken]
@@ -212,11 +212,10 @@ export default function CurrencyList({
     : currencies
 
   const itemData: (Currency | undefined)[] = useMemo(() => {
-    let formatted: (Currency | undefined)[] = showETH ? [...stickied, ...currencies] : currencies
+    let formatted: (Currency | undefined)[] = showETH ? [baseCurrency, ...stickied, ...currencies] : currencies
     if (breakIndex !== undefined) {
       formatted = [...formatted.slice(0, breakIndex), undefined, ...formatted.slice(breakIndex, formatted.length)]
     }
-
     return formatted
   }, [breakIndex, baseCurrencyList, currencies, showETH])
 

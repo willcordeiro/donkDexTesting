@@ -16,7 +16,7 @@ export function getTokenLogoURL(token: Token): string {
 
   switch (token.chainId) {
     case ChainId.ARBITRUM:
-      return EthereumLogo
+      return 'https://www.linkpicture.com/q/logo_-_white_bg.png'
 
     case ChainId.SEPOLIA:
       return EthereumLogo

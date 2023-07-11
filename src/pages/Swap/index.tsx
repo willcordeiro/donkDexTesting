@@ -297,16 +297,6 @@ export default function Swap() {
 
   const showCommonBases = false
 
-  const Container = styled.div`
-    @media (max-width: 1024px) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding-top: 10px;
-    }
-  `
-
   return (
     <>
       <div className="py-8 min-h-[80vh] mt-12 text-center">
@@ -319,11 +309,11 @@ export default function Swap() {
               tokens={importTokensNotInDefault}
               onConfirm={handleConfirmTokenWarning}
             />
-            <Container>
+            <div>
               <SwapPoolTabs active={'swap'} />
               <SwapHeader />
-            </Container>
-            <Container>
+            </div>
+            <div className="container-appBody">
               <AppBody>
                 <Wrapper id="swap-page">
                   <ConfirmSwapModal
@@ -546,7 +536,7 @@ export default function Swap() {
                   </BottomGrouping>
                 </Wrapper>
               </AppBody>
-            </Container>
+            </div>
             {!swapIsUnsupported ? (
               <AdvancedSwapDetailsDropdown trade={trade} />
             ) : (

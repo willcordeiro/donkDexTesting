@@ -32,6 +32,7 @@ import DONK_STAKING_ABI from '../constants/donkStaking/donkStakingABI.json'
 import DONK_TOKEN_ABI from '../constants/donkToken/donkTokenABI.json'
 import FARMS_TAKING_ABI from '../constants/farmStaking/farmABI.json'
 import { abi as IUniswapV2FactoryABI } from '@donkswap/core/build/UniswapV2Factory.json'
+import { FACTORY_ADDRESSES } from '@donkswap/sdk'
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
   const { library, account } = useActiveWeb3React()
@@ -48,8 +49,10 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
 }
 
 export function useFactoryContract(): Contract | null {
-  const donkFarmContract = '0xc8939572B6e100229399A1F3E35EDa4ccB57FCd3'
-  return useContract(donkFarmContract, IUniswapV2FactoryABI)
+  const { chainId } = useActiveWeb3React()
+  const donkFactoryContract = chainId ? FACTORY_ADDRESSES[chainId] : undefined
+
+  return useContract(donkFactoryContract, IUniswapV2FactoryABI)
 }
 
 export function useFarmStakingContract(): Contract | null {
@@ -58,12 +61,12 @@ export function useFarmStakingContract(): Contract | null {
 }
 
 export function useDonkStakingContract(): Contract | null {
-  const donkStakingContract = '0xE513c6BDA225945e265Aad7257a14FfA4ee190bB'
+  const donkStakingContract = '0x9B7e65f6F99947A81F8ff729d2f559C6b8DB2323'
   return useContract(donkStakingContract, DONK_STAKING_ABI)
 }
 
 export function useDonkTokenContract(): Contract | null {
-  const donkTokenContract = '0x42Fb5CE5fe683c301eD6Ed24ED1BE4B81804aD30'
+  const donkTokenContract = '0x1901AFaF3a3e0Ac8Ba66A41E9EB179d7F91dAFC4'
   return useContract(donkTokenContract, DONK_TOKEN_ABI)
 }
 
@@ -107,7 +110,6 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
       case ChainId.SEPOLIA:
       case ChainId.ROPSTEN:
       case ChainId.RINKEBY:
-        address = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
         break
     }
   }

@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
-import { useFactoryContract } from 'hooks/useContract'
+import { useDonkStakingContract } from 'hooks/useContract'
 import { ethers } from 'ethers'
-import AdminStakingPainel from './stakingAdmin'
+
 const ContainerValue = styled.div`
   max-width: 32rem;
   position: relative;
   margin: 20px;
-  margin-top: 0;
+  margin-top: 100px;
   display: inline-block;
   vertical-align: top;
   width: 100%;
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'white' : '#1f202e')};
   border-radius: 1rem;
   z-index: 1;
-  max-height: 20rem;
+  max-height: 25rem;
   border-radius: 1.25rem;
   text-align: left;
   padding: 20px;
@@ -40,6 +40,7 @@ const Container = styled.div`
   border-radius: 1.25rem;
   text-align: left;
   padding: 20px;
+  margin-top: 100px;
 `
 
 const Card = styled.div`
@@ -112,23 +113,25 @@ const Button = styled.div`
   }
 `
 
-export default function AdminPainel() {
+export default function AdminStakingPainel() {
   const { account, library } = useWeb3React()
   const signer = library.getSigner(account)
-  const factoryContract: any = useFactoryContract()
-  const farmContractWithSigner = factoryContract.connect(signer)
+  const stakingContract: any = useDonkStakingContract()
+  const stakingContractWithSigner = stakingContract.connect(signer)
   const [adminFee, setAdminFee] = useState<Number>()
   const [adminWallet, setAdminWallet] = useState<string>()
   const [adminDaysFee, setAdminDaysFee] = useState<Number>()
-
-  const [currentAdminFee, setCurrentAdminFee] = useState<Number>()
+  const [apr, setApr] = useState<any>()
+  const [currentAPR, setCurrentAPR] = useState<Number>()
+  const [currentUnstakeFee, setCurrentUnstakeFee] = useState<Number>()
   const [currentAdminWallet, setCurrentAdminWallet] = useState<string>()
   const [currentAdminDaysFee, setCurrentAdminDaysFee] = useState<Number>()
 
-  const handleAdminFee = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUnstakeFee = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
 
     const converted = Number(value) * 100
+
     setAdminFee(converted)
   }
 
@@ -142,26 +145,39 @@ export default function AdminPainel() {
     const value = event.target.value
 
     const converted = Number(value) * 100
+
     setAdminDaysFee(converted)
   }
 
+  const handleAPR = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+
+    setApr(value)
+  }
+
   async function getCurrentValues() {
-    const currentAdminFee = await farmContractWithSigner.callStatic.getAdminFee()
-    const adminConvertion = ethers.BigNumber.from(currentAdminFee)
+    const currentUnstakeFee = await stakingContractWithSigner.callStatic.stakingFee()
+    const adminConvertion = ethers.BigNumber.from(currentUnstakeFee)
     const adminFee = adminConvertion.toNumber()
     const adminFormated = adminFee / 100
 
-    setCurrentAdminFee(adminFormated)
+    setCurrentUnstakeFee(adminFormated)
 
-    const currentAdminWallet = await farmContractWithSigner.callStatic.feeToSetter()
+    const currentAdminWallet = await stakingContractWithSigner.callStatic.adminWallet()
     setCurrentAdminWallet(addDotsToAddress(currentAdminWallet))
 
-    const currentDaysFee = await farmContractWithSigner.callStatic.daysFee()
+    const currentDaysFee = await stakingContractWithSigner.callStatic.daysFee()
     const daysFeeConvertion = ethers.BigNumber.from(currentDaysFee)
     const daysFee = daysFeeConvertion.toNumber()
     const daysFeeFormated = daysFee / 100
 
     setCurrentAdminDaysFee(daysFeeFormated)
+
+    const currentAPR = await stakingContractWithSigner.callStatic.getAPR()
+    const APRConvertion = ethers.BigNumber.from(currentAPR)
+    const aprFee = APRConvertion.toNumber()
+
+    setCurrentAPR(aprFee)
   }
 
   function addDotsToAddress(address: string) {
@@ -174,16 +190,20 @@ export default function AdminPainel() {
     return `${startChunk}...${endChunk}`
   }
 
-  const changeAdminFee = async () => {
-    await farmContractWithSigner.setAdminFee(adminFee)
+  const changeUnstakeFee = async () => {
+    await stakingContractWithSigner.setStakingFee(adminFee)
   }
 
   const changeAdminWallet = async () => {
-    await farmContractWithSigner.setFeeToSetter(adminWallet)
+    await stakingContractWithSigner.setAdminWallet(adminWallet)
   }
 
   const changeDaysFee = async () => {
-    await farmContractWithSigner.setDaysFee(adminDaysFee)
+    await stakingContractWithSigner.setDaysFee(adminDaysFee)
+  }
+
+  const changeAPR = async () => {
+    await stakingContractWithSigner.setApr(apr)
   }
 
   useEffect(() => {
@@ -197,80 +217,96 @@ export default function AdminPainel() {
   }, [])
 
   return (
-    <>
-      <div>
-        <ContainerValue>
-          <Card>
-            <Text>Current Admin Fee {currentAdminFee} %</Text>
-          </Card>
-          <Card>
-            <Text>Current Admin Wallet {currentAdminWallet}</Text>
-          </Card>
-          <Card>
-            <Text>Current Days Fee {currentAdminDaysFee} %</Text>
-          </Card>
-        </ContainerValue>
+    <div>
+      <ContainerValue>
+        <Card>
+          <Text>Current Unstake Fee {currentUnstakeFee} %</Text>
+        </Card>
+        <Card>
+          <Text>Current Admin Wallet {currentAdminWallet}</Text>
+        </Card>
+        <Card>
+          <Text>Current Days Fee {currentAdminDaysFee} %</Text>
+        </Card>
+        <Card>
+          <Text>Current APR {currentAPR} %</Text>
+        </Card>
+      </ContainerValue>
 
-        <Container>
-          <MainText>Painel</MainText>
+      <Container>
+        <MainText>Painel</MainText>
+        <br />
+        <SubText>(Staking)</SubText>
+        <br /> <br />
+        <Card>
+          <Text>Unstake Fee</Text>
           <br />
-          <SubText>(Trade and Pools)</SubText>
-          <br /> <br />
-          <Card>
-            <Text>Admin Fee</Text>
-            <br />
-            <Label
-              htmlFor="cardsearch"
-              className="flex  flex-1 items-center gap-2 p-2 border border-gray-300 rounded-md "
-            >
-              <Input
-                type="text"
-                id="search"
-                placeholder="Enter an amount"
-                className="w-full text-sm "
-                onChange={handleAdminFee}
-              />
-            </Label>
-          </Card>
-          <Button onClick={() => changeAdminFee()}>update</Button>
-          <Card>
-            <Text>Change the admin wallet</Text>
-            <br />
-            <Label
-              htmlFor="cardsearch"
-              className="flex  flex-1 items-center gap-2 p-2 border border-gray-300 rounded-md "
-            >
-              <Input
-                type="text"
-                id="search"
-                placeholder="Enter an address"
-                className="w-full text-sm "
-                onChange={handleAdminWallet}
-              />
-            </Label>
-          </Card>
-          <Button onClick={() => changeAdminWallet()}>update</Button>
-          <Card>
-            <Text>Days Fee</Text>
-            <br />
-            <Label
-              htmlFor="cardsearch"
-              className="flex  flex-1 items-center gap-2 p-2 border border-gray-300 rounded-md "
-            >
-              <Input
-                type="text"
-                id="search"
-                placeholder="Enter an amount"
-                className="w-full text-sm "
-                onChange={handleDaysFee}
-              />
-            </Label>
-          </Card>
-          <Button onClick={() => changeDaysFee()}>update</Button>
-        </Container>
-      </div>
-
-      <AdminStakingPainel />
-    </>
+          <Label
+            htmlFor="cardsearch"
+            className="flex  flex-1 items-center gap-2 p-2 border border-gray-300 rounded-md "
+          >
+            <Input
+              type="text"
+              id="search"
+              placeholder="Enter an amount"
+              className="w-full text-sm "
+              onChange={handleUnstakeFee}
+            />
+          </Label>
+        </Card>
+        <Button onClick={() => changeUnstakeFee()}>update</Button>
+        <Card>
+          <Text>Change the admin wallet</Text>
+          <br />
+          <Label
+            htmlFor="cardsearch"
+            className="flex  flex-1 items-center gap-2 p-2 border border-gray-300 rounded-md "
+          >
+            <Input
+              type="text"
+              id="search"
+              placeholder="Enter an address"
+              className="w-full text-sm "
+              onChange={handleAdminWallet}
+            />
+          </Label>
+        </Card>
+        <Button onClick={() => changeAdminWallet()}>update</Button>
+        <Card>
+          <Text>Days Fee</Text>
+          <br />
+          <Label
+            htmlFor="cardsearch"
+            className="flex  flex-1 items-center gap-2 p-2 border border-gray-300 rounded-md "
+          >
+            <Input
+              type="text"
+              id="search"
+              placeholder="Enter an amount"
+              className="w-full text-sm "
+              onChange={handleDaysFee}
+            />
+          </Label>
+        </Card>
+        <Button onClick={() => changeDaysFee()}>update</Button>
+        <Card>
+          <Text>APR</Text>
+          <br />
+          <Label
+            htmlFor="cardsearch"
+            className="flex  flex-1 items-center gap-2 p-2 border border-gray-300 rounded-md "
+          >
+            <Input
+              type="text"
+              id="search"
+              placeholder="Enter an amount"
+              className="w-full text-sm "
+              onChange={handleAPR}
+            />
+          </Label>
+        </Card>
+        <Button onClick={() => changeAPR()}>update</Button>
+      </Container>
+    </div>
   )
 }

@@ -205,6 +205,7 @@ export default function AddLiquidity({
       (currencyB && DEFAULT_CURRENCIES.includes(currencyB))
     ) {
       const tokenBIsETH = currencyB && DEFAULT_CURRENCIES.includes(currencyB)
+
       estimate = router.estimateGas.addLiquidityETH
       method = router.addLiquidityETH
 
@@ -385,16 +386,6 @@ export default function AddLiquidity({
     maxWidth: twoCurrencies[0] && twoCurrencies[1] ? '72rem' : '32rem'
   }
 
-  const Container = styled.div`
-    @media (max-width: 1024px) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding-top: 10px;
-    }
-  `
-
   return (
     <>
       <div className="pt-4 pb-4">
@@ -440,7 +431,11 @@ export default function AddLiquidity({
                       </Button>
                     </div>
                     <div className="w-full">
-                      <Link to={`/remove/${twoCurrencies[0].address}/${twoCurrencies[1].address}`}>
+                      <Link
+                        to={`/remove/${
+                          twoCurrencies[0].symbol === 'ETH' ? twoCurrencies[0].symbol : twoCurrencies[0].address
+                        }/${twoCurrencies[1].symbol === 'ETH' ? twoCurrencies[1].symbol : twoCurrencies[1].address}`}
+                      >
                         <ButtonLink type="button">
                           {' '}
                           <Text2>Remove Liquidity</Text2>
@@ -452,7 +447,7 @@ export default function AddLiquidity({
               ) : (
                 ''
               )}
-              <Container>
+              <div className="container-appBody">
                 <AppBody>
                   <AddRemoveTabs creating={isCreate} adding={true} />
                   <Wrapper>
@@ -577,7 +572,7 @@ export default function AddLiquidity({
                     </AutoColumn>
                   </Wrapper>
                 </AppBody>
-              </Container>
+              </div>
               {!addIsUnsupported ? (
                 pair && !noLiquidity && pairState !== PairState.INVALID ? (
                   <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>

@@ -18,7 +18,6 @@ export function retrieveETHAmount(
   maxDuration = MAX_DURATION
 ): CurrencyAmount | undefined {
   if (currentValue !== undefined) return currentValue
-
   return storedValue && recentlyStored(timestamp, maxDuration)
     ? CurrencyAmount.ether(JSBI.BigInt(storedValue))
     : undefined
