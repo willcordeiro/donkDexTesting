@@ -378,7 +378,6 @@ export default function RewardSection({ farm, msg }: any) {
 
   return (
     <>
-      <button onClick={add}>here</button>
       <ContainerText>
         <Text>Farming Reward</Text>
       </ContainerText>
@@ -426,7 +425,6 @@ export default function RewardSection({ farm, msg }: any) {
             <Text>Farming Starts</Text>
             <Label>
               {' '}
-              <Text>(UTC)</Text>
               <StyledDatePicker
                 value={startDateNormal}
                 placeholderText="Select a date"
@@ -446,7 +444,6 @@ export default function RewardSection({ farm, msg }: any) {
             <Text>Farming Ends</Text>
             <Label>
               {' '}
-              <Text>(UTC)</Text>
               <StyledDatePicker
                 onChange={() => {
                   ''

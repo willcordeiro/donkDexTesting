@@ -161,14 +161,17 @@ export default function CreateFarm() {
     const currentTaxAllowance = await feeTokenContract.allowance(account, farmContract.address)
 
     if (currentTaxAllowance < feeAmount) {
-      try {
-        const approveTx = await feeTokenContract.approve(farmContract.address, feeAmount)
-        await library.waitForTransaction(approveTx.hash)
-      } catch (error) {
-        console.log(error)
-        toast.error('Something went wrong with fee token approval.')
-        return
-      }
+      await feeTokenContract.approve(farmContract.address, feeAmount)
+      await new Promise(resolve => {
+        // Wait for approval confirmation
+        const intervalId = setInterval(async () => {
+          const updatedAllowance = await feeTokenContract.allowance(account, farmContract.address)
+          if (updatedAllowance >= feeAmount) {
+            clearInterval(intervalId)
+            resolve()
+          }
+        }, 1000)
+      })
     }
 
     //reward token
@@ -180,14 +183,17 @@ export default function CreateFarm() {
     const rewardAllowance = await rewardTokenContract.allowance(account, farmContract.address)
 
     if (rewardAllowance < rewardTokenAmount) {
-      try {
-        const approveTx = await rewardTokenContract.approve(farmContract.address, rewardTokenAmount)
-        await library.waitForTransaction(approveTx.hash)
-      } catch (error) {
-        console.log(error)
-        toast.error('Something went wrong with reward token approval.')
-        return
-      }
+      await rewardTokenContract.approve(farmContract.address, rewardTokenAmount)
+      await new Promise(resolve => {
+        // Wait for approval confirmation
+        const intervalId = setInterval(async () => {
+          const updatedAllowance = await rewardTokenContract.allowance(account, farmContract.address)
+          if (updatedAllowance >= rewardTokenAmount) {
+            clearInterval(intervalId)
+            resolve()
+          }
+        }, 1000)
+      })
     }
 
     //creating farm
@@ -278,9 +284,9 @@ export default function CreateFarm() {
               <Text>Duration: </Text>
               <ListReview> {farm.durationDays} Days</ListReview>
               <Text>Farming Starts: </Text>
-              <ListReview> {farm.startDateNormal?.toString()} (UTC)</ListReview>
+              <ListReview> {farm.startDateNormal?.toString()} </ListReview>
               <Text>Farming Ends: </Text>
-              <ListReview> {farm.endNormal?.toString()} (UTC)</ListReview>
+              <ListReview> {farm.endNormal?.toString()} </ListReview>
               <Text>Estimated rewards / day: </Text>
               <ListReview> {farm.estimateReward} tokens</ListReview>
             </div>
