@@ -75,16 +75,17 @@ const ClusterTime = styled.span`
   background-color: #ff8e4c;
 `
 
-export default function Filter() {
+export default function Filter({ activeFilter }: any) {
   const { account, library } = useWeb3React()
   const farmContract: any = useFarmStakingContract()
   const signer = library.getSigner(account)
   const farmContractWithSigner = farmContract.connect(signer)
   const [data, setData] = useState<any[]>([])
   const [chainTime, setChainTime] = useState<string>()
+
   const allFarmData: any[] = []
 
-  async function getkeys() {
+  async function getkeys(activeFilter: boolean) {
     const allFarmsID = await farmContractWithSigner.callStatic.getFarmKeys()
 
     for (let i = 0; i < allFarmsID.length; i++) {
@@ -108,24 +109,36 @@ export default function Filter() {
 
       const existingFarm = allFarmData.find(farm => farm.farmID === farmData.farmID)
 
-      if (!existingFarm) {
-        allFarmData.push(farmData)
+      if (activeFilter) {
+        const now = new Date().getTime()
+        const startDate = new Date(Number(farmData.initialDate) * 1000).getTime()
+        const endDate = new Date(Number(farmData.endDate) * 1000).getTime()
+
+        if (startDate <= now && now <= endDate) {
+          if (!existingFarm) {
+            allFarmData.push(farmData)
+          }
+        }
+      } else {
+        if (!existingFarm) {
+          allFarmData.push(farmData)
+        }
       }
-    }
+    } //
 
     setData(allFarmData)
   }
 
   useEffect(() => {
-    const interval = setInterval(function() {
-      getkeys()
+    const interval = setInterval(() => {
+      getkeys(activeFilter)
       getChainTime()
     }, 1000)
 
     return () => {
       clearInterval(interval)
     }
-  }, [])
+  }, [activeFilter])
 
   const [filteredUsers, query, handleChange] = useSearch(data, predicate, {
     filter: true,

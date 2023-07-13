@@ -125,7 +125,7 @@ export default function FarmsCards({ data }: any) {
 
   return (
     <Container
-      to={active ? `/farm/manage/${farmID}/${rewardTokenName}` : '/farm'}
+      to={active || ended ? `/farm/manage/${farmID}/${rewardTokenName}` : '/farm'}
       className="bg-white p-5 rounded-md w-full"
     >
       <header className="items-center gap-2 justify-between mb-5 " id={farmID}>

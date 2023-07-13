@@ -42,19 +42,21 @@ const CreateBtn = styled(Link)`
   }
 `
 
-export default function FarmBtnList() {
+export default function FarmBtnList({ activeFilter, setActiveFilter }: any) {
   const [activePool, setActivePool] = useState('All')
 
   return (
     <Container className="flex md:gap-2">
       <CreateContainerBtn>
-        {['All', 'My farm'].map((btn, i) => (
+        {['All', 'Active Farms'].map((btn, i) => (
           <Btn
             className={`py-1 px-3 rounded-lg text-sm font-medium ${
               activePool === btn ? 'bg-white opacity-100' : 'opacity-50 '
             }`}
             key={i}
-            onClick={() => setActivePool(btn)}
+            onClick={() => {
+              setActivePool(btn), setActiveFilter(!activeFilter)
+            }}
           >
             {btn}
           </Btn>

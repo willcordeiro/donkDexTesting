@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { c } from '../../assets'
 import FarmBtnList from './FarmBtnList'
 import Filter from './Filter'
@@ -13,6 +13,8 @@ const Text = styled.span`
 `
 
 export default function Farm() {
+  const [activeFilter, setActiveFilter] = useState(false)
+
   return (
     <Container className="bg-pink100  min-h-[80vh]">
       <section className="max-w-6xl w-[90%] mx-auto">
@@ -23,10 +25,10 @@ export default function Farm() {
               <Text>Farm</Text>
             </h2>
           </div>
-          <FarmBtnList />
+          <FarmBtnList activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
         </header>
         <section>
-          <Filter />
+          <Filter activeFilter={activeFilter} />
         </section>
       </section>
     </Container>
