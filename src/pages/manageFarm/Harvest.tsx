@@ -62,7 +62,6 @@ export default function Harvest({ data }: any) {
 
     const share: number = (parseFloat(value2) / parseFloat(value)) * 100
 
-    console.log(stakeObject)
     setYourShare(share)
   }
 

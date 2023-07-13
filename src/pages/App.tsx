@@ -119,11 +119,11 @@ export default function App() {
   useEffect(() => {
     document.title = platformName
   }, [platformName])*/
-  //const { account, library } = useWeb3React()
+  const { account, library } = useWeb3React()
   const location = useLocation()
 
   const adminVerification = () => {
-    const user = account == '0x9cf363fF78B6B6Caf919886A28f47F1fA10a52e1' //Admin wallet
+    const user = account === '0xfB4c38FC6E72923a594A6B00cb8a7D449409C5e2' //Admin wallet
 
     return user
   }
@@ -168,7 +168,10 @@ export default function App() {
               <Route exact strict path="/stake" component={true ? DonkStaking : () => <Redirect to="/" />} />
               <Route exact strict path="/stake/token" component={true ? DonkToken : () => <Redirect to="/" />} />
               <Route exact strict path="/Farm" component={adminVerification() ? Farm : () => <Redirect to="/" />} />
-              <Route path="/farm/manage/:id" component={adminVerification() ? ManageFarm : () => <Redirect to="/" />} />
+              <Route
+                path="/farm/manage/:id/:token"
+                component={adminVerification() ? ManageFarm : () => <Redirect to="/" />}
+              />
               <Route path="/farm/create" component={adminVerification() ? CreateFarm : () => <Redirect to="/" />} />
               {/*  
               <Route exact strict path="/staking/pools" component={Earn} />

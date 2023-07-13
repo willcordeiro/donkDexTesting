@@ -10,6 +10,7 @@ import { useWeb3React } from '@web3-react/core'
 import { Contract, ethers } from 'ethers'
 import { getContract } from 'utils'
 import { ERC20_ABI } from 'constants/abis/erc20'
+import { DEFAULT_CURRENCIES } from '@donkswap/sdk'
 
 const Container = styled.div`
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#191924')};
@@ -105,7 +106,7 @@ export default function CreateFarm() {
     pool: { address: '', name: '', pair1: '', pair2: '' }
   })
 
-  const [farm, setFarm] = useState({
+  const [farm, setFarm] = useState<any>({
     startDate: '',
     startDateNormal: '',
     endDate: '',
@@ -135,7 +136,9 @@ export default function CreateFarm() {
       farm.currency0 !== null &&
       msg === false
     ) {
-      CreateFarm()
+      const tokenIsETH: any = farm.currency0 && DEFAULT_CURRENCIES.includes(farm.currency0)
+
+      CreateFarm(tokenIsETH)
     } else {
       toast.error('Something went wrong! Please check the fields')
     }
@@ -145,55 +148,34 @@ export default function CreateFarm() {
     return getContract(address, ABI, library, withSignerIfPossible && account ? account : undefined)
   }
 
-  const CreateFarm = async () => {
+  const CreateFarm = async (isETH: boolean) => {
     //converting amount
-    const rewardTokenAmount = ethers.utils.parseUnits(farm.tokenAmount.toString(), 18).toString()
-    const estimateTokenAmount = ethers.utils.parseUnits(farm.estimateReward.toString(), 18).toString()
+    const rewardTokenAmount = ethers.utils.parseUnits(farm.tokenAmount.toFixed(18).toString(), 18).toString()
+    const estimateTokenAmount = ethers.utils.parseUnits(farm.estimateReward.toFixed(18).toString(), 18).toString()
 
     // Aproving Token
 
-    //fee token
-    const feeAmount = await farmContract.callStatic.getCreatorTaxes()
-    const feeTokenAddress = await farmContract.callStatic.getCreatorTaxToken()
-
-    const feeTokenContract: any = contract(feeTokenAddress, ERC20_ABI)
-
-    const currentTaxAllowance = await feeTokenContract.allowance(account, farmContract.address)
-
-    if (currentTaxAllowance < feeAmount) {
-      await feeTokenContract.approve(farmContract.address, feeAmount)
-      await new Promise(resolve => {
-        // Wait for approval confirmation
-        const intervalId = setInterval(async () => {
-          const updatedAllowance = await feeTokenContract.allowance(account, farmContract.address)
-          if (updatedAllowance >= feeAmount) {
-            clearInterval(intervalId)
-            resolve()
-          }
-        }, 1000)
-      })
-    }
-
     //reward token
-    const rewardTokenContract: any = contract(farm.currency0.address, ERC20_ABI)
+    if (!isETH) {
+      const rewardTokenContract: any = contract(farm.currency0.address, ERC20_ABI)
 
-    console.log(feeAmount, rewardTokenAmount, 'amount')
-    //TODO: reward token address allowance issue
+      //TODO: reward token address allowance issue
 
-    const rewardAllowance = await rewardTokenContract.allowance(account, farmContract.address)
+      const rewardAllowance = await rewardTokenContract.allowance(account, farmContract.address)
 
-    if (rewardAllowance < rewardTokenAmount) {
-      await rewardTokenContract.approve(farmContract.address, rewardTokenAmount)
-      await new Promise(resolve => {
-        // Wait for approval confirmation
-        const intervalId = setInterval(async () => {
-          const updatedAllowance = await rewardTokenContract.allowance(account, farmContract.address)
-          if (updatedAllowance >= rewardTokenAmount) {
-            clearInterval(intervalId)
-            resolve()
-          }
-        }, 1000)
-      })
+      if (rewardAllowance < rewardTokenAmount) {
+        await rewardTokenContract.approve(farmContract.address, rewardTokenAmount)
+        await new Promise(resolve => {
+          // Wait for approval confirmation
+          const intervalId = setInterval(async () => {
+            const updatedAllowance = await rewardTokenContract.allowance(account, farmContract.address)
+            if (updatedAllowance >= rewardTokenAmount) {
+              clearInterval(intervalId)
+              resolve()
+            }
+          }, 1000)
+        })
+      }
     }
 
     //creating farm
@@ -202,29 +184,46 @@ export default function CreateFarm() {
     const farmContractWithSigner = farmContract.connect(signer)
 
     try {
-      await farmContractWithSigner.createFarm(
-        farm.currency0.address,
-        farmPool.pool.address,
-        farm.currency0.symbol,
-        rewardTokenAmount,
-        farm.startDate,
-        farm.endDate,
-        estimateTokenAmount,
-        farmPool.pool.pair1,
-        farmPool.pool.pair2
-      )
+      if (isETH) {
+        const data = { value: rewardTokenAmount }
 
-      toast.success('The farm has been created successfully')
+        await farmContractWithSigner.createFarmETH(
+          farmPool.pool.address,
+          farm.currency0.symbol,
+          farm.startDate,
+          farm.endDate,
+          estimateTokenAmount,
+          farmPool.pool.pair1,
+          farmPool.pool.pair2,
+          data
+        )
+
+        toast.success('The farm has been created successfully')
+      } else {
+        await farmContractWithSigner.createFarm(
+          farm.currency0.address,
+          farmPool.pool.address,
+          farm.currency0.symbol,
+          rewardTokenAmount,
+          farm.startDate,
+          farm.endDate,
+          estimateTokenAmount,
+          farmPool.pool.pair1,
+          farmPool.pool.pair2
+        )
+        toast.success('The farm has been created successfully')
+      }
     } catch (error) {
       console.log(error)
       toast.error('Something went wrong with farm creation.')
     }
   }
 
+  /*
   useEffect(() => {
     console.log(farm)
   }, [farm])
-
+*/
   return (
     <Container className="bg-pink100  min-h-[80vh]">
       <section className="max-w-6xl w-[90%] mx-auto">

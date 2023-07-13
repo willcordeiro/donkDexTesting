@@ -11,6 +11,7 @@ import { Contract, ethers } from 'ethers'
 import { toast } from 'react-toastify'
 import { ERC20_ABI } from 'constants/abis/erc20'
 import { getContract } from 'utils'
+import { DEFAULT_CURRENCIES } from '@donkswap/sdk'
 
 const ContainerHeader = styled.button`
   padding: 1rem;
@@ -34,7 +35,7 @@ const Container = styled.div`
 `
 
 export default function ManageFarm() {
-  const { id }: any = useParams()
+  const { id, token }: any = useParams()
   const { account, library } = useWeb3React()
   const farmContract: any = useFarmStakingContract()
   const signer = library.getSigner(account)
@@ -58,11 +59,11 @@ export default function ManageFarm() {
       toast.error('Something went wrong! Please add an amount to start a farm')
     }
   }
-
+  /*
   useEffect(() => {
     console.log(data)
   }, [data])
-
+*/
   function contract(address: string, ABI: any, withSignerIfPossible = true): Contract | null {
     return getContract(address, ABI, library, withSignerIfPossible && account ? account : undefined)
   }
@@ -102,9 +103,17 @@ export default function ManageFarm() {
 
   const unstakeFarm = async () => {
     try {
-      const farmUntake: any = await farmContractWithSigner.unstakeFarm(id)
+      const foundCurrency = DEFAULT_CURRENCIES.find(currency => currency.symbol === token)
 
-      await farmUntake.wait()
+      if (foundCurrency) {
+        const farmUntake: any = await farmContractWithSigner.unstakeFarmETH(id)
+        await farmUntake.wait()
+      } else {
+        const farmUntake: any = await farmContractWithSigner.unstakeFarm(id)
+
+        await farmUntake.wait()
+      }
+
       toast.success('You have left the farm successfully')
     } catch (error) {
       console.log(error)

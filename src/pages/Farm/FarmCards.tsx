@@ -33,6 +33,7 @@ export default function FarmsCards({ data }: any) {
   const [active, setActive] = useState<any>()
   const [start, setStart] = useState<any>()
   const [end, setEnd] = useState<any>()
+  const [ended, setEnded] = useState(false)
 
   async function getUserValues() {
     const totalStaked = await farmContractWithSigner.callStatic.stakedAmount(farmID)
@@ -92,11 +93,15 @@ export default function FarmsCards({ data }: any) {
   }
 
   async function getEndTime() {
+    const now = Math.floor(Date.now() / 1000)
     const bigNumber = ethers.BigNumber.from(endDate)
-    const value = bigNumber.toNumber()
-    const timestamp = value
-    const date = new Date(timestamp * 1000)
+    const endTime = bigNumber.toNumber()
 
+    if (endTime < now) {
+      setEnded(true)
+    }
+
+    const date = new Date(endTime * 1000)
     const year = date.getFullYear()
     const month = ('0' + (date.getMonth() + 1)).slice(-2)
     const day = ('0' + date.getDate()).slice(-2)
@@ -107,7 +112,6 @@ export default function FarmsCards({ data }: any) {
 
     setEnd(dateString)
   }
-
   useEffect(() => {
     const interval = setInterval(() => {
       getUserValues()
@@ -120,7 +124,10 @@ export default function FarmsCards({ data }: any) {
   }, [])
 
   return (
-    <Container to={active ? `/farm/manage/${farmID}` : '/farm'} className="bg-white p-5 rounded-md w-full">
+    <Container
+      to={active ? `/farm/manage/${farmID}/${rewardTokenName}` : '/farm'}
+      className="bg-white p-5 rounded-md w-full"
+    >
       <header className="items-center gap-2 justify-between mb-5 " id={farmID}>
         <div className="flex items-center gap-1">
           <img src={logo} alt="terra" className="w-8 sm:w-10" />
@@ -146,6 +153,22 @@ export default function FarmsCards({ data }: any) {
                 </span>
                 <br />
                 Ends in {end}
+              </>
+            ) : ended ? (
+              <>
+                <span
+                  style={{
+                    color: 'white  ',
+                    background: '#ff8e4c',
+                    borderRadius: '0.4rem',
+                    paddingRight: 5,
+                    paddingLeft: 5
+                  }}
+                >
+                  ended
+                </span>
+                <br />
+                Ended in {end}
               </>
             ) : (
               <>

@@ -4,6 +4,8 @@ import { useWeb3React } from '@web3-react/core'
 import { useFactoryContract } from 'hooks/useContract'
 import { ethers } from 'ethers'
 import AdminStakingPainel from './stakingAdmin'
+import AdminFarmPainel from './FarmAdmin'
+
 const ContainerValue = styled.div`
   max-width: 32rem;
   position: relative;
@@ -271,6 +273,8 @@ export default function AdminPainel() {
       </div>
 
       <AdminStakingPainel />
+
+      <AdminFarmPainel />
     </>
   )
 }

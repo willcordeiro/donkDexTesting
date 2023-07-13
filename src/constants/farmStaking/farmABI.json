@@ -3,17 +3,17 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_taxTokenAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
         "name": "_adminWallet",
         "type": "address"
       },
       {
         "internalType": "uint256",
         "name": "_taxAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_userTaxAmount",
         "type": "uint256"
       }
     ],
@@ -48,6 +48,30 @@
     ],
     "name": "calculateAccumulatedReward",
     "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "calculateTax",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
       {
         "internalType": "uint256",
         "name": "",
@@ -108,6 +132,49 @@
     "name": "createFarm",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_farmTokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_rewardTokenName",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_initialDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_endDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_rewardPerDay",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_pair0",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_pair1",
+        "type": "address"
+      }
+    ],
+    "name": "createFarmETH",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -255,19 +322,6 @@
         "internalType": "uint256",
         "name": "finalReward",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getCreatorTaxToken",
-    "outputs": [
-      {
-        "internalType": "contract IERC20",
-        "name": "",
-        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -488,6 +542,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "getUserTaxAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "string",
@@ -503,20 +570,14 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_taxTokenAddress",
-        "type": "address"
+        "internalType": "string",
+        "name": "_farmID",
+        "type": "string"
       }
     ],
-    "name": "setCreatorTaxToken",
-    "outputs": [
-      {
-        "internalType": "contract IERC20",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "nonpayable",
+    "name": "harvestFarmETH",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -528,6 +589,25 @@
       }
     ],
     "name": "setCreatorTaxes",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_userTaxAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "setUserTaxAmount",
     "outputs": [
       {
         "internalType": "uint256",
@@ -577,12 +657,12 @@
   },
   {
     "inputs": [],
-    "name": "taxTokenAddress",
+    "name": "taxAmount",
     "outputs": [
       {
-        "internalType": "contract IERC20",
+        "internalType": "uint256",
         "name": "",
-        "type": "address"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -599,6 +679,32 @@
     "name": "unstakeFarm",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_farmID",
+        "type": "string"
+      }
+    ],
+    "name": "unstakeFarmETH",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "userTaxAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   }
 ]
