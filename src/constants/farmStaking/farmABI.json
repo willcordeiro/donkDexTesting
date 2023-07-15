@@ -714,6 +714,19 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_farmID",
+        "type": "string"
+      }
+    ],
+    "name": "unstakeLPFarm",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "userTaxAmount",
     "outputs": [
