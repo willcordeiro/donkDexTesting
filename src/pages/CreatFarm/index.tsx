@@ -99,9 +99,12 @@ const ListReview = styled.p`
 
 export default function CreateFarm() {
   const { account, library } = useWeb3React()
+  const signer = library.getSigner(account)
   const farmContract: any = useFarmStakingContract()
+  const farmContractWithSigner = farmContract.connect(signer)
   const [isOpen, setIsOpen] = useState(false)
   const [msg, setMsg] = useState(false)
+  const [currentFarmCreationFee, setCurrentFarmCreationFee] = useState<Number | string>()
   const [farmPool, setFarmPool] = useState({
     pool: { address: '', name: '', pair1: '', pair2: '' }
   })
@@ -235,9 +238,23 @@ export default function CreateFarm() {
     }
   }
 
+  async function getCurrentValues() {
+    const currentDaysFee = await farmContractWithSigner.callStatic.taxAmount()
+    const daysFeeConvertion = ethers.BigNumber.from(currentDaysFee)
+    const daysFeeFormated = ethers.utils.formatEther(daysFeeConvertion)
+
+    setCurrentFarmCreationFee(daysFeeFormated)
+  }
+
   useEffect(() => {
-    console.log(farm)
-  }, [farm])
+    const interval = setInterval(function() {
+      getCurrentValues()
+    }, 1000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
 
   return (
     <Container className="bg-pink100  min-h-[80vh]">
@@ -272,8 +289,8 @@ export default function CreateFarm() {
 
         <InfoCard>
           <span style={{ color: '#f84525' }}>Please note:</span> Rewards allocated to farms are final and unused rewards
-          cannot be claimed. 0.031 ETH is collected as an Ecosystem farm creation fee. Token rewards should have a
-          minimum duration period of at least 7 days and last no more than 90 days.
+          cannot be claimed. {currentFarmCreationFee} ETH is collected as an Ecosystem farm creation fee. Token rewards
+          should have a minimum duration period of at least 7 days and last no more than 90 days.
         </InfoCard>
       </section>
       <div className="text-center mt-8">
