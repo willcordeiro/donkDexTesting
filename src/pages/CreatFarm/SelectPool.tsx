@@ -15,6 +15,7 @@ import { useTrackedTokenPairs, toV2LiquidityToken } from 'state/user/hooks'
 import { useTokenBalancesWithLoadingIndicator } from 'state/wallet/hooks'
 import { BIG_INT_ZERO } from '../../constants/'
 import { PulseLoader } from 'react-spinners'
+import { unwrappedToken } from 'utils/wrappedCurrency'
 const predicate = (user: { name: string }, query: string) => user.name.toLowerCase().includes(query.toLowerCase())
 
 const Label = styled.label`
@@ -122,13 +123,27 @@ export default function SelectPool({ farm }: any) {
   const stakingPairs = usePairs(stakingInfosWithBalance?.map(stakingInfo => stakingInfo.tokens))
 
   // remove any pairs that also are included in pairs with stake in mining pool
-  const v2PairsWithoutStakedAmount = allV2PairsWithLiquidity.filter(v2Pair => {
-    return (
-      stakingPairs
-        ?.map(stakingPair => stakingPair[1])
-        .filter(stakingPair => stakingPair?.liquidityToken.address === v2Pair.liquidityToken.address).length === 0
-    )
-  })
+  const v2PairsWithoutStakedAmount = allV2PairsWithLiquidity
+    .map(v2Pair => {
+      const currency0 = unwrappedToken(v2Pair.token0)
+      const currency1 = unwrappedToken(v2Pair.token1)
+
+      const updatedV2Pair = {
+        ...v2Pair,
+        token0: currency0,
+        token1: currency1
+      }
+
+      return updatedV2Pair
+    })
+    .filter(updatedV2Pair => {
+      return (
+        stakingPairs
+          ?.map(stakingPair => stakingPair[1])
+          .filter(stakingPair => stakingPair?.liquidityToken.address === updatedV2Pair.liquidityToken.address)
+          .length === 0
+      )
+    })
 
   const pairInfo: any = []
 
@@ -160,7 +175,7 @@ export default function SelectPool({ farm }: any) {
     if (pairInfo[0].length != 0) {
       const obj = []
       obj.push({
-        pairName: pairInfo[0][i].tokenAmounts[0].token.symbol + '/' + pairInfo[0][i].tokenAmounts[1].token.symbol
+        pairName: pairInfo[0][i].token0.symbol + '/' + pairInfo[0][i].token1.symbol
       })
       pairInfo[0][i].pairName = obj
     }

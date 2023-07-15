@@ -272,8 +272,8 @@ export default function CreateFarm() {
 
         <InfoCard>
           <span style={{ color: '#f84525' }}>Please note:</span> Rewards allocated to farms are final and unused rewards
-          cannot be claimed. 60 USDT is collected as an Ecosystem farm creation fee. Token rewards should have a minimum
-          duration period of at least 7 days and last no more than 90 days.
+          cannot be claimed. 0.031 ETH is collected as an Ecosystem farm creation fee. Token rewards should have a
+          minimum duration period of at least 7 days and last no more than 90 days.
         </InfoCard>
       </section>
       <div className="text-center mt-8">
