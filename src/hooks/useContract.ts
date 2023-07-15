@@ -56,7 +56,7 @@ export function useFactoryContract(): Contract | null {
 }
 
 export function useFarmStakingContract(): Contract | null {
-  const donkFarmContract = '0x547FC5270380b03aaaCa316923E841045Dcdc7c7'
+  const donkFarmContract = '0x084Af5847BB7fC4e04078E44593dedD1399Be3d6'
   return useContract(donkFarmContract, FARMS_TAKING_ABI)
 }
 

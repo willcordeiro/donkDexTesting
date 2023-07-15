@@ -183,9 +183,22 @@ export default function CreateFarm() {
 
     const farmContractWithSigner = farmContract.connect(signer)
 
+    const taxAmount = await farmContractWithSigner.taxAmount()
+
+    function sumWeiAndHex(weiAmount: any, hexAmount: any) {
+      const weiValue = ethers.BigNumber.from(weiAmount)
+      const hexValue = ethers.BigNumber.from(hexAmount)
+
+      const sum = weiValue.add(hexValue)
+
+      return sum.toString()
+    }
+
+    const AmountWithFee = sumWeiAndHex(rewardTokenAmount, taxAmount)
+
     try {
       if (isETH) {
-        const data = { value: rewardTokenAmount }
+        const data = { value: AmountWithFee }
 
         await farmContractWithSigner.createFarmETH(
           farmPool.pool.address,
@@ -200,6 +213,8 @@ export default function CreateFarm() {
 
         toast.success('The farm has been created successfully')
       } else {
+        const data = { value: taxAmount }
+
         await farmContractWithSigner.createFarm(
           farm.currency0.address,
           farmPool.pool.address,
@@ -209,7 +224,8 @@ export default function CreateFarm() {
           farm.endDate,
           estimateTokenAmount,
           farmPool.pool.pair1,
-          farmPool.pool.pair2
+          farmPool.pool.pair2,
+          data
         )
         toast.success('The farm has been created successfully')
       }
@@ -219,11 +235,10 @@ export default function CreateFarm() {
     }
   }
 
-  /*
   useEffect(() => {
     console.log(farm)
   }, [farm])
-*/
+
   return (
     <Container className="bg-pink100  min-h-[80vh]">
       <section className="max-w-6xl w-[90%] mx-auto">
