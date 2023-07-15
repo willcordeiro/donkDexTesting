@@ -40,6 +40,15 @@ const ButtonSubmit = styled.button`
   margin-top: 200px;
   cursor: pointer;
 `
+const ButtonSubmit2 = styled.button`
+  background-color: #ff8138;
+  padding: 15px;
+  font-size: 17px;
+  border: none;
+  outline: none;
+  margin-top: 50px;
+  cursor: pointer;
+`
 
 const Input = styled.input`
   padding: 10px;
@@ -60,7 +69,14 @@ const Text = styled.span`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
 `
 
-export default function ManageStakeUnstake({ data, farm, startFarm, stakeUnStake, setStakeUnStake }: any) {
+export default function ManageStakeUnstake({
+  data,
+  farm,
+  startFarm,
+  stakeUnStake,
+  setStakeUnStake,
+  unstakeFarmLP
+}: any) {
   const { account, library } = useWeb3React()
   const toggleWalletModal = useWalletModalToggle()
   const [lpTokenAmount, setLpTokenAmount] = useState<any>()
@@ -161,6 +177,23 @@ export default function ManageStakeUnstake({ data, farm, startFarm, stakeUnStake
                   <span onClick={toggleWalletModal}>Connect Wallet</span>
                 )}
               </ButtonSubmit>
+              <ButtonSubmit2 className="bg-orange500 text-white w-full py-[14px] rounded-2xl custom-shadow font-semibold mt-8 hover:bg-[#ff8138]">
+                {account ? (
+                  <span
+                    onClick={() => {
+                      unstakeFarmLP()
+                    }}
+                  >
+                    Unstake LP
+                  </span>
+                ) : (
+                  <span onClick={toggleWalletModal}>Connect Wallet</span>
+                )}
+              </ButtonSubmit2>
+              <br /> <br />
+              <Text>
+                (note by using this button you will reset all your farm rewards and only unstake your lp tokens)
+              </Text>
             </div>
           </div>
         </>

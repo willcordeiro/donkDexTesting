@@ -121,6 +121,18 @@ export default function ManageFarm() {
     }
   }
 
+  const unstakeFarmLP = async () => {
+    try {
+      const farmUntake: any = await farmContractWithSigner.unstakeLPFarm(id)
+      await farmUntake.wait()
+
+      toast.success('You have left the farm successfully')
+    } catch (error) {
+      console.log(error)
+      toast.error('Something went wrong.')
+    }
+  }
+
   async function getkeys() {
     const allFarmsID = await farmContractWithSigner.callStatic.getFarmKeys()
 
@@ -191,6 +203,7 @@ export default function ManageFarm() {
             startFarm={CheckFields}
             stakeUnStake={stakeUnStake}
             setStakeUnStake={setStakeUnStake}
+            unstakeFarmLP={unstakeFarmLP}
           />
         </main>
       </section>
