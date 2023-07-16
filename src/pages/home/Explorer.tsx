@@ -97,7 +97,6 @@ export default function Explore() {
           <p className="mt-5 font-semibold text-black">
             <Text>Farm</Text>
           </p>
-          <Text>Launches 15th JULY </Text>
         </CardFarm>
 
         <CardStake

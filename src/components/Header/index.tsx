@@ -52,7 +52,8 @@ const HeaderFrame = styled.div`
   position: relative;
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#191924')};
   padding: 1rem;
-  z-index: 2;
+  z-index: 1;
+  position: relative;
 
   ${({ theme }) => theme.mediaWidth.upToMedium`
     grid-template-columns: 1fr;

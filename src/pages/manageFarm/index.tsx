@@ -83,7 +83,7 @@ export default function ManageFarm() {
         // Wait for approval confirmation
         const intervalId = setInterval(async () => {
           const updatedAllowance = await TokenContract.allowance(account, farmContract.address)
-          if (updatedAllowance < lpTokenAmount) {
+          if (updatedAllowance >= lpTokenAmount) {
             clearInterval(intervalId)
             resolve()
           }
