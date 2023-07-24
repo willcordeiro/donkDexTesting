@@ -37,7 +37,7 @@ import { useGovernanceTokenUserAggregatedBalance } from '../../hooks/tokens/useG
 import { ANALYTICS_URLS } from '../../constants'
 import logoLight from '../../assets/images/logo/logo_-_discord_icon_1.png'
 import logoDarkOne from '../../assets/images/logo/logo_-_white_bg.png'
-
+import ChainDropDown from 'components/chainDropDown'
 import whitepaper from '../../assets/files/DONK-Whitepaper.pdf'
 
 const HeaderFrame = styled.div`
@@ -53,7 +53,7 @@ const HeaderFrame = styled.div`
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#191924')};
   padding: 1rem;
   z-index: 1;
-  position: relative;
+  padding-bottom: 100px;
 
   ${({ theme }) => theme.mediaWidth.upToMedium`
     grid-template-columns: 1fr;
@@ -428,6 +428,10 @@ export default function Header() {
             {t('Farm')}
           </StyledNavLink>
 
+          <StyledNavLink id={`mint-nav-link`} to={'/mint'}>
+            {t('Mint')}
+          </StyledNavLink>
+
           {account === '0x9cf363fF78B6B6Caf919886A28f47F1fA10a52e1' ? (
             <StyledNavLink id={`swap-nav-link`} to={'/adminPainel'}>
               {t('AP')}
@@ -453,12 +457,10 @@ export default function Header() {
         >
           WHITEPAPER
         </Links>
+
+        <ChainDropDown />
+
         <HeaderElement>
-          <HideSmall>
-            {account && chainId && NETWORK_LABELS[chainId] && (
-              <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>
-            )}
-          </HideSmall>
           {availableClaim && !showClaimPopup && (
             <UNIWrapper onClick={toggleClaimModal}>
               <UNIAmount active={!!account && !availableClaim} style={{ pointerEvents: 'auto' }}>

@@ -14,6 +14,7 @@ import { getBlockchain } from '../utils/blockchain'
 
 export const NETWORK_URL = process.env.REACT_APP_NETWORK_URL
 export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
+
 export const RPC_API_KEY = 'b6f9e2638f6044d5840defb2c7058dd9'
 
 const FORMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY

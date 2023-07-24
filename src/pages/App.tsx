@@ -55,6 +55,7 @@ import { ToastContainer } from 'react-toastify'
 import { useWeb3React } from '@web3-react/core'
 import CreateFarm from './CreatFarm'
 import AdminPainel from './AdminPainel'
+import Mint from './Mint'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -170,6 +171,7 @@ export default function App() {
               <Route exact strict path="/Farm" component={true ? Farm : () => <Redirect to="/" />} />
               <Route path="/farm/manage/:id/:token" component={true ? ManageFarm : () => <Redirect to="/" />} />
               <Route path="/farm/create" component={true ? CreateFarm : () => <Redirect to="/" />} />
+              <Route exact strict path="/mint" component={true ? Mint : () => <Redirect to="/" />} />
               {/*  
               <Route exact strict path="/staking/pools" component={Earn} />
               <Route exact strict path="/staking/pools/archived" component={EarnArchived} />

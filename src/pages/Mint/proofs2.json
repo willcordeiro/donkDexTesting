@@ -1,0 +1,40 @@
+[
+    {
+        "wallet": "0x47fa361b881db7f86c8fc7a5e8683580afa8b6c6",
+        "proof": [
+            "0x3a7973d6f3eda1800bdcfa745a82586fa87eabb04ac6d94db29fc892649391bb",
+            "0x343750465941b29921f50a28e0e43050e5e1c2611a3ea8d7fe1001090d5e1436",
+            "0x999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb"
+        ]
+    },
+    {
+        "wallet": "0x286b150e59d53ed106071f25e87c00f1861e5fcd",
+        "proof": [
+            "0x4af62074a5843c1f4078fc5fec424dbeaf573582a90f0c40fa3caf1dd783b63d",
+            "0x343750465941b29921f50a28e0e43050e5e1c2611a3ea8d7fe1001090d5e1436",
+            "0x999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb"
+        ]
+    },
+    {
+        "wallet": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "proof": [
+            "0x8a3552d60a98e0ade765adddad0a2e420ca9b1eef5f326ba7ab860bb4ea72c94",
+            "0xa11f1f6f536d76593a25cc181dd7a1ef536c484fd31ed30a8456de8a5d8b8ab6",
+            "0x999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb"
+        ]
+    },
+    {
+        "wallet": "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
+        "proof": [
+            "0x00314e565e0574cb412563df634608d76f5c59d9f817e85966100ec1d48005c0",
+            "0xa11f1f6f536d76593a25cc181dd7a1ef536c484fd31ed30a8456de8a5d8b8ab6",
+            "0x999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb"
+        ]
+    },
+    {
+        "wallet": "0xab8483f64d9c6d1ecf9b849ae677dd3315835cb2",
+        "proof": [
+            "0x1356e595799a1a64c5607b7f3ea0997abf2d3504ca2623b9a0eeb4c1f6fa1c4b"
+        ]
+    }
+]
