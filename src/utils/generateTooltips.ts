@@ -17,6 +17,12 @@ export default function generateTooltips(blockchain: Blockchain): Record<string,
     case Blockchain.SEPOLIA:
       return defaultToolTips
 
+    case Blockchain.POLYGON:
+      return defaultToolTips
+
+    case Blockchain.BINANCE:
+      return defaultToolTips
+
     default:
       return defaultToolTips
   }

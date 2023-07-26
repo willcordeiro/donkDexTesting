@@ -280,6 +280,13 @@ export function colors(blockchain: Blockchain, darkMode: boolean): Colors {
   switch (blockchain) {
     case Blockchain.ARBITRUM:
       return harmonyColors(darkMode)
+
+    case Blockchain.POLYGON:
+      return harmonyColors(darkMode)
+
+    case Blockchain.BINANCE:
+      return harmonyColors(darkMode)
+
     default:
       return viperColors(darkMode)
   }

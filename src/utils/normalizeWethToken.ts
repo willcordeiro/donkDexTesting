@@ -13,6 +13,14 @@ export default function normalizeWethToken(chainId: ChainId, token: Token | unde
       case ChainId.SEPOLIA:
         return new Token(chainId, token.address, token.decimals, 'SepoliaETH', 'SepoliaETH')
 
+      case ChainId.POLYGON:
+      case ChainId.POLYGON:
+        return new Token(chainId, token.address, token.decimals, 'MATIC', 'MATIC')
+
+      case ChainId.BINANCE:
+      case ChainId.BINANCE:
+        return new Token(chainId, token.address, token.decimals, 'BNB', 'BNB')
+
       default:
         return token
     }

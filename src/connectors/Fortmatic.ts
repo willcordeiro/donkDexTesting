@@ -5,7 +5,14 @@ export const OVERLAY_READY = 'OVERLAY_READY'
 
 type FormaticSupportedChains = Extract<
   ChainId,
-  ChainId.MAINNET | ChainId.ROPSTEN | ChainId.RINKEBY | ChainId.KOVAN | ChainId.SEPOLIA | ChainId.ARBITRUM
+  | ChainId.MAINNET
+  | ChainId.ROPSTEN
+  | ChainId.RINKEBY
+  | ChainId.KOVAN
+  | ChainId.SEPOLIA
+  | ChainId.ARBITRUM
+  | ChainId.POLYGON
+  | ChainId.BINANCE
 >
 
 const CHAIN_ID_NETWORK_ARGUMENT: { readonly [chainId in FormaticSupportedChains]: string | undefined } = {
@@ -14,7 +21,9 @@ const CHAIN_ID_NETWORK_ARGUMENT: { readonly [chainId in FormaticSupportedChains]
   [ChainId.RINKEBY]: 'rinkeby',
   [ChainId.KOVAN]: 'kovan',
   [ChainId.SEPOLIA]: 'SEPOLIA',
-  [ChainId.ARBITRUM]: 'ARBITRUM'
+  [ChainId.ARBITRUM]: 'ARBITRUM',
+  [ChainId.POLYGON]: 'POLYGON',
+  [ChainId.BINANCE]: 'BINANCE'
 }
 
 export class FortmaticConnector extends FortmaticConnectorCore {

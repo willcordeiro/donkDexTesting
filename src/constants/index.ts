@@ -22,7 +22,9 @@ export const PIT_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.RINKEBY]: { name: 'DonkPit', path: '/DonkPit' },
   [ChainId.ROPSTEN]: { name: 'DonkPit', path: '/DonkPit' },
   [ChainId.KOVAN]: { name: 'DonkPit', path: '/DonkPit' },
-  [ChainId.HARMONY_MAINNET]: { name: 'DonkPit', path: '/DonkPit' }
+  [ChainId.HARMONY_MAINNET]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.POLYGON]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.BINANCE]: { name: 'DonkPit', path: '/DonkPit' }
 }
 
 export const NEST_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
@@ -32,7 +34,9 @@ export const NEST_SETTINGS: { [chainId in ChainId]: Record<string, string> } = {
   [ChainId.RINKEBY]: { name: 'DonkPit', path: '/DonkPit' },
   [ChainId.ROPSTEN]: { name: 'DonkPit', path: '/DonkPit' },
   [ChainId.KOVAN]: { name: 'DonkPit', path: '/DonkPit' },
-  [ChainId.HARMONY_MAINNET]: { name: 'DonkPit', path: '/DonkPit' }
+  [ChainId.HARMONY_MAINNET]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.POLYGON]: { name: 'DonkPit', path: '/DonkPit' },
+  [ChainId.BINANCE]: { name: 'DonkPit', path: '/DonkPit' }
 }
 
 export const EXCHANGE_SUBGRAPHS: { [chainId in ChainId]: string } = {
@@ -42,7 +46,9 @@ export const EXCHANGE_SUBGRAPHS: { [chainId in ChainId]: string } = {
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
-  [ChainId.HARMONY_MAINNET]: ''
+  [ChainId.HARMONY_MAINNET]: '',
+  [ChainId.POLYGON]: '',
+  [ChainId.BINANCE]: ''
 }
 
 export const ANALYTICS_URLS: { [chainId in ChainId]: string } = {
@@ -52,7 +58,9 @@ export const ANALYTICS_URLS: { [chainId in ChainId]: string } = {
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
-  [ChainId.HARMONY_MAINNET]: ''
+  [ChainId.HARMONY_MAINNET]: '',
+  [ChainId.POLYGON]: '',
+  [ChainId.BINANCE]: ''
 }
 
 export const BRIDGE_URLS: { [chainId in ChainId]: string } = {
@@ -62,7 +70,9 @@ export const BRIDGE_URLS: { [chainId in ChainId]: string } = {
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
-  [ChainId.HARMONY_MAINNET]: ''
+  [ChainId.HARMONY_MAINNET]: '',
+  [ChainId.POLYGON]: '',
+  [ChainId.BINANCE]: ''
 }
 
 export const DOCS_URLS: { [chainId in ChainId]: string } = {
@@ -72,7 +82,9 @@ export const DOCS_URLS: { [chainId in ChainId]: string } = {
   [ChainId.RINKEBY]: '',
   [ChainId.ROPSTEN]: '',
   [ChainId.KOVAN]: '',
-  [ChainId.HARMONY_MAINNET]: ''
+  [ChainId.HARMONY_MAINNET]: '',
+  [ChainId.POLYGON]: '',
+  [ChainId.BINANCE]: ''
 }
 
 export const WEB_INTERFACES: { [chainId in ChainId]: string[] } = {
@@ -82,7 +94,9 @@ export const WEB_INTERFACES: { [chainId in ChainId]: string[] } = {
   [ChainId.RINKEBY]: [''],
   [ChainId.ROPSTEN]: [''],
   [ChainId.KOVAN]: [''],
-  [ChainId.HARMONY_MAINNET]: ['']
+  [ChainId.HARMONY_MAINNET]: [''],
+  [ChainId.POLYGON]: [''],
+  [ChainId.BINANCE]: ['']
 }
 
 export const TOKEN_LOGO_EXCEPTIONS: { [chainId in ChainId]: string[] } = {
@@ -92,7 +106,9 @@ export const TOKEN_LOGO_EXCEPTIONS: { [chainId in ChainId]: string[] } = {
   [ChainId.RINKEBY]: [''],
   [ChainId.ROPSTEN]: [''],
   [ChainId.KOVAN]: [''],
-  [ChainId.HARMONY_MAINNET]: ['']
+  [ChainId.HARMONY_MAINNET]: [''],
+  [ChainId.POLYGON]: [''],
+  [ChainId.BINANCE]: ['']
 }
 
 export const POOL_BACKGROUNDS: { [chainId in ChainId]: string } = {
@@ -102,7 +118,9 @@ export const POOL_BACKGROUNDS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '#02a2c4',
   [ChainId.ROPSTEN]: '#02a2c4',
   [ChainId.KOVAN]: '#02a2c4',
-  [ChainId.HARMONY_MAINNET]: '#02a2c4'
+  [ChainId.HARMONY_MAINNET]: '#02a2c4',
+  [ChainId.POLYGON]: '#ff8e4c',
+  [ChainId.BINANCE]: '#ff8e4c'
 }
 
 export const UNLOCKING_STARTS: { [chainId in ChainId]: number | undefined } = {
@@ -112,7 +130,9 @@ export const UNLOCKING_STARTS: { [chainId in ChainId]: number | undefined } = {
   [ChainId.MAINNET]: undefined,
   [ChainId.ROPSTEN]: undefined,
   [ChainId.KOVAN]: undefined,
-  [ChainId.HARMONY_MAINNET]: undefined
+  [ChainId.HARMONY_MAINNET]: undefined,
+  [ChainId.POLYGON]: undefined,
+  [ChainId.BINANCE]: undefined
 }
 
 export { PRELOADED_PROPOSALS } from './proposals'
@@ -155,14 +175,18 @@ const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
   [ChainId.ROPSTEN]: [WETH[ChainId.ROPSTEN]],
   [ChainId.KOVAN]: [WETH[ChainId.KOVAN]],
-  [ChainId.HARMONY_MAINNET]: [WETH[ChainId.HARMONY_MAINNET]]
+  [ChainId.HARMONY_MAINNET]: [WETH[ChainId.HARMONY_MAINNET]],
+  [ChainId.POLYGON]: [WETH[ChainId.POLYGON]],
+  [ChainId.BINANCE]: [WETH[ChainId.BINANCE]]
 }
 
 //used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.ARBITRUM]: [...WETH_ONLY[ChainId.ARBITRUM] /* DAI, USDC, USDT, COMP, MKR, WBTC */],
-  [ChainId.SEPOLIA]: [...WETH_ONLY[ChainId.SEPOLIA] /* DAI, USDC, USDT, COMP, MKR, WBTC */]
+  [ChainId.SEPOLIA]: [...WETH_ONLY[ChainId.SEPOLIA] /* DAI, USDC, USDT, COMP, MKR, WBTC */],
+  [ChainId.POLYGON]: [...WETH_ONLY[ChainId.POLYGON]],
+  [ChainId.BINANCE]: [...WETH_ONLY[ChainId.BINANCE]]
 }
 
 /**
@@ -188,7 +212,9 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET] /*DAI, USDC, USDT, WBTC */],
   [ChainId.ARBITRUM]: [...WETH_ONLY[ChainId.ARBITRUM] /*DAI, USDC, USDT, WBTC */],
-  [ChainId.SEPOLIA]: [...WETH_ONLY[ChainId.SEPOLIA] /*DAI, USDC, USDT, WBTC */]
+  [ChainId.SEPOLIA]: [...WETH_ONLY[ChainId.SEPOLIA] /*DAI, USDC, USDT, WBTC */],
+  [ChainId.POLYGON]: [...WETH_ONLY[ChainId.POLYGON]],
+  [ChainId.BINANCE]: [...WETH_ONLY[ChainId.BINANCE]]
   /*
   [ChainId.BSC_MAINNET]: [
     ...WETH_ONLY[ChainId.BSC_MAINNET],

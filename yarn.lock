@@ -1275,13 +1275,6 @@
   dependencies:
     web3 "^1.10.0"
 
-"@donkswap/core@^1.0.18":
-  version "1.0.18"
-  resolved "https://registry.yarnpkg.com/@donkswap/core/-/core-1.0.18.tgz#91e10ccf941350a01a16fd5c271fc91e68b2b44b"
-  integrity sha512-KmEZTAp3m0wZ4NVXRWn/+RdXx7wap3odSrjbwXzlLGaoVXC0TB6XLMdz/WjL4MzulWojgtKv1Y9332lLh7/21g==
-  dependencies:
-    web3 "^1.10.0"
-
 "@donkswap/default-token-list@^6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@donkswap/default-token-list/-/default-token-list-6.0.0.tgz#83c934f97338cc7ac26baab6abedb9b09e18b42f"
@@ -1390,38 +1383,24 @@
     "@donkswap/core" "1.0.29"
     "@donkswap/lib" "1.0.1"
 
-"@donkswap/sdk-extra@^1.3.32":
-  version "1.3.32"
-  resolved "https://registry.yarnpkg.com/@donkswap/sdk-extra/-/sdk-extra-1.3.32.tgz#4a1f2a650abf14fead84fe61284dc8baa57197cc"
-  integrity sha512-9AwIu4gAf0sn2g+0KnicbkyDMQhEto2SfzEfWPnytVSqgymOW6ld82CQawZmI/DEJz8i657rDRFQIMpBEy6xHQ==
+"@donkswap/sdk-extra@^1.3.33":
+  version "1.3.33"
+  resolved "https://registry.yarnpkg.com/@donkswap/sdk-extra/-/sdk-extra-1.3.33.tgz#87d3fadbbcdefd4ee81c4513c3b8d3dfade2ef94"
+  integrity sha512-gREJkjkPB32nGERz4ADbBkulwn2/BaGN+jNND2X6rnU2AotwbjRI/jGkr0OlbWMk1KB5XZtrEGSuQh4IALYhIg==
   dependencies:
     "@donkswap/community-token-list" "^2.6.3"
     "@donkswap/default-token-list" "^6.0.0"
-    "@donkswap/sdk" "^1.0.33"
+    "@donkswap/sdk" "1.0.55"
     "@ethersproject/address" "^5.5.0"
     "@ethersproject/contracts" "^5.5.0"
     "@ethersproject/providers" "^5.5.2"
     "@ethersproject/solidity" "^5.5.0"
     lodash.random "^3.2.0"
 
-"@donkswap/sdk@^1.0.33":
-  version "1.0.33"
-  resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.33.tgz#271e46eec884a3c5fa9a2acb97438b0d4f16cc72"
-  integrity sha512-t/x/VreTpD4dx7jEeuf53wX7yxTf99V9B3D+zSBxMAKPautuNRUprMokV6LpkRhmnmmc50S5GrdCY/5qBR8YkA==
-  dependencies:
-    "@donkswap/core" "^1.0.18"
-    big.js "^5.2.2"
-    decimal.js-light "^2.5.0"
-    jsbi "^3.1.1"
-    lodash.random "^3.2.0"
-    tiny-invariant "^1.1.0"
-    tiny-warning "^1.0.3"
-    toformat "^2.0.0"
-
-"@donkswap/sdk@^1.0.53":
-  version "1.0.53"
-  resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.53.tgz#c1d3fc242f1dc89ac9601165efc2783dcec2b675"
-  integrity sha512-frJePhqmHXZquehcPZdY23vWSkIv8eBTd9zMCTi8jufgrntDElpUeLniUndw/I2ac1qk0KIs2+eY7TyVcfQJhg==
+"@donkswap/sdk@1.0.55", "@donkswap/sdk@^1.0.55":
+  version "1.0.55"
+  resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.55.tgz#01759bcb6c60ea21949566fae9317ec4dde6a3db"
+  integrity sha512-sDwJiOEdHrHGaxwyjUPmi7qtYtvPmAYtvJtkBUYSaO5bG5HZLLfp1/0EBBNhpJC9usxW616x8I6NazVbe8gUhQ==
   dependencies:
     "@donkswap/core" "^1.0.26"
     big.js "^5.2.2"

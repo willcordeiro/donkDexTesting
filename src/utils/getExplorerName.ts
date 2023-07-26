@@ -6,6 +6,11 @@ export default function getExplorerName(blockchain: Blockchain): string {
       return 'ARBITRUM Explorer'
     case Blockchain.SEPOLIA:
       return 'SEPOLIA Explorer'
+    case Blockchain.POLYGON:
+      return 'POLYGON Explorer'
+
+    case Blockchain.BINANCE:
+      return 'BINANCE Explorer'
     default:
       return 'Etherscan'
   }

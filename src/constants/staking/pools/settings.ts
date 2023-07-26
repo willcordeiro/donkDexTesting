@@ -17,5 +17,16 @@ export const STAKING_SETTINGS: {
     startBlock: 10183471,
     lockRewardsRatio: 95,
     unlockedRewardsRatio: 5
+  },
+
+  [ChainId.POLYGON]: {
+    startBlock: 10183471,
+    lockRewardsRatio: 95,
+    unlockedRewardsRatio: 5
+  },
+  [ChainId.BINANCE]: {
+    startBlock: 10183471,
+    lockRewardsRatio: 95,
+    unlockedRewardsRatio: 5
   }
 }

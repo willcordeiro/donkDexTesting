@@ -1,5 +1,16 @@
 import { getAddress } from 'ethers/lib/utils'
-import { ChainId, Currency, Token, ETHER, DEFAULT_CURRENCIES, Blockchain, ARBITRUM, SepoliaETH } from '@donkswap/sdk'
+import {
+  ChainId,
+  Currency,
+  Token,
+  ETHER,
+  DEFAULT_CURRENCIES,
+  Blockchain,
+  ARBITRUM,
+  SepoliaETH,
+  POLYGON,
+  BINANCE
+} from '@donkswap/sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
@@ -16,6 +27,12 @@ export function getTokenLogoURL(token: Token): string {
 
   switch (token.chainId) {
     case ChainId.ARBITRUM:
+      return 'https://www.linkpicture.com/q/logo_-_white_bg.png'
+
+    case ChainId.POLYGON:
+      return 'https://www.linkpicture.com/q/logo_-_white_bg.png'
+
+    case ChainId.BINANCE:
       return 'https://www.linkpicture.com/q/logo_-_white_bg.png'
 
     case ChainId.SEPOLIA:
@@ -74,6 +91,10 @@ export default function CurrencyLogo({
     if (currency === SepoliaETH) {
       return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
     } else if (currency === ARBITRUM || (currency === wrappedCurrency && blockchain === Blockchain.ARBITRUM)) {
+      return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
+    } else if (currency === POLYGON || (currency === wrappedCurrency && blockchain === Blockchain.POLYGON)) {
+      return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
+    } else if (currency === BINANCE || (currency === wrappedCurrency && blockchain === Blockchain.BINANCE)) {
       return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
     }
   }

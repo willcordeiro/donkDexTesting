@@ -40,17 +40,23 @@ let networkLibrary: Web3Provider | undefined
 export function getNetworkLibrary(): Web3Provider {
   return (networkLibrary = networkLibrary ?? new Web3Provider(network.provider as any))
 }
-
+//TODO: LOOK
 let supportedChainIds: number[]
 switch (BLOCKCHAIN) {
   case Blockchain.ARBITRUM:
     supportedChainIds = [42161]
     break
+  case Blockchain.POLYGON:
+    supportedChainIds = [137]
+    break
+  case Blockchain.BINANCE:
+    supportedChainIds = [56]
+    break
   case Blockchain.SEPOLIA:
     supportedChainIds = [11155111]
     break
   default:
-    supportedChainIds = [1, 5, 42161]
+    supportedChainIds = [1, 5, 42161, 137, 56]
     break
 }
 

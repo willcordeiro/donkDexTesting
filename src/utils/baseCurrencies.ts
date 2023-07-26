@@ -1,4 +1,14 @@
-import { ChainId, Currency, ETHER, ARBITRUM, SepoliaETH, WETH, GOVERNANCE_TOKENS } from '@donkswap/sdk'
+import {
+  ChainId,
+  Currency,
+  ETHER,
+  ARBITRUM,
+  SepoliaETH,
+  POLYGON,
+  BINANCE,
+  WETH,
+  GOVERNANCE_TOKENS
+} from '@donkswap/sdk'
 import { NETWORK_CHAIN_ID } from '../connectors'
 
 export default function baseCurrencies(chainId: ChainId | undefined): Currency[] {
@@ -17,6 +27,20 @@ export default function baseCurrencies(chainId: ChainId | undefined): Currency[]
       case ChainId.ARBITRUM:
       case ChainId.ARBITRUM:
         currencies.push(ARBITRUM)
+        currencies.push(WETH[chainId])
+        currencies.push(GOVERNANCE_TOKENS[chainId])
+        break
+
+      case ChainId.POLYGON:
+      case ChainId.POLYGON:
+        currencies.push(POLYGON)
+        currencies.push(WETH[chainId])
+        currencies.push(GOVERNANCE_TOKENS[chainId])
+        break
+
+      case ChainId.BINANCE:
+      case ChainId.BINANCE:
+        currencies.push(BINANCE)
         currencies.push(WETH[chainId])
         currencies.push(GOVERNANCE_TOKENS[chainId])
         break
