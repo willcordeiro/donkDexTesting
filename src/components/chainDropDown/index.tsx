@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import './styles.css'
-
+import { Polygon, Arbitrum, Binance } from './chains'
 import { MultichainContext } from '../../context/MultiChain'
 import { AiFillCaretDown } from 'react-icons/ai'
 import polygonLogo from '../../assets/images/chainsLogo/polygon-matic-logo.97ff139cc7379a42cf141d74a6595fff.svg'
 import arbitrumLogo from '../../assets/images/chainsLogo/arbitrum_logo.17ba9b2d5b1574bd70b71505367f5130.svg'
+
 function ChainDropDown() {
   //context multichain variables
   const context: any = useContext(MultichainContext)
@@ -21,18 +22,19 @@ function ChainDropDown() {
     { id: 0, label: polygon, logo: polygonLogo },
     { id: 1, label: arbitrum, logo: arbitrumLogo }
   ]
-
+  /*
   const dataNoPoly = [
     // { id: 1, label: polygon, logo: polygonLogo },
     { id: 2, label: arbitrum, logo: arbitrumLogo }
     // { id: 3, label: binance },
   ]
-
+*/
   //varibles to toggle the dropdown
   const [isOpen, setOpen] = useState<boolean>(false)
   const [items, setItem] = useState<any>(data)
 
   const [selectedItemID, setSelectedItemID] = useState<string | null | undefined>(null)
+  const [previousId, setPreviousId] = useState<any>(null)
 
   const toggleDropdown = () => setOpen(!isOpen)
 
@@ -48,9 +50,12 @@ function ChainDropDown() {
 
   //to get the localStorage saved chain
   useEffect(() => {
-    if (localStorage.getItem('MintChain') !== null) {
-      const chain = localStorage.getItem('MintChain')
-      setCurrentChain(chain)
+    const chainFromStorage = localStorage.getItem('multiChain')
+
+    if (chainFromStorage !== null) {
+      setCurrentChain(chainFromStorage)
+    } else {
+      setCurrentChain('Arbitrum')
     }
   }, [])
 
@@ -64,27 +69,44 @@ function ChainDropDown() {
 
   //save last used chain in the user localhost
   function saveChanges(chain: string) {
-    localStorage.setItem('MintChain', chain)
+    localStorage.setItem('multiChain', chain)
     setCurrentChain(chain)
   }
 
   //change the dropdown item, getting and setting the last id of the dropdown
   const handleItemClick = (id: string | undefined) => {
-    selectedItemID == id ? setSelectedItemID(null) : setSelectedItemID(id)
+    selectedItemID === id ? setSelectedItemID(null) : setSelectedItemID(id)
   }
 
-  //change the user chain
-  async function enableChain(dropdownId?: string) {
-    if (polygon == currentChain) {
+  // Função para verificar e alterar a chain atual
+  async function enableChain(dropdownId?: string, reloadOn?: boolean) {
+    let chainChanged: any = false
+    const previousItem = items.find((element: any) => element.label === currentChain)
+    const previousID: any = previousItem ? String(previousItem.id) : null
+    setPreviousId(previousID)
+
+    if (polygon === currentChain) {
+      chainChanged = await Polygon()
+    } else if (arbitrum === currentChain) {
+      chainChanged = await Arbitrum()
+    } else if (binance === currentChain) {
+      chainChanged = await Binance()
+    }
+
+    if (reloadOn) {
+      window.ethereum.on('chainChanged', (chainId: any) => {
+        location.reload()
+        console.log('new chain id:', chainId)
+      })
+    }
+
+    if (chainChanged) {
       handleItemClick(dropdownId)
-    } else if (arbitrum == currentChain) {
-      handleItemClick(dropdownId)
-    } else if (binance == currentChain) {
-      handleItemClick(dropdownId)
+    } else {
+      handleItemClick(previousId)
     }
   }
 
-  //when currentChain changes it calls the function to change the user chain
   useEffect(() => {
     enableChain()
     console.log(currentChain)
@@ -109,7 +131,7 @@ function ChainDropDown() {
             key={index}
             className="dropdown-item-multichain"
             onClick={(e: any) => {
-              toggleDropdown(), enableChain(e.target.id)
+              toggleDropdown(), enableChain(e.target.id, true)
             }}
             id={item.id}
           >

@@ -13,16 +13,8 @@ import GoldImg from '../../assets/images/nfts/gold.jpg'
 import SilverImg from '../../assets/images/nfts/silver.jpg'
 
 import proofs from './proofs.json'
-import proofsRaw from './proofs2.json'
 import contractAbi from './DONKGPU.json'
-import { type } from 'os'
-const contractAddress = '0xcF0405E066A29Ae693bF95884C5AaC5099B4d668'
-const proofs2: Proof[] = proofsRaw
-
-type Proof = {
-  wallet: string
-  proof: string[]
-}
+const contractAddress = '0x7cf9E6E8F0Fe8485089147fe105A76dca14FC1b7'
 
 type Properties = {
   isPublicSale: boolean
@@ -263,31 +255,23 @@ const ModalContainer = styled.div`
   width: 100%;
 `
 
+const Response = styled.p`
+  word-wrap: normal;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 30px;
+`
+
 const Mint = () => {
-  //   const { library, account, active } = useWeb3React()
+  const { library, account, active } = useWeb3React()
   const [mintAmount, setMintAmount] = useState(1)
   const [metadataFetched, setMetadataFetched] = useState<boolean | null>(true)
   const [res, setRes] = useState('')
   const [showRes, setShowRes] = useState(false)
 
-  const [account, setAccount] = useState<undefined | string>(undefined)
-  const [active, setActive] = useState(true)
-  const [library, setLibrary] = useState(false)
-
-  //   const [properties, setProperties] = useState<Properties>({
-  //     isPublicSale: false,
-  //     isWhitelistSale: false,
-  //     pricePublic: ethers.utils.parseEther('40'),
-  //     priceWL: ethers.utils.parseEther('35'),
-  //     maxPerTxn: 5,
-  //     totalSupply: 0,
-  //     maxSupply: 9000,
-  //     whitelistSupply: 1000,
-  //     proof: null,
-  //     isWL: false
-  //   })
   const [properties, setProperties] = useState<Properties>({
-    isPublicSale: true,
+    isPublicSale: false,
     isWhitelistSale: false,
     pricePublic: ethers.utils.parseEther('40'),
     priceWL: ethers.utils.parseEther('35'),
@@ -295,58 +279,58 @@ const Mint = () => {
     totalSupply: 0,
     maxSupply: 9000,
     whitelistSupply: 1000,
-    proof: ['ss'],
-    isWL: true
+    proof: null,
+    isWL: false
   })
 
   function getProof(address: string) {
-    // const result: string[] | null = proofs[address.toLowerCase()] || null
-    // return result
+    const result: string[] | null = proofs[address.toLowerCase()] || null
+    return result
   }
 
   async function fetchData() {
     console.log('fetchdata')
-    // if (!(active && account && library)) {
-    //   setMetadataFetched(false)
-    //   return
-    // }
-    // try {
-    //   const signer = library.getSigner()
-    //   const contract = new ethers.Contract(contractAddress, contractAbi.abi, signer)
-    //   const isPublicSale = await contract.isPublicSaleEnabled()
-    //   const isWhitelistSale = await contract.isWhitelistSaleEnabled()
-    //   const pricePublic = await contract.publicPrice()
-    //   const priceWL = await contract.whitelistPrice()
-    //   const maxPerTxn = await contract.maxPerTransaction()
-    //   const totalSupply = await contract.totalSupply()
-    //   const maxSupply = await contract.maxSupply()
-    //   const whitelistSupply = await contract.whitelistSupply()
-    //   let proof = null
-    //   let isWL = false
+    if (!(active && account && library)) {
+      setMetadataFetched(false)
+      return
+    }
+    try {
+      const signer = library.getSigner()
+      const contract = new ethers.Contract(contractAddress, contractAbi.abi, signer)
+      const isPublicSale = await contract.isPublicSaleEnabled()
+      const isWhitelistSale = await contract.isWhitelistSaleEnabled()
+      const pricePublic = await contract.publicPrice()
+      const priceWL = await contract.whitelistPrice()
+      const maxPerTxn = await contract.maxPerTransaction()
+      const totalSupply = await contract.totalSupply()
+      const maxSupply = await contract.maxSupply()
+      const whitelistSupply = await contract.whitelistSupply()
+      let proof = null
+      let isWL = false
 
-    //   if (isWhitelistSale && !isPublicSale) {
-    //     proof = getProof(account)
-    //     isWL = Boolean(proof)
-    //   }
-    //   const properties_ = {
-    //     isPublicSale,
-    //     isWhitelistSale,
-    //     pricePublic,
-    //     priceWL,
-    //     maxPerTxn,
-    //     totalSupply,
-    //     maxSupply,
-    //     whitelistSupply,
-    //     proof,
-    //     isWL
-    //   }
-    //   setProperties(properties_)
-    //   setMetadataFetched(true)
-    // } catch (err) {
-    //   console.error(err)
-    //   setRes(err)
-    //   setMetadataFetched(false)
-    // }
+      if (isWhitelistSale && !isPublicSale) {
+        proof = getProof(account)
+        isWL = Boolean(proof)
+      }
+      const properties_ = {
+        isPublicSale,
+        isWhitelistSale,
+        pricePublic,
+        priceWL,
+        maxPerTxn,
+        totalSupply,
+        maxSupply,
+        whitelistSupply,
+        proof,
+        isWL
+      }
+      setProperties(properties_)
+      setMetadataFetched(true)
+    } catch (err) {
+      console.error(err)
+      setRes(err)
+      setMetadataFetched(false)
+    }
   }
 
   useEffect(() => {
@@ -366,76 +350,86 @@ const Mint = () => {
   }
 
   async function handleWhitelistMint() {
-    console.log('WL Mint')
-    // if (window.ethereum) {
-    //   // const provider = new ethers.providers.Web3Provider(window.ethereum);
-    //   const signer = library.getSigner()
-    //   const contract = new ethers.Contract(contractAddress, contractAbi.abi, signer)
-    //   if (!properties.isWhitelistSale) {
-    //     setRes('Whitelist sale not active')
-    //     setShowRes(true)
-    //     return
-    //   }
-    //   if (!properties.isWL || !properties.proof) {
-    //     setRes('You cannot mint in whitelist phase')
-    //     setShowRes(true)
-    //     return
-    //   }
-    //   try {
-    //     setRes('Waiting for confirmation...')
-    //     setShowRes(true)
-    //     console.log('Whitelist')
-    //     const res = await contract.whitelistMint(BigNumber.from(mintAmount), properties.proof, {
-    //       value: properties.priceWL.mul(BigNumber.from(mintAmount))
-    //     })
-    //     setRes('Transaction sent! Waiting for confirmation...')
-    //     const receipt = await res.wait()
-    //     if (receipt.status === 1) {
-    //       setRes('Transaction confirmed!')
-    //       setMintAmount(1)
-    //       await fetchData()
-    //     } else {
-    //       setRes('Transaction was reverted :(')
-    //     }
-    //   } catch (err) {
-    //     setRes(err.message)
-    //   }
-    // }
+    if (library) {
+      const signer = library.getSigner()
+      const contract = new ethers.Contract(contractAddress, contractAbi.abi, signer)
+      if (!properties.isWhitelistSale) {
+        setRes('Whitelist sale not active')
+        setShowRes(true)
+        return
+      }
+      if (!properties.isWL || !properties.proof) {
+        setRes('You cannot mint in whitelist phase')
+        setShowRes(true)
+        return
+      }
+      try {
+        setRes('Waiting for confirmation...')
+        setShowRes(true)
+        console.log('Whitelist')
+        const res = await contract.whitelistMint(BigNumber.from(mintAmount), properties.proof, {
+          value: properties.priceWL.mul(BigNumber.from(mintAmount))
+        })
+        setRes('Transaction sent! Waiting for confirmation...')
+        const receipt = await res.wait()
+        if (receipt.status === 1) {
+          setRes('Transaction confirmed!')
+          setMintAmount(1)
+          await fetchData()
+        } else {
+          setRes('Transaction was reverted :(')
+        }
+      } catch (err) {
+        if (err.code === -32603) {
+          setRes('Not enough MATIC')
+        } else if (err.code === 'ACTION_REJECTED') {
+          setRes('You have rejected the transaction')
+        } else {
+          setRes(err.message)
+        }
+      }
+    }
   }
 
   async function handleMint() {
     console.log('Pub Mint')
     setRes('Transaction sent...')
     setShowRes(true)
-    // if (window.ethereum) {
-    //   // const provider = new ethers.providers.Web3Provider(window.ethereum);
-    //   const signer = library.getSigner()
-    //   const contract = new ethers.Contract(contractAddress, contractAbi.abi, signer)
-    //   if (!properties.isPublicSale) {
-    //     setRes('Public sale not active')
-    //     setShowRes(true)
-    //     return
-    //   }
-    //   try {
-    //     setRes('Waiting for confirmation...')
-    //     setShowRes(true)
-    //     console.log('Public')
-    //     const res = await contract.mint(BigNumber.from(mintAmount), {
-    //       value: properties.pricePublic.mul(BigNumber.from(mintAmount))
-    //     })
-    //     setRes('Transaction sent! Waiting for confirmation...')
-    //     const receipt = await res.wait()
-    //     if (receipt.status === 1) {
-    //       setRes('Transaction confirmed!')
-    //       setMintAmount(1)
-    //       await fetchData()
-    //     } else {
-    //       setRes('Transaction was reverted :(')
-    //     }
-    //   } catch (err) {
-    //     setRes(err.message)
-    //   }
-    // }
+    if (library) {
+      const signer = library.getSigner()
+      const contract = new ethers.Contract(contractAddress, contractAbi.abi, signer)
+      if (!properties.isPublicSale) {
+        setRes('Public sale not active')
+        setShowRes(true)
+        return
+      }
+      try {
+        setRes('Waiting for confirmation...')
+        setShowRes(true)
+        console.log('Public')
+        const res = await contract.publicMint(BigNumber.from(mintAmount), {
+          value: properties.pricePublic.mul(BigNumber.from(mintAmount))
+        })
+        setRes('Transaction sent! Waiting for confirmation...')
+        const receipt = await res.wait()
+        if (receipt.status === 1) {
+          setRes('Transaction confirmed!')
+          setMintAmount(1)
+          await fetchData()
+        } else {
+          setRes('Transaction was reverted :(')
+        }
+      } catch (err) {
+        console.log(err.code)
+        if (err.code === -32603) {
+          setRes('Not enough MATIC')
+        } else if (err.code === 'ACTION_REJECTED') {
+          setRes('You have rejected the transaction')
+        } else {
+          setRes(err.message)
+        }
+      }
+    }
   }
 
   function closeModal() {
@@ -447,7 +441,7 @@ const Mint = () => {
     <div>
       <Modal isOpen={showRes} onDismiss={closeModal} minHeight={10}>
         <ModalContainer>
-          <p>{res}</p>
+          <Response>{res}</Response>
           <ResponsiveButtonPrimary onClick={closeModal}>Close</ResponsiveButtonPrimary>
         </ModalContainer>
       </Modal>
@@ -574,7 +568,7 @@ const Mint = () => {
                         .toString()
                         .slice(0, -2) + ' MATIC/NFT'}
                 </Price>
-                <h2>Max {properties.maxPerTxn} NFTs per transaction</h2>
+                <h2>Max {properties.maxPerTxn.toString()} NFTs per transaction</h2>
                 <h2>
                   Minted: {properties.totalSupply.toString()}/{properties.maxSupply.toString()}
                 </h2>

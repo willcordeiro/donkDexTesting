@@ -12,9 +12,28 @@ import { Blockchain, Currency } from '@donkswap/sdk'
 import baseCurrencies from '../utils/baseCurrencies'
 import { getBlockchain } from '../utils/blockchain'
 
-export const NETWORK_URL = process.env.REACT_APP_NETWORK_URL
-export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
+export let NETWORK_URL = process.env.REACT_APP_NETWORK_URL
+export let NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
 
+const chainFromStorage = localStorage.getItem('multiChain')
+let currentChain = ''
+
+if (chainFromStorage !== null) {
+  currentChain = chainFromStorage
+} else {
+  currentChain = 'Arbitrum'
+}
+
+if ('Polygon' === currentChain) {
+  NETWORK_URL = 'https://polygon-rpc.com'
+  NETWORK_CHAIN_ID = 137
+} else if ('Arbitrum' === currentChain) {
+  NETWORK_URL = 'https://arb1.arbitrum.io/rpc'
+  NETWORK_CHAIN_ID = 42161
+} else if ('Binance' === currentChain) {
+  NETWORK_URL = 'https://rpc.ankr.com/bsc'
+  NETWORK_CHAIN_ID = 56
+}
 export const RPC_API_KEY = 'b6f9e2638f6044d5840defb2c7058dd9'
 
 const FORMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY
