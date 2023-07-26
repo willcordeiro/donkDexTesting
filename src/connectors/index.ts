@@ -56,8 +56,7 @@ switch (BLOCKCHAIN) {
       */
   case Blockchain.SEPOLIA:
     supportedChainIds = [11155111, 42161, 137]
-    breakfraive15
-
+    break
   default:
     supportedChainIds = [42161, 137]
     break
