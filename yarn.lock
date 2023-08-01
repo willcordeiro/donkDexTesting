@@ -1397,10 +1397,24 @@
     "@ethersproject/solidity" "^5.5.0"
     lodash.random "^3.2.0"
 
-"@donkswap/sdk@1.0.55", "@donkswap/sdk@^1.0.55":
+"@donkswap/sdk@1.0.55":
   version "1.0.55"
   resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.55.tgz#01759bcb6c60ea21949566fae9317ec4dde6a3db"
   integrity sha512-sDwJiOEdHrHGaxwyjUPmi7qtYtvPmAYtvJtkBUYSaO5bG5HZLLfp1/0EBBNhpJC9usxW616x8I6NazVbe8gUhQ==
+  dependencies:
+    "@donkswap/core" "^1.0.26"
+    big.js "^5.2.2"
+    decimal.js-light "^2.5.0"
+    jsbi "^3.1.1"
+    lodash.random "^3.2.0"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.3"
+    toformat "^2.0.0"
+
+"@donkswap/sdk@^1.0.56":
+  version "1.0.56"
+  resolved "https://registry.yarnpkg.com/@donkswap/sdk/-/sdk-1.0.56.tgz#9f42e9a4f4d588688b70bab987138cd060459e0b"
+  integrity sha512-l0OwDqMiOTAL+Fz8jcrSDpAmmS0BgcZ8TzkyW7nyrprI9McOJzcmWjJL7BzwX9fUcrImPW+RAV6ITpvpuEmJ0Q==
   dependencies:
     "@donkswap/core" "^1.0.26"
     big.js "^5.2.2"

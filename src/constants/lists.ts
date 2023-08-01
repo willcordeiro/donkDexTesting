@@ -17,8 +17,27 @@ const CMC_ALL_LIST = 'defi.cmc.eth'
 const CMC_STABLECOIN = 'stablecoin.cmc.eth'
 const KLEROS_LIST = 't2crtokens.eth'
 const GEMINI_LIST = 'https://www.gemini.com/uniswap/manifest.json'*/
-const DEFAULT_LIST =
-  'https://raw.githubusercontent.com/DonkSolana/donk-default-token-list/main/build/donkswap-default.tokenlist.json'
+let DEFAULT_LIST =
+  'https://raw.githubusercontent.com/DonkProtocol/donk-default-token-list/main/allTokensList/donkswap-default.tokenlist-arbitrum.json'
+
+const chainFromStorage = localStorage.getItem('multiChain')
+let currentChain = ''
+
+if (chainFromStorage !== null) {
+  currentChain = chainFromStorage
+} else {
+  currentChain = 'Arbitrum'
+}
+
+if ('Polygon' === currentChain) {
+  DEFAULT_LIST =
+    'https://raw.githubusercontent.com/DonkProtocol/donk-default-token-list/main/allTokensList/donkswap-default.tokenlist-polygon.json'
+} else if ('Arbitrum' === currentChain) {
+  DEFAULT_LIST =
+    'https://raw.githubusercontent.com/DonkProtocol/donk-default-token-list/main/allTokensList/donkswap-default.tokenlist-arbitrum.json'
+} else if ('Binance' === currentChain) {
+  DEFAULT_LIST = ''
+}
 
 /*
 const VENOMSWAP_COMMUNITY_LIST =

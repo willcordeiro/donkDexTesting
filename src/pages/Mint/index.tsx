@@ -14,7 +14,7 @@ import SilverImg from '../../assets/images/nfts/silver.jpg'
 
 import proofs from './proofs.json'
 import contractAbi from './DONKGPU.json'
-const contractAddress = '0x7cf9E6E8F0Fe8485089147fe105A76dca14FC1b7'
+const contractAddress = '0x49db8C04Df2C699016c4AFdF23257a67AfbC7d3B'
 
 type Properties = {
   isPublicSale: boolean
@@ -264,6 +264,15 @@ const Response = styled.p`
 `
 
 const Mint = () => {
+  //TODO FUNCTION TO FORCE THE POLYGON NETWORK
+
+  const chain = localStorage.getItem('multiChain')
+  if (chain === 'Arbitrum') {
+    localStorage.setItem('multiChain', 'Polygon')
+    location.reload()
+  } else {
+  }
+
   const { library, account, active } = useWeb3React()
   const [mintAmount, setMintAmount] = useState(1)
   const [metadataFetched, setMetadataFetched] = useState<boolean | null>(true)

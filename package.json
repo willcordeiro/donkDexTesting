@@ -9,7 +9,7 @@
     "@donkswap/contracts": "^1.0.3",
     "@donkswap/core": "^1.0.29",
     "@donkswap/periphery": "^1.0.39",
-    "@donkswap/sdk": "^1.0.55",
+    "@donkswap/sdk": "^1.0.56",
     "@donkswap/sdk-extra": "^1.3.33",
     "@ethersproject/experimental": "^5.1.2",
     "@popperjs/core": "^2.4.4",

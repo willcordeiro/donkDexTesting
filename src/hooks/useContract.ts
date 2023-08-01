@@ -32,7 +32,13 @@ import DONK_STAKING_ABI from '../constants/donkStaking/donkStakingABI.json'
 import DONK_TOKEN_ABI from '../constants/donkToken/donkTokenABI.json'
 import FARMS_TAKING_ABI from '../constants/farmStaking/farmABI.json'
 import { abi as IUniswapV2FactoryABI } from '@donkswap/core/build/UniswapV2Factory.json'
-import { FACTORY_ADDRESSES } from '@donkswap/sdk'
+import {
+  FACTORY_ADDRESSES,
+  FARM_ADDRESSES,
+  DONK_STAKING_ADDRESSES,
+  DONK_TOKEN_ADDRESSES,
+  MINT_ADDRESSES
+} from '@donkswap/sdk'
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
   const { library, account } = useActiveWeb3React()
@@ -56,20 +62,37 @@ export function useFactoryContract(): Contract | null {
 }
 
 export function useFarmStakingContract(): Contract | null {
-  const donkFarmContract = '0xD0D61e4cd03bFb46a6715b3ddA86ad92169cEaFD'
+  const { chainId } = useActiveWeb3React()
+
+  const donkFarmContract = chainId ? FARM_ADDRESSES[chainId] : undefined
+
   return useContract(donkFarmContract, FARMS_TAKING_ABI)
 }
 
 //farm contract testnet 0x367192fd88dD88BAF0Ee78684B3959289c4f2056
 
 export function useDonkStakingContract(): Contract | null {
-  const donkStakingContract = '0x9B7e65f6F99947A81F8ff729d2f559C6b8DB2323'
+  const { chainId } = useActiveWeb3React()
+
+  const donkStakingContract = chainId ? DONK_STAKING_ADDRESSES[chainId] : undefined
+
   return useContract(donkStakingContract, DONK_STAKING_ABI)
 }
 
 export function useDonkTokenContract(): Contract | null {
-  const donkTokenContract = '0x1901AFaF3a3e0Ac8Ba66A41E9EB179d7F91dAFC4'
+  const { chainId } = useActiveWeb3React()
+
+  const donkTokenContract = chainId ? DONK_TOKEN_ADDRESSES[chainId] : undefined
+
   return useContract(donkTokenContract, DONK_TOKEN_ABI)
+}
+
+export function useDonkMintContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+
+  const mintContract = chainId ? MINT_ADDRESSES[chainId] : undefined
+
+  return useContract(mintContract, DONK_TOKEN_ABI)
 }
 
 export function useV1FactoryContract(): Contract | null {
