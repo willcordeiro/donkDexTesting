@@ -52,7 +52,7 @@ const HeaderFrame = styled.div`
   position: relative;
   background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#f1ece9' : '#191924')};
   padding: 1rem;
-  z-index: 1;
+
   padding-bottom: 100px;
 
   ${({ theme }) => theme.mediaWidth.upToMedium`
@@ -76,19 +76,20 @@ const Links = styled.a`
   text-decoration: none;
   font-size: 16px;
   width: fit-content;
-  max-width: 130px;
-  margin: 0 12px;
+  max-width: 170px;
   font-weight: 500;
   color: white;
   text-decoration: none;
   text-decoration: inherit;
   flex-basis: 100%;
   border-radius: 0.375rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
   padding-top: 7px;
   padding-bottom: 7px;
   background-color: #ff8e4c;
+  z-index: 9999;
+
   :hover {
     opacity: 0.5;
   }
@@ -106,7 +107,7 @@ const HeaderControls = styled.div`
     justify-self: center;
     width: 100%;
     max-width: 960px;
-    padding: 1rem;
+    padding: 0.2rem;
     position: fixed;
     bottom: 0px;
     left: 0px;
@@ -114,7 +115,29 @@ const HeaderControls = styled.div`
     z-index: 99;
     height: 72px;
     border-radius: 5px
+    
   `};
+`
+
+const WrapperDiv = styled.div`
+  display: flex;
+  gap: 5px;
+
+  @media (max-width: 1200px) {
+    display: block;
+    position: relative;
+    margin-bottom: 40px;
+  }
+`
+
+const ChainDropDownDiv = styled.div`
+  max-height: 100%;
+  @media (max-width: 960px) {
+    margin-top: 5px;
+  }
+`
+const WhitepaperDiv = styled.div`
+  text-align: left;
 `
 
 const HeaderElement = styled.div`
@@ -138,9 +161,13 @@ const HeaderElementWrap = styled.div`
 `
 
 const HeaderRow = styled(RowFixed)`
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-   width: 100%;
-  `};
+  @media (max-width: 414px) {
+    width: 95%;
+  }
+
+  @media (max-width: 380px) {
+    width: 104%;
+  }
 `
 
 const HeaderLinks = styled(Row)`
@@ -189,48 +216,19 @@ const UNIWrapper = styled.span`
   }
 `
 
-const HideSmall = styled.span`
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    display: none;
-  `};
-`
-
-const NetworkCard = styled(BlueCard)`
-  border-radius: 5px;
-  padding: 8px 12px;
-
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    margin: 0;
-    margin-right: 0.5rem;
-    width: initial;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-shrink: 1;
-  `};
-`
-
 const BalanceText = styled(Text)`
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     display: none;
   `};
 `
 
-const Title = styled.a`
-  display: flex;
-  align-items: center;
-  pointer-events: auto;
-  justify-self: flex-start;
-
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    justify-self: center;
-  `};
-  :hover {
-    cursor: pointer;
-  }
-`
-
 const UniIcon = styled.div`
   transition: transform 0.3s ease;
+
+  @media (max-width: 436px) {
+    position: absolute;
+    margin-top: 20px;
+  }
 
   :hover {
     transform: rotate(-5deg);
@@ -337,17 +335,6 @@ export const StyledMenuButton = styled.button`
   }
 `
 
-const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
-  [ChainId.RINKEBY]: 'Rinkeby',
-  [ChainId.ROPSTEN]: 'Ropsten',
-  [ChainId.SEPOLIA]: 'Sepolia',
-  [ChainId.ARBITRUM]: 'ARBITRUM',
-  [ChainId.KOVAN]: 'Kovan',
-  [ChainId.HARMONY_MAINNET]: 'Harmony',
-  [ChainId.POLYGON]: 'POLYGON',
-  [ChainId.BINANCE]: 'BINANCE'
-}
-
 export default function Header() {
   const { chainId, account } = useActiveWeb3React()
   const { t } = useTranslation()
@@ -434,7 +421,7 @@ export default function Header() {
             {t('Mint')}
           </StyledNavLink>
 
-          {account === '0x9cf363fF78B6B6Caf919886A28f47F1fA10a52e1' ? (
+          {account === '0xfB4c38FC6E72923a594A6B00cb8a7D449409C5e2' ? (
             <StyledNavLink id={`swap-nav-link`} to={'/adminPainel'}>
               {t('AP')}
             </StyledNavLink>
@@ -452,16 +439,20 @@ export default function Header() {
       </HeaderRow>
 
       <HeaderControls>
-        <Links
-          onClick={() => {
-            openWhitepaper()
-          }}
-        >
-          WHITEPAPER
-        </Links>
-
-        <ChainDropDown />
-
+        <WrapperDiv>
+          <WhitepaperDiv>
+            <Links
+              onClick={() => {
+                openWhitepaper()
+              }}
+            >
+              WHITEPAPER
+            </Links>
+          </WhitepaperDiv>
+          <ChainDropDownDiv>
+            <ChainDropDown />
+          </ChainDropDownDiv>{' '}
+        </WrapperDiv>
         <HeaderElement>
           {availableClaim && !showClaimPopup && (
             <UNIWrapper onClick={toggleClaimModal}>

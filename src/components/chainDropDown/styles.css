@@ -22,13 +22,21 @@
   display: none;
   overflow-y: auto;
   max-height: 150px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border-radius: 0.5rem;
   position: absolute;
+
+  @media (max-width: 960px) {
+    position: relative;
+  }
 }
 
 .dropdown-body.open {
   display: block;
+
+  @media (max-width: 960px) {
+    margin-bottom: 40%;
+  }
 }
 
 .dropdown-item-multichain {
