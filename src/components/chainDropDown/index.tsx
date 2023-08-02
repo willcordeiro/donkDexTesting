@@ -1,10 +1,65 @@
 import React, { useState, useEffect, useContext } from 'react'
-import './styles.css'
+import styled from 'styled-components'
 import { Polygon, Arbitrum, Binance } from './chains'
 import { MultichainContext } from '../../context/MultiChain'
 import { AiFillCaretDown } from 'react-icons/ai'
 import polygonLogo from '../../assets/images/chainsLogo/polygon-matic-logo.97ff139cc7379a42cf141d74a6595fff.svg'
 import arbitrumLogo from '../../assets/images/chainsLogo/arbitrum_logo.17ba9b2d5b1574bd70b71505367f5130.svg'
+
+const DropdownWrapper = styled.div`
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  gap: 20px;
+  border-radius: 0.5rem;
+  width: 150px;
+  margin-right: 0.5rem;
+`
+
+const DropdownHeader = styled.div`
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 35px;
+`
+
+const DropdownBody = styled.div`
+  padding: 5px;
+  border: 1px solid #b0b3b9;
+  display: none;
+  overflow-y: auto;
+  max-height: 150px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 0.5rem;
+  position: absolute;
+
+  @media (max-width: 960px) {
+    position: relative;
+  }
+
+  &.open {
+    display: block;
+
+    @media (max-width: 960px) {
+      margin-bottom: 40%;
+    }
+  }
+`
+
+const DropdownItemMultichain = styled.div`
+  padding: 10px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ff8e4c;
+    color: white;
+    vertical-align: middle;
+    border-radius: 0.5rem;
+  }
+`
 
 function ChainDropDown() {
   //context multichain variables
@@ -113,34 +168,33 @@ function ChainDropDown() {
   }, [currentChain])
 
   return (
-    <div className="dropdown">
-      <div className="dropdown-header" onClick={toggleDropdown}>
+    <DropdownWrapper>
+      <DropdownHeader onClick={toggleDropdown}>
         <img
           src={items?.find((item: { label: string }) => item.label == currentChain)?.logo}
           alt={'logo'}
           width={20}
           height={20}
         />
-
         {selectedItemID || currentChain ? currentChain : ''}
         <AiFillCaretDown />
-      </div>
-      <div className={`dropdown-body ${isOpen && 'open'}`}>
+      </DropdownHeader>
+      <DropdownBody className={isOpen ? 'open' : ''}>
         {items.map((item: any, index: number) => (
-          <div
+          <DropdownItemMultichain
             key={index}
-            className="dropdown-item-multichain"
             onClick={(e: any) => {
-              toggleDropdown(), enableChain(e.target.id, true)
+              toggleDropdown()
+              enableChain(e.target.id, true)
             }}
             id={item.id}
           >
             <img src={item.logo} alt={item.label} width={20} height={20} />
             {item.label}
-          </div>
+          </DropdownItemMultichain>
         ))}
-      </div>
-    </div>
+      </DropdownBody>
+    </DropdownWrapper>
   )
 }
 export default ChainDropDown
