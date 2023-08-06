@@ -97,7 +97,7 @@ export default function ManageFarm() {
       toast.success('You have joined the farm successfully')
     } catch (error) {
       console.log(error)
-      toast.error('Something went wrong with starting the farm.')
+      toast.error('Something went wrong with starting the farm.', error)
     }
   }
 
