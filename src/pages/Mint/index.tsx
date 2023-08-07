@@ -263,16 +263,14 @@ const Response = styled.p`
   margin-bottom: 30px;
 `
 
+const chain = localStorage.getItem('multiChain')
+if (chain === 'Arbitrum') {
+  localStorage.setItem('multiChain', 'Polygon')
+  location.reload()
+} else {
+}
+
 const Mint = () => {
-  //TODO FUNCTION TO FORCE THE POLYGON NETWORK
-
-  const chain = localStorage.getItem('multiChain')
-  if (chain === 'Arbitrum') {
-    localStorage.setItem('multiChain', 'Polygon')
-    location.reload()
-  } else {
-  }
-
   const { library, account, active } = useWeb3React()
   const [mintAmount, setMintAmount] = useState(1)
   const [metadataFetched, setMetadataFetched] = useState<boolean | null>(true)
@@ -343,6 +341,7 @@ const Mint = () => {
   }
 
   useEffect(() => {
+    console.log(active)
     if (account) {
       fetchData()
     }
