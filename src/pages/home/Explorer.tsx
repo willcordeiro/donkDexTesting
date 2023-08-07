@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { a, b, c, d, e } from '../../assets'
 import styled from 'styled-components'
-
+import anyLogo from '../../assets/AnyToAny_Icon_Logo.png'
 const Text = styled.span`
   color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'black' : 'white')};
 `
@@ -61,6 +61,14 @@ const CardNFT = styled(Link)`
     border: solid 1px ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
   }
 `
+const CardANY = styled.a`
+  background-color: ${({ theme }) => (theme.text2 === '#C3C5CB' ? 'hsl(240, 90%, 96%)' : '#2f3146')};
+  border-radius: 0.75rem;
+  transition: all 300ms ease-in-out;
+  :hover {
+    border: solid 1px ${({ theme }) => (theme.text2 === '#C3C5CB' ? '#2f3146' : 'white')};
+  }
+`
 
 export default function Explore() {
   return (
@@ -101,7 +109,7 @@ export default function Explore() {
 
         <CardStake
           to="/stake"
-          className="flex flex-col items-center justify-center p-12 rounded-xl border-2 border-transparent   group transition-all duration-300  lg:-mr-[50%] lg:ml-[50%]"
+          className="flex flex-col items-center justify-center p-12 rounded-xl border-2 border-transparent   group transition-all duration-300 "
         >
           <Img src={d} className="w-[140px] group-hover:scale-110 duration-300 transition-all" alt="a" />
           <p className="mt-5 font-semibold text-black">
@@ -110,14 +118,25 @@ export default function Explore() {
         </CardStake>
         <CardNFT
           to="/NFTs"
-          className="flex flex-col items-center justify-center p-12 rounded-xl border-2 border-transparent  group transition-all duration-300  md:-mr-[50%] md:ml-[50%] "
+          className="flex flex-col items-center justify-center p-12 rounded-xl border-2 border-transparent   group transition-all duration-300 "
         >
           <Img src={a} className="w-[140px]  group-hover:scale-110 duration-300 transition-all" alt="a" />
           <p className="mt-5 font-semibold text-black">
             <Text>Trade NFTs</Text>
           </p>
-          <Text>Launches 1st AUGUST</Text>
+          <Text>Launches December 25th</Text>
         </CardNFT>
+
+        <CardANY
+          href="https://anytoany.io/alpha?source=0x84f131F003fe4168473755022a9170e7aAB816FB"
+          target="_blank"
+          className="flex flex-col items-center justify-center p-12 rounded-xl border-2 border-transparent   group transition-all duration-300 "
+        >
+          <Img src={anyLogo} className="w-[140px]  group-hover:scale-110 duration-300 transition-all" alt="a" />
+          <p className="mt-5 font-semibold text-black">
+            <Text>Cross-Chain Swap</Text>
+          </p>
+        </CardANY>
         {/* <div
                   className="flex flex-col items-center justify-center p-12 rounded-xl border-2 border-transparent hover:border-[#8381b7]  group transition-all duration-300 "
                   style={{ backgroundColor: 'hsl(241, 85%, 89%)' }}
