@@ -128,7 +128,7 @@ export default function Explore() {
         </CardNFT>
 
         <CardANY
-          href="https://anytoany.io/alpha?source=0x84f131F003fe4168473755022a9170e7aAB816FB"
+          href="https://anytoany.io/"
           target="_blank"
           className="flex flex-col items-center justify-center p-12 rounded-xl border-2 border-transparent   group transition-all duration-300 "
         >
