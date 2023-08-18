@@ -9,7 +9,28 @@ import { fortmatic, injected, portis, walletconnect, walletlink } from '../conne
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 export const ZERO_ONE_ADDRESS = '0x0000000000000000000000000000000000000001'
 
-export const GOVERNANCE_ADDRESS = '0x1901AFaF3a3e0Ac8Ba66A41E9EB179d7F91dAFC4'
+let currentChain = ''
+const chainFromStorage = localStorage.getItem('multiChain')
+
+if (chainFromStorage !== null) {
+  currentChain = chainFromStorage
+} else {
+  currentChain = 'Arbitrum'
+}
+
+let GET_GOVERNANCE_ADDRESS = ''
+
+if ('Polygon' === currentChain) {
+  GET_GOVERNANCE_ADDRESS = '0x7F2d31FC898Ad47e04c9a0bb0A96DA13aeeE63be'
+} else if ('Arbitrum' === currentChain) {
+  GET_GOVERNANCE_ADDRESS = '0x1901AFaF3a3e0Ac8Ba66A41E9EB179d7F91dAFC4'
+} else if ('Binance' === currentChain) {
+  GET_GOVERNANCE_ADDRESS = ''
+} else {
+  GET_GOVERNANCE_ADDRESS = '0x1901AFaF3a3e0Ac8Ba66A41E9EB179d7F91dAFC4'
+}
+
+export const GOVERNANCE_ADDRESS = GET_GOVERNANCE_ADDRESS
 
 export const TIMELOCK_ADDRESS = '0x0000000000000000000000000000000000000001'
 

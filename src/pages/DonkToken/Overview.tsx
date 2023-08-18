@@ -41,7 +41,7 @@ export default function Overview() {
   const checkContractBalance = async () => {
     if (!account) return
     const stakingBalance = await stakingContract.getTotalStakedAmount()
-
+    console.log(stakingBalance)
     const amount = ethers.utils.formatUnits(stakingBalance)
     setTotalContractBalance(parseFloat(amount).toFixed(0))
   }

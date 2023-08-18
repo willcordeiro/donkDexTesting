@@ -34,6 +34,7 @@ export default function Card() {
     //checking contract balance
     if (!account) return
     const stakingBalance = await stakingContract.getTotalStakedAmount()
+    console.log(stakingBalance)
     const amount = ethers.utils.formatUnits(stakingBalance)
     setTotalContractBalance(parseFloat(amount).toFixed(0))
   }
